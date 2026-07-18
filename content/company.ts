@@ -19,18 +19,20 @@ export const positioning = {
 
 export const companyStory = {
   history: [
-    "Bear Team Real Estate is a Central Florida real estate company built on decades of hands-on experience helping buyers and sellers navigate one of the most dynamic housing markets in the country. [REVIEW: confirm founding details and company history with Bear Team]",
-    "From established Orlando neighborhoods to growing master-planned communities, our team has guided clients through changing markets, changing rates, and changing neighborhoods — with the same steady process each time.",
+    "Bear Team Real Estate LLC is a boutique Orlando brokerage founded and led by Bethanne Baer, Broker/Owner — built on more than four decades of hands-on Central Florida experience, over 7,000 homes sold, and more than $4 billion in career volume.",
+    "From our office at 2300 S Crystal Lake Dr, the team has served generations of families across the Conway, Edgewood, and Belle Isle corridor and greater Orlando — through changing markets, changing rates, and changing neighborhoods, with the same steady process each time.",
   ],
   philosophy: [
-    "We believe real estate guidance should be personal. National portals can show you photographs; they can't walk a property with you, read a contract addendum, or negotiate a repair credit.",
-    "Our approach combines established real estate experience with modern technology — clear communication, honest pricing conversations, and a defined process from first consultation to closing.",
+    "A home is not a home because of its room dimensions or the color of the walls. It is about how you feel when you walk through the front door — and the way you can instantly envision your life unfolding there. This is about more than real estate: it is about your life and your dreams.",
+    "We are different by design. Bear Team takes a different approach to real estate — one built on personal service to each customer, win-win deals, and positive results. We use current technology, market research, and business strategy to exceed your expectations. More importantly, we listen — and that means solutions tailored to you.",
   ],
   commitments: [
     "Clear, proactive communication at every stage",
     "Honest pricing and market-position guidance",
     "Skilled representation in negotiation and contract terms",
     "Coordination through inspections, appraisal, financing, and closing",
+    "Help navigating down payment assistance, bond money, and renovation financing programs",
+    "Experienced guidance through difficult situations, including short sales",
     "Professional standards and Fair Housing compliance in every interaction",
   ],
 };

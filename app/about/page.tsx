@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/animation/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ButtonLink } from "@/components/ui/Button";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { companyStory } from "@/content/company";
 import { proofPoints } from "@/content/proof-points";
 import { compliance } from "@/config/compliance";
@@ -23,8 +24,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About Bear Team"
-        title="Central Florida Real Estate Experience You Can Rely On."
-        intro="An experienced, locally knowledgeable real estate company — and a hands-on alternative to impersonal national portals."
+        title="More Than Real Estate. Your Life and Your Dreams."
+        intro="Bear Team Real Estate is the boutique Orlando brokerage founded by Bethanne Baer — 40+ years, 7,000+ homes, and a philosophy built on personal service, win-win deals, and actually listening."
       >
         <ButtonLink href="/team" variant="primary">
           Meet Bear Team
@@ -68,12 +69,34 @@ export default function AboutPage() {
               </div>
             </div>
             <Reveal className="space-y-6">
-              <PlaceholderImage
-                label="Bear Team leadership photo"
-                alt="Bear Team leadership placeholder image"
-                className="aspect-[4/3] rounded-lg"
-                tone="charcoal"
-              />
+              {/* Bethanne — the broker behind the brokerage */}
+              <div className="overflow-hidden rounded-lg border border-ink/10 bg-cream/40">
+                <div className="relative aspect-[4/5] max-h-[520px] w-full overflow-hidden">
+                  <Image
+                    src="/images/team/bethanne-baer.jpg"
+                    alt="Bethanne Baer, Broker/Owner of Bear Team Real Estate"
+                    fill
+                    sizes="(min-width:1024px) 50vw, 100vw"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                <div className="p-6">
+                  <h2 className="font-display text-xl font-medium text-ink">Bethanne Baer</h2>
+                  <p className="text-sm text-muted">Broker/Owner · FL BK553431</p>
+                  <p className="mt-3 text-sm leading-relaxed text-charcoal-soft">
+                    Four decades of Central Florida real estate, thousands of families guided home,
+                    and a brokerage built the way she believes real estate should work: personally.
+                    Every consultation with Bethanne is free, 30 minutes, and obligation-free.
+                  </p>
+                  <Link
+                    href="/team/bethanne-baer"
+                    className="mt-4 inline-block text-sm font-semibold text-teal-800 underline-offset-4 hover:underline"
+                  >
+                    Read Bethanne&rsquo;s full profile →
+                  </Link>
+                </div>
+              </div>
               <div className="rounded-lg border border-ink/10 bg-cream/40 p-6">
                 <h2 className="font-display text-xl font-medium text-ink">Experience, in Numbers</h2>
                 <dl className="mt-4 grid grid-cols-3 gap-4 text-center">
