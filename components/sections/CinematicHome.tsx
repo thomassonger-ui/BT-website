@@ -24,8 +24,8 @@ import { siteConfig } from "@/config/site";
  */
 
 const ROOM_FADE = 0.3; // room-to-room melt length, in room-units
-const FRAME_FADE = 0.1; // frame-to-frame dissolve length, in room-units
-const UNIT_SCROLL = 130; // vh of scroll per room
+const FRAME_FADE = 0.3; // frame-to-frame dissolve length — long, gentle overlap
+const UNIT_SCROLL = 150; // vh of scroll per room
 
 export function CinematicHome() {
   const ref = useRef<HTMLDivElement>(null);
@@ -90,15 +90,17 @@ export function CinematicHome() {
             const lifeStart = f === 0 ? (i === 0 ? 0 : i - ROOM_FADE) : winStart - FRAME_FADE / 2;
             const lifeEnd = lastFrame ? (lastRoom ? n : i + 1) : winEnd + FRAME_FADE / 2;
 
+            // Subtle push-in only — the photographed steps carry the motion;
+            // matching zoom ranges keep every dissolve blend calm (no pop).
             gsap.set(frame, { transformOrigin: "50% 52%" });
             tl.fromTo(
               frame,
-              { scale: 1.05 },
-              { scale: 1.24, duration: lifeEnd - lifeStart },
+              { scale: 1.04 },
+              { scale: 1.12, duration: lifeEnd - lifeStart },
               lifeStart,
             );
             if (!lastFrame) {
-              tl.to(frame, { autoAlpha: 0, duration: FRAME_FADE }, winEnd - FRAME_FADE / 2);
+              tl.to(frame, { autoAlpha: 0, duration: FRAME_FADE, ease: "power1.inOut" }, winEnd - FRAME_FADE / 2);
             }
           });
 
@@ -207,7 +209,7 @@ export function CinematicHome() {
             {/* 4-frame sequence (frame 1 on top; melts reveal the next) */}
             <div data-scene-frames className="absolute inset-0 overflow-hidden will-change-transform">
               {room.frames.map((src, f) => (
-                <div key={src} data-frame className="absolute inset-0 will-change-transform" style={{ zIndex: 4 - f }}>
+                <div key={src} data-frame className="absolute inset-0" style={{ zIndex: 4 - f }}>
                   <Image
                     src={src}
                     alt=""
