@@ -4,14 +4,17 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/animation/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ButtonLink } from "@/components/ui/Button";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { valuationFields } from "@/components/forms/definitions";
+import { Scout } from "@/components/forms/Scout";
+import { MarketBrief } from "@/components/home-value/MarketBrief";
 import { compliance } from "@/config/compliance";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Home Value Consultation | What Could Your Property Sell For?",
+  title: "Home Value & Orlando Market Brief | What Could Your Property Sell For?",
   description:
-    "Request a property-value consultation for your Central Florida home — condition, location, improvements, competition, and buyer demand considered by an experienced local team.",
+    "Orlando's market moved — did your home's value move with it? See the current Orlando MSA market brief and request a property-value consultation from an experienced local team.",
   path: "/home-value",
 });
 
@@ -22,17 +25,52 @@ const factors = [
   { title: "Market activity & demand", text: "What comparable properties are actually doing — not last year's headlines." },
 ];
 
+/** Market-brief prompts for the Ask Scout™ input — answered from the July 2026 brief data. */
+const briefAskSuggestions = [
+  "What's the median price in my county?",
+  "Are Orlando prices still rising?",
+  "How fast are homes selling right now?",
+  "Is this a good time to sell?",
+];
+
 export default function HomeValuePage() {
   return (
     <>
       <PageHero
         eyebrow="For homeowners"
-        title="What Could Your Property Sell For?"
-        intro="Online estimates are a starting point. A thoughtful property-value consultation considers condition, location, improvements, competition, market activity, and buyer demand."
-      />
+        title="The Market Moved. Did Your Home's Value Move With It?"
+        intro="Prices are up in all four Orlando-area counties — but inventory is the deepest since 2019 and 22% of listings are cutting price. A Zillow guess won't tell you where your home stands in that market. A consultation will."
+      >
+        <ButtonLink href="#market-brief" variant="primary">
+          See This Month&rsquo;s Market Brief
+        </ButtonLink>
+        <ButtonLink href="#valuation-request" variant="outline-light">
+          Request My Property Review
+        </ButtonLink>
+      </PageHero>
       <Breadcrumbs items={[{ name: "Home Value", path: "/home-value" }]} />
 
-      <section className="bg-soft-white py-16 md:py-24">
+      {/* Orlando Market Brief — same data the agent portal brief carries */}
+      <MarketBrief />
+
+      {/* Ask Scout™ — market brief analysis + seller intake */}
+      <section className="bg-cream py-16 md:py-24" aria-labelledby="scout-brief-heading">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionHeading
+            title="Ask Scout™ | Your Market, Explained"
+            intro="Ask Scout what these numbers mean for your street, your timeline, and your price — it answers from this month's brief. Or take the 90-second intake and get your consultation with Bethanne on the calendar."
+          />
+          <h2 id="scout-brief-heading" className="sr-only">
+            Ask Scout about the market brief
+          </h2>
+          <Scout initialIntent="Selling" askSuggestions={briefAskSuggestions} />
+          <p className="mt-6 text-xs italic leading-relaxed text-muted">
+            {compliance.valuationDisclaimer} {compliance.brokerageRelationship}
+          </p>
+        </div>
+      </section>
+
+      <section id="valuation-request" className="scroll-mt-24 bg-soft-white py-16 md:py-24">
         <div className="mx-auto grid max-w-content gap-12 px-6 lg:grid-cols-[2fr,3fr]">
           <div>
             <SectionHeading
