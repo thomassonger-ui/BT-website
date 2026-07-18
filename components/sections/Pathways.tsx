@@ -39,14 +39,16 @@ export function Pathways() {
               <h3 id={path.title === "Buy a Home" ? "pathways-heading" : undefined} className="font-display text-2xl font-medium text-ink">
                 {path.title}
               </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{path.text}</p>
-              <div className="mt-6 space-y-3">
-                <ButtonLink href={path.cta.href} variant="primary" className="w-full">
-                  {path.cta.label}
-                </ButtonLink>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{path.text}</p>
+              {/* Secondary link sits above the primary CTA so every card's
+                  primary button bottom-aligns across the row. */}
+              <div className="mt-6 flex flex-1 flex-col justify-end gap-3">
                 {path.secondary === "search" ? (
                   <SearchHomesLink variant="ghost" label="Search Available Homes" className="w-full" />
                 ) : null}
+                <ButtonLink href={path.cta.href} variant="primary" className="w-full">
+                  {path.cta.label}
+                </ButtonLink>
               </div>
             </article>
           ))}
