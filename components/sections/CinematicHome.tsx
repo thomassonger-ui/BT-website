@@ -4,39 +4,32 @@ import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
 import { gsap, DESKTOP_MQ, MOBILE_MQ } from "@/lib/animations/gsap";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
-import { heroScene, walkthroughScenes, finaleScene } from "@/content/home-scenes";
+import { rooms, heroCopy } from "@/content/home-scenes";
 import { siteConfig } from "@/config/site";
 
 /**
- * CONTINUOUS-FILM HOMEPAGE — scroll moves you through the home.
+ * CONTINUOUS-FILM HOMEPAGE — 9 rooms × 4 sequential frames.
  *
- * Architecture (desktop + motion): every photo is a full-viewport layer in a
- * single pinned container, stacked with DESCENDING z-index. One master
- * timeline is scrubbed by the scroll position:
+ * Scroll = walking. Inside each room, scrolling steps through 4 photographed
+ * frames along one path (image-sequence animation — scrubbing real footage of
+ * the walk), each frame carrying a continuous push-in so the camera never
+ * stops. Rooms hand off by melting (opacity + focus-pull blur) into the next
+ * room, whose own frame sequence is already moving. Mouse = looking: a damped
+ * 3D perspective tilt lets the visitor look around each room, Matterport-
+ * style, independent of the walk.
  *
- *   - The camera never stops: each photo plays a continuous camera path
- *     (push-in + drift across the room) for its entire life on screen.
- *   - Rooms hand off by the TOP layer melting away (opacity + focus-pull
- *     blur) while the next room — already moving — is revealed beneath.
- *     Both layers are in motion during every transition, so scrolling reads
- *     as one uninterrupted walk through the house, frame by frame, forward
- *     and backward with the wheel.
- *   - Soft snapping settles on each room's caption moment; scrolling is
- *     never hijacked.
- *
- * Fallbacks: the absolute stacking only applies via the `md:motion-safe:`
- * variants — on mobile and for reduced-motion users the scenes are ordinary
- * stacked full-screen sections in document flow, and every CTA stays
- * reachable. (True 360° look-around would require 360 captures or a
- * Matterport embed — this is the closest flat photography allows.)
+ * Fallbacks: absolute stacking only applies via `md:motion-safe:` variants —
+ * mobile and reduced-motion get ordinary stacked sections (first frame of
+ * each room) in document flow with every CTA reachable.
  */
 
-const FADE = 0.35; // crossfade length, in scene-units
-const UNIT_SCROLL = 75; // vh of scroll per scene
+const ROOM_FADE = 0.3; // room-to-room melt length, in room-units
+const FRAME_FADE = 0.1; // frame-to-frame dissolve length, in room-units
+const UNIT_SCROLL = 130; // vh of scroll per room
 
 export function CinematicHome() {
   const ref = useRef<HTMLDivElement>(null);
-  const totalScenes = walkthroughScenes.length + 2;
+  const n = rooms.length;
 
   useLayoutEffect(() => {
     const el = ref.current;
@@ -56,10 +49,9 @@ export function CinematicHome() {
       // Desktop: the continuous scrubbed film.
       mm.add(DESKTOP_MQ, () => {
         const scenes = gsap.utils.toArray<HTMLElement>("[data-scene]", el);
-        const n = scenes.length;
 
-        // Soft snap to each room's caption moment (never the cut itself).
-        const holdPoints = [0, ...scenes.map((_, i) => (i + 0.4) / n), 1];
+        // Soft snap to each room's caption moment.
+        const holdPoints = [0, ...scenes.map((_, i) => (i + 0.35) / n), 1];
 
         const tl = gsap.timeline({
           defaults: { ease: "none" },
@@ -82,35 +74,40 @@ export function CinematicHome() {
         });
 
         scenes.forEach((scene, i) => {
-          const last = i === n - 1;
-          const img = scene.querySelector("[data-scene-img]");
-          const text = scene.querySelector("[data-scene-text]");
-          // Scene i is revealed while scene i-1 fades over [i-FADE, i], and
-          // melts away over [i+1-FADE, i+1]. Its life on screen:
-          const lifeStart = i === 0 ? 0 : i - FADE;
-          const lifeEnd = last ? n : i + 1;
+          const lastRoom = i === n - 1;
+          const framesWrap = scene.querySelector<HTMLElement>("[data-scene-frames]");
+          const frames = gsap.utils.toArray<HTMLElement>("[data-frame]", scene);
+          const text = scene.querySelector<HTMLElement>("[data-scene-text]");
 
-          // CONTINUOUS CAMERA PATH — a straight walk forward: pure push-in
-          // toward the center of every room for the photo's entire life.
-          // No lateral drift; the path through the house is a straight line.
-          // (Base scale 1.06 leaves coverage margin for the mouse look-around
-          // tilt below, so edges can never show.)
-          if (img) {
-            gsap.set(img, { transformOrigin: "50% 52%", transformPerspective: 1200 });
+          // IMAGE SEQUENCE inside the room: 4 frames, each owning a quarter
+          // of the room's scroll unit. Every frame pushes in continuously for
+          // its whole life; consecutive frames hand off with a quick dissolve
+          // — scrubbing forward and back steps through the photographed walk.
+          frames.forEach((frame, f) => {
+            const lastFrame = f === frames.length - 1;
+            const winStart = i + f / 4;
+            const winEnd = i + (f + 1) / 4;
+            const lifeStart = f === 0 ? (i === 0 ? 0 : i - ROOM_FADE) : winStart - FRAME_FADE / 2;
+            const lifeEnd = lastFrame ? (lastRoom ? n : i + 1) : winEnd + FRAME_FADE / 2;
+
+            gsap.set(frame, { transformOrigin: "50% 52%" });
             tl.fromTo(
-              img,
-              { scale: 1.06 },
-              { scale: 1.5, duration: lifeEnd - lifeStart },
+              frame,
+              { scale: 1.05 },
+              { scale: 1.24, duration: lifeEnd - lifeStart },
               lifeStart,
             );
-          }
+            if (!lastFrame) {
+              tl.to(frame, { autoAlpha: 0, duration: FRAME_FADE }, winEnd - FRAME_FADE / 2);
+            }
+          });
 
-          // ROOM HANDOFF — the top layer melts away (opacity + focus-pull
-          // blur) revealing the next room already in motion beneath.
-          if (!last) {
-            tl.to(scene, { autoAlpha: 0, duration: FADE }, i + 1 - FADE);
-            if (img) {
-              tl.to(img, { filter: "blur(9px)", duration: FADE, ease: "power1.in" }, i + 1 - FADE);
+          // ROOM HANDOFF — the whole room melts away (opacity + focus-pull
+          // blur), revealing the next room's sequence already in motion.
+          if (!lastRoom) {
+            tl.to(scene, { autoAlpha: 0, duration: ROOM_FADE }, i + 1 - ROOM_FADE);
+            if (framesWrap) {
+              tl.to(framesWrap, { filter: "blur(9px)", duration: ROOM_FADE, ease: "power1.in" }, i + 1 - ROOM_FADE);
             }
           }
 
@@ -118,10 +115,12 @@ export function CinematicHome() {
           // before the handoff (their own speed = foreground parallax).
           if (text) {
             if (i > 0) {
-              tl.fromTo(text, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.2 }, i + 0.08);
+              tl.fromTo(text, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.18 }, i + 0.06);
+            } else {
+              tl.set(text, { autoAlpha: 1, y: 0 }, 0);
             }
-            if (!last) {
-              tl.to(text, { autoAlpha: 0, y: -70, duration: 0.18 }, i + 0.5);
+            if (!lastRoom) {
+              tl.to(text, { autoAlpha: 0, y: -70, duration: 0.16 }, i + 0.55);
             }
           }
         });
@@ -129,19 +128,20 @@ export function CinematicHome() {
         // MOUSE LOOK-AROUND (the Matterport feel): moving the mouse rotates
         // the room around you in 3D — damped, like dragging a panorama —
         // while scroll independently walks you forward. Captions counter-move
-        // slightly for depth. Pointer only; never affects touch or keyboard.
-        const imgs = scenes
-          .map((scene) => scene.querySelector<HTMLElement>("[data-scene-img]"))
-          .filter((n): n is HTMLElement => Boolean(n));
+        // slightly for depth. Mouse pointer only.
+        const wraps = scenes
+          .map((scene) => scene.querySelector<HTMLElement>("[data-scene-frames]"))
+          .filter((node): node is HTMLElement => Boolean(node));
         const texts = scenes
           .map((scene) => scene.querySelector<HTMLElement>("[data-scene-text]"))
-          .filter((n): n is HTMLElement => Boolean(n));
-        const lookY = imgs.map((n) => gsap.quickTo(n, "rotationY", { duration: 0.9, ease: "power2.out" }));
-        const lookX = imgs.map((n) => gsap.quickTo(n, "rotationX", { duration: 0.9, ease: "power2.out" }));
-        const textX = texts.map((n) => gsap.quickTo(n, "x", { duration: 1.1, ease: "power2.out" }));
+          .filter((node): node is HTMLElement => Boolean(node));
+        wraps.forEach((w) => gsap.set(w, { transformPerspective: 1200 }));
+        const lookY = wraps.map((w) => gsap.quickTo(w, "rotationY", { duration: 0.9, ease: "power2.out" }));
+        const lookX = wraps.map((w) => gsap.quickTo(w, "rotationX", { duration: 0.9, ease: "power2.out" }));
+        const textX = texts.map((t) => gsap.quickTo(t, "x", { duration: 1.1, ease: "power2.out" }));
         const onPointerMove = (e: PointerEvent) => {
           if (e.pointerType !== "mouse") return;
-          const nx = e.clientX / window.innerWidth - 0.5; // -0.5 … 0.5
+          const nx = e.clientX / window.innerWidth - 0.5;
           const ny = e.clientY / window.innerHeight - 0.5;
           lookY.forEach((to) => to(nx * 7));
           lookX.forEach((to) => to(-ny * 4));
@@ -183,7 +183,7 @@ export function CinematicHome() {
       // Reduced motion: no tweens — plain stacked sections in document flow.
     }, el);
     return () => ctx.revert();
-  }, []);
+  }, [n]);
 
   const sceneClass =
     "relative flex h-[100svh] overflow-hidden bg-ink md:motion-safe:absolute md:motion-safe:inset-0 md:motion-safe:h-full";
@@ -193,130 +193,113 @@ export function CinematicHome() {
       ref={ref}
       className="relative bg-ink md:motion-safe:h-[100svh] md:motion-safe:overflow-hidden"
     >
-      {/* SCENE 1 — HERO (top layer; visible without JS) */}
-      <section
-        data-scene
-        aria-labelledby="hero-heading"
-        className={`${sceneClass} items-end`}
-        style={{ zIndex: totalScenes }}
-      >
-        <div className="absolute inset-0 overflow-hidden">
-          <Image
-            data-scene-img
-            src={heroScene.image}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover will-change-transform"
-          />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/25 to-ink/20" />
-        </div>
-        <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 pb-20 pt-32">
-          <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
-            <span data-hero-line className="block">{heroScene.headlineTop}</span>
-            <span data-hero-line className="block text-gold-light">{heroScene.headlineBottom}</span>
-          </h1>
-          <p data-hero-copy className="mt-6 max-w-xl text-lg leading-relaxed text-cream/90">
-            {heroScene.copy}
-          </p>
-          <div data-hero-cta className="mt-9 flex flex-wrap items-center gap-4">
-            <SearchHomesLink variant="primary" />
-            <ButtonLink href="/sell" variant="outline-light">
-              Sell Your Property
-            </ButtonLink>
-            <ButtonLink href="/home-value" variant="ghost" className="!text-cream/90 hover:!text-gold-light">
-              Request a Home Value Consultation →
-            </ButtonLink>
-          </div>
-          <p data-hero-cta className="mt-9 flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-cream/60">
-            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 motion-safe:animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M12 5v14m0 0-5-5m5 5 5-5" />
-            </svg>
-            Scroll to walk through
-          </p>
-        </div>
-      </section>
-
-      {/* SCENES 2–9 — THE WALKTHROUGH (each revealed beneath the last) */}
-      {walkthroughScenes.map((scene, i) => (
-        <section
-          key={scene.image}
-          data-scene
-          className={`${sceneClass} items-end`}
-          style={{ zIndex: totalScenes - (i + 1) }}
-        >
-          <div className="absolute inset-0 overflow-hidden">
-            <Image
-              data-scene-img
-              src={scene.image}
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover will-change-transform"
-            />
-            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent" />
-          </div>
-          <div
-            data-scene-text
-            className={`relative z-10 mx-auto w-full max-w-content px-6 pb-20 ${
-              scene.align === "right" ? "text-right" : ""
-            }`}
+      {rooms.map((room, i) => {
+        const isHero = i === 0;
+        const isFinale = i === rooms.length - 1;
+        return (
+          <section
+            key={room.id}
+            data-scene
+            aria-labelledby={isHero ? "hero-heading" : isFinale ? "finale-heading" : undefined}
+            className={`${sceneClass} ${isFinale ? "items-center" : "items-end"}`}
+            style={{ zIndex: rooms.length - i }}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">
-              {String(i + 2).padStart(2, "0")} — {scene.kicker}
-            </p>
-            <p
-              className={`mt-3 max-w-2xl font-display text-display-lg font-medium leading-tight text-soft-white text-balance ${
-                scene.align === "right" ? "ml-auto" : ""
-              }`}
-            >
-              {scene.line}
-            </p>
-          </div>
-        </section>
-      ))}
+            {/* 4-frame sequence (frame 1 on top; melts reveal the next) */}
+            <div data-scene-frames className="absolute inset-0 overflow-hidden will-change-transform">
+              {room.frames.map((src, f) => (
+                <div key={src} data-frame className="absolute inset-0 will-change-transform" style={{ zIndex: 4 - f }}>
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    priority={isHero && f === 0}
+                    sizes="100vw"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+              <div
+                aria-hidden="true"
+                className={`absolute inset-0 z-10 ${
+                  isHero
+                    ? "bg-gradient-to-t from-ink/90 via-ink/25 to-ink/20"
+                    : isFinale
+                      ? "bg-ink/70"
+                      : "bg-gradient-to-t from-ink/75 via-transparent to-transparent"
+                }`}
+              />
+            </div>
 
-      {/* SCENE 10 — FINALE / CONVERSION (bottom layer) */}
-      <section
-        data-scene
-        aria-labelledby="finale-heading"
-        className={`${sceneClass} items-center`}
-        style={{ zIndex: 1 }}
-      >
-        <div className="absolute inset-0 overflow-hidden">
-          <Image
-            data-scene-img
-            src={finaleScene.image}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover will-change-transform"
-          />
-          <div aria-hidden="true" className="absolute inset-0 bg-ink/70" />
-        </div>
-        <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">{finaleScene.kicker}</p>
-          <h2 id="finale-heading" className="mx-auto mt-4 max-w-3xl font-display text-display-xl font-medium leading-tight text-soft-white text-balance">
-            {finaleScene.line}
-          </h2>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <SearchHomesLink variant="primary" label="Search for a Home" />
-            <ButtonLink href="/sell" variant="outline-light">
-              Sell a Property
-            </ButtonLink>
-            <ButtonLink href="/contact" variant="outline-light">
-              Speak With Bear Team
-            </ButtonLink>
-          </div>
-          <a
-            href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`}
-            className="mt-8 inline-block text-sm font-semibold text-gold-light underline-offset-4 hover:underline"
-          >
-            Call {siteConfig.phone}
-          </a>
-        </div>
-      </section>
+            {/* Overlay content */}
+            {isHero ? (
+              <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 pb-20 pt-32">
+                <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
+                  <span data-hero-line className="block">{heroCopy.headlineTop}</span>
+                  <span data-hero-line className="block text-gold-light">{heroCopy.headlineBottom}</span>
+                </h1>
+                <p data-hero-copy className="mt-6 max-w-xl text-lg leading-relaxed text-cream/90">
+                  {heroCopy.copy}
+                </p>
+                <div data-hero-cta className="mt-9 flex flex-wrap items-center gap-4">
+                  <SearchHomesLink variant="primary" />
+                  <ButtonLink href="/sell" variant="outline-light">
+                    Sell Your Property
+                  </ButtonLink>
+                  <ButtonLink href="/home-value" variant="ghost" className="!text-cream/90 hover:!text-gold-light">
+                    Request a Home Value Consultation →
+                  </ButtonLink>
+                </div>
+                <p data-hero-cta className="mt-9 flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-cream/60">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 motion-safe:animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M12 5v14m0 0-5-5m5 5 5-5" />
+                  </svg>
+                  Scroll to walk through
+                </p>
+              </div>
+            ) : isFinale ? (
+              <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 text-center">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">{room.kicker}</p>
+                <h2 id="finale-heading" className="mx-auto mt-4 max-w-3xl font-display text-display-xl font-medium leading-tight text-soft-white text-balance">
+                  {room.line}
+                </h2>
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                  <SearchHomesLink variant="primary" label="Search for a Home" />
+                  <ButtonLink href="/sell" variant="outline-light">
+                    Sell a Property
+                  </ButtonLink>
+                  <ButtonLink href="/contact" variant="outline-light">
+                    Speak With Bear Team
+                  </ButtonLink>
+                </div>
+                <a
+                  href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`}
+                  className="mt-8 inline-block text-sm font-semibold text-gold-light underline-offset-4 hover:underline"
+                >
+                  Call {siteConfig.phone}
+                </a>
+              </div>
+            ) : (
+              <div
+                data-scene-text
+                className={`relative z-10 mx-auto w-full max-w-content px-6 pb-20 ${
+                  room.align === "right" ? "text-right" : ""
+                }`}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">
+                  {String(i + 1).padStart(2, "0")} — {room.kicker}
+                </p>
+                <p
+                  className={`mt-3 max-w-2xl font-display text-display-lg font-medium leading-tight text-soft-white text-balance ${
+                    room.align === "right" ? "ml-auto" : ""
+                  }`}
+                >
+                  {room.line}
+                </p>
+              </div>
+            )}
+          </section>
+        );
+      })}
     </div>
   );
 }
