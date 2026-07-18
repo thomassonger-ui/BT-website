@@ -90,16 +90,15 @@ export function CinematicHome() {
           const lifeStart = i === 0 ? 0 : i - FADE;
           const lifeEnd = last ? n : i + 1;
 
-          // CONTINUOUS CAMERA PATH — push-in plus a drift across the room,
-          // running for the photo's entire life. Drift direction alternates
-          // so consecutive rooms feel like turning as you walk.
+          // CONTINUOUS CAMERA PATH — a straight walk forward: pure push-in
+          // toward the center of every room for the photo's entire life.
+          // No lateral drift; the path through the house is a straight line.
           if (img) {
-            const dir = i % 2 === 0 ? 1 : -1;
             gsap.set(img, { transformOrigin: "50% 52%" });
             tl.fromTo(
               img,
-              { scale: 1.08, xPercent: -3.5 * dir, yPercent: 1.5 },
-              { scale: 1.5, xPercent: 3.5 * dir, yPercent: -2, duration: lifeEnd - lifeStart },
+              { scale: 1 },
+              { scale: 1.5, duration: lifeEnd - lifeStart },
               lifeStart,
             );
           }
