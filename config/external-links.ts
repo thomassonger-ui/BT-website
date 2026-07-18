@@ -13,10 +13,9 @@ export const PROPERTY_SEARCH_PLACEHOLDER = "[INSERT APPROVED PROPERTY SEARCH URL
 export const externalLinks = {
   propertySearch:
     process.env.NEXT_PUBLIC_PROPERTY_SEARCH_URL || PROPERTY_SEARCH_PLACEHOLDER,
-  scheduling: process.env.NEXT_PUBLIC_SCHEDULING_URL || "",
-  googleMaps:
-    process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL ||
-    "https://www.google.com/maps/place/Bear+Team+Real+Estate/data=!4m2!3m1!1s0x0:0xbfe2dfd8e8b15164?sa=X&ved=1t:2428&ictx=111",
+  scheduling:
+    process.env.NEXT_PUBLIC_SCHEDULING_URL || "https://calendar.app.google/Ppha9tukU9iqDgs88",
+  googleMaps: process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || "https://maps.app.goo.gl/n6635xh7GQ7E1fbX7",
   googleBusinessProfile: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL || "",
   facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "",
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "",

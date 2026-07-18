@@ -68,7 +68,7 @@ export default function ContactPage() {
               <div className="mt-5 flex flex-wrap gap-3 text-sm">
                 {externalLinks.scheduling ? (
                   <a href={externalLinks.scheduling} target="_blank" rel="noopener noreferrer" className="font-semibold text-teal-800 underline-offset-2 hover:underline">
-                    Schedule a consultation
+                    Schedule a 30-minute consultation
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 ) : null}
