@@ -8,27 +8,30 @@ import { rooms, heroCopy } from "@/content/home-scenes";
 import { siteConfig } from "@/config/site";
 
 /**
- * CONTINUOUS-FILM HOMEPAGE — 9 rooms × 4 sequential frames.
+ * SCROLL-SCRUBBED FILM HOMEPAGE.
  *
- * Scroll = walking. Inside each room, scrolling steps through 4 photographed
- * frames along one path (image-sequence animation — scrubbing real footage of
- * the walk), each frame carrying a continuous push-in so the camera never
- * stops. Rooms hand off by melting (opacity + focus-pull blur) into the next
- * room, whose own frame sequence is already moving. Mouse = looking: a damped
- * 3D perspective tilt lets the visitor look around each room, Matterport-
- * style, independent of the walk.
+ * The 36 approved stills are rendered offline (ffmpeg) into one continuous
+ * 24fps film — real interpolated zooms inside every frame, true dissolves
+ * between steps, blur-melts between rooms (public/videos/walkthrough.mp4,
+ * regenerate per scripts/render-walkthrough.sh notes in CONTENT_GUIDE.md).
  *
- * Fallbacks: absolute stacking only applies via `md:motion-safe:` variants —
- * mobile and reduced-motion get ordinary stacked sections (first frame of
- * each room) in document flow with every CTA reachable.
+ * On desktop the film NEVER autoplays: scroll position IS the playhead.
+ * A damped ticker lerps video.currentTime toward the scroll target, so the
+ * wheel moves you through the house forward and backward with video
+ * smoothness — the Matterport "you control the movement" feel. The mouse
+ * adds a damped 3D look-around tilt on top.
+ *
+ * Fallbacks: mobile and reduced-motion get ordinary stacked photo sections
+ * (first frame of each room) in document flow; no video downloads there.
  */
 
-const ROOM_FADE = 0.3; // room-to-room melt length, in room-units
-const FRAME_FADE = 0.3; // frame-to-frame dissolve length — long, gentle overlap
-const UNIT_SCROLL = 150; // vh of scroll per room
+const UNIT_SCROLL = 140; // vh of scroll per room
+/** Must match the render: 36 clips × 1.4s step + tail. */
+const VIDEO_FALLBACK_DURATION = 50.4;
 
 export function CinematicHome() {
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const n = rooms.length;
 
   useLayoutEffect(() => {
@@ -46,13 +49,17 @@ export function CinematicHome() {
           .fromTo("[data-hero-cta]", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.4 }, "-=0.25");
       });
 
-      // Desktop: the continuous scrubbed film.
+      // Desktop: scroll scrubs the film.
       mm.add(DESKTOP_MQ, () => {
-        const scenes = gsap.utils.toArray<HTMLElement>("[data-scene]", el);
+        const video = videoRef.current;
+        const captions = gsap.utils.toArray<HTMLElement>("[data-caption]", el);
+        const holdPoints = [0, ...captions.map((_, i) => (i + 0.35) / n), 1];
 
-        // Soft snap to each room's caption moment.
-        const holdPoints = [0, ...scenes.map((_, i) => (i + 0.35) / n), 1];
+        // THE PLAYHEAD TARGET — scroll progress, captured in the trigger's
+        // own onUpdate (registered at creation) and chased by a damped ticker.
+        let target = 0;
 
+        // Caption choreography shares the master timeline (9 room-units).
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
@@ -61,7 +68,10 @@ export function CinematicHome() {
             end: `+=${n * UNIT_SCROLL}%`,
             pin: true,
             anticipatePin: 1,
-            scrub: 0.7,
+            scrub: 0.5,
+            onUpdate: (self) => {
+              target = self.progress;
+            },
             snap: {
               snapTo: (value) =>
                 holdPoints.reduce((a, b) => (Math.abs(b - value) < Math.abs(a - value) ? b : a)),
@@ -72,101 +82,72 @@ export function CinematicHome() {
             },
           },
         });
+        const pad = { x: 0 };
+        tl.to(pad, { x: 1, duration: 0.01 }, n - 0.01); // exact 9-unit length
 
-        scenes.forEach((scene, i) => {
+        captions.forEach((caption, i) => {
           const lastRoom = i === n - 1;
-          const framesWrap = scene.querySelector<HTMLElement>("[data-scene-frames]");
-          const frames = gsap.utils.toArray<HTMLElement>("[data-frame]", scene);
-          const text = scene.querySelector<HTMLElement>("[data-scene-text]");
-
-          // IMAGE SEQUENCE inside the room: 4 frames, each owning a quarter
-          // of the room's scroll unit. Every frame pushes in continuously for
-          // its whole life; consecutive frames hand off with a quick dissolve
-          // — scrubbing forward and back steps through the photographed walk.
-          frames.forEach((frame, f) => {
-            const lastFrame = f === frames.length - 1;
-            const winStart = i + f / 4;
-            const winEnd = i + (f + 1) / 4;
-            const lifeStart = f === 0 ? (i === 0 ? 0 : i - ROOM_FADE) : winStart - FRAME_FADE / 2;
-            const lifeEnd = lastFrame ? (lastRoom ? n : i + 1) : winEnd + FRAME_FADE / 2;
-
-            // Subtle push-in only — the photographed steps carry the motion;
-            // matching zoom ranges keep every dissolve blend calm (no pop).
-            gsap.set(frame, { transformOrigin: "50% 52%" });
-            tl.fromTo(
-              frame,
-              { scale: 1.04 },
-              { scale: 1.12, duration: lifeEnd - lifeStart },
-              lifeStart,
-            );
-            if (!lastFrame) {
-              tl.to(frame, { autoAlpha: 0, duration: FRAME_FADE, ease: "power1.inOut" }, winEnd - FRAME_FADE / 2);
-            }
-          });
-
-          // ROOM HANDOFF — the whole room melts away (opacity + focus-pull
-          // blur), revealing the next room's sequence already in motion.
-          if (!lastRoom) {
-            tl.to(scene, { autoAlpha: 0, duration: ROOM_FADE }, i + 1 - ROOM_FADE);
-            if (framesWrap) {
-              tl.to(framesWrap, { filter: "blur(9px)", duration: ROOM_FADE, ease: "power1.in" }, i + 1 - ROOM_FADE);
-            }
+          if (i > 0) {
+            tl.fromTo(caption, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.18 }, i + 0.08);
+          } else {
+            tl.set(caption, { autoAlpha: 1, y: 0 }, 0);
           }
-
-          // CAPTIONS — rise in once the room is revealed, drift up and fade
-          // before the handoff (their own speed = foreground parallax).
-          if (text) {
-            if (i > 0) {
-              tl.fromTo(text, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.18 }, i + 0.06);
-            } else {
-              tl.set(text, { autoAlpha: 1, y: 0 }, 0);
-            }
-            if (!lastRoom) {
-              tl.to(text, { autoAlpha: 0, y: -70, duration: 0.16 }, i + 0.55);
-            }
+          if (!lastRoom) {
+            tl.to(caption, { autoAlpha: 0, y: -70, duration: 0.16 }, i + 0.6);
           }
         });
 
-        // MOUSE LOOK-AROUND (the Matterport feel): moving the mouse rotates
-        // the room around you in 3D — damped, like dragging a panorama —
-        // while scroll independently walks you forward. Captions counter-move
-        // slightly for depth. Mouse pointer only.
-        const wraps = scenes
-          .map((scene) => scene.querySelector<HTMLElement>("[data-scene-frames]"))
-          .filter((node): node is HTMLElement => Boolean(node));
-        const texts = scenes
-          .map((scene) => scene.querySelector<HTMLElement>("[data-scene-text]"))
-          .filter((node): node is HTMLElement => Boolean(node));
-        wraps.forEach((w) => gsap.set(w, { transformPerspective: 1200 }));
-        const lookY = wraps.map((w) => gsap.quickTo(w, "rotationY", { duration: 0.9, ease: "power2.out" }));
-        const lookX = wraps.map((w) => gsap.quickTo(w, "rotationX", { duration: 0.9, ease: "power2.out" }));
-        const textX = texts.map((t) => gsap.quickTo(t, "x", { duration: 1.1, ease: "power2.out" }));
+        // THE PLAYHEAD: scroll progress → video time, through a damped lerp
+        // so wheel ticks glide instead of stepping. Forward and backward.
+        let current = 0;
+        const tick = () => {
+          if (!video) return;
+          current += (target - current) * 0.14;
+          const dur = video.duration || VIDEO_FALLBACK_DURATION;
+          const t = Math.min(current * dur, dur - 0.05);
+          if (Math.abs(t - video.currentTime) > 1 / 30 && video.readyState >= 2) {
+            video.currentTime = t;
+          }
+        };
+        gsap.ticker.add(tick);
+
+        // Nudge the browser to buffer the whole film for instant scrubbing.
+        video?.load();
+
+        // MOUSE LOOK-AROUND: damped 3D tilt on the film, Matterport-style.
+        const stage = el.querySelector<HTMLElement>("[data-film-stage]");
+        const lookTargets = stage ? [stage] : [];
+        lookTargets.forEach((node) => gsap.set(node, { transformPerspective: 1200, scale: 1.06 }));
+        const lookY = lookTargets.map((node) => gsap.quickTo(node, "rotationY", { duration: 0.9, ease: "power2.out" }));
+        const lookX = lookTargets.map((node) => gsap.quickTo(node, "rotationX", { duration: 0.9, ease: "power2.out" }));
+        const textXs = captions.map((c) => gsap.quickTo(c, "x", { duration: 1.1, ease: "power2.out" }));
         const onPointerMove = (e: PointerEvent) => {
           if (e.pointerType !== "mouse") return;
           const nx = e.clientX / window.innerWidth - 0.5;
           const ny = e.clientY / window.innerHeight - 0.5;
-          lookY.forEach((to) => to(nx * 7));
-          lookX.forEach((to) => to(-ny * 4));
-          textX.forEach((to) => to(nx * -18));
+          lookY.forEach((to) => to(nx * 6));
+          lookX.forEach((to) => to(-ny * 3.5));
+          textXs.forEach((to) => to(nx * -18));
         };
         const onPointerLeave = () => {
           lookY.forEach((to) => to(0));
           lookX.forEach((to) => to(0));
-          textX.forEach((to) => to(0));
+          textXs.forEach((to) => to(0));
         };
         window.addEventListener("pointermove", onPointerMove, { passive: true });
         document.documentElement.addEventListener("pointerleave", onPointerLeave);
         return () => {
+          gsap.ticker.remove(tick);
           window.removeEventListener("pointermove", onPointerMove);
           document.documentElement.removeEventListener("pointerleave", onPointerLeave);
         };
       });
 
-      // Mobile: normal flow, no pinning — light caption reveals only.
+      // Mobile: normal flow photo sections — light caption reveals only.
       mm.add(MOBILE_MQ, () => {
-        gsap.utils.toArray<HTMLElement>("[data-scene]", el).forEach((scene, i) => {
+        gsap.utils.toArray<HTMLElement>("[data-mobile-scene]", el).forEach((scene, i) => {
           if (i === 0) return;
-          const text = scene.querySelector("[data-scene-text]");
+          const text = scene.querySelector("[data-mobile-text]");
           if (text) {
             gsap.fromTo(
               text,
@@ -182,126 +163,195 @@ export function CinematicHome() {
           }
         });
       });
-      // Reduced motion: no tweens — plain stacked sections in document flow.
     }, el);
     return () => ctx.revert();
   }, [n]);
 
-  const sceneClass =
-    "relative flex h-[100svh] overflow-hidden bg-ink md:motion-safe:absolute md:motion-safe:inset-0 md:motion-safe:h-full";
-
   return (
-    <div
-      ref={ref}
-      className="relative bg-ink md:motion-safe:h-[100svh] md:motion-safe:overflow-hidden"
-    >
-      {rooms.map((room, i) => {
-        const isHero = i === 0;
-        const isFinale = i === rooms.length - 1;
-        return (
-          <section
-            key={room.id}
-            data-scene
-            aria-labelledby={isHero ? "hero-heading" : isFinale ? "finale-heading" : undefined}
-            className={`${sceneClass} ${isFinale ? "items-center" : "items-end"}`}
-            style={{ zIndex: rooms.length - i }}
+    <div ref={ref} className="relative bg-ink">
+      {/* ============ DESKTOP FILM STAGE (scroll-scrubbed) ============ */}
+      <div className="relative hidden h-[100svh] overflow-hidden md:motion-safe:block">
+        <div data-film-stage className="absolute inset-0 will-change-transform">
+          <video
+            ref={videoRef}
+            muted
+            playsInline
+            preload="auto"
+            poster="/videos/walkthrough-poster.jpg"
+            aria-hidden="true"
+            tabIndex={-1}
+            disablePictureInPicture
+            className="h-full w-full object-cover"
           >
-            {/* 4-frame sequence (frame 1 on top; melts reveal the next) */}
-            <div data-scene-frames className="absolute inset-0 overflow-hidden will-change-transform">
-              {room.frames.map((src, f) => (
-                <div key={src} data-frame className="absolute inset-0" style={{ zIndex: 4 - f }}>
-                  <Image
-                    src={src}
-                    alt=""
-                    fill
-                    priority={isHero && f === 0}
-                    sizes="100vw"
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-              <div
-                aria-hidden="true"
-                className={`absolute inset-0 z-10 ${
-                  isHero
-                    ? "bg-gradient-to-t from-ink/90 via-ink/25 to-ink/20"
-                    : isFinale
-                      ? "bg-ink/70"
-                      : "bg-gradient-to-t from-ink/75 via-transparent to-transparent"
-                }`}
-              />
-            </div>
+            <source src="/videos/walkthrough.mp4" type="video/mp4" />
+            <source src="/videos/walkthrough.webm" type="video/webm" />
+          </video>
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-ink/25" />
+        </div>
+        <p className="sr-only">
+          A scroll-controlled photographic walkthrough of a Central Florida home, from the front
+          exterior through the entry, living spaces, kitchen, and lanai to the pool.
+        </p>
 
-            {/* Overlay content */}
-            {isHero ? (
-              <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 pb-20 pt-32">
-                <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
-                  <span data-hero-line className="block">{heroCopy.headlineTop}</span>
-                  <span data-hero-line className="block text-gold-light">{heroCopy.headlineBottom}</span>
-                </h1>
-                <p data-hero-copy className="mt-6 max-w-xl text-lg leading-relaxed text-cream/90">
-                  {heroCopy.copy}
-                </p>
-                <div data-hero-cta className="mt-9 flex flex-wrap items-center gap-4">
-                  <SearchHomesLink variant="primary" />
-                  <ButtonLink href="/sell" variant="outline-light">
-                    Sell Your Property
-                  </ButtonLink>
-                  <ButtonLink href="/home-value" variant="ghost" className="!text-cream/90 hover:!text-gold-light">
-                    Request a Home Value Consultation →
-                  </ButtonLink>
+        {/* Caption overlays — one per room, choreographed to the playhead */}
+        {rooms.map((room, i) => {
+          const isHero = i === 0;
+          const isFinale = i === rooms.length - 1;
+          return (
+            <div
+              key={room.id}
+              data-caption
+              className={`absolute inset-0 z-10 flex ${isFinale ? "items-center" : "items-end"} pointer-events-none`}
+            >
+              {isHero ? (
+                <div className="pointer-events-auto relative mx-auto w-full max-w-content px-6 pb-20 pt-32">
+                  <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
+                    <span data-hero-line className="block">{heroCopy.headlineTop}</span>
+                    <span data-hero-line className="block text-gold-light">{heroCopy.headlineBottom}</span>
+                  </h1>
+                  <p data-hero-copy className="mt-6 max-w-xl text-lg leading-relaxed text-cream/90">
+                    {heroCopy.copy}
+                  </p>
+                  <div data-hero-cta className="mt-9 flex flex-wrap items-center gap-4">
+                    <SearchHomesLink variant="primary" />
+                    <ButtonLink href="/sell" variant="outline-light">
+                      Sell Your Property
+                    </ButtonLink>
+                    <ButtonLink href="/home-value" variant="ghost" className="!text-cream/90 hover:!text-gold-light">
+                      Request a Home Value Consultation →
+                    </ButtonLink>
+                  </div>
+                  <p data-hero-cta className="mt-9 flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-cream/60">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 motion-safe:animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <path d="M12 5v14m0 0-5-5m5 5 5-5" />
+                    </svg>
+                    Scroll to walk through
+                  </p>
                 </div>
-                <p data-hero-cta className="mt-9 flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-cream/60">
-                  <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 motion-safe:animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <path d="M12 5v14m0 0-5-5m5 5 5-5" />
-                  </svg>
-                  Scroll to walk through
-                </p>
-              </div>
-            ) : isFinale ? (
-              <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 text-center">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">{room.kicker}</p>
-                <h2 id="finale-heading" className="mx-auto mt-4 max-w-3xl font-display text-display-xl font-medium leading-tight text-soft-white text-balance">
-                  {room.line}
-                </h2>
-                <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                  <SearchHomesLink variant="primary" label="Search for a Home" />
-                  <ButtonLink href="/sell" variant="outline-light">
-                    Sell a Property
-                  </ButtonLink>
-                  <ButtonLink href="/contact" variant="outline-light">
-                    Speak With Bear Team
-                  </ButtonLink>
+              ) : isFinale ? (
+                <div className="pointer-events-auto relative mx-auto w-full max-w-content px-6 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">{room.kicker}</p>
+                  <h2 className="mx-auto mt-4 max-w-3xl font-display text-display-xl font-medium leading-tight text-soft-white text-balance">
+                    {room.line}
+                  </h2>
+                  <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                    <SearchHomesLink variant="primary" label="Search for a Home" />
+                    <ButtonLink href="/sell" variant="outline-light">
+                      Sell a Property
+                    </ButtonLink>
+                    <ButtonLink href="/contact" variant="outline-light">
+                      Speak With Bear Team
+                    </ButtonLink>
+                  </div>
+                  <a
+                    href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`}
+                    className="mt-8 inline-block text-sm font-semibold text-gold-light underline-offset-4 hover:underline"
+                  >
+                    Call {siteConfig.phone}
+                  </a>
                 </div>
-                <a
-                  href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`}
-                  className="mt-8 inline-block text-sm font-semibold text-gold-light underline-offset-4 hover:underline"
-                >
-                  Call {siteConfig.phone}
-                </a>
-              </div>
-            ) : (
-              <div
-                data-scene-text
-                className={`relative z-10 mx-auto w-full max-w-content px-6 pb-20 ${
-                  room.align === "right" ? "text-right" : ""
-                }`}
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">
-                  {String(i + 1).padStart(2, "0")} — {room.kicker}
-                </p>
-                <p
-                  className={`mt-3 max-w-2xl font-display text-display-lg font-medium leading-tight text-soft-white text-balance ${
-                    room.align === "right" ? "ml-auto" : ""
+              ) : (
+                <div
+                  className={`relative mx-auto w-full max-w-content px-6 pb-20 ${
+                    room.align === "right" ? "text-right" : ""
                   }`}
                 >
-                  {room.line}
-                </p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">
+                    {String(i + 1).padStart(2, "0")} — {room.kicker}
+                  </p>
+                  <p
+                    className={`mt-3 max-w-2xl font-display text-display-lg font-medium leading-tight text-soft-white text-balance ${
+                      room.align === "right" ? "ml-auto" : ""
+                    }`}
+                  >
+                    {room.line}
+                  </p>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ============ MOBILE / REDUCED-MOTION: photo sections ============ */}
+      <div className="md:motion-safe:hidden">
+        {rooms.map((room, i) => {
+          const isHero = i === 0;
+          const isFinale = i === rooms.length - 1;
+          return (
+            <section
+              key={room.id}
+              data-mobile-scene
+              className={`relative flex h-[100svh] ${isFinale ? "items-center" : "items-end"} overflow-hidden bg-ink`}
+            >
+              <div className="absolute inset-0">
+                <Image
+                  src={room.frames[0]}
+                  alt=""
+                  fill
+                  priority={isHero}
+                  sizes="100vw"
+                  className="object-cover"
+                />
+                <div
+                  aria-hidden="true"
+                  className={`absolute inset-0 ${
+                    isHero
+                      ? "bg-gradient-to-t from-ink/90 via-ink/25 to-ink/20"
+                      : isFinale
+                        ? "bg-ink/70"
+                        : "bg-gradient-to-t from-ink/75 via-transparent to-transparent"
+                  }`}
+                />
               </div>
-            )}
-          </section>
-        );
-      })}
+              <div
+                data-mobile-text
+                className={`relative z-10 mx-auto w-full max-w-content px-6 ${
+                  isFinale ? "text-center" : isHero ? "pb-16 pt-32" : `pb-16 ${room.align === "right" ? "text-right" : ""}`
+                }`}
+              >
+                {isHero ? (
+                  <>
+                    <h2 className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
+                      <span className="block">{heroCopy.headlineTop}</span>
+                      <span className="block text-gold-light">{heroCopy.headlineBottom}</span>
+                    </h2>
+                    <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/90">{heroCopy.copy}</p>
+                    <div className="mt-8 flex flex-wrap items-center gap-4">
+                      <SearchHomesLink variant="primary" />
+                      <ButtonLink href="/sell" variant="outline-light">
+                        Sell Your Property
+                      </ButtonLink>
+                    </div>
+                  </>
+                ) : isFinale ? (
+                  <>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">{room.kicker}</p>
+                    <h2 className="mx-auto mt-4 max-w-3xl font-display text-display-lg font-medium leading-tight text-soft-white">
+                      {room.line}
+                    </h2>
+                    <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                      <SearchHomesLink variant="primary" label="Search for a Home" />
+                      <ButtonLink href="/contact" variant="outline-light">
+                        Speak With Bear Team
+                      </ButtonLink>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">
+                      {String(i + 1).padStart(2, "0")} — {room.kicker}
+                    </p>
+                    <p className={`mt-3 max-w-2xl font-display text-display-md font-medium leading-tight text-soft-white ${room.align === "right" ? "ml-auto" : ""}`}>
+                      {room.line}
+                    </p>
+                  </>
+                )}
+              </div>
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 }
