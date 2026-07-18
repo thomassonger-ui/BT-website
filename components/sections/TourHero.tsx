@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
-import { BTMark } from "@/components/ui/Logo";
 import { heroCopy } from "@/content/home-scenes";
 
 /**
@@ -62,7 +61,6 @@ export function TourHero() {
         /* OVERLAY MODE — headline + CTAs; page scroll works normally */
         <div className="absolute inset-0 z-20 flex items-end bg-gradient-to-t from-ink/75 via-ink/20 to-transparent">
           <div className="mx-auto w-full max-w-content px-6 pb-16 pt-32">
-            <BTMark className="mb-6 h-12 w-12 text-soft-white" />
             <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
               <span className="block">{heroCopy.headlineTop}</span>
               <span className="block text-gold-light">{heroCopy.headlineBottom}</span>
@@ -82,11 +80,6 @@ export function TourHero() {
               <SearchHomesLink variant="primary" />
               <ButtonLink href="/sell" variant="outline-light">
                 Sell Your Property
-              </ButtonLink>
-            </div>
-            <div className="mt-5">
-              <ButtonLink href="/home-value" variant="ghost" className="!text-cream/90 hover:!text-gold-light">
-                Request a Home Value Consultation →
               </ButtonLink>
             </div>
             {IS_DEMO_TOUR ? (
