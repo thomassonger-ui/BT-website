@@ -11,23 +11,30 @@ export type NavItem = {
   children?: { label: string; href: string }[];
 };
 
+/** Minimal header — plain links with two dropdowns, no header CTA buttons. */
 export const primaryNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Search Homes", href: "__PROPERTY_SEARCH__", external: true },
-  { label: "Buy", href: "/buy" },
-  { label: "Sell", href: "/sell" },
-  { label: "Home Value", href: "/home-value" },
+  {
+    label: "Buy & Sell",
+    href: "/buy",
+    children: [
+      { label: "Buy a Home", href: "/buy" },
+      { label: "Sell a Property", href: "/sell" },
+      { label: "Home Value", href: "/home-value" },
+      { label: "Relocation", href: "/relocation" },
+    ],
+  },
   { label: "Communities", href: "/communities" },
+  { label: "Resources", href: "/resources" },
   {
     label: "About",
     href: "/about",
     children: [
       { label: "About Bear Team", href: "/about" },
       { label: "Meet the Team", href: "/team" },
-      { label: "Relocation", href: "/relocation" },
     ],
   },
-  { label: "Resources", href: "/resources" },
   { label: "Contact", href: "/contact" },
 ];
 

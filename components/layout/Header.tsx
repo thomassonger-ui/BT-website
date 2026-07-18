@@ -6,24 +6,23 @@ import { useEffect, useId, useRef, useState } from "react";
 import { primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils/cn";
-import { ExternalIcon, SearchHomesLink, ButtonLink } from "@/components/ui/Button";
+import { SearchHomesLink } from "@/components/ui/Button";
 
 /**
- * Sticky site header.
- * - Transparent over page heroes, transitions to solid ink after scrolling.
- * - Accessible dropdown (About) and mobile menu: aria-expanded, Escape to
- *   close, click-outside handling, visible keyboard focus throughout.
- * - Active page state via aria-current.
- * - "Search Homes" is always the centralized external link.
+ * Minimal sticky site header — plain nav links with accessible dropdowns,
+ * matching the original bearteam.com's restrained header. No CTA buttons;
+ * conversion lives in the page content.
+ * - Transparent over page heroes, solid ink after scrolling.
+ * - Dropdowns: aria-expanded, Escape closes, click-outside closes.
+ * - Mobile: hamburger menu + click-to-call.
  */
 export function Header() {
   const pathname = usePathname();
   const [solid, setSolid] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLLIElement>(null);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const navRef = useRef<HTMLUListElement>(null);
   const menuId = useId();
-  const dropdownId = useId();
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 24);
@@ -35,17 +34,15 @@ export function Header() {
   // Close menus on route change.
   useEffect(() => {
     setMobileOpen(false);
-    setDropdownOpen(false);
+    setOpenMenu(null);
   }, [pathname]);
 
-  // Escape + click-outside for the dropdown.
+  // Escape + click-outside close any open dropdown.
   useEffect(() => {
-    if (!dropdownOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setDropdownOpen(false);
+    if (!openMenu) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenMenu(null);
     const onClick = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdownOpen(false);
-      }
+      if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenMenu(null);
     };
     document.addEventListener("keydown", onKey);
     document.addEventListener("mousedown", onClick);
@@ -53,7 +50,7 @@ export function Header() {
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("mousedown", onClick);
     };
-  }, [dropdownOpen]);
+  }, [openMenu]);
 
   // Escape closes the mobile menu; lock body scroll while open.
   useEffect(() => {
@@ -85,44 +82,43 @@ export function Header() {
           Bear Team <span className="text-gold-light">Real Estate</span>
         </Link>
 
-        {/* Desktop navigation */}
+        {/* Desktop navigation — plain links, no buttons */}
         <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-5 text-sm font-medium text-cream/90">
+          <ul ref={navRef} className="flex items-center gap-6 text-sm font-medium text-cream/90">
             {primaryNav.map((item) => {
               if (item.external) {
                 return (
                   <li key={item.label}>
                     <SearchHomesLink
                       variant="ghost"
-                      className="!min-h-0 whitespace-nowrap !px-1 !py-1 !text-cream/90 no-underline hover:!text-gold-light"
-                      label="Search Homes"
+                      className="!min-h-0 whitespace-nowrap !px-0 !py-1 !text-cream/90 no-underline hover:!text-gold-light"
+                      label={item.label}
                     />
                   </li>
                 );
               }
               if (item.children) {
+                const open = openMenu === item.label;
                 return (
-                  <li key={item.label} ref={dropdownRef} className="relative">
+                  <li key={item.label} className="relative">
                     <button
                       type="button"
-                      aria-expanded={dropdownOpen}
-                      aria-controls={dropdownId}
-                      onClick={() => setDropdownOpen((v) => !v)}
+                      aria-expanded={open}
+                      onClick={() => setOpenMenu(open ? null : item.label)}
                       className={cn(
                         "flex items-center gap-1 py-1 transition-colors hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold",
-                        isActive(item.href) && "text-gold-light",
+                        item.children.some((c) => isActive(c.href)) && "text-gold-light",
                       )}
                     >
                       {item.label}
-                      <svg aria-hidden="true" viewBox="0 0 12 8" className={cn("h-2 w-3 transition-transform", dropdownOpen && "rotate-180")} fill="none" stroke="currentColor" strokeWidth="2">
+                      <svg aria-hidden="true" viewBox="0 0 12 8" className={cn("h-2 w-3 transition-transform", open && "rotate-180")} fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="m1 1 5 5 5-5" />
                       </svg>
                     </button>
                     <ul
-                      id={dropdownId}
                       className={cn(
                         "absolute left-0 top-full mt-2 w-52 rounded-md border border-cream/10 bg-ink/95 py-2 shadow-xl backdrop-blur",
-                        dropdownOpen ? "block" : "hidden",
+                        open ? "block" : "hidden",
                       )}
                     >
                       {item.children.map((child) => (
@@ -157,13 +153,6 @@ export function Header() {
             })}
           </ul>
         </nav>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          <ButtonLink href="/sell" variant="outline-light" className="!min-h-0 !px-4 !py-2">
-            Sell Your Home
-          </ButtonLink>
-          <SearchHomesLink variant="primary" className="!min-h-0 !px-4 !py-2" />
-        </div>
 
         {/* Mobile: click-to-call + menu button */}
         <div className="flex items-center gap-2 lg:hidden">
@@ -213,7 +202,7 @@ export function Header() {
                 <SearchHomesLink variant="primary" className="w-full" />
               </li>
             ) : (
-              <li key={item.href}>
+              <li key={item.label}>
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
@@ -241,11 +230,6 @@ export function Header() {
               </li>
             ),
           )}
-          <li className="pt-3">
-            <ButtonLink href="/sell" variant="outline-light" className="w-full">
-              Sell Your Home
-            </ButtonLink>
-          </li>
         </ul>
       </nav>
     </header>
