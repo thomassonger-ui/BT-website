@@ -14,6 +14,7 @@ import { buyerFields } from "@/components/forms/definitions";
 import { buyerProcess } from "@/content/company";
 import { buyerFaqs } from "@/content/faqs";
 import { compliance } from "@/config/compliance";
+import { externalLinks } from "@/config/external-links";
 
 export const metadata: Metadata = buildMetadata({
   title: "Buy a Home in Central Florida",
@@ -55,6 +56,62 @@ export default function BuyPage() {
         </ButtonLink>
       </PageHero>
       <Breadcrumbs items={[{ name: "Buy", path: "/buy" }]} />
+
+      {/* Free ways to see homes */}
+      <section className="bg-cream py-16 md:py-24" aria-labelledby="see-homes-heading">
+        <div className="mx-auto max-w-content px-6">
+          <SectionHeading
+            eyebrow="Start looking today"
+            title="See Homes This Week"
+            intro="Four ways to start looking right now — all free, no obligation."
+          />
+          <h2 id="see-homes-heading" className="sr-only">
+            See Homes This Week
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <article className="flex flex-col rounded-lg border border-ink/10 bg-soft-white p-6">
+              <h3 className="font-display text-lg font-medium text-ink">Search Available Homes</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                Browse every home on the market in Central Florida through our search platform.
+              </p>
+              <SearchHomesLink variant="primary" className="mt-5 w-full" label="Search Homes" />
+            </article>
+            <article className="flex flex-col rounded-lg border border-ink/10 bg-soft-white p-6">
+              <h3 className="font-display text-lg font-medium text-ink">Found One Online?</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                Saw a home on any website or portal? Send it to us — we&rsquo;ll verify the details
+                and schedule your private showing.
+              </p>
+              <ButtonLink href="#buyer-inquiry" variant="outline" className="mt-5 w-full">
+                Request a Showing
+              </ButtonLink>
+            </article>
+            <article className="flex flex-col rounded-lg border border-ink/10 bg-soft-white p-6">
+              <h3 className="font-display text-lg font-medium text-ink">Talk It Through First</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                Book a free 30-minute buyer consultation — goals, budget comfort, and a search plan.
+              </p>
+              <ButtonLink
+                href={externalLinks.scheduling}
+                external
+                variant="outline"
+                className="mt-5 w-full"
+              >
+                Book 30 Minutes
+              </ButtonLink>
+            </article>
+            <article className="flex flex-col rounded-lg border border-ink/10 bg-soft-white p-6">
+              <h3 className="font-display text-lg font-medium text-ink">Browse by Community</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                Compare Orlando-area communities — housing character, amenities, and transportation.
+              </p>
+              <ButtonLink href="/communities" variant="outline" className="mt-5 w-full">
+                Explore Communities
+              </ButtonLink>
+            </article>
+          </div>
+        </div>
+      </section>
 
       {/* Service overview */}
       <section className="bg-soft-white py-16 md:py-24">
