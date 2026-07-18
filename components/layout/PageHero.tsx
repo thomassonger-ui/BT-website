@@ -1,20 +1,34 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
-/** Shared dark hero band for interior pages (keeps the transparent header legible). */
+/**
+ * Shared dark hero band for interior pages (keeps the transparent header
+ * legible). Pass `image` for a photographic backdrop with a legibility scrim.
+ */
 export function PageHero({
   eyebrow,
   title,
   intro,
+  image,
+  imageAlt = "",
   children,
 }: {
   eyebrow?: string;
   title: string;
   intro?: string;
+  image?: string;
+  imageAlt?: string;
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-ink pb-16 pt-36 md:pb-20 md:pt-44">
-      <div className="mx-auto max-w-content px-6">
+    <section className="relative overflow-hidden bg-ink pb-16 pt-36 md:pb-20 md:pt-44">
+      {image ? (
+        <>
+          <Image src={image} alt={imageAlt} fill priority sizes="100vw" className="object-cover" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/60 to-ink/40" />
+        </>
+      ) : null}
+      <div className="relative mx-auto max-w-content px-6">
         {eyebrow ? (
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-light">{eyebrow}</p>
         ) : null}
