@@ -16,8 +16,8 @@ export const siteConfig = {
     "Bear Team Real Estate is a Central Florida real estate company helping buyers, sellers, homeowners, investors, and relocation clients move forward with experienced, local guidance.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.bearteam.com",
 
-  /** REVIEW: verify license numbers with the Florida DBPR before launch */
-  brokerageLicense: "[VERIFY BROKERAGE LICENSE]",
+  /** REVIEW: sourced from public listings — confirm against Florida DBPR before launch */
+  brokerageLicense: "FL BK553431",
   brokerName: "Bethanne Baer",
 
   address: {
@@ -28,7 +28,7 @@ export const siteConfig = {
   },
 
   phone: process.env.NEXT_PUBLIC_PHONE_NUMBER || "(407) 228-1112",
-  email: process.env.NEXT_PUBLIC_GENERAL_EMAIL || "[VERIFY GENERAL EMAIL]",
+  email: process.env.NEXT_PUBLIC_GENERAL_EMAIL || "Bethanne@BearTeam.com",
   officeHours: "Monday–Friday, 9 AM–5 PM",
 
   /** Contacts required by the accessibility & compliance pages */
