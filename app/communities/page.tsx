@@ -192,19 +192,47 @@ const osceolaTiles: CommunityTile[] = [
   },
 ];
 
-const serviceAreas: { county: string; places: { name: string }[] }[] = [
+/** Lake County photo tiles — pop-up details, no full guides yet. REVIEW: verify blurb facts before launch. */
+const lakeTiles: CommunityTile[] = [
   {
-    county: "Lake County",
-    places: [
-      { name: "Clermont" },
-      { name: "Minneola" },
-      { name: "Montverde" },
-      { name: "Mount Dora" },
-      { name: "Tavares" },
-      { name: "Eustis" },
-      { name: "Groveland" },
-      { name: "Howey-in-the-Hills" },
-    ],
+    name: "Clermont",
+    img: "/images/communities/clermont.jpg",
+    blurb: "South Lake County's largest city — rolling hills, the Clermont Chain of Lakes, a lakefront trail network, and fast-growing new-construction communities along SR 50 and US 27.",
+  },
+  {
+    name: "Minneola",
+    img: "/images/communities/minneola.jpg",
+    blurb: "A hillside city adjoining Clermont with newer master-planned neighborhoods around the Florida Turnpike interchange and Lake Minneola.",
+  },
+  {
+    name: "Montverde",
+    img: "/images/communities/montverde.jpg",
+    blurb: "A small rural-character town on Lake Apopka's west shore known for acreage homesteads, custom estates, and Bella Collina's golf-course homes.",
+  },
+  {
+    name: "Mount Dora",
+    img: "/images/communities/mount-dora.jpg",
+    blurb: "A historic lakefront town on Lake Dora with an antiques-and-festivals downtown, tree-lined streets of vintage homes, and newer communities on its east side.",
+  },
+  {
+    name: "Tavares",
+    img: "/images/communities/tavares.jpg",
+    blurb: "Lake County's seat — \"America's Seaplane City\" — with a lakefront entertainment district on Lake Dora and established and newer neighborhoods on the Harris Chain of Lakes.",
+  },
+  {
+    name: "Eustis",
+    img: "/images/communities/eustis.jpg",
+    blurb: "A historic city on Lake Eustis with a walkable downtown, vintage neighborhoods, and larger-lot properties toward the countryside.",
+  },
+  {
+    name: "Groveland",
+    img: "/images/communities/groveland.jpg",
+    blurb: "A fast-growing south Lake County city of new-construction communities along SR 50 west of Clermont, with rural acreage beyond.",
+  },
+  {
+    name: "Howey-in-the-Hills",
+    img: "/images/communities/howey-in-the-hills.jpg",
+    blurb: "A small hillside town on Little Lake Harris known for citrus heritage, the Mission Resort golf community, and estate properties.",
   },
 ];
 
@@ -278,23 +306,12 @@ export default function CommunitiesPage() {
               </h3>
               <CommunityTiles tiles={osceolaTiles} />
             </div>
-            {serviceAreas.map((group) => (
-              <div key={group.county}>
-                <h3 className="border-b border-gold/40 pb-2 font-display text-lg font-medium text-ink">
-                  {group.county}
-                </h3>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {group.places.map((place) => (
-                    <li
-                      key={place.name}
-                      className="inline-flex min-h-[36px] items-center rounded-full border border-ink/10 bg-soft-white/70 px-4 py-1.5 text-sm text-charcoal-soft"
-                    >
-                      {place.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <div>
+              <h3 className="border-b border-gold/40 pb-2 font-display text-lg font-medium text-ink">
+                Lake County
+              </h3>
+              <CommunityTiles tiles={lakeTiles} />
+            </div>
           </div>
           <div className="mt-12 text-center">
             <p className="text-sm text-muted">
