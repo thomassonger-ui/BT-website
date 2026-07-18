@@ -11,9 +11,10 @@ import { siteConfig } from "@/config/site";
  * Cinematic scroll-driven homepage.
  *
  * Ten full-screen photo scenes walk the visitor through a home. On desktop
- * (motion allowed) each scene pins while the next cuts up over it — a
- * video-like sequence scrubbed by the scroll wheel — with a slow Ken Burns
- * zoom on every photo and text that slides in per scene.
+ * (motion allowed) each scene pins while its photo pushes in toward the
+ * center of the frame — scrolling moves you closer, like walking toward the
+ * front door — then the next photo dissolves in over it (scrubbed crossfade),
+ * carrying you into the next room. Video-like, wheel-driven, reversible.
  *
  * Degradation is built in: with JavaScript off, reduced motion on, or on
  * mobile, the scenes are ordinary stacked full-screen sections in document
@@ -69,38 +70,35 @@ export function CinematicHome() {
             });
           }
 
-          // Camera move, scrubbed to scroll and fully reversible.
-          // Even scenes: slow push-in (zoom). Odd scenes: horizontal pan —
-          // vertical scrolling drives sideways camera movement.
+          // WALK-IN DOLLY: while a scene holds the screen (pinned), its photo
+          // pushes in toward the center of the frame — scrubbed 1:1 with the
+          // wheel, so scrolling literally moves you closer to the front door /
+          // into the room. Fully reversible when scrolling back.
           const img = scene.querySelector("[data-scene-img]");
           if (img) {
-            const sceneScrub = {
-              trigger: scene,
-              start: i === 0 ? "top top" : "top bottom",
-              end: "bottom top",
-              scrub: 0.5,
-            };
-            if (i % 2 === 0) {
-              gsap.fromTo(img, { scale: 1 }, { scale: 1.14, ease: "none", scrollTrigger: sceneScrub });
-            } else {
-              gsap.fromTo(
-                img,
-                { scale: 1.15, xPercent: -4 },
-                { scale: 1.15, xPercent: 4, ease: "none", scrollTrigger: sceneScrub },
-              );
-            }
+            gsap.set(img, { transformOrigin: "50% 52%" });
+            gsap.fromTo(
+              img,
+              { scale: 1 },
+              {
+                scale: 1.45,
+                ease: "none",
+                scrollTrigger: { trigger: scene, start: "top top", end: "bottom top", scrub: 0.4 },
+              },
+            );
           }
 
-          // Parallax: the photo drifts slower than the section as it enters,
-          // so background and foreground move at different speeds.
-          if (img && i > 0) {
+          // DISSOLVE: the next scene fades in over the pinned one as you keep
+          // walking — a scrubbed crossfade, so each photo melts into the next
+          // room while the previous is still pushing forward underneath.
+          if (i > 0) {
             gsap.fromTo(
-              img.parentElement,
-              { yPercent: 10 },
+              scene,
+              { autoAlpha: 0 },
               {
-                yPercent: 0,
+                autoAlpha: 1,
                 ease: "none",
-                scrollTrigger: { trigger: scene, start: "top bottom", end: "top top", scrub: 0.5 },
+                scrollTrigger: { trigger: scene, start: "top 90%", end: "top 10%", scrub: 0.4 },
               },
             );
           }
@@ -120,11 +118,12 @@ export function CinematicHome() {
               },
             );
           }
-          // …then drifts upward at its own speed while the scene is pinned
-          // and the next photo cuts over it (foreground/background parallax).
+          // …then drifts upward and dissolves at its own speed while you walk
+          // deeper into the photo (foreground/background parallax).
           if (text && i < scenes.length - 1) {
             gsap.to(text, {
-              y: -80,
+              y: -90,
+              autoAlpha: 0,
               ease: "none",
               scrollTrigger: { trigger: scene, start: "bottom bottom", end: "bottom top", scrub: 0.5 },
             });
@@ -178,7 +177,7 @@ export function CinematicHome() {
           />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-ink/20" />
         </div>
-        <div className="relative z-10 mx-auto w-full max-w-content px-6 pb-24 pt-32">
+        <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 pb-24 pt-32">
           <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
             <span data-hero-line className="block">{heroScene.headlineTop}</span>
             <span data-hero-line className="block text-gold-light">{heroScene.headlineBottom}</span>
