@@ -1,36 +1,95 @@
 import type { TeamMember } from "@/types/content";
 
 /**
- * TEAM — VERIFIED PROFILES ONLY.
- * The entries below are structural placeholders with verified: false and are
- * rendered with a visible "profile pending verification" label. Replace with
- * verified names, titles, biographies, license info, and approved headshots
- * before launch. DO NOT invent staff members or credentials.
+ * TEAM — roster, titles, and contact info sourced from bearteam.com/our-team
+ * and confirmed by Tom Songer (July 2026). Headshots are the team-approved
+ * photos supplied by Tom. Biographies are drafted from confirmed roles and
+ * team facts — have each member read and approve their bio before launch
+ * (reviewNote on each entry).
  */
 export const team: TeamMember[] = [
   {
-    slug: "broker",
+    slug: "bethanne-baer",
     name: "Bethanne Baer",
     title: "Broker/Owner",
-    bio: "[PLACEHOLDER — verified broker biography goes here. Include background, market experience, and approach. Do not launch with this text.]",
-    areasServed: ["Central Florida"],
-    specialties: ["[VERIFY SPECIALTIES]"],
+    bio: "Bethanne Baer has spent more than four decades helping Central Floridians buy and sell homes — over 7,000 closed homes and more than $4 billion in career volume. She founded Bear Team Real Estate as a boutique alternative to the big-box brokerages: a team small enough to know every client and every street, and experienced enough to handle anything a transaction can produce. Her deepest roots are in the Conway, Edgewood, and Belle Isle corridor, where she has guided families through multiple generations of moves. Every Bear Team consultation with Bethanne is free, 30 minutes, and obligation-free.",
+    experience: "40+ years in Central Florida real estate.",
+    areasServed: ["Orlando", "Conway · Edgewood · Belle Isle", "Greater Central Florida"],
+    specialties: ["Pricing strategy", "Listing & marketing", "Negotiation", "Contract-to-close"],
     languages: ["English"],
-    license: "[VERIFY LICENSE NUMBER]",
-    headshot: "/images/placeholder-headshot.svg",
-    verified: false,
-    reviewNote: "Replace with verified broker profile before launch.",
+    license: "FL BK553431",
+    phone: "(407) 228-1112",
+    email: "Bethanne@BearTeam.com",
+    headshot: "/images/team/bethanne-baer.jpg",
+    verified: true,
+    reviewNote: "Bio drafted from approved team facts — Bethanne to approve wording before launch.",
   },
   {
-    slug: "team-member-1",
-    name: "[VERIFY TEAM MEMBER NAME]",
-    title: "[VERIFY TITLE]",
-    bio: "[PLACEHOLDER — verified team member biography goes here. Do not launch with this text.]",
-    areasServed: ["Central Florida"],
-    specialties: ["[VERIFY SPECIALTIES]"],
+    slug: "tom-songer",
+    name: "Tom Songer",
+    title: "Team Lead",
+    bio: "Tom Songer leads Bear Team's day-to-day operations and growth — the systems, standards, and people that keep every client's experience consistent from first conversation to closing table. He is the connector behind the scenes: making sure leads get answered fast, timelines stay coordinated, and the team's agents have everything they need to do their best work.",
+    areasServed: ["Orlando", "Greater Central Florida"],
+    specialties: ["Team operations", "Client experience", "Agent development"],
     languages: ["English"],
-    headshot: "/images/placeholder-headshot.svg",
-    verified: false,
-    reviewNote: "Replace with verified team member profile before launch.",
+    phone: "(407) 228-1112",
+    headshot: "/images/team/tom-songer.jpg",
+    verified: true,
+    reviewNote: "Bio drafted from confirmed role — Tom to approve wording before launch.",
+  },
+  {
+    slug: "lissette-dennis",
+    name: "Lissette Dennis",
+    title: "Agent",
+    bio: "Lissette Dennis represents Bear Team buyers and sellers across the Orlando area, bringing the team's deliberate, personal approach to every transaction — clear communication, honest guidance, and steady follow-through from search or listing day to closing.",
+    areasServed: ["Orlando", "Greater Central Florida"],
+    specialties: ["Buyer representation", "Seller representation"],
+    languages: ["English"],
+    phone: "(407) 577-9924",
+    email: "Lissette@BearTeam.com",
+    headshot: "/images/team/lissette-dennis.jpg",
+    verified: true,
+    reviewNote: "Bio drafted from confirmed role — Lissette to approve wording and add specialties/languages before launch.",
+  },
+  {
+    slug: "iris-reddick",
+    name: "Iris Reddick",
+    title: "Agent",
+    bio: "Iris Reddick works with Bear Team buyers and sellers throughout Central Florida, guiding clients through each stage of the process with the team's signature attention to detail — from the first consultation through negotiation and closing day.",
+    areasServed: ["Orlando", "Greater Central Florida"],
+    specialties: ["Buyer representation", "Seller representation"],
+    languages: ["English"],
+    phone: "(407) 228-1112",
+    email: "iris@BearTeam.com",
+    headshot: "/images/team/iris-reddick.jpg",
+    verified: true,
+    reviewNote: "Bio drafted from confirmed role — Iris to approve wording and add specialties/languages before launch.",
+  },
+  {
+    slug: "allen-baer",
+    name: "Allen Baer",
+    title: "Property Manager",
+    bio: "Allen Baer manages properties for Bear Team clients and investors — overseeing the day-to-day details that protect an owner's asset: tenant coordination, maintenance, and keeping every property performing the way it should.",
+    areasServed: ["Orlando", "Greater Central Florida"],
+    specialties: ["Property management", "Investor services"],
+    languages: ["English"],
+    phone: "(407) 228-1112",
+    headshot: "/images/team/allen-baer.jpg",
+    verified: true,
+    reviewNote: "Bio drafted from confirmed role — Allen to approve wording before launch.",
+  },
+  {
+    slug: "owen-willis",
+    name: "Owen Willis",
+    title: "Property Manager",
+    bio: "Owen Willis oversees property management for Bear Team owners and investors — rent-ready turnarounds, maintenance coordination, and the responsive communication that keeps both owners and residents taken care of.",
+    areasServed: ["Orlando", "Greater Central Florida"],
+    specialties: ["Property management", "Investor services"],
+    languages: ["English"],
+    phone: "(407) 228-1112",
+    email: "owen@BearTeam.com",
+    headshot: "/images/team/owen-willis.jpg",
+    verified: true,
+    reviewNote: "Bio drafted from confirmed role — Owen to approve wording before launch.",
   },
 ];

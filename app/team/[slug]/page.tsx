@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { ButtonLink } from "@/components/ui/Button";
 import { team } from "@/content/team";
 
@@ -48,13 +48,37 @@ export default async function TeamMemberPage({
       <section className="bg-soft-white py-16 md:py-24">
         <div className="mx-auto grid max-w-content gap-12 px-6 lg:grid-cols-[1fr,2fr]">
           <div>
-            <PlaceholderImage
-              label="Approved headshot"
-              alt={`${member.name} headshot placeholder`}
-              className="aspect-square rounded-lg"
-              tone="charcoal"
-            />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+              <Image
+                src={member.headshot}
+                alt={`${member.name}, ${member.title} at Bear Team Real Estate`}
+                fill
+                sizes="(min-width:1024px) 33vw, 100vw"
+                className="object-cover"
+                priority
+              />
+            </div>
             <dl className="mt-6 space-y-3 rounded-lg border border-ink/10 bg-cream/40 p-6 text-sm">
+              {member.phone ? (
+                <div>
+                  <dt className="font-semibold text-ink">Phone</dt>
+                  <dd className="text-muted">
+                    <a href={`tel:${member.phone.replace(/\D/g, "")}`} className="text-teal-800 underline-offset-2 hover:underline">
+                      {member.phone}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+              {member.email ? (
+                <div>
+                  <dt className="font-semibold text-ink">Email</dt>
+                  <dd className="text-muted">
+                    <a href={`mailto:${member.email}`} className="text-teal-800 underline-offset-2 hover:underline">
+                      {member.email}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
               <div>
                 <dt className="font-semibold text-ink">Areas served</dt>
                 <dd className="text-muted">{member.areasServed.join(", ")}</dd>
