@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Reveal } from "@/components/animation/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { companyStory } from "@/content/company";
 
@@ -11,12 +11,15 @@ export function AboutSection() {
       <div className="mx-auto max-w-content px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
-            <PlaceholderImage
-              label="Bear Team office / team photo"
-              alt="Bear Team Real Estate team placeholder image"
-              className="aspect-[4/3] rounded-lg"
-              tone="charcoal"
-            />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+              <Image
+                src="/images/bt-6.jpg"
+                alt="Elegant dining room opening to tropical Florida landscaping"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
           </Reveal>
           <div>
             <SectionHeading

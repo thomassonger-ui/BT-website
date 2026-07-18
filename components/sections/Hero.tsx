@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { HeroIntro } from "@/components/animation/HeroIntro";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
 /**
  * Homepage hero — layered reveal, subtle scroll-scrubbed background scale.
@@ -10,14 +10,17 @@ export function Hero() {
   return (
     <HeroIntro>
       <section className="relative flex min-h-[92svh] items-center overflow-hidden bg-ink" aria-labelledby="hero-heading">
-        {/* Background scene (approved Central Florida photography goes here) */}
+        {/* Background scene — approved Bear Team photography */}
         <div data-hero-bg className="absolute inset-0 will-change-transform">
-          <PlaceholderImage
-            label="Central Florida hero scene"
-            className="h-full w-full"
-            tone="charcoal"
+          <Image
+            src="/images/bt-1.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/30" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/25" />
         </div>
 
         <div data-hero-content className="relative z-10 mx-auto w-full max-w-content px-6 pb-24 pt-36">

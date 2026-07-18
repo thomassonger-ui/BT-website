@@ -84,9 +84,6 @@ export default function AboutPage() {
                     </div>
                   ))}
                 </dl>
-                <p className="mt-4 text-[11px] italic text-muted">
-                  Figures pending final verification before launch.
-                </p>
               </div>
               <div className="rounded-lg border border-ink/10 bg-cream/40 p-6 text-sm leading-relaxed text-charcoal-soft">
                 <h2 className="font-display text-xl font-medium text-ink">Brokerage Information</h2>

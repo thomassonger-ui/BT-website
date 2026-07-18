@@ -1,10 +1,9 @@
 import type { ProofPoint } from "@/types/content";
 
 /**
- * BUSINESS PROOF POINTS
- * REVIEW NOTE: every figure below must receive final Bear Team approval before
- * launch. Do not add statistics, awards, rankings, review counts, or
- * market-share claims that are not verified.
+ * BUSINESS PROOF POINTS — approved by Bear Team (Tom Songer, 2026-07-18).
+ * Do not add statistics, awards, rankings, review counts, or market-share
+ * claims that are not verified.
  */
 export const proofPoints: ProofPoint[] = [
   {
@@ -13,7 +12,6 @@ export const proofPoints: ProofPoint[] = [
     label: "Years of Real Estate Experience",
     detail:
       "Four decades of Central Florida market cycles, negotiations, and closings inform every recommendation we make.",
-    reviewNote: "APPROVAL REQUIRED: confirm '40+ years' figure before launch.",
   },
   {
     id: "homes-sold",
@@ -21,7 +19,6 @@ export const proofPoints: ProofPoint[] = [
     label: "Homes Sold",
     detail:
       "Thousands of completed transactions across Central Florida property types, price points, and market conditions.",
-    reviewNote: "APPROVAL REQUIRED: confirm '7,000+ homes sold' figure before launch.",
   },
   {
     id: "volume",
@@ -29,7 +26,6 @@ export const proofPoints: ProofPoint[] = [
     label: "Career Real Estate Volume",
     detail:
       "Experience at every scale — from first homes to luxury properties, land, and investment portfolios.",
-    reviewNote: "APPROVAL REQUIRED: confirm '$4B+ career volume' figure before launch.",
   },
 ];
 

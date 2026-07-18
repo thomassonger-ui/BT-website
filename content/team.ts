@@ -10,8 +10,8 @@ import type { TeamMember } from "@/types/content";
 export const team: TeamMember[] = [
   {
     slug: "broker",
-    name: "[VERIFY BROKER NAME]",
-    title: "Broker [VERIFY TITLE]",
+    name: "Bethanne Baer",
+    title: "Broker/Owner",
     bio: "[PLACEHOLDER — verified broker biography goes here. Include background, market experience, and approach. Do not launch with this text.]",
     areasServed: ["Central Florida"],
     specialties: ["[VERIFY SPECIALTIES]"],

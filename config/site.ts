@@ -19,18 +19,18 @@ export const siteConfig = {
 
   /** REVIEW: verify license numbers with the Florida DBPR before launch */
   brokerageLicense: "[VERIFY BROKERAGE LICENSE]",
-  brokerName: "[VERIFY BROKER NAME]",
+  brokerName: "Bethanne Baer",
 
   address: {
-    street: "[VERIFY BUSINESS ADDRESS]",
+    street: "2300 S Crystal Lake Dr",
     city: "Orlando",
     state: "FL",
-    zip: "[VERIFY ZIP]",
+    zip: "32806",
   },
 
-  phone: process.env.NEXT_PUBLIC_PHONE_NUMBER || "[VERIFY PHONE NUMBER]",
+  phone: process.env.NEXT_PUBLIC_PHONE_NUMBER || "(407) 228-1112",
   email: process.env.NEXT_PUBLIC_GENERAL_EMAIL || "[VERIFY GENERAL EMAIL]",
-  officeHours: "[VERIFY OFFICE HOURS]",
+  officeHours: "Monday–Friday, 9 AM–5 PM",
 
   /** Contacts required by the accessibility & compliance pages */
   accessibilityContact: "[VERIFY ACCESSIBILITY CONTACT]",

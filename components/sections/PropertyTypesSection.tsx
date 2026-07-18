@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Reveal } from "@/components/animation/Reveal";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { propertyTypes } from "@/content/property-types";
 
@@ -23,7 +23,15 @@ export function PropertyTypesSection() {
         <Reveal stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {propertyTypes.map((type) => (
             <article key={type.id} className="flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-soft-white">
-              <PlaceholderImage label={type.name} alt={type.imageAlt} className="aspect-[4/3]" />
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={type.image}
+                  alt={type.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
               <div className="flex flex-1 flex-col p-5">
                 <h3 className="font-display text-lg font-medium text-ink">{type.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{type.description}</p>
