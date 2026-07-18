@@ -8,31 +8,30 @@ import { rooms, heroCopy } from "@/content/home-scenes";
 import { siteConfig } from "@/config/site";
 
 /**
- * SCROLL-SCRUBBED FILM HOMEPAGE.
+ * SCROLL-SCRUBBED WALKTHROUGH — compositor-only build.
  *
- * The 36 approved stills are rendered offline (ffmpeg) into one continuous
- * 24fps film — real interpolated zooms inside every frame, true dissolves
- * between steps, blur-melts between rooms (public/videos/walkthrough.mp4,
- * regenerate per scripts/render-walkthrough.sh notes in CONTENT_GUIDE.md).
+ * The 36 full-resolution stills form one flat sequence in a pinned viewport.
+ * Every image plays a slow continuous push-in for its entire life, and hands
+ * off with a LONG overlapping crossfade (the top layer melts, revealing the
+ * next already in motion). At any moment at most two layers are active.
  *
- * On desktop the film NEVER autoplays: scroll position IS the playhead.
- * A damped ticker lerps video.currentTime toward the scroll target, so the
- * wheel moves you through the house forward and backward with video
- * smoothness — the Matterport "you control the movement" feel. The mouse
- * adds a damped 3D look-around tilt on top.
+ * Deliberately restricted to opacity + transform — the only two properties
+ * browsers composite on the GPU without re-painting — so scrubbing holds
+ * 60fps on ordinary hardware. No filters, no blur, no 3D tilt, no snap:
+ * every source of frame drops from earlier iterations is gone. Photos render
+ * at full source resolution (no video compression), so it's crisp.
  *
- * Fallbacks: mobile and reduced-motion get ordinary stacked photo sections
- * (first frame of each room) in document flow; no video downloads there.
+ * Scroll = playhead, forward and backward. Mobile / reduced-motion get
+ * ordinary stacked photo sections in document flow.
  */
 
-const UNIT_SCROLL = 140; // vh of scroll per room
-/** Must match the render: 36 clips × 1.4s step + tail (50fps master). */
-const VIDEO_FALLBACK_DURATION = 50.2;
+const IMG_SCROLL = 45; // vh of scroll per image (36 images ≈ 16 viewports)
+const XFADE = 0.6; // crossfade length in image-units (60% overlap = always in motion)
 
 export function CinematicHome() {
   const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const n = rooms.length;
+  const allFrames = rooms.flatMap((room) => room.frames);
+  const total = allFrames.length;
 
   useLayoutEffect(() => {
     const el = ref.current;
@@ -49,104 +48,63 @@ export function CinematicHome() {
           .fromTo("[data-hero-cta]", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.4 }, "-=0.25");
       });
 
-      // Desktop: scroll scrubs the film.
+      // Desktop: the scrubbed sequence.
       mm.add(DESKTOP_MQ, () => {
-        const video = videoRef.current;
+        const frames = gsap.utils.toArray<HTMLElement>("[data-seq-frame]", el);
         const captions = gsap.utils.toArray<HTMLElement>("[data-caption]", el);
-        const holdPoints = [0, ...captions.map((_, i) => (i + 0.35) / n), 1];
+        const U = frames.length; // 36 units
 
-        // THE PLAYHEAD TARGET — scroll progress, captured in the trigger's
-        // own onUpdate (registered at creation) and chased by a damped ticker.
-        let target = 0;
-
-        // Caption choreography shares the master timeline (9 room-units).
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
             trigger: el,
             start: "top top",
-            end: `+=${n * UNIT_SCROLL}%`,
+            end: `+=${U * IMG_SCROLL}%`,
             pin: true,
             anticipatePin: 1,
-            scrub: 0.5,
-            onUpdate: (self) => {
-              target = self.progress;
-            },
-            snap: {
-              snapTo: (value) =>
-                holdPoints.reduce((a, b) => (Math.abs(b - value) < Math.abs(a - value) ? b : a)),
-              duration: { min: 0.2, max: 0.6 },
-              delay: 0.15,
-              ease: "power1.inOut",
-              directional: true,
-            },
+            scrub: 1, // heavier smoothing = glide
           },
         });
-        const pad = { x: 0 };
-        tl.to(pad, { x: 1, duration: 0.01 }, n - 0.01); // exact 9-unit length
 
+        frames.forEach((frame, k) => {
+          const lastFrame = k === U - 1;
+          // Life: revealed while frame k-1 melts, gone when own melt ends.
+          const lifeStart = Math.max(0, k - XFADE);
+          const lifeEnd = lastFrame ? U : k + 1;
+
+          // CRITICAL PERF: a frame exists for the compositor ONLY during its
+          // life. Outside it, visibility:hidden — so at any scroll position
+          // at most two layers are painted, not thirty-six.
+          gsap.set(frame, { autoAlpha: k === 0 ? 1 : 0 });
+          if (k > 0) {
+            tl.set(frame, { autoAlpha: 1 }, lifeStart);
+          }
+
+          // Continuous push-in for the whole life — the camera never stops.
+          const img = frame.firstElementChild;
+          if (img) {
+            gsap.set(img, { transformOrigin: "50% 52%" });
+            tl.fromTo(img, { scale: 1 }, { scale: 1.16, duration: lifeEnd - lifeStart }, lifeStart);
+          }
+          // Long overlapping melt into the next photo (opacity only).
+          if (!lastFrame) {
+            tl.to(frame, { autoAlpha: 0, duration: XFADE }, k + 1 - XFADE);
+          }
+        });
+
+        // Captions: one per room (4 images each), riding the same playhead.
         captions.forEach((caption, i) => {
-          const lastRoom = i === n - 1;
+          const roomStart = i * 4;
+          const lastRoom = i === captions.length - 1;
           if (i > 0) {
-            tl.fromTo(caption, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.18 }, i + 0.08);
+            tl.fromTo(caption, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.7 }, roomStart + 0.4);
           } else {
             tl.set(caption, { autoAlpha: 1, y: 0 }, 0);
           }
           if (!lastRoom) {
-            tl.to(caption, { autoAlpha: 0, y: -70, duration: 0.16 }, i + 0.6);
+            tl.to(caption, { autoAlpha: 0, y: -50, duration: 0.7 }, roomStart + 3.1);
           }
         });
-
-        // THE PLAYHEAD: scroll progress → video time, through a damped lerp
-        // so wheel ticks glide instead of stepping. Forward and backward.
-        let current = 0;
-        const tick = () => {
-          if (!video) return;
-          current += (target - current) * 0.12;
-          const dur = video.duration || VIDEO_FALLBACK_DURATION;
-          const t = Math.min(current * dur, dur - 0.05);
-          // Never issue a seek while one is in flight — dropped seeks are
-          // what reads as "jumping" while scrubbing.
-          if (
-            !video.seeking &&
-            video.readyState >= 2 &&
-            Math.abs(t - video.currentTime) > 1 / 50
-          ) {
-            video.currentTime = t;
-          }
-        };
-        gsap.ticker.add(tick);
-
-        // Nudge the browser to buffer the whole film for instant scrubbing.
-        video?.load();
-
-        // MOUSE LOOK-AROUND: damped 3D tilt on the film, Matterport-style.
-        const stage = el.querySelector<HTMLElement>("[data-film-stage]");
-        const lookTargets = stage ? [stage] : [];
-        lookTargets.forEach((node) => gsap.set(node, { transformPerspective: 1200, scale: 1.06 }));
-        const lookY = lookTargets.map((node) => gsap.quickTo(node, "rotationY", { duration: 0.9, ease: "power2.out" }));
-        const lookX = lookTargets.map((node) => gsap.quickTo(node, "rotationX", { duration: 0.9, ease: "power2.out" }));
-        const textXs = captions.map((c) => gsap.quickTo(c, "x", { duration: 1.1, ease: "power2.out" }));
-        const onPointerMove = (e: PointerEvent) => {
-          if (e.pointerType !== "mouse") return;
-          const nx = e.clientX / window.innerWidth - 0.5;
-          const ny = e.clientY / window.innerHeight - 0.5;
-          lookY.forEach((to) => to(nx * 6));
-          lookX.forEach((to) => to(-ny * 3.5));
-          textXs.forEach((to) => to(nx * -18));
-        };
-        const onPointerLeave = () => {
-          lookY.forEach((to) => to(0));
-          lookX.forEach((to) => to(0));
-          textXs.forEach((to) => to(0));
-        };
-        window.addEventListener("pointermove", onPointerMove, { passive: true });
-        document.documentElement.addEventListener("pointerleave", onPointerLeave);
-        return () => {
-          gsap.ticker.remove(tick);
-          window.removeEventListener("pointermove", onPointerMove);
-          document.documentElement.removeEventListener("pointerleave", onPointerLeave);
-        };
       });
 
       // Mobile: normal flow photo sections — light caption reveals only.
@@ -169,37 +127,48 @@ export function CinematicHome() {
           }
         });
       });
+      // Reduced motion: no tweens — plain stacked sections in document flow.
     }, el);
     return () => ctx.revert();
-  }, [n]);
+  }, [total]);
 
   return (
     <div ref={ref} className="relative bg-ink">
-      {/* ============ DESKTOP FILM STAGE (scroll-scrubbed) ============ */}
+      {/* ============ DESKTOP SEQUENCE (scroll-scrubbed) ============ */}
       <div className="relative hidden h-[100svh] overflow-hidden md:motion-safe:block">
-        <div data-film-stage className="absolute inset-0 will-change-transform">
-          <video
-            ref={videoRef}
-            muted
-            playsInline
-            preload="auto"
-            poster="/videos/walkthrough-poster.jpg"
-            aria-hidden="true"
-            tabIndex={-1}
-            disablePictureInPicture
-            className="h-full w-full object-cover"
+        {/* 36 stacked frames, z descending — top layer melts to reveal the next */}
+        {allFrames.map((src, k) => (
+          <div
+            key={src}
+            data-seq-frame
+            className="absolute inset-0"
+            style={{ zIndex: total - k }}
           >
-            <source src="/videos/walkthrough.mp4" type="video/mp4" />
-            <source src="/videos/walkthrough.webm" type="video/webm" />
-          </video>
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-ink/25" />
-        </div>
+            <div className="absolute inset-0">
+              <Image
+                src={src}
+                alt=""
+                fill
+                priority={k < 2}
+                quality={90}
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        ))}
+        {/* Single static legibility gradient above all frames */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-ink/20"
+          style={{ zIndex: total + 1 }}
+        />
         <p className="sr-only">
           A scroll-controlled photographic walkthrough of a Central Florida home, from the front
           exterior through the entry, living spaces, kitchen, and lanai to the pool.
         </p>
 
-        {/* Caption overlays — one per room, choreographed to the playhead */}
+        {/* Caption overlays — one per room */}
         {rooms.map((room, i) => {
           const isHero = i === 0;
           const isFinale = i === rooms.length - 1;
@@ -207,7 +176,8 @@ export function CinematicHome() {
             <div
               key={room.id}
               data-caption
-              className={`absolute inset-0 z-10 flex ${isFinale ? "items-center" : "items-end"} pointer-events-none`}
+              style={{ zIndex: total + 2 }}
+              className={`absolute inset-0 flex ${isFinale ? "items-center" : "items-end"} pointer-events-none`}
             >
               {isHero ? (
                 <div className="pointer-events-auto relative mx-auto w-full max-w-content px-6 pb-20 pt-32">
