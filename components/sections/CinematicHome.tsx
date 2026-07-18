@@ -93,11 +93,13 @@ export function CinematicHome() {
           // CONTINUOUS CAMERA PATH — a straight walk forward: pure push-in
           // toward the center of every room for the photo's entire life.
           // No lateral drift; the path through the house is a straight line.
+          // (Base scale 1.06 leaves coverage margin for the mouse look-around
+          // tilt below, so edges can never show.)
           if (img) {
-            gsap.set(img, { transformOrigin: "50% 52%" });
+            gsap.set(img, { transformOrigin: "50% 52%", transformPerspective: 1200 });
             tl.fromTo(
               img,
-              { scale: 1 },
+              { scale: 1.06 },
               { scale: 1.5, duration: lifeEnd - lifeStart },
               lifeStart,
             );
@@ -123,6 +125,39 @@ export function CinematicHome() {
             }
           }
         });
+
+        // MOUSE LOOK-AROUND (the Matterport feel): moving the mouse rotates
+        // the room around you in 3D — damped, like dragging a panorama —
+        // while scroll independently walks you forward. Captions counter-move
+        // slightly for depth. Pointer only; never affects touch or keyboard.
+        const imgs = scenes
+          .map((scene) => scene.querySelector<HTMLElement>("[data-scene-img]"))
+          .filter((n): n is HTMLElement => Boolean(n));
+        const texts = scenes
+          .map((scene) => scene.querySelector<HTMLElement>("[data-scene-text]"))
+          .filter((n): n is HTMLElement => Boolean(n));
+        const lookY = imgs.map((n) => gsap.quickTo(n, "rotationY", { duration: 0.9, ease: "power2.out" }));
+        const lookX = imgs.map((n) => gsap.quickTo(n, "rotationX", { duration: 0.9, ease: "power2.out" }));
+        const textX = texts.map((n) => gsap.quickTo(n, "x", { duration: 1.1, ease: "power2.out" }));
+        const onPointerMove = (e: PointerEvent) => {
+          if (e.pointerType !== "mouse") return;
+          const nx = e.clientX / window.innerWidth - 0.5; // -0.5 … 0.5
+          const ny = e.clientY / window.innerHeight - 0.5;
+          lookY.forEach((to) => to(nx * 7));
+          lookX.forEach((to) => to(-ny * 4));
+          textX.forEach((to) => to(nx * -18));
+        };
+        const onPointerLeave = () => {
+          lookY.forEach((to) => to(0));
+          lookX.forEach((to) => to(0));
+          textX.forEach((to) => to(0));
+        };
+        window.addEventListener("pointermove", onPointerMove, { passive: true });
+        document.documentElement.addEventListener("pointerleave", onPointerLeave);
+        return () => {
+          window.removeEventListener("pointermove", onPointerMove);
+          document.documentElement.removeEventListener("pointerleave", onPointerLeave);
+        };
       });
 
       // Mobile: normal flow, no pinning — light caption reveals only.
