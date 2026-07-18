@@ -4,6 +4,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/animation/Reveal";
+import Image from "next/image";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CommunityCard } from "@/components/ui/CommunityCard";
@@ -64,11 +65,23 @@ export default async function CommunityPage({
         <div className="mx-auto max-w-content px-6">
           <div className="grid gap-12 lg:grid-cols-2">
             <Reveal>
-              <PlaceholderImage
-                label={`${community.name} photography`}
-                alt={community.imageAlt}
-                className="aspect-[4/3] rounded-lg"
-              />
+              {community.image.includes("placeholder") ? (
+                <PlaceholderImage
+                  label={`${community.name} photography`}
+                  alt={community.imageAlt}
+                  className="aspect-[4/3] rounded-lg"
+                />
+              ) : (
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                  <Image
+                    src={community.image}
+                    alt={community.imageAlt}
+                    fill
+                    sizes="(min-width:1024px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              )}
             </Reveal>
             <div className="space-y-8">
               <div>

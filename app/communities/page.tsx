@@ -169,14 +169,26 @@ export default function CommunitiesPage() {
       </PageHero>
       <Breadcrumbs items={[{ name: "Communities", path: "/communities" }]} />
 
-      <section className="bg-soft-white py-16 md:py-24">
+      {/* Featured: the specialty corridor */}
+      <section className="bg-soft-white py-16 md:py-24" aria-labelledby="featured-communities-heading">
         <div className="mx-auto max-w-content px-6">
+          <SectionHeading
+            eyebrow="Featured communities"
+            title="The Conway · Edgewood · Belle Isle Corridor"
+            intro="Bear Team's home turf for more than 40 years — three lake-dotted communities minutes south of downtown Orlando, where the team has guided thousands of moves."
+          />
+          <h2 id="featured-communities-heading" className="sr-only">
+            Featured communities
+          </h2>
           <Reveal stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {communities.map((community) => (
-              <div key={community.slug} className="relative">
-                <CommunityCard community={community} />
-              </div>
-            ))}
+            {["conway", "edgewood", "belle-isle"]
+              .map((slug) => communities.find((c) => c.slug === slug))
+              .filter((c): c is (typeof communities)[number] => Boolean(c))
+              .map((community) => (
+                <div key={community.slug} className="relative">
+                  <CommunityCard community={community} />
+                </div>
+              ))}
           </Reveal>
           <p className="mt-12 text-center text-xs italic text-muted">{compliance.marketDataDisclaimer}</p>
         </div>
