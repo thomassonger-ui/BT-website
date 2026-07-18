@@ -222,23 +222,55 @@ export default function BuyPage() {
               <h2 id="service-area-heading" className="sr-only">
                 Buying Across Central Florida
               </h2>
+
+              {/* Specialty corridor — home turf */}
+              <div className="mb-6 rounded-lg border-l-4 border-gold bg-soft-white p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                  Our specialty for 40+ years
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-charcoal-soft">
+                  The <strong>Conway · Edgewood · Belle Isle</strong> corridor is Bear Team&rsquo;s
+                  home turf — our office sits in the middle of it, and we&rsquo;ve represented
+                  buyers and sellers here for four decades.
+                </p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {[
+                    { name: "Conway", slug: "conway" },
+                    { name: "Edgewood", slug: "edgewood" },
+                    { name: "Belle Isle", slug: "belle-isle" },
+                  ].map((area) => (
+                    <li key={area.slug}>
+                      <ButtonLink
+                        href={`/communities/${area.slug}`}
+                        variant="ghost"
+                        className="!min-h-0 rounded-full border border-gold bg-gold/10 !px-4 !py-1.5 text-xs font-semibold !text-ink !no-underline hover:bg-gold/25"
+                      >
+                        ★ {area.name}
+                      </ButtonLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
               <ul className="flex flex-wrap gap-2">
-                {siteConfig.serviceAreas.map((area) => (
-                  <li key={area}>
-                    <ButtonLink
-                      href="/communities"
-                      variant="ghost"
-                      className="!min-h-0 rounded-full border border-teal-700/30 bg-soft-white !px-4 !py-1.5 text-xs !no-underline hover:border-teal-700"
-                    >
-                      {area}
-                    </ButtonLink>
-                  </li>
-                ))}
+                {siteConfig.serviceAreas
+                  .filter((area) => !(siteConfig.specialtyAreas as readonly string[]).includes(area))
+                  .map((area) => (
+                    <li key={area}>
+                      <ButtonLink
+                        href="/communities"
+                        variant="ghost"
+                        className="!min-h-0 rounded-full border border-teal-700/30 bg-soft-white !px-4 !py-1.5 text-xs !no-underline hover:border-teal-700"
+                      >
+                        {area}
+                      </ButtonLink>
+                    </li>
+                  ))}
               </ul>
             </div>
             <iframe
-              src="https://maps.google.com/maps?q=Orlando,+FL&z=10&output=embed"
-              title="Map of the Central Florida area served by Bear Team Real Estate"
+              src="https://maps.google.com/maps?q=Conway,+Orlando,+FL&z=12&output=embed"
+              title="Map of Bear Team's specialty corridor — Conway, Edgewood, and Belle Isle — and the surrounding Central Florida service area"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="aspect-[4/3] w-full rounded-lg border-0 shadow-sm lg:aspect-[16/10]"

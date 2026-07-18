@@ -120,7 +120,63 @@ export const communities: Community[] = [
     transportation: ["SR 408", "SR 15 / Conway Road", "Orlando International Airport proximity", "Downtown Orlando via Crystal Lake Drive"],
     image: "/images/placeholder-community-conway.svg",
     imageAlt: "Conway lakes placeholder image",
-    related: ["orlando", "lake-nona", "winter-park"],
+    related: ["edgewood", "belle-isle", "orlando"],
+    reviewNote: "Verify amenity and transportation facts before launch.",
+  },
+  {
+    slug: "edgewood",
+    name: "Edgewood",
+    intro:
+      "A small incorporated city along the South Orange Avenue corridor, minutes south of downtown Orlando — one of Bear Team's specialty areas for more than 40 years.",
+    lifestyle:
+      "A compact, established residential city with quick access to downtown Orlando, the SODO district, and the Conway chain of lakes area to the east.",
+    locationContext:
+      "South of downtown Orlando along South Orange Avenue, bordered by Orlando neighborhoods to the north and Belle Isle to the southeast.",
+    housingOverview:
+      "Predominantly established single-family homes on generous lots, many without HOA restrictions, alongside selective infill construction.",
+    propertyTypes: ["Established single-family", "Larger-lot homes", "Infill new construction"],
+    buyerConsiderations: [
+      "Small-city governance with its own police department and services",
+      "Many properties without HOA restrictions",
+      "Older housing stock benefits from careful inspection",
+    ],
+    sellerConsiderations: [
+      "Buyers value the corridor's proximity to downtown and the airport",
+      "Lot size and condition drive positioning against nearby alternatives",
+    ],
+    amenities: ["South Orange Avenue corridor", "Proximity to SODO district shopping and dining", "Nearby Lake Conway chain access"],
+    transportation: ["South Orange Avenue", "SR 528 access", "Downtown Orlando via Orange Ave", "Orlando International Airport proximity"],
+    image: "/images/placeholder-community-edgewood.svg",
+    imageAlt: "Edgewood neighborhood placeholder image",
+    related: ["conway", "belle-isle", "orlando"],
+    reviewNote: "Verify amenity and transportation facts before launch.",
+  },
+  {
+    slug: "belle-isle",
+    name: "Belle Isle",
+    intro:
+      "A lakefront city wrapped around the Conway Chain of Lakes south of Orlando — Bear Team specialty territory for more than 40 years.",
+    lifestyle:
+      "Residential streets organized around Lake Conway with private ramps and lake access points, minutes from Orlando International Airport and downtown.",
+    locationContext:
+      "South of Orlando between the Conway area and the airport, largely surrounding the southern lobes of Lake Conway.",
+    housingOverview:
+      "Mid-century ranch homes, renovated and rebuilt lakefront residences, and established neighborhoods on mature lots.",
+    propertyTypes: ["Lakefront homes", "Ranch homes", "Renovated and rebuilt residences", "Established-lot single-family"],
+    buyerConsiderations: [
+      "Lakefront and lake-access properties involve dock, seawall, and insurance diligence",
+      "City residency includes access arrangements to the Conway chain",
+      "Wide range between original-condition and fully renovated homes",
+    ],
+    sellerConsiderations: [
+      "Documented lake rights and access are strong marketing assets",
+      "Lakefront buyers form a distinct pool from neighborhood buyers",
+    ],
+    amenities: ["Conway Chain of Lakes", "City lake-access points and ramps", "Warren Park", "Proximity to airport-area employment"],
+    transportation: ["McCoy Road", "SR 528 Beachline", "Conway Road / SR 15", "Orlando International Airport proximity"],
+    image: "/images/placeholder-community-belle-isle.svg",
+    imageAlt: "Belle Isle lakefront placeholder image",
+    related: ["conway", "edgewood", "lake-nona"],
     reviewNote: "Verify amenity and transportation facts before launch.",
   },
   {

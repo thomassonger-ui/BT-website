@@ -41,6 +41,8 @@ export const siteConfig = {
     "Winter Park",
     "Lake Nona",
     "Conway",
+    "Edgewood",
+    "Belle Isle",
     "College Park",
     "Dr. Phillips",
     "Windermere",
@@ -48,6 +50,9 @@ export const siteConfig = {
     "Pine Hills",
     "Greater Central Florida",
   ],
+
+  /** Specialty corridor — Bear Team's home turf for 40+ years. */
+  specialtyAreas: ["Conway", "Edgewood", "Belle Isle"],
 } as const;
 
 export type SiteConfig = typeof siteConfig;
