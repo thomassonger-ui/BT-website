@@ -26,8 +26,8 @@ import { siteConfig } from "@/config/site";
  */
 
 const UNIT_SCROLL = 140; // vh of scroll per room
-/** Must match the render: 36 clips × 1.4s step + tail. */
-const VIDEO_FALLBACK_DURATION = 50.4;
+/** Must match the render: 36 clips × 1.4s step + tail (50fps master). */
+const VIDEO_FALLBACK_DURATION = 50.2;
 
 export function CinematicHome() {
   const ref = useRef<HTMLDivElement>(null);
@@ -102,10 +102,16 @@ export function CinematicHome() {
         let current = 0;
         const tick = () => {
           if (!video) return;
-          current += (target - current) * 0.14;
+          current += (target - current) * 0.12;
           const dur = video.duration || VIDEO_FALLBACK_DURATION;
           const t = Math.min(current * dur, dur - 0.05);
-          if (Math.abs(t - video.currentTime) > 1 / 30 && video.readyState >= 2) {
+          // Never issue a seek while one is in flight — dropped seeks are
+          // what reads as "jumping" while scrubbing.
+          if (
+            !video.seeking &&
+            video.readyState >= 2 &&
+            Math.abs(t - video.currentTime) > 1 / 50
+          ) {
             video.currentTime = t;
           }
         };
