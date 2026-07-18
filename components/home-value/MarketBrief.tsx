@@ -45,12 +45,11 @@ const SOURCES_LINE =
 
 export function MarketBrief() {
   return (
-    <section id="market-brief" className="scroll-mt-24 bg-ink py-16 md:py-24" aria-labelledby="market-brief-heading">
+    <section id="market-brief" className="scroll-mt-24 bg-soft-white py-16 md:py-24" aria-labelledby="market-brief-heading">
       <div className="mx-auto max-w-content px-6">
         <SectionHeading
           eyebrow={`Orlando Market Brief · ${BRIEF_MONTH}`}
           title="More Homes, Easing Rates — the Summer Window Belongs to Sellers Who Price to Today."
-          tone="light"
         />
         <h2 id="market-brief-heading" className="sr-only">
           Orlando market brief, {BRIEF_MONTH}
@@ -59,22 +58,22 @@ export function MarketBrief() {
         {/* Stat tiles */}
         <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {STATS.map((s) => (
-            <div key={s.label} className="rounded-lg border border-soft-white/10 bg-charcoal/60 p-6">
-              <dd className="font-display text-display-md font-medium text-gold-light">{s.value}</dd>
-              <dt className="mt-1 text-sm font-semibold text-soft-white">{s.label}</dt>
-              <p className="mt-2 text-xs leading-relaxed text-cream/60">{s.detail}</p>
+            <div key={s.label} className="rounded-lg border border-ink/10 bg-cream/40 p-6">
+              <dd className="font-display text-display-md font-medium text-teal-800">{s.value}</dd>
+              <dt className="mt-1 text-sm font-semibold text-ink">{s.label}</dt>
+              <p className="mt-2 text-xs leading-relaxed text-muted">{s.detail}</p>
             </div>
           ))}
         </dl>
 
         {/* County table */}
-        <div className="mt-10 overflow-x-auto rounded-lg border border-soft-white/10">
+        <div className="mt-10 overflow-x-auto rounded-lg border border-ink/10 bg-soft-white">
           <table className="w-full min-w-[560px] text-left text-sm">
             <caption className="sr-only">
               Median sale price, days on market, active inventory, and year-over-year price change by county
             </caption>
             <thead>
-              <tr className="border-b border-soft-white/10 bg-charcoal/60 text-xs uppercase tracking-wider text-cream/70">
+              <tr className="border-b border-ink/10 bg-cream/60 text-xs uppercase tracking-wider text-charcoal-soft">
                 <th scope="col" className="px-5 py-3.5 font-semibold">County</th>
                 <th scope="col" className="px-5 py-3.5 font-semibold">Median sale</th>
                 <th scope="col" className="px-5 py-3.5 font-semibold">Days on market</th>
@@ -84,12 +83,12 @@ export function MarketBrief() {
             </thead>
             <tbody>
               {COUNTIES.map((c) => (
-                <tr key={c.county} className="border-b border-soft-white/5 last:border-b-0">
-                  <th scope="row" className="px-5 py-3.5 font-semibold text-soft-white">{c.county}</th>
-                  <td className="px-5 py-3.5 text-cream/85">{c.median}</td>
-                  <td className="px-5 py-3.5 text-cream/85">{c.dom}</td>
-                  <td className="px-5 py-3.5 text-cream/85">{c.inventory}</td>
-                  <td className="px-5 py-3.5 font-medium text-gold-light">{c.yoy}</td>
+                <tr key={c.county} className="border-b border-ink/5 last:border-b-0">
+                  <th scope="row" className="px-5 py-3.5 font-semibold text-ink">{c.county}</th>
+                  <td className="px-5 py-3.5 text-charcoal-soft">{c.median}</td>
+                  <td className="px-5 py-3.5 text-charcoal-soft">{c.dom}</td>
+                  <td className="px-5 py-3.5 text-charcoal-soft">{c.inventory}</td>
+                  <td className="px-5 py-3.5 font-semibold text-teal-800">{c.yoy}</td>
                 </tr>
               ))}
             </tbody>
@@ -97,9 +96,9 @@ export function MarketBrief() {
         </div>
 
         {/* The take */}
-        <div className="mt-10 rounded-lg border-l-4 border-gold bg-charcoal/60 p-6 md:p-8">
+        <div className="mt-10 rounded-md border-l-4 border-gold bg-cream/60 p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">The take</p>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-cream/85">
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-charcoal-soft">
             Inventory is the deepest it has been since 2019 — roughly 2.5 to 3 months of supply —
             and about 22% of active listings have already cut their asking price. Homes priced to
             today&rsquo;s market are still selling and values are still rising in every county;
@@ -109,7 +108,7 @@ export function MarketBrief() {
           </p>
         </div>
 
-        <p className="mt-10 text-[11px] italic leading-relaxed text-cream/50">{SOURCES_LINE}</p>
+        <p className="mt-10 text-[11px] italic leading-relaxed text-muted">{SOURCES_LINE}</p>
       </div>
     </section>
   );
