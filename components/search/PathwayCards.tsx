@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils/cn";
  * "Talk It Through First" hands straight to Bethanne's booking calendar.
  */
 
-type Field = {
+export type Field = {
   key: string;
   label: string;
   type: "text" | "select" | "textarea";
@@ -25,7 +25,7 @@ type Field = {
   placeholder?: string;
 };
 
-type Pathway = {
+export type Pathway = {
   id: string;
   img: string;
   alt: string;
@@ -38,6 +38,10 @@ type Pathway = {
   /** "form" opens the micro-form modal; "booking" opens value + booking; "scout" scrolls to Scout. */
   mode: "form" | "booking" | "scout";
   submitLabel?: string;
+  /** inquiryType sent to /api/contact — controls how the lead is marked in Premier Leads. */
+  inquiryType?: "Buying" | "Selling" | "Property value" | "Relocation" | "General question" | "Other";
+  /** Filled (teal) card button instead of outline. */
+  primary?: boolean;
 };
 
 const PATHWAYS: Pathway[] = [
@@ -113,6 +117,7 @@ const PATHWAYS: Pathway[] = [
     text: "Have our team build a personalized property search.",
     ctaLabel: "Build My Home Search",
     mode: "scout",
+    primary: true,
     value: [],
   },
   {
@@ -194,12 +199,18 @@ const PATHWAYS: Pathway[] = [
   },
 ];
 
-export function PathwayCards() {
+export function PathwayCards({
+  pathways = PATHWAYS,
+  scoutTargetId = "scout-qualify",
+}: {
+  pathways?: Pathway[];
+  scoutTargetId?: string;
+}) {
   const [open, setOpen] = useState<Pathway | null>(null);
 
   function activate(p: Pathway) {
     if (p.mode === "scout") {
-      document.getElementById("scout-qualify")?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById(scoutTargetId)?.scrollIntoView({ behavior: "smooth" });
       return;
     }
     setOpen(p);
@@ -208,7 +219,7 @@ export function PathwayCards() {
   return (
     <>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {PATHWAYS.map((p) => (
+        {pathways.map((p) => (
           <article
             key={p.id}
             className="flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-soft-white transition-shadow hover:shadow-lg"
@@ -230,7 +241,7 @@ export function PathwayCards() {
                 onClick={() => activate(p)}
                 className={cn(
                   "mt-5 inline-flex min-h-[48px] w-full items-center justify-center rounded-md px-6 py-3 text-sm font-semibold tracking-wide transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
-                  p.id === "search"
+                  p.primary
                     ? "bg-teal-700 text-soft-white hover:bg-teal-800"
                     : "border-2 border-teal-700 text-teal-800 hover:bg-teal-700 hover:text-soft-white",
                 )}
@@ -295,7 +306,7 @@ function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: () => v
           name: name.trim(),
           email: email.trim(),
           phone: phone.trim(),
-          inquiryType: "Buying",
+          inquiryType: pathway.inquiryType ?? "Buying",
           message: `${pathway.leadPrefix}: ${details}`,
           preferredContact: "Phone",
           consent: true,
