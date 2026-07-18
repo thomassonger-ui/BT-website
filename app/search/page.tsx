@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ButtonLink } from "@/components/ui/Button";
 import { Scout, type ScoutQuestion } from "@/components/forms/Scout";
+import { PathwayCards } from "@/components/search/PathwayCards";
 import { compliance } from "@/config/compliance";
-import { externalLinks } from "@/config/external-links";
 
 export const metadata: Metadata = buildMetadata({
   title: "Search Homes in Central Florida",
@@ -65,51 +64,6 @@ const qualifyingQuestions: ScoutQuestion[] = [
   },
 ];
 
-const pathCards = [
-  {
-    img: "/images/buy/firsttime.jpg",
-    alt: "Modest single-story Florida home in the suburbs",
-    title: "First-Time Buyers",
-    text: "Get guidance from financing through closing.",
-    cta: { label: "Start Here", href: "/buy" },
-  },
-  {
-    img: "/images/buy/investor.jpg",
-    alt: "Duplex home with two entrances and driveways in Orlando",
-    title: "Investors",
-    text: "Find rental, duplex, value-add, and income opportunities.",
-    cta: { label: "Talk Investments", href: "/buy" },
-  },
-  {
-    img: "/images/buy/search.jpg",
-    alt: "Palm-lined street of homes in a Florida subdivision",
-    title: "Search Available Homes",
-    text: "Have our team build a personalized property search.",
-    cta: { label: "Build My Home Search", href: "#scout-qualify" },
-  },
-  {
-    img: "/images/buy/online.jpg",
-    alt: "Person browsing home listings on a laptop",
-    title: "Found One Online?",
-    text: "Send us the link and we will investigate it.",
-    cta: { label: "Send Us a Listing", href: "/contact" },
-  },
-  {
-    img: "/images/buy/consult.jpg",
-    alt: "Agent discussing plans with a couple in an office",
-    title: "Talk It Through First",
-    text: "Schedule a buyer strategy consultation.",
-    cta: { label: "Book 30 Minutes", href: externalLinks.scheduling, external: true },
-  },
-  {
-    img: "/images/buy/community.jpg",
-    alt: "Aerial view of a residential subdivision with the downtown skyline beyond",
-    title: "Browse by Community",
-    text: "Explore Orlando-area communities and request current options.",
-    cta: { label: "View Communities", href: "/communities" },
-  },
-];
-
 export default function SearchPage() {
   return (
     <>
@@ -138,36 +92,7 @@ export default function SearchPage() {
           <h2 id="pathways-heading" className="sr-only">
             Six ways to start your home search
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {pathCards.map((card) => (
-              <article
-                key={card.title}
-                className="flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-soft-white transition-shadow hover:shadow-lg"
-              >
-                <div className="relative aspect-[16/10]">
-                  <Image
-                    src={card.img}
-                    alt={card.alt}
-                    fill
-                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-display text-lg font-medium text-ink">{card.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{card.text}</p>
-                  <ButtonLink
-                    href={card.cta.href}
-                    external={card.cta.external}
-                    variant={card.title === "Search Available Homes" ? "primary" : "outline"}
-                    className="mt-5 w-full"
-                  >
-                    {card.cta.label}
-                  </ButtonLink>
-                </div>
-              </article>
-            ))}
-          </div>
+          <PathwayCards />
         </div>
       </section>
 
