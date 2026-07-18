@@ -140,7 +140,7 @@ export default function BuyPage() {
       <section id="buyer-inquiry" className="scroll-mt-24 bg-soft-white py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
-            title="Plan Your Home Purchase"
+            title="Ask Scout™ | Plan Your Home Purchase"
             intro="Answer a few quick questions and pick a time with Bethanne — no long forms, no pressure."
           />
           <Scout initialIntent="Buying" />

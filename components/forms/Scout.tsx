@@ -73,6 +73,10 @@ export function Scout({ initialIntent }: { initialIntent?: Intent }) {
   const [error, setError] = useState("");
   const [consent, setConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [askInput, setAskInput] = useState("");
+  const [askLog, setAskLog] = useState<{ q: string; a: string }[]>([]);
+  const [asking, setAsking] = useState(false);
+  const [sessionId] = useState(() => `web-${Math.random().toString(36).slice(2, 10)}`);
 
   const questions = intent === "Selling" ? SELLER_QUESTIONS : BUYER_QUESTIONS;
   const trail: string[] = [];
@@ -156,6 +160,33 @@ export function Scout({ initialIntent }: { initialIntent?: Intent }) {
     }
   }
 
+  async function askScout() {
+    const q = askInput.trim();
+    if (q.length < 2 || asking) return;
+    setAskInput("");
+    setAsking(true);
+    try {
+      const res = await fetch("/api/scout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q, session_id: sessionId, context: { intent: intent ?? "", ...answers } }),
+      });
+      const data = (await res.json()) as { ok: boolean; answer?: string; offline?: boolean };
+      const a =
+        data.ok && data.answer
+          ? data.answer
+          : "I'm best with the quick questions above right now — or call us at (407) 228-1112 and a real person will help.";
+      setAskLog((log) => [...log, { q, a }]);
+    } catch {
+      setAskLog((log) => [
+        ...log,
+        { q, a: "I couldn't reach my brain just now — call (407) 228-1112 and a real person will help." },
+      ]);
+    } finally {
+      setAsking(false);
+    }
+  }
+
   const progress =
     phase === "done"
       ? 1
@@ -195,6 +226,22 @@ export function Scout({ initialIntent }: { initialIntent?: Intent }) {
               </li>
             ))}
           </ul>
+        ) : null}
+
+        {/* Ask Scout™ — free-text AI answers (Claude Sonnet via scout-chat) */}
+        {phase !== "done" && askLog.length > 0 ? (
+          <div className="mb-5 space-y-3" aria-live="polite">
+            {askLog.map((entry, i) => (
+              <div key={i} className="space-y-2">
+                <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-sm bg-teal-700 px-4 py-2 text-sm text-soft-white">
+                  {entry.q}
+                </p>
+                <p className="w-fit max-w-[85%] rounded-2xl rounded-bl-sm bg-cream px-4 py-2 text-sm leading-relaxed text-charcoal">
+                  {entry.a}
+                </p>
+              </div>
+            ))}
+          </div>
         ) : null}
 
         {phase === "done" ? (
@@ -334,6 +381,39 @@ export function Scout({ initialIntent }: { initialIntent?: Intent }) {
             </button>
           </div>
         )}
+        {/* Ask Scout anything — available throughout the intake */}
+        {phase !== "done" ? (
+          <form
+            className="mt-8 border-t border-ink/10 pt-5"
+            onSubmit={(e) => {
+              e.preventDefault();
+              askScout();
+            }}
+          >
+            <label htmlFor="ask-scout" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+              Or ask Scout anything
+            </label>
+            <div className="mt-2 flex gap-2">
+              <input
+                id="ask-scout"
+                type="text"
+                value={askInput}
+                onChange={(e) => setAskInput(e.target.value)}
+                placeholder="e.g. What does a buyer consultation cost?"
+                maxLength={600}
+                className="min-h-[44px] w-full flex-1 rounded-full border border-ink/15 bg-soft-white px-5 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
+              />
+              <button
+                type="submit"
+                disabled={asking}
+                aria-label="Ask Scout"
+                className="min-h-[44px] rounded-full bg-ink px-5 text-sm font-semibold text-gold-light transition-colors hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:opacity-60"
+              >
+                {asking ? "…" : "Ask"}
+              </button>
+            </div>
+          </form>
+        ) : null}
       </div>
     </div>
   );

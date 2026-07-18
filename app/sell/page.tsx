@@ -104,7 +104,7 @@ export default function SellPage() {
       <section id="seller-inquiry" className="scroll-mt-24 bg-soft-white py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
-            title="Request a Selling Consultation"
+            title="Ask Scout™ | Request a Selling Consultation"
             intro="Answer a few quick questions and pick a time with Bethanne — no long forms, no pressure."
           />
           <Scout initialIntent="Selling" />
