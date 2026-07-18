@@ -43,14 +43,21 @@ export function CinematicHome() {
       mm.add(DESKTOP_MQ, () => {
         const scenes = gsap.utils.toArray<HTMLElement>("[data-scene]", el);
 
-        // Gentle snap: after the wheel settles, ease to the nearest scene cut.
-        // Directional + short, so free scrolling is never hijacked.
+        // Gentle snap: after the wheel settles, ease to each scene's HOLD
+        // moment — dissolve complete, room settled, caption up — rather than
+        // the cut itself. Directional + short, so scrolling is never hijacked.
+        const holdPoints = [0];
+        for (let s = 0; s < scenes.length - 1; s++) {
+          holdPoints.push((s + 0.55) / (scenes.length - 1));
+        }
+        holdPoints.push(1);
         ScrollTrigger.create({
           trigger: el,
           start: "top top",
           end: "bottom bottom",
           snap: {
-            snapTo: 1 / (scenes.length - 1),
+            snapTo: (value) =>
+              holdPoints.reduce((a, b) => (Math.abs(b - value) < Math.abs(a - value) ? b : a)),
             duration: { min: 0.2, max: 0.5 },
             delay: 0.1,
             ease: "power1.inOut",
@@ -96,44 +103,54 @@ export function CinematicHome() {
             );
           }
 
-          // SEAMLESS DISSOLVE: each scene arrives invisible, and only once it
-          // is pinned full-frame does it crossfade in over the previous room —
-          // which is still pinned and still dollying forward underneath.
+          // SEAMLESS TRANSITIONS — always full-frame, never a photo edge.
+          // Even scenes: film dissolve. Odd scenes: whip-pan — the camera
+          // whips sideways with directional motion blur and snaps sharp into
+          // the next room. Both scrubbed and reversible.
           if (i > 0) {
-            gsap.fromTo(
-              scene,
-              { autoAlpha: 0 },
-              {
-                autoAlpha: 1,
-                ease: "none",
-                scrollTrigger: { trigger: scene, start: "top top", end: "+=45%", scrub: 0.4 },
-              },
-            );
+            const win = { trigger: scene, start: "top top", end: "+=45%", scrub: 0.4 } as const;
+            gsap.fromTo(scene, { autoAlpha: 0 }, { autoAlpha: 1, ease: "none", scrollTrigger: { ...win } });
+
+            if (i % 2 === 1 && img) {
+              const dir = i % 4 === 1 ? 1 : -1; // alternate whip direction
+              // Incoming: arrives blurred from the side, settles sharp.
+              // Whip runs on the wrapper with overscale so the pan can never
+              // expose an edge of the frame (coverage margin > pan distance).
+              gsap.fromTo(
+                img.parentElement,
+                { xPercent: 10 * dir, scale: 1.25, filter: "blur(14px)" },
+                { xPercent: 0, scale: 1, filter: "blur(0px)", ease: "power1.out", scrollTrigger: { ...win } },
+              );
+              // Outgoing (still pinned underneath): whips the opposite way and blurs out.
+              const prevImg = scenes[i - 1].querySelector("[data-scene-img]");
+              if (prevImg) {
+                gsap.fromTo(
+                  prevImg,
+                  { xPercent: 0, filter: "blur(0px)" },
+                  { xPercent: -8 * dir, filter: "blur(10px)", ease: "power1.in", scrollTrigger: { ...win } },
+                );
+              }
+            }
           }
 
-          // Scene text slides in as the scene takes the screen…
+          // Caption lifecycle — ONE scrubbed timeline per scene so in and out
+          // can never fight over the same properties: rises in after the
+          // dissolve settles, holds, then drifts up and fades at its own speed
+          // as you walk deeper into the photo (foreground/background parallax).
           const text = scene.querySelector("[data-scene-text]");
-          if (text && i > 0) {
-            gsap.fromTo(
-              text,
-              { autoAlpha: 0, y: 60 },
-              {
-                autoAlpha: 1,
-                y: 0,
-                ease: "none",
-                scrollTrigger: { trigger: scene, start: "top+=15% top", end: "top+=55% top", scrub: 0.4 },
-              },
-            );
-          }
-          // …then drifts upward and dissolves at its own speed while you walk
-          // deeper into the photo (foreground/background parallax).
-          if (text && !last) {
-            gsap.to(text, {
-              y: -90,
-              autoAlpha: 0,
-              ease: "none",
-              scrollTrigger: { trigger: scene, start: "top+=80% top", end: "top+=115% top", scrub: 0.4 },
+          if (text) {
+            const tl = gsap.timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: { trigger: scene, start: "top top", end: last ? "+=100%" : "+=115%", scrub: 0.4 },
             });
+            if (i > 0) {
+              tl.fromTo(text, { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 0.35 }, 0.13);
+            } else {
+              tl.set(text, { autoAlpha: 1, y: 0 }, 0); // hero text enters via the load timeline
+            }
+            if (!last) {
+              tl.to(text, { autoAlpha: 0, y: -90, duration: 0.3 }, 0.7);
+            }
           }
         });
       });
@@ -229,11 +246,20 @@ export function CinematicHome() {
             />
             <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
           </div>
-          <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 pb-20">
+          <div
+            data-scene-text
+            className={`relative z-10 mx-auto w-full max-w-content px-6 pb-20 ${
+              scene.align === "right" ? "text-right" : ""
+            }`}
+          >
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">
               {String(i + 2).padStart(2, "0")} — {scene.kicker}
             </p>
-            <p className="mt-3 max-w-2xl font-display text-display-lg font-medium leading-tight text-soft-white text-balance">
+            <p
+              className={`mt-3 max-w-2xl font-display text-display-lg font-medium leading-tight text-soft-white text-balance ${
+                scene.align === "right" ? "ml-auto" : ""
+              }`}
+            >
               {scene.line}
             </p>
           </div>
