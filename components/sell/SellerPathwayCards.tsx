@@ -12,8 +12,8 @@ import { PathwayCards, type Pathway } from "@/components/search/PathwayCards";
 const SELLER_PATHWAYS: Pathway[] = [
   {
     id: "pricing",
-    img: "/images/rooms/01-exterior-1.jpg",
-    alt: "Front exterior of a Florida home with palm trees and manicured landscaping",
+    img: "/images/sell/pricing.jpg",
+    alt: "Two-story Florida home with palm trees, stone entry, and paver driveway",
     title: "Pricing Strategy",
     text: "Position your property against its real competition — not wishful comparables.",
     ctaLabel: "Price My Property",
@@ -46,8 +46,8 @@ const SELLER_PATHWAYS: Pathway[] = [
   },
   {
     id: "preparation",
-    img: "/images/rooms/04-living-2.jpg",
-    alt: "Bright open living area of a staged Florida home",
+    img: "/images/sell/prep.jpg",
+    alt: "Real estate agent walking a family through a bright home interior",
     title: "Property Preparation",
     text: "Spend where buyers pay — skip what they will never notice.",
     ctaLabel: "Plan My Prep",
@@ -85,8 +85,8 @@ const SELLER_PATHWAYS: Pathway[] = [
   },
   {
     id: "marketing",
-    img: "/images/rooms/07-kitchen-1.jpg",
-    alt: "Professionally photographed kitchen with a large stone island",
+    img: "/images/sell/marketing.jpg",
+    alt: "Modern two-story home with floor-to-ceiling glass and palm trees",
     title: "Marketing & Photography",
     text: "Professional presentation where Central Florida buyers actually look.",
     ctaLabel: "See the Marketing",
@@ -116,8 +116,8 @@ const SELLER_PATHWAYS: Pathway[] = [
   },
   {
     id: "showings",
-    img: "/images/rooms/02-entry-1.jpg",
-    alt: "Covered front entry of a Florida home with glass doors",
+    img: "/images/sell/showings.jpg",
+    alt: "Laptop on an office desk displaying a showing-scheduling calendar",
     title: "Showing Management",
     text: "Qualified exposure that respects your household.",
     ctaLabel: "Manage My Showings",
@@ -147,8 +147,8 @@ const SELLER_PATHWAYS: Pathway[] = [
   },
   {
     id: "offers",
-    img: "/images/rooms/06-dining-1.jpg",
-    alt: "Formal dining room with a long table and upholstered chairs",
+    img: "/images/sell/offers.jpg",
+    alt: "Agent and couple reviewing market comparables at a conference table",
     title: "Offer Evaluation & Negotiation",
     text: "Offers weighed on strength and risk — then negotiated on every term.",
     ctaLabel: "Talk Offers",
@@ -178,8 +178,8 @@ const SELLER_PATHWAYS: Pathway[] = [
   },
   {
     id: "closing",
-    img: "/images/rooms/09-pool-1.jpg",
-    alt: "Backyard pool and covered lanai of a Florida home",
+    img: "/images/sell/closing.jpg",
+    alt: "Couple signing closing paperwork at a title company conference table",
     title: "Contract-to-Close Coordination",
     text: "Talk it through with the broker — from signed contract to closing table.",
     ctaLabel: "Book 30 Minutes",
