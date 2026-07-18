@@ -21,14 +21,14 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-ink pb-16 pt-36 md:pb-20 md:pt-44">
+    <section className="relative flex min-h-[480px] items-center overflow-hidden bg-ink pb-14 pt-32 md:min-h-[600px] md:pb-16 md:pt-40">
       {image ? (
         <>
           <Image src={image} alt={imageAlt} fill priority sizes="100vw" className="object-cover" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/60 to-ink/40" />
         </>
       ) : null}
-      <div className="relative mx-auto max-w-content px-6">
+      <div className="relative mx-auto w-full max-w-content px-6">
         {eyebrow ? (
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-light">{eyebrow}</p>
         ) : null}

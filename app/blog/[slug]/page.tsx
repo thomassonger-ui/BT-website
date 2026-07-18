@@ -77,9 +77,9 @@ export default async function BlogArticlePage({ params }: Params) {
 
   return (
     <>
-      {/* Article header */}
-      <section className="bg-ink pb-12 pt-16 md:pb-16 md:pt-24">
-        <div className="mx-auto max-w-3xl px-6">
+      {/* Article header — same height as every page hero */}
+      <section className="flex min-h-[480px] items-center bg-ink pb-14 pt-32 md:min-h-[600px] md:pb-16 md:pt-40">
+        <div className="mx-auto w-full max-w-3xl px-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-light">
             The Bear Team blog · {formatPostDate(post.published_at)}
           </p>
