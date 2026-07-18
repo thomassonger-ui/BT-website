@@ -42,6 +42,10 @@ export type Pathway = {
   inquiryType?: "Buying" | "Selling" | "Property value" | "Relocation" | "General question" | "Other";
   /** Filled (teal) card button instead of outline. */
   primary?: boolean;
+  /** Plain paragraph shown under the modal title (before the value list). */
+  description?: string;
+  /** Optional internal link rendered in the modal (e.g. "View the full guide"). */
+  moreLink?: { href: string; label: string };
 };
 
 const PATHWAYS: Pathway[] = [
@@ -258,7 +262,7 @@ export function PathwayCards({
   );
 }
 
-function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: () => void }) {
+export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: () => void }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const [values, setValues] = useState<Record<string, string>>({});
   const [name, setName] = useState("");
@@ -355,6 +359,19 @@ function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: () => v
           <h3 id={`modal-${pathway.id}-title`} className="font-display text-2xl font-medium text-ink">
             {pathway.title}
           </h3>
+          {pathway.description ? (
+            <p className="mt-3 text-sm leading-relaxed text-charcoal-soft">{pathway.description}</p>
+          ) : null}
+          {pathway.moreLink ? (
+            <p className="mt-3">
+              <Link
+                href={pathway.moreLink.href}
+                className="text-sm font-semibold text-teal-800 underline underline-offset-4 hover:text-teal-600"
+              >
+                {pathway.moreLink.label} →
+              </Link>
+            </p>
+          ) : null}
           <ul className="mt-4 space-y-2">
             {pathway.value.map((v) => (
               <li key={v} className="flex gap-3 text-sm leading-relaxed text-charcoal-soft">

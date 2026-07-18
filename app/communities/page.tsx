@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -8,6 +6,7 @@ import { Reveal } from "@/components/animation/Reveal";
 import { CommunityCard } from "@/components/ui/CommunityCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
+import { CommunityTiles, type CommunityTile } from "@/components/communities/CommunityTiles";
 import { communities } from "@/content/communities";
 import { compliance } from "@/config/compliance";
 
@@ -23,37 +22,99 @@ export const metadata: Metadata = buildMetadata({
  * Names only — geography, no characterizations (Fair Housing).
  * Entries with a `slug` link to their detailed community page.
  */
-const serviceAreas: { county: string; places: { name: string; slug?: string; img?: string }[] }[] = [
+/** Blurb lookup for the 11 communities with full guides — reuse their intros. */
+const intros = Object.fromEntries(communities.map((c) => [c.slug, c.intro]));
+
+/**
+ * Orange County photo tiles — every tile opens a pop-up card with the photo,
+ * a short factual description, a full-guide link where one exists, and a
+ * "current options" micro-form. REVIEW: verify blurb facts before launch.
+ */
+const orangeTiles: CommunityTile[] = [
+  { name: "Orlando", slug: "orlando", img: "/images/communities/orlando.jpg", blurb: intros["orlando"] },
+  { name: "Conway", slug: "conway", img: "/images/communities/conway.jpg", blurb: intros["conway"] },
+  { name: "Edgewood", slug: "edgewood", img: "/images/communities/edgewood.jpg", blurb: intros["edgewood"] },
+  { name: "Belle Isle", slug: "belle-isle", img: "/images/communities/belle-isle.jpg", blurb: intros["belle-isle"] },
+  { name: "Winter Park", slug: "winter-park", img: "/images/communities/winter-park.jpg", blurb: intros["winter-park"] },
+  { name: "College Park", slug: "college-park", img: "/images/communities/college-park.jpg", blurb: intros["college-park"] },
+  { name: "Lake Nona", slug: "lake-nona", img: "/images/communities/lake-nona.jpg", blurb: intros["lake-nona"] },
+  { name: "Dr. Phillips", slug: "dr-phillips", img: "/images/communities/dr-phillips.jpg", blurb: intros["dr-phillips"] },
+  { name: "Windermere", slug: "windermere", img: "/images/communities/windermere.jpg", blurb: intros["windermere"] },
+  { name: "MetroWest", slug: "metrowest", img: "/images/communities/metrowest.jpg", blurb: intros["metrowest"] },
+  { name: "Pine Hills", slug: "pine-hills", img: "/images/communities/pine-hills.jpg", blurb: intros["pine-hills"] },
   {
-    county: "Orange County",
-    places: [
-      { name: "Orlando", slug: "orlando", img: "/images/communities/orlando.jpg" },
-      { name: "Conway", slug: "conway", img: "/images/communities/conway.jpg" },
-      { name: "Edgewood", slug: "edgewood", img: "/images/communities/edgewood.jpg" },
-      { name: "Belle Isle", slug: "belle-isle", img: "/images/communities/belle-isle.jpg" },
-      { name: "Winter Park", slug: "winter-park", img: "/images/communities/winter-park.jpg" },
-      { name: "College Park", slug: "college-park", img: "/images/communities/college-park.jpg" },
-      { name: "Lake Nona", slug: "lake-nona", img: "/images/communities/lake-nona.jpg" },
-      { name: "Dr. Phillips", slug: "dr-phillips", img: "/images/communities/dr-phillips.jpg" },
-      { name: "Windermere", slug: "windermere", img: "/images/communities/windermere.jpg" },
-      { name: "MetroWest", slug: "metrowest", img: "/images/communities/metrowest.jpg" },
-      { name: "Pine Hills", slug: "pine-hills", img: "/images/communities/pine-hills.jpg" },
-      { name: "Baldwin Park", img: "/images/communities/baldwin-park.jpg" },
-      { name: "Thornton Park", img: "/images/communities/thornton-park.jpg" },
-      { name: "Delaney Park", img: "/images/communities/delaney-park.jpg" },
-      { name: "Audubon Park", img: "/images/communities/audubon-park.jpg" },
-      { name: "Winter Garden", img: "/images/communities/winter-garden.jpg" },
-      { name: "Horizon West", img: "/images/communities/horizon-west.jpg" },
-      { name: "Ocoee", img: "/images/communities/ocoee.jpg" },
-      { name: "Apopka", img: "/images/communities/apopka.jpg" },
-      { name: "Maitland", img: "/images/communities/maitland.jpg" },
-      { name: "Hunter's Creek", img: "/images/communities/hunters-creek.jpg" },
-      { name: "Avalon Park", img: "/images/communities/avalon-park.jpg" },
-      { name: "Waterford Lakes", img: "/images/communities/waterford-lakes.jpg" },
-      { name: "Gotha", img: "/images/communities/gotha.jpg" },
-      { name: "Oakland", img: "/images/communities/oakland.jpg" },
-    ],
+    name: "Baldwin Park",
+    img: "/images/communities/baldwin-park.jpg",
+    blurb: "A planned village on the former Orlando Naval Training Center site — neo-traditional homes, townhomes, and condominiums around Lake Baldwin and a walkable village center.",
   },
+  {
+    name: "Thornton Park",
+    img: "/images/communities/thornton-park.jpg",
+    blurb: "A downtown-edge Orlando district of brick streets, historic bungalows, and condominiums a short walk from Lake Eola.",
+  },
+  {
+    name: "Delaney Park",
+    img: "/images/communities/delaney-park.jpg",
+    blurb: "An established near-downtown Orlando neighborhood of early-20th-century homes surrounding its namesake park.",
+  },
+  {
+    name: "Audubon Park",
+    img: "/images/communities/audubon-park.jpg",
+    blurb: "A garden district between downtown Orlando and Winter Park with mid-century homes and the East End Market corridor.",
+  },
+  {
+    name: "Winter Garden",
+    img: "/images/communities/winter-garden.jpg",
+    blurb: "A west Orange County city with a restored historic downtown on the West Orange Trail near Lake Apopka's south shore.",
+  },
+  {
+    name: "Horizon West",
+    img: "/images/communities/horizon-west.jpg",
+    blurb: "One of Orange County's newest master-planned areas — village-based new construction in the county's southwest corner.",
+  },
+  {
+    name: "Ocoee",
+    img: "/images/communities/ocoee.jpg",
+    blurb: "A west Orange County city of established and newer subdivisions with access to SR 429 and the West Orange Trail.",
+  },
+  {
+    name: "Apopka",
+    img: "/images/communities/apopka.jpg",
+    blurb: "A northwest Orange County city with acreage properties and newer subdivisions, near Wekiwa Springs State Park.",
+  },
+  {
+    name: "Maitland",
+    img: "/images/communities/maitland.jpg",
+    blurb: "A lake-dotted suburb just north of Winter Park with mid-century and custom homes and its own SunRail station.",
+  },
+  {
+    name: "Hunter's Creek",
+    img: "/images/communities/hunters-creek.jpg",
+    blurb: "A master-planned community in south Orlando with village neighborhoods, parks, and access to SR 417.",
+  },
+  {
+    name: "Avalon Park",
+    img: "/images/communities/avalon-park.jpg",
+    blurb: "A neo-traditional planned community in east Orlando built around a town-center main street.",
+  },
+  {
+    name: "Waterford Lakes",
+    img: "/images/communities/waterford-lakes.jpg",
+    blurb: "An east Orlando area of 1990s–2000s subdivisions around the Waterford Lakes Town Center.",
+  },
+  {
+    name: "Gotha",
+    img: "/images/communities/gotha.jpg",
+    blurb: "A small historic west Orange County community of acreage homesteads and custom homes near the Windermere-area lakes.",
+  },
+  {
+    name: "Oakland",
+    img: "/images/communities/oakland.jpg",
+    blurb: "A small town on Lake Apopka's south shore along the West Orange Trail, with historic streets and newer enclaves.",
+  },
+];
+
+const serviceAreas: { county: string; places: { name: string }[] }[] = [
   {
     county: "Seminole County",
     places: [
@@ -133,58 +194,27 @@ export default function CommunitiesPage() {
             Communities served, by county
           </h2>
           <div className="space-y-12">
+            <div>
+              <h3 className="border-b border-gold/40 pb-2 font-display text-lg font-medium text-ink">
+                Orange County
+              </h3>
+              <CommunityTiles tiles={orangeTiles} />
+            </div>
             {serviceAreas.map((group) => (
               <div key={group.county}>
                 <h3 className="border-b border-gold/40 pb-2 font-display text-lg font-medium text-ink">
                   {group.county}
                 </h3>
-                {group.places.some((p) => p.img) ? (
-                  <ul className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-                    {group.places.map((place) => {
-                      const tile = (
-                        <div className="group relative aspect-[16/10] overflow-hidden rounded-lg">
-                          <Image
-                            src={place.img as string}
-                            alt={`Homes in ${place.name}, Florida`}
-                            fill
-                            sizes="(min-width:1024px) 20vw, (min-width:640px) 33vw, 50vw"
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent" />
-                          <p className="absolute bottom-2.5 left-3 right-3 text-sm font-semibold text-soft-white drop-shadow">
-                            {place.name}
-                            {place.slug ? <span aria-hidden="true" className="ml-1 text-gold-light">→</span> : null}
-                          </p>
-                        </div>
-                      );
-                      return (
-                        <li key={place.name}>
-                          {place.slug ? (
-                            <Link
-                              href={`/communities/${place.slug}`}
-                              className="block rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-                            >
-                              {tile}
-                            </Link>
-                          ) : (
-                            tile
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                ) : (
-                  <ul className="mt-4 flex flex-wrap gap-2">
-                    {group.places.map((place) => (
-                      <li
-                        key={place.name}
-                        className="inline-flex min-h-[36px] items-center rounded-full border border-ink/10 bg-soft-white/70 px-4 py-1.5 text-sm text-charcoal-soft"
-                      >
-                        {place.name}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {group.places.map((place) => (
+                    <li
+                      key={place.name}
+                      className="inline-flex min-h-[36px] items-center rounded-full border border-ink/10 bg-soft-white/70 px-4 py-1.5 text-sm text-charcoal-soft"
+                    >
+                      {place.name}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
