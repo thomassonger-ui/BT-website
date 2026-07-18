@@ -29,8 +29,8 @@ const buyerSegments = [
   {
     title: "First-Time Buyers",
     text: "The whole process explained in plain language — what things cost, what happens when, and how to avoid the mistakes that only show up after closing. No question is too basic.",
-    img: "/images/rooms/04-living-1.jpg",
-    alt: "Comfortable living room with natural light",
+    img: "/images/buy/firsttime.jpg",
+    alt: "Modest single-story Florida home in the suburbs",
   },
   {
     title: "Relocation Buyers",
@@ -47,8 +47,8 @@ const buyerSegments = [
   {
     title: "Investors",
     text: "Rental-demand fundamentals, realistic expense analysis, and local regulation awareness — real estate evaluated as an investment, not a brochure.",
-    img: "/images/rooms/03-foyer-1.jpg",
-    alt: "Two-story foyer with chandelier",
+    img: "/images/buy/investor.jpg",
+    alt: "Duplex home with two entrances and driveways in Orlando",
   },
 ];
 
@@ -82,15 +82,15 @@ export default function BuyPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                img: "/images/rooms/02-entry-2.jpg",
-                alt: "Front entry of a Central Florida home",
+                img: "/images/buy/search.jpg",
+                alt: "Palm-lined street of homes in a Florida subdivision",
                 title: "Search Available Homes",
                 text: "Browse every home on the market in Central Florida through our search platform.",
                 cta: <SearchHomesLink variant="primary" className="mt-5 w-full" label="Search Homes" />,
               },
               {
-                img: "/images/rooms/05-great-1.jpg",
-                alt: "Bright great room with fireplace",
+                img: "/images/buy/online.jpg",
+                alt: "Person browsing home listings on a laptop",
                 title: "Found One Online?",
                 text: "Saw a home on any website or portal? Send it to us — we’ll verify the details and schedule your private showing.",
                 cta: (
@@ -100,8 +100,8 @@ export default function BuyPage() {
                 ),
               },
               {
-                img: "/images/rooms/06-dining-1.jpg",
-                alt: "Dining room with garden view",
+                img: "/images/buy/consult.jpg",
+                alt: "Agent discussing plans with a couple in an office",
                 title: "Talk It Through First",
                 text: "Book a free 30-minute buyer consultation — goals, budget comfort, and a search plan.",
                 cta: (
@@ -111,8 +111,8 @@ export default function BuyPage() {
                 ),
               },
               {
-                img: "/images/rooms/09-pool-1.jpg",
-                alt: "Backyard pool with palm trees",
+                img: "/images/buy/community.jpg",
+                alt: "Aerial view of a residential subdivision with the downtown skyline beyond",
                 title: "Browse by Community",
                 text: "Compare Orlando-area communities — housing character, amenities, and transportation.",
                 cta: (
