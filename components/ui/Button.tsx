@@ -76,13 +76,13 @@ export function SearchHomesLink({
   if (!hasPropertySearchUrl) {
     return (
       <Link
-        href="/contact"
+        href="/search"
         title={`Property search link pending: ${PROPERTY_SEARCH_PLACEHOLDER}`}
         className={cn(base, variants[variant], className)}
       >
         {label}
         <span className="sr-only">
-          (external property-search link not yet configured — contact Bear Team)
+          (external property-search link not yet configured — opens our Search Homes page)
         </span>
       </Link>
     );

@@ -63,7 +63,16 @@ const CONTACT_STEPS = [
   { key: "email", prompt: "And your email?", type: "email", placeholder: "you@example.com", autoComplete: "email" },
 ] as const;
 
-export function Scout({ initialIntent }: { initialIntent?: Intent }) {
+export type ScoutQuestion = { key: string; prompt: string; options: string[] };
+
+export function Scout({
+  initialIntent,
+  questions: questionsOverride,
+}: {
+  initialIntent?: Intent;
+  /** Optional custom question set (e.g. the /search buyer-qualifying flow). */
+  questions?: ScoutQuestion[];
+}) {
   const [intent, setIntent] = useState<Intent | null>(initialIntent ?? null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [qIndex, setQIndex] = useState(0);
@@ -78,7 +87,8 @@ export function Scout({ initialIntent }: { initialIntent?: Intent }) {
   const [asking, setAsking] = useState(false);
   const [sessionId] = useState(() => `web-${Math.random().toString(36).slice(2, 10)}`);
 
-  const questions = intent === "Selling" ? SELLER_QUESTIONS : BUYER_QUESTIONS;
+  const questions =
+    questionsOverride ?? (intent === "Selling" ? SELLER_QUESTIONS : BUYER_QUESTIONS);
   const trail: string[] = [];
   if (intent) trail.push(intent === "Buying" ? "I'm buying" : "I'm selling");
   questions.slice(0, qIndex).forEach((q) => answers[q.key] && trail.push(answers[q.key]));

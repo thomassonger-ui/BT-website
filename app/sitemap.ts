@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
   const staticRoutes = [
     "",
+    "/search",
     "/buy",
     "/sell",
     "/home-value",

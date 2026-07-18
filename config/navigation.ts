@@ -14,7 +14,7 @@ export type NavItem = {
 /** Minimal header — plain links with two dropdowns, no header CTA buttons. */
 export const primaryNav: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "Search Homes", href: "__PROPERTY_SEARCH__", external: true },
+  { label: "Search Homes", href: "/search" },
   {
     label: "Buy & Sell",
     href: "/buy",
