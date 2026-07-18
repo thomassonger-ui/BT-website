@@ -3,8 +3,9 @@ import { siteConfig } from "@/config/site";
 import { communities } from "@/content/communities";
 import { resources } from "@/content/resources";
 import { team } from "@/content/team";
+import { getPosts } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url;
   const staticRoutes = [
     "",
@@ -14,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/home-value",
     "/communities",
     "/relocation",
+    "/blog",
     "/about",
     "/team",
     "/resources",
@@ -47,5 +49,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.4,
   }));
 
-  return [...staticRoutes, ...communityRoutes, ...resourceRoutes, ...teamRoutes];
+  const blogRoutes = (await getPosts()).map((p) => ({
+    url: `${base}/blog/${p.slug}`,
+    lastModified: p.published_at,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...communityRoutes, ...resourceRoutes, ...teamRoutes, ...blogRoutes];
 }

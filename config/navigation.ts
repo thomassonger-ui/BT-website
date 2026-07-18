@@ -26,7 +26,15 @@ export const primaryNav: NavItem[] = [
     ],
   },
   { label: "Communities", href: "/communities" },
-  { label: "Resources", href: "/resources" },
+  {
+    label: "Resources",
+    href: "/resources",
+    children: [
+      { label: "Blog — Market News Weekly", href: "/blog" },
+      { label: "Guides & Resources", href: "/resources" },
+      { label: "Monthly Market Brief", href: "/home-value#market-brief" },
+    ],
+  },
   {
     label: "About",
     href: "/about",
@@ -49,6 +57,7 @@ export const footerNav = {
   company: [
     { label: "About Bear Team", href: "/about" },
     { label: "Meet the Team", href: "/team" },
+    { label: "Blog", href: "/blog" },
     { label: "Real Estate Resources", href: "/resources" },
     { label: "Contact", href: "/contact" },
   ],
