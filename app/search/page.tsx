@@ -116,7 +116,7 @@ export default function SearchPage() {
       <PageHero
         eyebrow="Home search"
         title="You do not need another property-search website."
-        intro="You need the right homes, verified by an experienced local team. Tell us what you are looking for — we will search, screen, and organize the strongest available options for you."
+        intro="You need the right homes, verified by an experienced local team. Tell us what you are looking for — we will search, screen, and organize the strongest available options for you. Ninety seconds to start, your shortlist within one business day, and direct MLS alerts the moment new homes hit the market."
         image="/images/buy/search.jpg"
       >
         <ButtonLink href="#scout-qualify" variant="primary">
@@ -171,12 +171,68 @@ export default function SearchPage() {
         </div>
       </section>
 
+      {/* Why not just browse the portals? — the hook */}
+      <section className="bg-ink py-16 md:py-24" aria-labelledby="why-not-portals-heading">
+        <div className="mx-auto max-w-content px-6">
+          <SectionHeading
+            eyebrow="The honest answer"
+            title="Why Not Just Browse Zillow?"
+            intro="Browse wherever you like — then understand what the portals aren't doing for you."
+            tone="light"
+          />
+          <h2 id="why-not-portals-heading" className="sr-only">
+            Why not just browse the portals
+          </h2>
+          <div className="grid gap-8 md:grid-cols-3">
+            <article>
+              <p className="font-display text-display-md font-medium text-gold-light">01</p>
+              <h3 className="mt-2 text-lg font-semibold text-soft-white">
+                Portals show homes after everyone&rsquo;s seen them.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-cream/75">
+                Listings reach national portals on a delay — and the best homes go pending while
+                browsers scroll. Our clients get direct MLS alerts the moment a matching home
+                lists, often before it surfaces on the portals at all.
+              </p>
+            </article>
+            <article>
+              <p className="font-display text-display-md font-medium text-gold-light">02</p>
+              <h3 className="mt-2 text-lg font-semibold text-soft-white">
+                The best inventory never makes the portals.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-cream/75">
+                Coming-soon listings, off-market sellers, and four decades of relationships in the
+                Conway, Edgewood, and Belle Isle corridor surface homes you will simply never see
+                on a search site.
+              </p>
+            </article>
+            <article>
+              <p className="font-display text-display-md font-medium text-gold-light">03</p>
+              <h3 className="mt-2 text-lg font-semibold text-soft-white">
+                On the portals, you are the product.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-cream/75">
+                Click &ldquo;contact agent&rdquo; on a portal and your information is sold as a
+                lead to whoever paid for that ZIP code. Here you get one accountable local team —
+                and we screen every home&rsquo;s condition, HOA, insurance, and flood picture
+                before you fall in love with it.
+              </p>
+            </article>
+          </div>
+          <p className="mt-12 text-center">
+            <ButtonLink href="#scout-qualify" variant="primary">
+              Build My Home Search — 90 Seconds
+            </ButtonLink>
+          </p>
+        </div>
+      </section>
+
       {/* Scout™ buyer qualification — "Build My Home Search" lands here */}
       <section id="scout-qualify" className="scroll-mt-24 bg-soft-white py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
             title="Ask Scout™ | Build My Home Search"
-            intro="Five quick questions so we can search, screen, and organize the strongest options for you — then 30 minutes with Bethanne to lock in the plan."
+            intro="Ninety seconds, five questions. Your curated shortlist arrives within one business day, direct MLS alerts follow the moment matching homes hit the market — and you can book 30 minutes with Bethanne right now."
           />
           <Scout initialIntent="Buying" questions={qualifyingQuestions} />
           <p className="mt-6 text-xs italic leading-relaxed text-muted">
