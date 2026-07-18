@@ -8,7 +8,7 @@ import { ProcessTimeline } from "@/components/animation/ProcessTimeline";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FaqList } from "@/components/ui/FaqList";
-import { Scout } from "@/components/forms/Scout";
+import { Scout, type ScoutQuestion } from "@/components/forms/Scout";
 import { SellerPathwayCards } from "@/components/sell/SellerPathwayCards";
 import { sellerProcess } from "@/content/company";
 import { sellerFaqs } from "@/content/faqs";
@@ -20,6 +20,57 @@ export const metadata: Metadata = buildMetadata({
     "Sell with a defined strategy — pricing, preparation, professional marketing, showing management, negotiation, and contract-to-close coordination in Orlando and Central Florida.",
   path: "/sell",
 });
+
+/** Seller-qualifying questions — property, condition, and timing separate ready sellers from researchers. */
+const sellerQuestions: ScoutQuestion[] = [
+  {
+    key: "propertyType",
+    prompt: "What kind of property are you selling?",
+    options: ["Single-family home", "Condo", "Townhome", "Duplex / multifamily", "Land", "Something else"],
+  },
+  {
+    key: "area",
+    prompt: "Which area is it in?",
+    options: [
+      "Conway · Edgewood · Belle Isle",
+      "Downtown Orlando",
+      "Winter Park",
+      "Lake Nona",
+      "Dr. Phillips / Windermere",
+      "Elsewhere in Central Florida",
+    ],
+  },
+  {
+    key: "condition",
+    prompt: "How would you describe its condition?",
+    options: ["Move-in ready", "Needs some updates", "Needs significant work", "Not sure"],
+  },
+  {
+    key: "situation",
+    prompt: "What best describes your situation?",
+    options: [
+      "Upsizing",
+      "Downsizing",
+      "Relocating out of the area",
+      "Selling a rental / investment",
+      "Estate or inherited property",
+      "Just exploring my options",
+    ],
+  },
+  {
+    key: "timeframe",
+    prompt: "When are you hoping to sell?",
+    options: ["As soon as possible", "1–3 months", "3–6 months", "6–12 months", "Just researching"],
+  },
+];
+
+/** Tappable seller prompts for the Ask Scout™ input. */
+const sellerAskSuggestions = [
+  "What will it cost me to sell?",
+  "How do you decide my list price?",
+  "Should I make repairs before listing?",
+  "How long do homes take to sell here?",
+];
 
 export default function SellPage() {
   return (
@@ -77,7 +128,7 @@ export default function SellPage() {
             title="Ask Scout™ | Request a Selling Consultation"
             intro="Answer a few quick questions and pick a time with Bethanne — no long forms, no pressure."
           />
-          <Scout initialIntent="Selling" />
+          <Scout initialIntent="Selling" questions={sellerQuestions} askSuggestions={sellerAskSuggestions} />
           <p className="mt-6 text-xs italic leading-relaxed text-muted">
             {compliance.valuationDisclaimer} {compliance.brokerageRelationship}
           </p>

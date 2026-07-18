@@ -68,10 +68,13 @@ export type ScoutQuestion = { key: string; prompt: string; options: string[] };
 export function Scout({
   initialIntent,
   questions: questionsOverride,
+  askSuggestions,
 }: {
   initialIntent?: Intent;
   /** Optional custom question set (e.g. the /search buyer-qualifying flow). */
   questions?: ScoutQuestion[];
+  /** Optional tappable example questions shown above the "ask Scout anything" input. */
+  askSuggestions?: string[];
 }) {
   const [intent, setIntent] = useState<Intent | null>(initialIntent ?? null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -170,8 +173,8 @@ export function Scout({
     }
   }
 
-  async function askScout() {
-    const q = askInput.trim();
+  async function askScout(preset?: string) {
+    const q = (preset ?? askInput).trim();
     if (q.length < 2 || asking) return;
     setAskInput("");
     setAsking(true);
@@ -403,13 +406,32 @@ export function Scout({
             <label htmlFor="ask-scout" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Or ask Scout anything
             </label>
+            {askSuggestions?.length && askLog.length === 0 ? (
+              <div className="mt-2.5 flex flex-wrap gap-2" aria-label="Example questions">
+                {askSuggestions.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    disabled={asking}
+                    onClick={() => askScout(s)}
+                    className="rounded-full border border-gold/50 bg-cream/50 px-4 py-1.5 text-xs font-medium text-charcoal transition-colors hover:border-gold hover:bg-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:opacity-60"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            ) : null}
             <div className="mt-2 flex gap-2">
               <input
                 id="ask-scout"
                 type="text"
                 value={askInput}
                 onChange={(e) => setAskInput(e.target.value)}
-                placeholder="e.g. What does a buyer consultation cost?"
+                placeholder={
+                  intent === "Selling"
+                    ? "e.g. What will it cost me to sell my home?"
+                    : "e.g. What does a buyer consultation cost?"
+                }
                 maxLength={600}
                 className="min-h-[44px] w-full flex-1 rounded-full border border-ink/15 bg-soft-white px-5 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
               />
