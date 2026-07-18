@@ -7,6 +7,7 @@ import { primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils/cn";
 import { SearchHomesLink } from "@/components/ui/Button";
+import { BTMark } from "@/components/ui/Logo";
 
 /**
  * Minimal sticky site header — plain nav links with accessible dropdowns,
@@ -77,9 +78,12 @@ export function Header() {
       <div className="mx-auto flex max-w-content items-center justify-between gap-4 px-6 py-4">
         <Link
           href="/"
-          className="font-display text-lg font-semibold tracking-tight text-soft-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+          className="flex items-center gap-3 font-display text-lg font-semibold tracking-tight text-soft-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
         >
-          Bear Team <span className="text-gold-light">Real Estate</span>
+          <BTMark className="h-9 w-9 shrink-0 text-soft-white" />
+          <span className="whitespace-nowrap">
+            Bear Team <span className="text-gold-light">Real Estate</span>
+          </span>
         </Link>
 
         {/* Desktop navigation — plain links, no buttons */}

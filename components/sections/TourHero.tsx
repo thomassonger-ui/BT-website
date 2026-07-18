@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
+import { BTMark } from "@/components/ui/Logo";
 import { heroCopy } from "@/content/home-scenes";
 
 /**
@@ -63,6 +64,7 @@ export function TourHero() {
         /* OVERLAY MODE — headline + CTAs; page scroll works normally */
         <div className="absolute inset-0 z-20 flex items-end bg-gradient-to-t from-ink/90 via-ink/40 to-ink/25">
           <div className="mx-auto w-full max-w-content px-6 pb-16 pt-32">
+            <BTMark className="mb-6 h-12 w-12 text-soft-white" />
             <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
               <span className="block">{heroCopy.headlineTop}</span>
               <span className="block text-gold-light">{heroCopy.headlineBottom}</span>
