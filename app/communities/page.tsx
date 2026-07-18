@@ -163,17 +163,36 @@ const seminoleTiles: CommunityTile[] = [
   },
 ];
 
-const serviceAreas: { county: string; places: { name: string }[] }[] = [
+/** Osceola County photo tiles — pop-up details, no full guides yet. REVIEW: verify blurb facts before launch. */
+const osceolaTiles: CommunityTile[] = [
   {
-    county: "Osceola County",
-    places: [
-      { name: "Kissimmee" },
-      { name: "St. Cloud" },
-      { name: "Celebration" },
-      { name: "Poinciana" },
-      { name: "Harmony" },
-    ],
+    name: "Kissimmee",
+    img: "/images/communities/kissimmee.jpg",
+    blurb: "Osceola County's seat along US 192 and Lake Tohopekaliga — a historic downtown, established neighborhoods, and large resort and vacation-home corridors.",
   },
+  {
+    name: "St. Cloud",
+    img: "/images/communities/st-cloud.jpg",
+    blurb: "A lakefront city on East Lake Tohopekaliga with a historic downtown grid and fast-growing new-construction communities along the Narcoossee corridor.",
+  },
+  {
+    name: "Celebration",
+    img: "/images/communities/celebration.jpg",
+    blurb: "A master-planned town founded by the Walt Disney Company — neo-traditional architecture, a walkable town center, and village neighborhoods.",
+  },
+  {
+    name: "Poinciana",
+    img: "/images/communities/poinciana.jpg",
+    blurb: "A large planned community spanning Osceola and Polk counties with established villages and value-oriented single-family homes.",
+  },
+  {
+    name: "Harmony",
+    img: "/images/communities/harmony.jpg",
+    blurb: "A conservation-focused planned community in east Osceola County with trails, dark-sky lighting, and new-construction neighborhoods.",
+  },
+];
+
+const serviceAreas: { county: string; places: { name: string }[] }[] = [
   {
     county: "Lake County",
     places: [
@@ -252,6 +271,12 @@ export default function CommunitiesPage() {
                 Seminole County
               </h3>
               <CommunityTiles tiles={seminoleTiles} />
+            </div>
+            <div>
+              <h3 className="border-b border-gold/40 pb-2 font-display text-lg font-medium text-ink">
+                Osceola County
+              </h3>
+              <CommunityTiles tiles={osceolaTiles} />
             </div>
             {serviceAreas.map((group) => (
               <div key={group.county}>
