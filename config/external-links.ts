@@ -15,6 +15,9 @@ export const externalLinks = {
     process.env.NEXT_PUBLIC_PROPERTY_SEARCH_URL || PROPERTY_SEARCH_PLACEHOLDER,
   scheduling:
     process.env.NEXT_PUBLIC_SCHEDULING_URL || "https://calendar.app.google/Ppha9tukU9iqDgs88",
+  /** Scout™ hands completed intakes to this booking page — 30 minutes with Bethanne. */
+  bethanneBooking:
+    process.env.NEXT_PUBLIC_BOOKING_URL || "https://calendar.app.google/8H2ytHozcNon3VzM8",
   googleMaps: process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || "https://maps.app.goo.gl/n6635xh7GQ7E1fbX7",
   googleBusinessProfile: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL || "",
   facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "",

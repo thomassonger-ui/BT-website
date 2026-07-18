@@ -9,8 +9,7 @@ import { Reveal } from "@/components/animation/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FaqList } from "@/components/ui/FaqList";
-import { LeadForm } from "@/components/forms/LeadForm";
-import { sellerFields } from "@/components/forms/definitions";
+import { Scout } from "@/components/forms/Scout";
 import { sellerProcess } from "@/content/company";
 import { sellerFaqs } from "@/content/faqs";
 import { compliance } from "@/config/compliance";
@@ -106,16 +105,12 @@ export default function SellPage() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
             title="Request a Selling Consultation"
-            intro="Tell us about the property and your timeline. We'll follow up with a consultation built around your goals."
+            intro="Answer a few quick questions and pick a time with Bethanne — no long forms, no pressure."
           />
-          <div className="rounded-lg border border-ink/10 bg-cream/30 p-6 md:p-8">
-            <LeadForm
-              kind="seller-lead"
-              fields={sellerFields}
-              submitLabel="Request a Selling Consultation"
-              footnote={`${compliance.valuationDisclaimer} ${compliance.brokerageRelationship}`}
-            />
-          </div>
+          <Scout initialIntent="Selling" />
+          <p className="mt-6 text-xs italic leading-relaxed text-muted">
+            {compliance.valuationDisclaimer} {compliance.brokerageRelationship}
+          </p>
         </div>
       </section>
     </>

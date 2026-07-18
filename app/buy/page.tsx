@@ -10,8 +10,7 @@ import { Reveal } from "@/components/animation/Reveal";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FaqList } from "@/components/ui/FaqList";
-import { LeadForm } from "@/components/forms/LeadForm";
-import { buyerFields } from "@/components/forms/definitions";
+import { Scout } from "@/components/forms/Scout";
 import { buyerProcess } from "@/content/company";
 import { buyerFaqs } from "@/content/faqs";
 import { compliance } from "@/config/compliance";
@@ -291,21 +290,15 @@ export default function BuyPage() {
         <JsonLd data={faqSchema(buyerFaqs)} />
       </section>
 
-      {/* Buyer inquiry form */}
+      {/* Scout™ conversational intake */}
       <section id="buyer-inquiry" className="scroll-mt-24 bg-soft-white py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
             title="Plan Your Home Purchase"
-            intro="Tell us where you're headed and we'll follow up with a consultation matched to your timeline — no pressure, no obligation."
+            intro="Answer a few quick questions and pick a time with Bethanne — no long forms, no pressure."
           />
-          <div className="rounded-lg border border-ink/10 bg-cream/30 p-6 md:p-8">
-            <LeadForm
-              kind="buyer-lead"
-              fields={buyerFields}
-              submitLabel="Request a Buyer Consultation"
-              footnote={compliance.brokerageRelationship}
-            />
-          </div>
+          <Scout initialIntent="Buying" />
+          <p className="mt-6 text-xs italic leading-relaxed text-muted">{compliance.brokerageRelationship}</p>
         </div>
       </section>
     </>
