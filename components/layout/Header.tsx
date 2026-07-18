@@ -92,7 +92,11 @@ export function Header() {
               if (item.external) {
                 return (
                   <li key={item.label}>
-                    <SearchHomesLink variant="ghost" className="!px-1 !py-0 !min-h-0 text-cream/90 no-underline hover:text-gold-light" label="Search Homes" />
+                    <SearchHomesLink
+                      variant="ghost"
+                      className="!min-h-0 whitespace-nowrap !px-1 !py-1 !text-cream/90 no-underline hover:!text-gold-light"
+                      label="Search Homes"
+                    />
                   </li>
                 );
               }

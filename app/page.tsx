@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo/metadata";
-import { Hero } from "@/components/sections/Hero";
+import { CinematicHome } from "@/components/sections/CinematicHome";
+import { ProofStrip } from "@/components/sections/ProofStrip";
 import { Pathways } from "@/components/sections/Pathways";
-import { PropertyTypesSection } from "@/components/sections/PropertyTypesSection";
-import { ExperienceSection } from "@/components/sections/ExperienceSection";
-import { BuyerProcessSection, SellerProcessSection } from "@/components/sections/ProcessSections";
-import { HomeValueSection } from "@/components/sections/HomeValueSection";
-import { CommunitiesSection } from "@/components/sections/CommunitiesSection";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { ResourcesSection } from "@/components/sections/ResourcesSection";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
-import { FinalCta } from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = buildMetadata({
   title: "Central Florida Real Estate | Bear Team Real Estate",
@@ -19,21 +11,19 @@ export const metadata: Metadata = buildMetadata({
   path: "/",
 });
 
+/**
+ * Minimal, cinematic landing page:
+ * 10 full-screen photo scenes that cut into each other as you scroll
+ * (pinned + scrubbed on desktop, natural flow on mobile/reduced motion),
+ * followed by a slim proof strip and the three primary pathways.
+ * Deeper content lives on /buy, /sell, /home-value, /communities, /resources.
+ */
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <CinematicHome />
+      <ProofStrip />
       <Pathways />
-      <PropertyTypesSection />
-      <ExperienceSection />
-      <BuyerProcessSection />
-      <SellerProcessSection />
-      <HomeValueSection />
-      <CommunitiesSection />
-      <AboutSection />
-      <ResourcesSection />
-      <TestimonialsSection />
-      <FinalCta />
     </>
   );
 }
