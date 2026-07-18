@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/layout/PageHero";
@@ -22,35 +23,35 @@ export const metadata: Metadata = buildMetadata({
  * Names only — geography, no characterizations (Fair Housing).
  * Entries with a `slug` link to their detailed community page.
  */
-const serviceAreas: { county: string; places: { name: string; slug?: string }[] }[] = [
+const serviceAreas: { county: string; places: { name: string; slug?: string; img?: string }[] }[] = [
   {
     county: "Orange County",
     places: [
-      { name: "Orlando", slug: "orlando" },
-      { name: "Conway", slug: "conway" },
-      { name: "Edgewood", slug: "edgewood" },
-      { name: "Belle Isle", slug: "belle-isle" },
-      { name: "Winter Park", slug: "winter-park" },
-      { name: "College Park", slug: "college-park" },
-      { name: "Lake Nona", slug: "lake-nona" },
-      { name: "Dr. Phillips", slug: "dr-phillips" },
-      { name: "Windermere", slug: "windermere" },
-      { name: "MetroWest", slug: "metrowest" },
-      { name: "Pine Hills", slug: "pine-hills" },
-      { name: "Baldwin Park" },
-      { name: "Thornton Park" },
-      { name: "Delaney Park" },
-      { name: "Audubon Park" },
-      { name: "Winter Garden" },
-      { name: "Horizon West" },
-      { name: "Ocoee" },
-      { name: "Apopka" },
-      { name: "Maitland" },
-      { name: "Hunter's Creek" },
-      { name: "Avalon Park" },
-      { name: "Waterford Lakes" },
-      { name: "Gotha" },
-      { name: "Oakland" },
+      { name: "Orlando", slug: "orlando", img: "/images/communities/orlando.jpg" },
+      { name: "Conway", slug: "conway", img: "/images/communities/conway.jpg" },
+      { name: "Edgewood", slug: "edgewood", img: "/images/communities/edgewood.jpg" },
+      { name: "Belle Isle", slug: "belle-isle", img: "/images/communities/belle-isle.jpg" },
+      { name: "Winter Park", slug: "winter-park", img: "/images/communities/winter-park.jpg" },
+      { name: "College Park", slug: "college-park", img: "/images/communities/college-park.jpg" },
+      { name: "Lake Nona", slug: "lake-nona", img: "/images/communities/lake-nona.jpg" },
+      { name: "Dr. Phillips", slug: "dr-phillips", img: "/images/communities/dr-phillips.jpg" },
+      { name: "Windermere", slug: "windermere", img: "/images/communities/windermere.jpg" },
+      { name: "MetroWest", slug: "metrowest", img: "/images/communities/metrowest.jpg" },
+      { name: "Pine Hills", slug: "pine-hills", img: "/images/communities/pine-hills.jpg" },
+      { name: "Baldwin Park", img: "/images/communities/baldwin-park.jpg" },
+      { name: "Thornton Park", img: "/images/communities/thornton-park.jpg" },
+      { name: "Delaney Park", img: "/images/communities/delaney-park.jpg" },
+      { name: "Audubon Park", img: "/images/communities/audubon-park.jpg" },
+      { name: "Winter Garden", img: "/images/communities/winter-garden.jpg" },
+      { name: "Horizon West", img: "/images/communities/horizon-west.jpg" },
+      { name: "Ocoee", img: "/images/communities/ocoee.jpg" },
+      { name: "Apopka", img: "/images/communities/apopka.jpg" },
+      { name: "Maitland", img: "/images/communities/maitland.jpg" },
+      { name: "Hunter's Creek", img: "/images/communities/hunters-creek.jpg" },
+      { name: "Avalon Park", img: "/images/communities/avalon-park.jpg" },
+      { name: "Waterford Lakes", img: "/images/communities/waterford-lakes.jpg" },
+      { name: "Gotha", img: "/images/communities/gotha.jpg" },
+      { name: "Oakland", img: "/images/communities/oakland.jpg" },
     ],
   },
   {
@@ -131,33 +132,59 @@ export default function CommunitiesPage() {
           <h2 id="service-areas-heading" className="sr-only">
             Communities served, by county
           </h2>
-          <div className="grid gap-10 md:grid-cols-2">
+          <div className="space-y-12">
             {serviceAreas.map((group) => (
               <div key={group.county}>
                 <h3 className="border-b border-gold/40 pb-2 font-display text-lg font-medium text-ink">
                   {group.county}
                 </h3>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {group.places.map((place) =>
-                    place.slug ? (
-                      <li key={place.name}>
-                        <Link
-                          href={`/communities/${place.slug}`}
-                          className="inline-flex min-h-[36px] items-center rounded-full border border-teal-700/40 bg-soft-white px-4 py-1.5 text-sm font-medium text-teal-800 transition-colors hover:border-teal-700 hover:bg-teal-700 hover:text-soft-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-                        >
-                          {place.name}
-                        </Link>
-                      </li>
-                    ) : (
+                {group.places.some((p) => p.img) ? (
+                  <ul className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+                    {group.places.map((place) => {
+                      const tile = (
+                        <div className="group relative aspect-[16/10] overflow-hidden rounded-lg">
+                          <Image
+                            src={place.img as string}
+                            alt={`Homes in ${place.name}, Florida`}
+                            fill
+                            sizes="(min-width:1024px) 20vw, (min-width:640px) 33vw, 50vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent" />
+                          <p className="absolute bottom-2.5 left-3 right-3 text-sm font-semibold text-soft-white drop-shadow">
+                            {place.name}
+                            {place.slug ? <span aria-hidden="true" className="ml-1 text-gold-light">→</span> : null}
+                          </p>
+                        </div>
+                      );
+                      return (
+                        <li key={place.name}>
+                          {place.slug ? (
+                            <Link
+                              href={`/communities/${place.slug}`}
+                              className="block rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                            >
+                              {tile}
+                            </Link>
+                          ) : (
+                            tile
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {group.places.map((place) => (
                       <li
                         key={place.name}
                         className="inline-flex min-h-[36px] items-center rounded-full border border-ink/10 bg-soft-white/70 px-4 py-1.5 text-sm text-charcoal-soft"
                       >
                         {place.name}
                       </li>
-                    ),
-                  )}
-                </ul>
+                    ))}
+                  </ul>
+                )}
               </div>
             ))}
           </div>
