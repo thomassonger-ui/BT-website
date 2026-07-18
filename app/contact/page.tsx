@@ -3,7 +3,6 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/animation/Reveal";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { contactFields } from "@/components/forms/definitions";
 import { siteConfig, isPlaceholder } from "@/config/site";
@@ -82,12 +81,13 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Map placeholder */}
-            <PlaceholderImage
-              label="Office location map"
-              alt="Map placeholder showing the Bear Team office location"
-              className="aspect-[4/3] rounded-lg"
-              tone="teal"
+            {/* Live office location map */}
+            <iframe
+              src="https://maps.google.com/maps?q=Bear+Team+Real+Estate,+2300+S+Crystal+Lake+Dr,+Orlando,+FL+32806&z=15&output=embed"
+              title="Map showing the Bear Team Real Estate office at 2300 S Crystal Lake Dr, Orlando, FL"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="aspect-[4/3] w-full rounded-lg border-0"
             />
 
             {socials.length > 0 ? (
