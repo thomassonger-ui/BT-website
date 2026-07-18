@@ -10,8 +10,7 @@
 export const siteConfig = {
   /** Public marketing name */
   name: "Bear Team Real Estate",
-  /** REVIEW: confirm exact registered legal entity name before launch */
-  legalName: "Bear Team Real Estate LLC [VERIFY LEGAL ENTITY NAME]",
+  legalName: "Bear Team Real Estate LLC",
   tagline: "Experience, Local Knowledge, and a Clear Path Home.",
   description:
     "Bear Team Real Estate is a Central Florida real estate company helping buyers, sellers, homeowners, investors, and relocation clients move forward with experienced, local guidance.",
