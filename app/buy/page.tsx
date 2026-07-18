@@ -136,6 +136,18 @@ export default function BuyPage() {
         </div>
       </section>
 
+      {/* Scout™ conversational intake */}
+      <section id="buyer-inquiry" className="scroll-mt-24 bg-soft-white py-16 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionHeading
+            title="Plan Your Home Purchase"
+            intro="Answer a few quick questions and pick a time with Bethanne — no long forms, no pressure."
+          />
+          <Scout initialIntent="Buying" />
+          <p className="mt-6 text-xs italic leading-relaxed text-muted">{compliance.brokerageRelationship}</p>
+        </div>
+      </section>
+
       {/* Service overview */}
       <section className="bg-soft-white py-16 md:py-24">
         <div className="mx-auto max-w-content px-6">
@@ -290,17 +302,6 @@ export default function BuyPage() {
         <JsonLd data={faqSchema(buyerFaqs)} />
       </section>
 
-      {/* Scout™ conversational intake */}
-      <section id="buyer-inquiry" className="scroll-mt-24 bg-soft-white py-16 md:py-24">
-        <div className="mx-auto max-w-3xl px-6">
-          <SectionHeading
-            title="Plan Your Home Purchase"
-            intro="Answer a few quick questions and pick a time with Bethanne — no long forms, no pressure."
-          />
-          <Scout initialIntent="Buying" />
-          <p className="mt-6 text-xs italic leading-relaxed text-muted">{compliance.brokerageRelationship}</p>
-        </div>
-      </section>
     </>
   );
 }
