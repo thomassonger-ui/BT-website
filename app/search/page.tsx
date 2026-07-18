@@ -1,25 +1,22 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
+import { ButtonLink } from "@/components/ui/Button";
 import { Scout, type ScoutQuestion } from "@/components/forms/Scout";
 import { compliance } from "@/config/compliance";
-import { hasPropertySearchUrl } from "@/config/external-links";
+import { externalLinks } from "@/config/external-links";
 
 export const metadata: Metadata = buildMetadata({
   title: "Search Homes in Central Florida",
   description:
-    "Start your Central Florida home search — browse available homes and get matched with the right search plan through Scout™, Bear Team's intake assistant.",
+    "You don't need another property-search website — you need the right homes, verified by an experienced local team. Tell Bear Team what you're looking for and we'll search, screen, and organize the strongest options.",
   path: "/search",
 });
 
-/**
- * Buyer-QUALIFYING question set for the Search page — deeper than the
- * standard intake: financing status and current housing situation are the
- * questions that turn a browser into a qualified buyer conversation.
- */
+/** Buyer-qualifying questions — financing and situation separate lookers from buyers. */
 const qualifyingQuestions: ScoutQuestion[] = [
   {
     key: "preferredArea",
@@ -68,78 +65,123 @@ const qualifyingQuestions: ScoutQuestion[] = [
   },
 ];
 
+const pathCards = [
+  {
+    img: "/images/buy/firsttime.jpg",
+    alt: "Modest single-story Florida home in the suburbs",
+    title: "First-Time Buyers",
+    text: "Get guidance from financing through closing.",
+    cta: { label: "Start Here", href: "/buy" },
+  },
+  {
+    img: "/images/buy/investor.jpg",
+    alt: "Duplex home with two entrances and driveways in Orlando",
+    title: "Investors",
+    text: "Find rental, duplex, value-add, and income opportunities.",
+    cta: { label: "Talk Investments", href: "/buy" },
+  },
+  {
+    img: "/images/buy/search.jpg",
+    alt: "Palm-lined street of homes in a Florida subdivision",
+    title: "Search Available Homes",
+    text: "Have our team build a personalized property search.",
+    cta: { label: "Build My Home Search", href: "#scout-qualify" },
+  },
+  {
+    img: "/images/buy/online.jpg",
+    alt: "Person browsing home listings on a laptop",
+    title: "Found One Online?",
+    text: "Send us the link and we will investigate it.",
+    cta: { label: "Send Us a Listing", href: "/contact" },
+  },
+  {
+    img: "/images/buy/consult.jpg",
+    alt: "Agent discussing plans with a couple in an office",
+    title: "Talk It Through First",
+    text: "Schedule a buyer strategy consultation.",
+    cta: { label: "Book 30 Minutes", href: externalLinks.scheduling, external: true },
+  },
+  {
+    img: "/images/buy/community.jpg",
+    alt: "Aerial view of a residential subdivision with the downtown skyline beyond",
+    title: "Browse by Community",
+    text: "Explore Orlando-area communities and request current options.",
+    cta: { label: "View Communities", href: "/communities" },
+  },
+];
+
 export default function SearchPage() {
   return (
     <>
       <PageHero
         eyebrow="Home search"
-        title="Search Homes in Central Florida."
-        intro="Browse what's on the market — and let Scout™ build your search plan, so the right homes find you instead of the other way around."
+        title="You do not need another property-search website."
+        intro="You need the right homes, verified by an experienced local team. Tell us what you are looking for — we will search, screen, and organize the strongest available options for you."
         image="/images/buy/search.jpg"
       >
-        {hasPropertySearchUrl ? (
-          <SearchHomesLink variant="primary" label="Browse Available Homes" />
-        ) : (
-          <ButtonLink href="#scout-qualify" variant="primary">
-            Get Matched with Scout™
-          </ButtonLink>
-        )}
-        <ButtonLink href="/communities" variant="outline-light">
-          Explore Communities
+        <ButtonLink href="#scout-qualify" variant="primary">
+          Build My Home Search
+        </ButtonLink>
+        <ButtonLink href="/contact" variant="outline-light">
+          Send Us a Listing
         </ButtonLink>
       </PageHero>
       <Breadcrumbs items={[{ name: "Search Homes", path: "/search" }]} />
 
-      {/* Scout™ buyer qualification */}
+      {/* Six pathways — the expert filter, not another portal */}
+      <section className="bg-cream py-16 md:py-24" aria-labelledby="pathways-heading">
+        <div className="mx-auto max-w-content px-6">
+          <SectionHeading
+            eyebrow="How would you like to start?"
+            title="Six Ways In — All Backed by the Same Team"
+          />
+          <h2 id="pathways-heading" className="sr-only">
+            Six ways to start your home search
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {pathCards.map((card) => (
+              <article
+                key={card.title}
+                className="flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-soft-white transition-shadow hover:shadow-lg"
+              >
+                <div className="relative aspect-[16/10]">
+                  <Image
+                    src={card.img}
+                    alt={card.alt}
+                    fill
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="font-display text-lg font-medium text-ink">{card.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{card.text}</p>
+                  <ButtonLink
+                    href={card.cta.href}
+                    external={card.cta.external}
+                    variant={card.title === "Search Available Homes" ? "primary" : "outline"}
+                    className="mt-5 w-full"
+                  >
+                    {card.cta.label}
+                  </ButtonLink>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Scout™ buyer qualification — "Build My Home Search" lands here */}
       <section id="scout-qualify" className="scroll-mt-24 bg-soft-white py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
-            title="Ask Scout™ | Get Matched Before You Search"
-            intro="Five quick questions so your search starts focused — the right areas, the right price band, financing squared away — then 30 minutes with Bethanne to lock in the plan."
+            title="Ask Scout™ | Build My Home Search"
+            intro="Five quick questions so we can search, screen, and organize the strongest options for you — then 30 minutes with Bethanne to lock in the plan."
           />
           <Scout initialIntent="Buying" questions={qualifyingQuestions} />
           <p className="mt-6 text-xs italic leading-relaxed text-muted">
             {compliance.thirdPartySearchDisclaimer} {compliance.brokerageRelationship}
           </p>
-        </div>
-      </section>
-
-      {/* Why qualify first */}
-      <section className="bg-cream py-16 md:py-24">
-        <div className="mx-auto max-w-content px-6">
-          <SectionHeading
-            title="Why a Focused Search Wins"
-            intro="Anyone can scroll listings. Buyers who know their numbers and their target areas move faster when the right home appears — and in a competitive market, speed is leverage."
-          />
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: "Financing First",
-                text: "Sellers weigh financing strength alongside price. Knowing where you stand before you tour makes every offer you write stronger.",
-              },
-              {
-                title: "Target the Right Areas",
-                text: "Central Florida changes character every few miles. A focused search in two or three communities beats a shallow search across twenty.",
-              },
-              {
-                title: "Move When It Matters",
-                text: "When the right home lists, prepared buyers see it first and act the same day — with Bear Team handling the scheduling and strategy.",
-              },
-            ].map((card) => (
-              <article key={card.title} className="rounded-lg border border-ink/10 bg-soft-white p-6">
-                <h3 className="font-display text-lg font-medium text-ink">{card.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{card.text}</p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
-            <ButtonLink href="/buy" variant="outline">
-              See the Full Buyer Process
-            </ButtonLink>
-            <ButtonLink href="/home-value" variant="ghost">
-              Selling first? Start with your home&rsquo;s value →
-            </ButtonLink>
-          </div>
         </div>
       </section>
     </>
