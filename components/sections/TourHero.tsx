@@ -60,7 +60,7 @@ export function TourHero() {
         </div>
       ) : (
         /* OVERLAY MODE — headline + CTAs; page scroll works normally */
-        <div className="absolute inset-0 z-20 flex items-end bg-gradient-to-t from-ink/90 via-ink/40 to-ink/25">
+        <div className="absolute inset-0 z-20 flex items-end bg-gradient-to-t from-ink/75 via-ink/20 to-transparent">
           <div className="mx-auto w-full max-w-content px-6 pb-16 pt-32">
             <BTMark className="mb-6 h-12 w-12 text-soft-white" />
             <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
