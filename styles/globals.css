@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Prevent horizontal overflow from any animated element */
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-soft-white font-sans text-ink antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-teal-700 text-soft-white;
+  }
+
+  /* Balance long display headlines */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/*
+ * REDUCED MOTION — WCAG 2.2 AA.
+ * GSAP animations are gated behind (prefers-reduced-motion: no-preference)
+ * matchMedia in JS (lib/animations/gsap.ts), so no scrubbing or pinning is
+ * ever created for reduced-motion users. This CSS layer additionally disables
+ * residual transitions and smooth scrolling. All content renders in normal
+ * document flow; nothing is hidden behind animation.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
