@@ -2,27 +2,41 @@
 
 import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
-import { gsap, ScrollTrigger, DESKTOP_MQ, MOBILE_MQ } from "@/lib/animations/gsap";
+import { gsap, DESKTOP_MQ, MOBILE_MQ } from "@/lib/animations/gsap";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
 import { heroScene, walkthroughScenes, finaleScene } from "@/content/home-scenes";
 import { siteConfig } from "@/config/site";
 
 /**
- * Cinematic scroll-driven homepage.
+ * CONTINUOUS-FILM HOMEPAGE — scroll moves you through the home.
  *
- * Ten full-screen photo scenes walk the visitor through a home. On desktop
- * (motion allowed) each scene pins while its photo pushes in toward the
- * center of the frame — scrolling moves you closer, like walking toward the
- * front door — then the next photo dissolves in over it (scrubbed crossfade),
- * carrying you into the next room. Video-like, wheel-driven, reversible.
+ * Architecture (desktop + motion): every photo is a full-viewport layer in a
+ * single pinned container, stacked with DESCENDING z-index. One master
+ * timeline is scrubbed by the scroll position:
  *
- * Degradation is built in: with JavaScript off, reduced motion on, or on
- * mobile, the scenes are ordinary stacked full-screen sections in document
- * flow (no pinning, no scrubbing) and every CTA stays reachable. Native
- * scrolling is never hijacked; all animation reverses when scrolling up.
+ *   - The camera never stops: each photo plays a continuous camera path
+ *     (push-in + drift across the room) for its entire life on screen.
+ *   - Rooms hand off by the TOP layer melting away (opacity + focus-pull
+ *     blur) while the next room — already moving — is revealed beneath.
+ *     Both layers are in motion during every transition, so scrolling reads
+ *     as one uninterrupted walk through the house, frame by frame, forward
+ *     and backward with the wheel.
+ *   - Soft snapping settles on each room's caption moment; scrolling is
+ *     never hijacked.
+ *
+ * Fallbacks: the absolute stacking only applies via the `md:motion-safe:`
+ * variants — on mobile and for reduced-motion users the scenes are ordinary
+ * stacked full-screen sections in document flow, and every CTA stays
+ * reachable. (True 360° look-around would require 360 captures or a
+ * Matterport embed — this is the closest flat photography allows.)
  */
+
+const FADE = 0.35; // crossfade length, in scene-units
+const UNIT_SCROLL = 75; // vh of scroll per scene
+
 export function CinematicHome() {
   const ref = useRef<HTMLDivElement>(null);
+  const totalScenes = walkthroughScenes.length + 2;
 
   useLayoutEffect(() => {
     const el = ref.current;
@@ -39,123 +53,80 @@ export function CinematicHome() {
           .fromTo("[data-hero-cta]", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.4 }, "-=0.25");
       });
 
-      // Desktop: pinned cut-through sequence, scroll-scrubbed.
+      // Desktop: the continuous scrubbed film.
       mm.add(DESKTOP_MQ, () => {
         const scenes = gsap.utils.toArray<HTMLElement>("[data-scene]", el);
+        const n = scenes.length;
 
-        // Gentle snap: after the wheel settles, ease to each scene's HOLD
-        // moment — dissolve complete, room settled, caption up — rather than
-        // the cut itself. Directional + short, so scrolling is never hijacked.
-        const holdPoints = [0];
-        for (let s = 0; s < scenes.length - 1; s++) {
-          holdPoints.push((s + 0.55) / (scenes.length - 1));
-        }
-        holdPoints.push(1);
-        ScrollTrigger.create({
-          trigger: el,
-          start: "top top",
-          end: "bottom bottom",
-          snap: {
-            snapTo: (value) =>
-              holdPoints.reduce((a, b) => (Math.abs(b - value) < Math.abs(a - value) ? b : a)),
-            duration: { min: 0.2, max: 0.5 },
-            delay: 0.1,
-            ease: "power1.inOut",
-            directional: true,
+        // Soft snap to each room's caption moment (never the cut itself).
+        const holdPoints = [0, ...scenes.map((_, i) => (i + 0.4) / n), 1];
+
+        const tl = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: el,
+            start: "top top",
+            end: `+=${n * UNIT_SCROLL}%`,
+            pin: true,
+            anticipatePin: 1,
+            scrub: 0.7,
+            snap: {
+              snapTo: (value) =>
+                holdPoints.reduce((a, b) => (Math.abs(b - value) < Math.abs(a - value) ? b : a)),
+              duration: { min: 0.2, max: 0.6 },
+              delay: 0.15,
+              ease: "power1.inOut",
+              directional: true,
+            },
           },
         });
+
         scenes.forEach((scene, i) => {
-          const last = i === scenes.length - 1;
-
-          // Every scene pins at the viewport top and stays pinned PAST its
-          // own scroll segment, so the next photo only ever fades in while
-          // both are perfectly full-frame aligned — a pure movie crossfade,
-          // never a visible photo edge.
-          ScrollTrigger.create({
-            trigger: scene,
-            start: "top top",
-            end: last ? "+=100%" : "+=150%",
-            pin: true,
-            pinSpacing: false,
-            anticipatePin: 1,
-          });
-
-          // WALK-IN DOLLY: while a scene holds the screen (pinned), its photo
-          // pushes in toward the center of the frame — scrubbed 1:1 with the
-          // wheel, so scrolling literally moves you closer to the front door /
-          // into the room. Fully reversible when scrolling back.
+          const last = i === n - 1;
           const img = scene.querySelector("[data-scene-img]");
+          const text = scene.querySelector("[data-scene-text]");
+          // Scene i is revealed while scene i-1 fades over [i-FADE, i], and
+          // melts away over [i+1-FADE, i+1]. Its life on screen:
+          const lifeStart = i === 0 ? 0 : i - FADE;
+          const lifeEnd = last ? n : i + 1;
+
+          // CONTINUOUS CAMERA PATH — push-in plus a drift across the room,
+          // running for the photo's entire life. Drift direction alternates
+          // so consecutive rooms feel like turning as you walk.
           if (img) {
+            const dir = i % 2 === 0 ? 1 : -1;
             gsap.set(img, { transformOrigin: "50% 52%" });
-            gsap.fromTo(
+            tl.fromTo(
               img,
-              { scale: 1 },
-              {
-                scale: last ? 1.3 : 1.45,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: scene,
-                  start: "top top",
-                  end: last ? "+=100%" : "+=150%",
-                  scrub: 0.4,
-                },
-              },
+              { scale: 1.08, xPercent: -3.5 * dir, yPercent: 1.5 },
+              { scale: 1.5, xPercent: 3.5 * dir, yPercent: -2, duration: lifeEnd - lifeStart },
+              lifeStart,
             );
           }
 
-          // SEAMLESS TRANSITIONS — always full-frame, never a photo edge.
-          // Even scenes: film dissolve. Odd scenes: whip-pan — the camera
-          // whips sideways with directional motion blur and snaps sharp into
-          // the next room. Both scrubbed and reversible.
-          if (i > 0) {
-            const win = { trigger: scene, start: "top top", end: "+=45%", scrub: 0.4 } as const;
-            gsap.fromTo(scene, { autoAlpha: 0 }, { autoAlpha: 1, ease: "none", scrollTrigger: { ...win } });
-
-            if (i % 2 === 1 && img) {
-              const dir = i % 4 === 1 ? 1 : -1; // alternate whip direction
-              // Incoming: arrives blurred from the side, settles sharp.
-              // Whip runs on the wrapper with overscale so the pan can never
-              // expose an edge of the frame (coverage margin > pan distance).
-              gsap.fromTo(
-                img.parentElement,
-                { xPercent: 10 * dir, scale: 1.25, filter: "blur(14px)" },
-                { xPercent: 0, scale: 1, filter: "blur(0px)", ease: "power1.out", scrollTrigger: { ...win } },
-              );
-              // Outgoing (still pinned underneath): whips the opposite way and blurs out.
-              const prevImg = scenes[i - 1].querySelector("[data-scene-img]");
-              if (prevImg) {
-                gsap.fromTo(
-                  prevImg,
-                  { xPercent: 0, filter: "blur(0px)" },
-                  { xPercent: -8 * dir, filter: "blur(10px)", ease: "power1.in", scrollTrigger: { ...win } },
-                );
-              }
+          // ROOM HANDOFF — the top layer melts away (opacity + focus-pull
+          // blur) revealing the next room already in motion beneath.
+          if (!last) {
+            tl.to(scene, { autoAlpha: 0, duration: FADE }, i + 1 - FADE);
+            if (img) {
+              tl.to(img, { filter: "blur(9px)", duration: FADE, ease: "power1.in" }, i + 1 - FADE);
             }
           }
 
-          // Caption lifecycle — ONE scrubbed timeline per scene so in and out
-          // can never fight over the same properties: rises in after the
-          // dissolve settles, holds, then drifts up and fades at its own speed
-          // as you walk deeper into the photo (foreground/background parallax).
-          const text = scene.querySelector("[data-scene-text]");
+          // CAPTIONS — rise in once the room is revealed, drift up and fade
+          // before the handoff (their own speed = foreground parallax).
           if (text) {
-            const tl = gsap.timeline({
-              defaults: { ease: "none" },
-              scrollTrigger: { trigger: scene, start: "top top", end: last ? "+=100%" : "+=115%", scrub: 0.4 },
-            });
             if (i > 0) {
-              tl.fromTo(text, { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 0.35 }, 0.13);
-            } else {
-              tl.set(text, { autoAlpha: 1, y: 0 }, 0); // hero text enters via the load timeline
+              tl.fromTo(text, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.2 }, i + 0.08);
             }
             if (!last) {
-              tl.to(text, { autoAlpha: 0, y: -90, duration: 0.3 }, 0.7);
+              tl.to(text, { autoAlpha: 0, y: -70, duration: 0.18 }, i + 0.5);
             }
           }
         });
       });
 
-      // Mobile: no pinning — natural flow with light text reveals only.
+      // Mobile: normal flow, no pinning — light caption reveals only.
       mm.add(MOBILE_MQ, () => {
         gsap.utils.toArray<HTMLElement>("[data-scene]", el).forEach((scene, i) => {
           if (i === 0) return;
@@ -175,19 +146,25 @@ export function CinematicHome() {
           }
         });
       });
-      // Reduced motion: no tweens created — plain stacked sections.
+      // Reduced motion: no tweens — plain stacked sections in document flow.
     }, el);
     return () => ctx.revert();
   }, []);
 
+  const sceneClass =
+    "relative flex h-[100svh] overflow-hidden bg-ink md:motion-safe:absolute md:motion-safe:inset-0 md:motion-safe:h-full";
+
   return (
-    <div ref={ref} className="bg-ink">
-      {/* SCENE 1 — HERO */}
+    <div
+      ref={ref}
+      className="relative bg-ink md:motion-safe:h-[100svh] md:motion-safe:overflow-hidden"
+    >
+      {/* SCENE 1 — HERO (top layer; visible without JS) */}
       <section
         data-scene
         aria-labelledby="hero-heading"
-        className="relative flex h-[100svh] items-end overflow-hidden bg-ink"
-        style={{ zIndex: 1 }}
+        className={`${sceneClass} items-end`}
+        style={{ zIndex: totalScenes }}
       >
         <div className="absolute inset-0 overflow-hidden">
           <Image
@@ -199,9 +176,9 @@ export function CinematicHome() {
             sizes="100vw"
             className="object-cover will-change-transform"
           />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-ink/20" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/25 to-ink/20" />
         </div>
-        <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 pb-24 pt-32">
+        <div data-scene-text className="relative z-10 mx-auto w-full max-w-content px-6 pb-20 pt-32">
           <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
             <span data-hero-line className="block">{heroScene.headlineTop}</span>
             <span data-hero-line className="block text-gold-light">{heroScene.headlineBottom}</span>
@@ -218,7 +195,7 @@ export function CinematicHome() {
               Request a Home Value Consultation →
             </ButtonLink>
           </div>
-          <p data-hero-cta className="mt-10 flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-cream/60">
+          <p data-hero-cta className="mt-9 flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-cream/60">
             <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 motion-safe:animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M12 5v14m0 0-5-5m5 5 5-5" />
             </svg>
@@ -227,13 +204,13 @@ export function CinematicHome() {
         </div>
       </section>
 
-      {/* SCENES 2–9 — THE WALKTHROUGH */}
+      {/* SCENES 2–9 — THE WALKTHROUGH (each revealed beneath the last) */}
       {walkthroughScenes.map((scene, i) => (
         <section
           key={scene.image}
           data-scene
-          className="relative flex h-[100svh] items-end overflow-hidden bg-ink"
-          style={{ zIndex: i + 2 }}
+          className={`${sceneClass} items-end`}
+          style={{ zIndex: totalScenes - (i + 1) }}
         >
           <div className="absolute inset-0 overflow-hidden">
             <Image
@@ -244,7 +221,7 @@ export function CinematicHome() {
               sizes="100vw"
               className="object-cover will-change-transform"
             />
-            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
+            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent" />
           </div>
           <div
             data-scene-text
@@ -266,12 +243,12 @@ export function CinematicHome() {
         </section>
       ))}
 
-      {/* SCENE 10 — FINALE / CONVERSION */}
+      {/* SCENE 10 — FINALE / CONVERSION (bottom layer) */}
       <section
         data-scene
         aria-labelledby="finale-heading"
-        className="relative flex h-[100svh] items-center overflow-hidden bg-ink"
-        style={{ zIndex: walkthroughScenes.length + 2 }}
+        className={`${sceneClass} items-center`}
+        style={{ zIndex: 1 }}
       >
         <div className="absolute inset-0 overflow-hidden">
           <Image
