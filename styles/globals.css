@@ -4,7 +4,8 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* NOTE: scroll-behavior: smooth is intentionally NOT set — it conflicts
+       with GSAP ScrollTrigger pinning/snapping (causes visible jumps). */
     /* Prevent horizontal overflow from any animated element */
     overflow-x: hidden;
   }

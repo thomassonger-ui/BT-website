@@ -58,17 +58,20 @@ export function CinematicHome() {
           },
         });
         scenes.forEach((scene, i) => {
-          // Pin every scene except the last so the next one cuts up over it.
-          if (i < scenes.length - 1) {
-            ScrollTrigger.create({
-              trigger: scene,
-              start: "top top",
-              end: "bottom top",
-              pin: true,
-              pinSpacing: false,
-              anticipatePin: 1,
-            });
-          }
+          const last = i === scenes.length - 1;
+
+          // Every scene pins at the viewport top and stays pinned PAST its
+          // own scroll segment, so the next photo only ever fades in while
+          // both are perfectly full-frame aligned — a pure movie crossfade,
+          // never a visible photo edge.
+          ScrollTrigger.create({
+            trigger: scene,
+            start: "top top",
+            end: last ? "+=100%" : "+=150%",
+            pin: true,
+            pinSpacing: false,
+            anticipatePin: 1,
+          });
 
           // WALK-IN DOLLY: while a scene holds the screen (pinned), its photo
           // pushes in toward the center of the frame — scrubbed 1:1 with the
@@ -81,16 +84,21 @@ export function CinematicHome() {
               img,
               { scale: 1 },
               {
-                scale: 1.45,
+                scale: last ? 1.3 : 1.45,
                 ease: "none",
-                scrollTrigger: { trigger: scene, start: "top top", end: "bottom top", scrub: 0.4 },
+                scrollTrigger: {
+                  trigger: scene,
+                  start: "top top",
+                  end: last ? "+=100%" : "+=150%",
+                  scrub: 0.4,
+                },
               },
             );
           }
 
-          // DISSOLVE: the next scene fades in over the pinned one as you keep
-          // walking — a scrubbed crossfade, so each photo melts into the next
-          // room while the previous is still pushing forward underneath.
+          // SEAMLESS DISSOLVE: each scene arrives invisible, and only once it
+          // is pinned full-frame does it crossfade in over the previous room —
+          // which is still pinned and still dollying forward underneath.
           if (i > 0) {
             gsap.fromTo(
               scene,
@@ -98,7 +106,7 @@ export function CinematicHome() {
               {
                 autoAlpha: 1,
                 ease: "none",
-                scrollTrigger: { trigger: scene, start: "top 90%", end: "top 10%", scrub: 0.4 },
+                scrollTrigger: { trigger: scene, start: "top top", end: "+=45%", scrub: 0.4 },
               },
             );
           }
@@ -108,24 +116,23 @@ export function CinematicHome() {
           if (text && i > 0) {
             gsap.fromTo(
               text,
-              { autoAlpha: 0, y: 56 },
+              { autoAlpha: 0, y: 60 },
               {
                 autoAlpha: 1,
                 y: 0,
-                duration: 0.7,
-                ease: "power2.out",
-                scrollTrigger: { trigger: scene, start: "top 55%", toggleActions: "play none none reverse" },
+                ease: "none",
+                scrollTrigger: { trigger: scene, start: "top+=15% top", end: "top+=55% top", scrub: 0.4 },
               },
             );
           }
           // …then drifts upward and dissolves at its own speed while you walk
           // deeper into the photo (foreground/background parallax).
-          if (text && i < scenes.length - 1) {
+          if (text && !last) {
             gsap.to(text, {
               y: -90,
               autoAlpha: 0,
               ease: "none",
-              scrollTrigger: { trigger: scene, start: "bottom bottom", end: "bottom top", scrub: 0.5 },
+              scrollTrigger: { trigger: scene, start: "top+=80% top", end: "top+=115% top", scrub: 0.4 },
             });
           }
         });
