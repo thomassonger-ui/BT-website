@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils/cn";
-import { externalLinks, hasPropertySearchUrl, PROPERTY_SEARCH_PLACEHOLDER } from "@/config/external-links";
 
 type Variant = "primary" | "secondary" | "outline" | "outline-light" | "ghost";
 
@@ -57,12 +56,13 @@ export function ExternalIcon() {
 }
 
 /**
- * Every "Search Homes" CTA on the site renders through this component so the
- * destination stays centralized in config/external-links.ts.
+ * Every "Search Homes" CTA on the site (header, footer, heroes, cards)
+ * renders through this component and routes to /search — Bear Team's own
+ * Search Homes page, where the team is the search engine (Scout™ builds a
+ * personalized search instead of handing visitors to a portal).
  *
- * Until an approved NEXT_PUBLIC_PROPERTY_SEARCH_URL is configured, the button
- * renders as a clearly-labeled pending state pointing to /contact instead of
- * inventing a destination.
+ * externalLinks.propertySearch remains available for use ON the /search page
+ * if an approved external browse platform is ever configured.
  */
 export function SearchHomesLink({
   variant = "primary",
@@ -73,30 +73,9 @@ export function SearchHomesLink({
   className?: string;
   label?: string;
 }) {
-  if (!hasPropertySearchUrl) {
-    return (
-      <Link
-        href="/search"
-        title={`Property search link pending: ${PROPERTY_SEARCH_PLACEHOLDER}`}
-        className={cn(base, variants[variant], className)}
-      >
-        {label}
-        <span className="sr-only">
-          (external property-search link not yet configured — opens our Search Homes page)
-        </span>
-      </Link>
-    );
-  }
   return (
-    <a
-      href={externalLinks.propertySearch}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cn(base, variants[variant], className)}
-    >
+    <Link href="/search" className={cn(base, variants[variant], className)}>
       {label}
-      <ExternalIcon />
-      <span className="sr-only">(opens external property-search site in a new tab)</span>
-    </a>
+    </Link>
   );
 }
