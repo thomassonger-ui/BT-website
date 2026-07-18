@@ -16,11 +16,25 @@ import { leadSchemas, type LeadKind } from "./schemas";
  *   integration") for connecting a real destination.
  */
 
+/**
+ * Default destination: the "website-lead" Supabase Edge Function, which
+ * inserts every submission into BearTeamOS premier_leads (status "offering")
+ * so it appears in the agent portal at bearteam.app/portal/leads for
+ * claiming. Per-form env vars still override. The anon key below is the
+ * project's public client key (not a secret) used only to satisfy the edge
+ * function's JWT gate; inserts happen inside the function via service role.
+ */
+const DEFAULT_LEAD_WEBHOOK =
+  "https://evzgihywbkaxpkbhstdb.supabase.co/functions/v1/website-lead";
+const SUPABASE_ANON_KEY =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV2emdpaHl3YmtheHBrYmhzdGRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk0NTkyMjIsImV4cCI6MjA5NTAzNTIyMn0.XRxCAI_Lwa-QfUSLUE8gItlQszjb152UD62CbzT-FtU";
+
 const WEBHOOK_ENV: Record<LeadKind, string | undefined> = {
-  contact: process.env.CONTACT_FORM_WEBHOOK_URL,
-  "buyer-lead": process.env.BUYER_LEAD_WEBHOOK_URL,
-  "seller-lead": process.env.SELLER_LEAD_WEBHOOK_URL,
-  valuation: process.env.VALUATION_WEBHOOK_URL,
+  contact: process.env.CONTACT_FORM_WEBHOOK_URL || DEFAULT_LEAD_WEBHOOK,
+  "buyer-lead": process.env.BUYER_LEAD_WEBHOOK_URL || DEFAULT_LEAD_WEBHOOK,
+  "seller-lead": process.env.SELLER_LEAD_WEBHOOK_URL || DEFAULT_LEAD_WEBHOOK,
+  valuation: process.env.VALUATION_WEBHOOK_URL || DEFAULT_LEAD_WEBHOOK,
 };
 
 /** Very small in-memory rate limit per runtime instance (spam backstop). */
@@ -80,9 +94,14 @@ export async function handleLead(kind: LeadKind, request: Request): Promise<Next
   }
 
   try {
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    if (destination === DEFAULT_LEAD_WEBHOOK) {
+      headers.Authorization = `Bearer ${SUPABASE_ANON_KEY}`;
+      headers.apikey = SUPABASE_ANON_KEY;
+    }
     const res = await fetch(destination, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify({
         kind,
         receivedAt: new Date().toISOString(),
