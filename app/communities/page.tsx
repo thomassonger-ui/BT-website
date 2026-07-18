@@ -114,21 +114,56 @@ const orangeTiles: CommunityTile[] = [
   },
 ];
 
-const serviceAreas: { county: string; places: { name: string }[] }[] = [
+/** Seminole County photo tiles — pop-up details, no full guides yet. REVIEW: verify blurb facts before launch. */
+const seminoleTiles: CommunityTile[] = [
   {
-    county: "Seminole County",
-    places: [
-      { name: "Altamonte Springs" },
-      { name: "Casselberry" },
-      { name: "Lake Mary" },
-      { name: "Longwood" },
-      { name: "Oviedo" },
-      { name: "Sanford" },
-      { name: "Winter Springs" },
-      { name: "Heathrow" },
-      { name: "Wekiwa Springs" },
-    ],
+    name: "Casselberry",
+    img: "/images/communities/casselberry.jpg",
+    blurb: "A Seminole County city of established lakeside neighborhoods and mid-century homes along the US 17-92 corridor.",
   },
+  {
+    name: "Lake Mary",
+    img: "/images/communities/lake-mary.jpg",
+    blurb: "A north Seminole County city with planned communities, custom-home enclaves, the International Parkway business corridor, and a SunRail station.",
+  },
+  {
+    name: "Longwood",
+    img: "/images/communities/longwood.jpg",
+    blurb: "A historic Seminole County city with a preserved downtown district, established subdivisions, and larger-lot neighborhoods near the Wekiva River basin.",
+  },
+  {
+    name: "Altamonte Springs",
+    img: "/images/communities/altamonte-springs.jpg",
+    blurb: "A residential and retail hub around Cranes Roost Park, with condominiums, townhomes, and established subdivisions off Interstate 4.",
+  },
+  {
+    name: "Oviedo",
+    img: "/images/communities/oviedo.jpg",
+    blurb: "An east Seminole County city of newer subdivisions and rural-edge properties near the Econlockhatchee River and the Cross Seminole Trail.",
+  },
+  {
+    name: "Sanford",
+    img: "/images/communities/sanford.jpg",
+    blurb: "Seminole County's seat on Lake Monroe — a brick-street historic district and riverwalk, with homes from Victorian-era to new construction and a SunRail terminus.",
+  },
+  {
+    name: "Winter Springs",
+    img: "/images/communities/winter-springs.jpg",
+    blurb: "A residential city along the SR 434 corridor with planned communities near the Cross Seminole Trail and Lake Jesup.",
+  },
+  {
+    name: "Heathrow",
+    img: "/images/communities/heathrow.jpg",
+    blurb: "A gated master-planned community in north Seminole County with golf-course and custom estate homes off International Parkway.",
+  },
+  {
+    name: "Wekiwa Springs",
+    img: "/images/communities/wekiwa-springs.jpg",
+    blurb: "An unincorporated Seminole County area of larger-lot and estate neighborhoods bordering Wekiwa Springs State Park.",
+  },
+];
+
+const serviceAreas: { county: string; places: { name: string }[] }[] = [
   {
     county: "Osceola County",
     places: [
@@ -211,6 +246,12 @@ export default function CommunitiesPage() {
                 Orange County
               </h3>
               <CommunityTiles tiles={orangeTiles} />
+            </div>
+            <div>
+              <h3 className="border-b border-gold/40 pb-2 font-display text-lg font-medium text-ink">
+                Seminole County
+              </h3>
+              <CommunityTiles tiles={seminoleTiles} />
             </div>
             {serviceAreas.map((group) => (
               <div key={group.county}>
