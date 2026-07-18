@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo/metadata";
-import { CinematicHome } from "@/components/sections/CinematicHome";
+import { TourHero } from "@/components/sections/TourHero";
 import { ProofStrip } from "@/components/sections/ProofStrip";
 import { Pathways } from "@/components/sections/Pathways";
 
@@ -12,16 +12,17 @@ export const metadata: Metadata = buildMetadata({
 });
 
 /**
- * Minimal, cinematic landing page:
- * 10 full-screen photo scenes that cut into each other as you scroll
- * (pinned + scrubbed on desktop, natural flow on mobile/reduced motion),
- * followed by a slim proof strip and the three primary pathways.
+ * Minimal landing page: an interactive Matterport 3D walkthrough as the hero
+ * (click-to-activate so page scrolling is never hijacked), followed by a slim
+ * proof strip and the three primary pathways.
+ * REVIEW: the tour is Matterport's labeled sample until replaced with a Bear
+ * Team-owned scan via NEXT_PUBLIC_MATTERPORT_URL (see TourHero.tsx).
  * Deeper content lives on /buy, /sell, /home-value, /communities, /resources.
  */
 export default function HomePage() {
   return (
     <>
-      <CinematicHome />
+      <TourHero />
       <ProofStrip />
       <Pathways />
     </>
