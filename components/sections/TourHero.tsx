@@ -20,7 +20,7 @@ import { heroCopy } from "@/content/home-scenes";
 
 const TOUR_URL =
   process.env.NEXT_PUBLIC_MATTERPORT_URL ||
-  "https://my.matterport.com/show/?m=JGPnGQ6hosj&play=1&qs=1&brand=0";
+  "https://my.matterport.com/show/?m=JGPnGQ6hosj&play=1&qs=1&brand=0&title=0";
 
 const IS_DEMO_TOUR = !process.env.NEXT_PUBLIC_MATTERPORT_URL;
 
