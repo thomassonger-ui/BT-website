@@ -6,7 +6,7 @@ import { Reveal } from "@/components/animation/Reveal";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { contactFields } from "@/components/forms/definitions";
-import { siteConfig } from "@/config/site";
+import { siteConfig, isPlaceholder } from "@/config/site";
 import { externalLinks } from "@/config/external-links";
 import { compliance } from "@/config/compliance";
 
@@ -53,12 +53,14 @@ export default function ContactPage() {
                     {siteConfig.phone}
                   </a>
                 </p>
-                <p>
-                  <span className="font-semibold text-ink">Email: </span>
-                  <a href={`mailto:${siteConfig.email}`} className="text-teal-800 underline-offset-2 hover:underline">
-                    {siteConfig.email}
-                  </a>
-                </p>
+                {!isPlaceholder(siteConfig.email) ? (
+                  <p>
+                    <span className="font-semibold text-ink">Email: </span>
+                    <a href={`mailto:${siteConfig.email}`} className="text-teal-800 underline-offset-2 hover:underline">
+                      {siteConfig.email}
+                    </a>
+                  </p>
+                ) : null}
                 <p>
                   <span className="font-semibold text-ink">Office hours: </span>
                   {siteConfig.officeHours}
@@ -70,17 +72,13 @@ export default function ContactPage() {
                     Schedule a consultation
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
-                ) : (
-                  <span className="text-xs italic text-muted">Scheduling link: [VERIFY SCHEDULING URL]</span>
-                )}
+                ) : null}
                 {externalLinks.googleMaps ? (
                   <a href={externalLinks.googleMaps} target="_blank" rel="noopener noreferrer" className="font-semibold text-teal-800 underline-offset-2 hover:underline">
-                    Get directions
+                    Get directions on Google Maps
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
-                ) : (
-                  <span className="text-xs italic text-muted">Directions link: [VERIFY GOOGLE MAPS URL]</span>
-                )}
+                ) : null}
               </div>
             </div>
 

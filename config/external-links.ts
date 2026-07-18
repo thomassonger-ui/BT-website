@@ -14,7 +14,9 @@ export const externalLinks = {
   propertySearch:
     process.env.NEXT_PUBLIC_PROPERTY_SEARCH_URL || PROPERTY_SEARCH_PLACEHOLDER,
   scheduling: process.env.NEXT_PUBLIC_SCHEDULING_URL || "",
-  googleMaps: process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || "",
+  googleMaps:
+    process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL ||
+    "https://www.google.com/maps/place/Bear+Team+Real+Estate/data=!4m2!3m1!1s0x0:0xbfe2dfd8e8b15164?sa=X&ved=1t:2428&ictx=111",
   googleBusinessProfile: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL || "",
   facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "",
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "",

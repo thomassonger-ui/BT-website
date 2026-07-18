@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { footerNav } from "@/config/navigation";
-import { siteConfig } from "@/config/site";
+import { siteConfig, isPlaceholder } from "@/config/site";
 import { compliance } from "@/config/compliance";
 import { externalLinks } from "@/config/external-links";
 import { SearchHomesLink } from "@/components/ui/Button";
@@ -32,11 +32,13 @@ export function Footer() {
                 {siteConfig.phone}
               </a>
             </p>
-            <p>
-              <a href={`mailto:${siteConfig.email}`} className="hover:text-gold-light">
-                {siteConfig.email}
-              </a>
-            </p>
+            {!isPlaceholder(siteConfig.email) ? (
+              <p>
+                <a href={`mailto:${siteConfig.email}`} className="hover:text-gold-light">
+                  {siteConfig.email}
+                </a>
+              </p>
+            ) : null}
             <p>License: {siteConfig.brokerageLicense}</p>
             <p>Broker: {siteConfig.brokerName}</p>
           </address>
