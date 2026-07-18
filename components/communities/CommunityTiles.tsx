@@ -73,12 +73,12 @@ export function CommunityTiles({ tiles }: { tiles: CommunityTile[] }) {
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent transition-colors group-hover:from-ink/85" />
-              <p className="absolute bottom-2.5 left-3 right-3 text-sm font-semibold text-soft-white drop-shadow">
-                {t.name}
-                <span aria-hidden="true" className="ml-1 text-gold-light opacity-0 transition-opacity group-hover:opacity-100">
-                  →
-                </span>
-              </p>
+              <div className="absolute bottom-2.5 left-3 right-3 drop-shadow">
+                <p className="text-sm font-semibold text-soft-white">{t.name}</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-gold-light">
+                  Click to Explore <span aria-hidden="true">→</span>
+                </p>
+              </div>
             </button>
           </li>
         ))}
