@@ -39,16 +39,14 @@ export function TourHero() {
         className="absolute inset-0 h-full w-full border-0"
       />
 
-      {/* Sample label — required until replaced with a Bear Team scan */}
-      {IS_DEMO_TOUR ? (
-        <p className="absolute left-1/2 top-24 z-30 -translate-x-1/2 whitespace-nowrap rounded-full bg-ink/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-gold-light backdrop-blur">
-          Sample 3D tour — for demonstration only, not a Bear Team listing
-        </p>
-      ) : null}
-
       {exploring ? (
         /* EXPLORE MODE — tour owns the mouse; exit restores the page */
-        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-30 flex justify-center">
+        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-30 flex flex-col items-center gap-2">
+          {IS_DEMO_TOUR ? (
+            <p className="text-[10px] uppercase tracking-widest text-cream/40">
+              Sample 3D tour — for demonstration only, not a Bear Team listing
+            </p>
+          ) : null}
           <button
             type="button"
             onClick={() => setExploring(false)}
@@ -91,6 +89,11 @@ export function TourHero() {
                 Request a Home Value Consultation →
               </ButtonLink>
             </div>
+            {IS_DEMO_TOUR ? (
+              <p className="mt-8 text-[10px] uppercase tracking-widest text-cream/40">
+                Sample 3D tour — for demonstration only, not a Bear Team listing
+              </p>
+            ) : null}
           </div>
         </div>
       )}
