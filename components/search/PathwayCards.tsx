@@ -275,11 +275,22 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
+    // iOS-safe scroll lock: fix the body in place (plain overflow:hidden is
+    // ignored by iOS Safari and lets the page behind the modal scroll/jump).
+    const scrollY = window.scrollY;
+    const { position, top, width, overflow } = document.body.style;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
     document.body.style.overflow = "hidden";
     panelRef.current?.focus();
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      document.body.style.position = position;
+      document.body.style.top = top;
+      document.body.style.width = width;
+      document.body.style.overflow = overflow;
+      window.scrollTo(0, scrollY);
     };
   }, [onClose]);
 
@@ -339,7 +350,7 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
         aria-modal="true"
         aria-labelledby={`modal-${pathway.id}-title`}
         tabIndex={-1}
-        className="max-h-[92svh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-soft-white shadow-2xl outline-none sm:rounded-2xl"
+        className="max-h-[92svh] w-full max-w-lg overflow-y-auto overscroll-contain rounded-t-2xl bg-soft-white shadow-2xl outline-none sm:rounded-2xl"
       >
         <div className="relative aspect-[16/7]">
           <Image src={pathway.img} alt="" fill sizes="512px" className="object-cover sm:rounded-t-2xl" />

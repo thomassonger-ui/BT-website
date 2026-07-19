@@ -56,3 +56,16 @@
     font-size: 14px;
   }
 }
+
+/*
+ * iOS Safari force-zooms the page when a focused input's font-size is
+ * below 16px — inside fixed-position modals that zoom wedges the UI.
+ * Keep all form controls at 16px on phones (overrides utility classes).
+ */
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
