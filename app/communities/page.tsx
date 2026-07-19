@@ -244,7 +244,7 @@ export default function CommunitiesPage() {
         title="Explore Central Florida Communities."
         intro="Each community here is described factually — architecture, housing character, amenities, and transportation — so you can compare on the things that actually differ."
         image="/images/heroes/communities.jpg"
-        imageAlt="Front entrance of a Florida home framed by palms and tropical landscaping"
+        imageAlt="Coastal-style single-story Florida home with palms and lush landscaping"
       >
         <SearchHomesLink variant="primary" />
         <ButtonLink href="/contact" variant="outline-light">

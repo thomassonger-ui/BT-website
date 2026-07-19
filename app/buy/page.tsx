@@ -58,7 +58,8 @@ export default function BuyPage() {
         eyebrow="For buyers"
         title="Buy With Experienced Guidance on Your Side."
         intro="From financing preparation and property selection through negotiation, inspections, and closing — a defined process, an experienced advocate, and a clear path to keys in hand."
-        image="/images/rooms/01-exterior-1.jpg"
+        image="/images/heroes/buy.jpg"
+        imageAlt="Bright open living room of a Florida home with a fireplace and pool view"
       >
         <SearchHomesLink variant="primary" label="Search Available Homes" />
         <ButtonLink href="#buyer-inquiry" variant="outline-light">
