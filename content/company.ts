@@ -19,7 +19,7 @@ export const positioning = {
 
 export const companyStory = {
   history: [
-    "Bear Team Real Estate LLC is a boutique Orlando brokerage founded and led by Bethanne Baer, Broker/Owner — built on more than four decades of hands-on Central Florida experience, over 7,000 homes sold, and more than $4 billion in career volume.",
+    "Bear Team Real Estate — the trade name of BearTeam LLC — is a boutique Orlando brokerage founded and led by Bethanne Baer, Broker/Owner — built on more than four decades of hands-on Central Florida experience, over 7,000 homes sold, and more than $4 billion in career volume.",
     "From our office at 2300 S Crystal Lake Dr, the team has served generations of families across the Conway, Edgewood, and Belle Isle corridor and greater Orlando — through changing markets, changing rates, and changing neighborhoods, with the same steady process each time.",
   ],
   philosophy: [

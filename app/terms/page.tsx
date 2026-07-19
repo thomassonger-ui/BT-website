@@ -21,7 +21,7 @@ export default function TermsPage() {
           paragraphs: [
             "This website provides general information about Bear Team Real Estate's services and Central Florida real estate education. Content is provided for informational purposes and may change without notice.",
             // REVIEW (not user-visible): counsel to provide complete terms — permitted use, IP, limitation of liability, governing law.
-            "All content on this website — including text, photography, graphics, and branding — is the property of Bear Team Real Estate LLC or its licensors and may not be reproduced without written permission. Use of this website constitutes acceptance of these terms, which may be updated from time to time.",
+            "All content on this website — including text, photography, graphics, and branding — is the property of BearTeam LLC d/b/a Bear Team Real Estate or its licensors and may not be reproduced without written permission. Use of this website constitutes acceptance of these terms, which may be updated from time to time.",
           ],
         },
         {

@@ -52,7 +52,7 @@ export default async function ListingsPage() {
           </h2>
           <ListingCards listings={listings} />
           <p className="mt-12 text-center text-xs italic leading-relaxed text-muted">
-            Listing information is provided by Bear Team Real Estate LLC from Stellar MLS and is
+            Listing information is provided by BearTeam LLC d/b/a Bear Team Real Estate from Stellar MLS and is
             believed accurate as of the last update but is not guaranteed; status and pricing can
             change at any time. {compliance.brokerageRelationship} Equal Housing Opportunity.
           </p>

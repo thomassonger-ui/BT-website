@@ -7,7 +7,7 @@
 
 export const compliance = {
   equalHousing:
-    "Bear Team Real Estate LLC supports the principles of the Fair Housing Act and the Equal Opportunity Act. Equal Housing Opportunity.",
+    "BearTeam LLC d/b/a Bear Team Real Estate supports the principles of the Fair Housing Act and the Equal Opportunity Act. Equal Housing Opportunity.",
 
   brokerageRelationship:
     "Contacting Bear Team Real Estate, submitting a form, or requesting a consultation does not create a brokerage relationship. Brokerage relationships in Florida are established as provided under Chapter 475, Florida Statutes.", // REVIEW (not user-visible): confirm brokerage-relationship language with Florida counsel

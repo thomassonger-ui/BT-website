@@ -7,7 +7,7 @@ import { siteConfig } from "@/config/site";
 export const metadata: Metadata = buildMetadata({
   title: "Privacy Policy",
   description:
-    "How Bear Team Real Estate LLC collects, uses, discloses, retains, and protects information when you visit our website or request real estate services.",
+    "How BearTeam LLC, doing business as Bear Team Real Estate, collects, uses, discloses, retains, and protects information when you visit our website or request real estate services.",
   path: "/privacy",
 });
 
@@ -21,7 +21,7 @@ const sections: Section[] = [
       { p: "Effective Date: July 2, 2015" },
       { p: "Last Updated: July 19, 2026" },
       {
-        p: "Bear Team Real Estate LLC, operated by Bethanne Baer (“Bear Team Real Estate,” “we,” “us,” or “our”), respects your privacy. This Privacy Policy explains how we collect, use, disclose, retain, and protect information when you visit our website, communicate with us, request real estate services, attend one of our events, or otherwise interact with Bear Team Real Estate.",
+        p: "BearTeam LLC, doing business as Bear Team Real Estate and operated by Bethanne Baer (“Bear Team Real Estate,” “we,” “us,” or “our”), respects your privacy. This Privacy Policy explains how we collect, use, disclose, retain, and protect information when you visit our website, communicate with us, request real estate services, attend one of our events, or otherwise interact with Bear Team Real Estate.",
       },
       {
         p: "By using our website or providing information to us, you acknowledge the practices described in this Privacy Policy.",
@@ -535,7 +535,7 @@ export default function PrivacyPage() {
           <section className="border-t border-ink/10 pt-8">
             <h2 className="mb-3 font-display text-xl font-medium text-ink">Equal Housing Opportunity</h2>
             <p className="text-sm leading-relaxed text-charcoal-soft">
-              Bear Team Real Estate LLC is committed to providing professional real estate services
+              BearTeam LLC d/b/a Bear Team Real Estate is committed to providing professional real estate services
               without unlawful discrimination and supports the principles of the Fair Housing Act.
             </p>
           </section>
