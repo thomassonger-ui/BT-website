@@ -28,10 +28,52 @@ const TOUR_URL =
 
 const IS_DEMO_TOUR = !process.env.NEXT_PUBLIC_MATTERPORT_URL;
 
+/**
+ * Rotating hero phrases. Index 0 (the classic) always paints first with the
+ * poster; when the 3D tour crossfades in, the headline crossfades to a random
+ * one of the other 29 — a different one each visit, never repeating the one
+ * shown last time (remembered per browser). Fair-Housing-safe: no phrase
+ * characterizes people or neighborhoods — only homes, craft, and geography.
+ */
+const PHRASES: [string, string][] = [
+  ["Find Your Place", "in Central Florida."],
+  ["Every Home Tells a Story.", "Let's Find Yours."],
+  ["From First Look", "to Final Key."],
+  ["Your Next Chapter", "Starts at the Front Door."],
+  ["Four Decades of Doors,", "Opened the Right Way."],
+  ["The Right Home", "Is Worth the Right Guide."],
+  ["Move With Confidence,", "Not Guesswork."],
+  ["Homes Change.", "Home Doesn't."],
+  ["Local Knowledge.", "Lifelong Addresses."],
+  ["Buy Smart.", "Sell Smarter."],
+  ["Orlando Is Big.", "Your Team Shouldn't Be."],
+  ["See It. Walk It.", "Love It. Live It."],
+  ["Great Moves", "Are Made, Not Found."],
+  ["Behind Every Sold Sign,", "A Strategy."],
+  ["The Market Moves.", "We Read It Daily."],
+  ["A House Is a Price.", "A Home Is a Fit."],
+  ["Doors Open", "for the Well-Prepared."],
+  ["Walk In Curious.", "Walk Out Certain."],
+  ["Real Estate Is Local.", "So Are We."],
+  ["Seven Thousand Homes.", "One Standard."],
+  ["Your Timeline.", "Our Craft."],
+  ["Priced Right.", "Presented Beautifully."],
+  ["From Conway to the Chain of Lakes,", "We Know the Way Home."],
+  ["Not Just Square Feet —", "the Life Inside Them."],
+  ["Begin With a Conversation.", "End With Keys."],
+  ["The Best Tours", "Start With the Right Guide."],
+  ["Every Street", "Has Its Own Rhythm."],
+  ["Tour It in 3D.", "Live It in Person."],
+  ["Experience Isn't Extra.", "It's Everything."],
+  ["Make Your Move", "a Masterpiece."],
+];
+
 export function TourHero() {
   const [exploring, setExploring] = useState(false);
   const [mountTour, setMountTour] = useState(false);
   const [tourReady, setTourReady] = useState(false);
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [phraseVisible, setPhraseVisible] = useState(true);
 
   // Poster-first: paint an instant photo of the tour's starting view, then
   // load the heavy Matterport engine in the background and crossfade it in.
@@ -39,6 +81,31 @@ export function TourHero() {
     const t = setTimeout(() => setMountTour(true), 300);
     return () => clearTimeout(t);
   }, []);
+
+  // When the tour appears, crossfade the headline to a random phrase —
+  // different every visit, never the one shown last time on this device.
+  useEffect(() => {
+    if (!tourReady) return;
+    let last = 0;
+    try {
+      last = Number(window.localStorage.getItem("bt-hero-phrase") || 0);
+    } catch {
+      /* private mode etc. */
+    }
+    let next = 1 + Math.floor(Math.random() * (PHRASES.length - 1));
+    if (next === last) next = (next % (PHRASES.length - 1)) + 1;
+    try {
+      window.localStorage.setItem("bt-hero-phrase", String(next));
+    } catch {
+      /* ignore */
+    }
+    setPhraseVisible(false);
+    const t = setTimeout(() => {
+      setPhraseIdx(next);
+      setPhraseVisible(true);
+    }, 500);
+    return () => clearTimeout(t);
+  }, [tourReady]);
 
   return (
     <section aria-labelledby="hero-heading" className="relative min-h-[100svh] overflow-hidden bg-ink">
@@ -89,9 +156,12 @@ export function TourHero() {
            the section downward instead of overflowing up into the header */
         <div className="relative z-20 flex min-h-[100svh] items-end bg-gradient-to-t from-ink/75 via-ink/20 to-transparent">
           <div className="mx-auto w-full max-w-content px-6 pb-12 pt-28 md:pb-16 md:pt-32">
-            <h1 id="hero-heading" className="max-w-3xl font-display text-[1.7rem] font-medium leading-[1.15] text-soft-white md:text-display-xl md:leading-[1.05]">
-              <span className="block">{heroCopy.headlineTop}</span>
-              <span className="block text-gold-light">{heroCopy.headlineBottom}</span>
+            <h1
+              id="hero-heading"
+              className={`max-w-3xl font-display text-[1.7rem] font-medium leading-[1.15] text-soft-white transition-opacity duration-500 md:text-display-xl md:leading-[1.05] ${phraseVisible ? "opacity-100" : "opacity-0"}`}
+            >
+              <span className="block">{PHRASES[phraseIdx][0]}</span>
+              <span className="block text-gold-light">{PHRASES[phraseIdx][1]}</span>
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-cream/90 md:mt-6 md:text-lg">{heroCopy.copy}</p>
             <div className="mt-6 flex flex-wrap items-center gap-2.5 md:mt-9 md:gap-4">
