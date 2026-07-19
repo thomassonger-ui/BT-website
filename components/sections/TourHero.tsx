@@ -87,24 +87,24 @@ export function TourHero() {
         /* OVERLAY MODE — headline + CTAs; page scroll works normally */
         <div className="absolute inset-0 z-20 flex items-end bg-gradient-to-t from-ink/75 via-ink/20 to-transparent">
           <div className="mx-auto w-full max-w-content px-6 pb-16 pt-32">
-            <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
+            <h1 id="hero-heading" className="max-w-3xl font-display text-[1.9rem] font-medium leading-[1.12] text-soft-white md:text-display-xl md:leading-[1.05]">
               <span className="block">{heroCopy.headlineTop}</span>
               <span className="block text-gold-light">{heroCopy.headlineBottom}</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/90">{heroCopy.copy}</p>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-cream/90 md:mt-6 md:text-lg">{heroCopy.copy}</p>
+            <div className="mt-6 flex flex-wrap items-center gap-2.5 md:mt-9 md:gap-4">
               <button
                 type="button"
                 onClick={() => setExploring(true)}
-                className="inline-flex min-h-[48px] items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold tracking-wide text-ink transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-soft-white"
+                className="inline-flex min-h-[48px] items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold tracking-wide text-ink transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-soft-white max-md:min-h-[44px] max-md:px-4 max-md:py-2.5 max-md:text-xs"
               >
                 <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="currentColor">
                   <path d="M10 2 2 7v11h5v-6h6v6h5V7l-8-5z" />
                 </svg>
                 Walk Through in 3D
               </button>
-              <SearchHomesLink variant="primary" />
-              <ButtonLink href="/sell" variant="outline-light">
+              <SearchHomesLink variant="primary" className="max-md:min-h-[44px] max-md:px-4 max-md:py-2.5 max-md:text-xs" />
+              <ButtonLink href="/sell" variant="outline-light" className="max-md:min-h-[44px] max-md:px-4 max-md:py-2.5 max-md:text-xs">
                 Sell Your Property
               </ButtonLink>
             </div>
