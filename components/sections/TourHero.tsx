@@ -19,9 +19,12 @@ import { heroCopy } from "@/content/home-scenes";
  * launch — a demo property must never be presentable as a listing.
  */
 
+// mt=0 hides Mattertags (the demo model's owner embedded promo videos/posts
+// in the scan — the tags travel with the model, not our code); hr=0 hides the
+// highlight reel; brand=0/title=0 strip the owner's branding.
 const TOUR_URL =
   process.env.NEXT_PUBLIC_MATTERPORT_URL ||
-  "https://my.matterport.com/show/?m=JGPnGQ6hosj&play=1&qs=1&brand=0&title=0&ss=16";
+  "https://my.matterport.com/show/?m=JGPnGQ6hosj&play=1&qs=1&brand=0&title=0&mt=0&hr=0&ss=16";
 
 const IS_DEMO_TOUR = !process.env.NEXT_PUBLIC_MATTERPORT_URL;
 
