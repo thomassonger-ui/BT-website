@@ -45,3 +45,14 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/*
+ * Mobile density: shrink the root font size on phones so all rem-based
+ * type (headlines, body, buttons, labels) scales down ~12% together.
+ * Desktop and tablet are unaffected.
+ */
+@media (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+}

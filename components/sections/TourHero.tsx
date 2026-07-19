@@ -96,15 +96,15 @@ export function TourHero() {
               <button
                 type="button"
                 onClick={() => setExploring(true)}
-                className="inline-flex min-h-[48px] items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold tracking-wide text-ink transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-soft-white max-md:min-h-[44px] max-md:px-4 max-md:py-2.5 max-md:text-xs"
+                className="inline-flex min-h-[48px] items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold tracking-wide text-ink transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-soft-white max-md:min-h-[40px] max-md:px-3.5 max-md:py-2 max-md:text-xs"
               >
                 <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="currentColor">
                   <path d="M10 2 2 7v11h5v-6h6v6h5V7l-8-5z" />
                 </svg>
                 Walk Through in 3D
               </button>
-              <SearchHomesLink variant="primary" className="max-md:min-h-[44px] max-md:px-4 max-md:py-2.5 max-md:text-xs" />
-              <ButtonLink href="/sell" variant="outline-light" className="max-md:min-h-[44px] max-md:px-4 max-md:py-2.5 max-md:text-xs">
+              <SearchHomesLink variant="primary" className="max-md:min-h-[40px] max-md:px-3.5 max-md:py-2 max-md:text-xs" />
+              <ButtonLink href="/sell" variant="outline-light" className="max-md:min-h-[40px] max-md:px-3.5 max-md:py-2 max-md:text-xs">
                 Sell Your Property
               </ButtonLink>
             </div>
