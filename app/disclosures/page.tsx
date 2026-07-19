@@ -42,8 +42,12 @@ export default function DisclosuresPage() {
         {
           heading: "Affiliated Business Arrangements",
           paragraphs: [
-            // REVIEW (not user-visible): Tom confirmed affiliated arrangements exist — obtain company names and have counsel finalize the RESPA disclosure.
-            "Bear Team Real Estate LLC may have affiliated business arrangements with providers of settlement services, such as title, mortgage, or insurance companies. Where such an arrangement applies to your transaction, it is disclosed to you in writing at or before the time of referral, as required by the Real Estate Settlement Procedures Act (RESPA). You are never required to use an affiliated provider, and you are free to shop for and select any settlement service provider you choose.",
+            // REVIEW (not user-visible): facts per Tom Songer 7/19/2026 + Sunbiz records. Counsel to confirm the formal RESPA ABA disclosure form used at referral and exact ownership percentages.
+            "Bear Team Real Estate LLC discloses the following business relationships, any of which may be referred to you in connection with a transaction:",
+            "BearTeam LLC — property management. BearTeam LLC (a Florida limited liability company, Sunbiz document L16000178990) is owned 100% by Bethanne Baer, who is also the Broker/Owner of Bear Team Real Estate LLC. It provides in-house property-management services.",
+            "Conway Title LLC — title and settlement services. Per Florida public corporate records, the manager and registered agent of Conway Title LLC (2462 E. Michigan Street, Suite 205, Orlando, FL 32806) is Allen J. Baer, a member of the Bear Team organization.",
+            "Because of these relationships, a referral to an affiliated company may provide a financial or other benefit to the referring party or its owners. Where an affiliated business arrangement applies to your transaction, you will also receive a written disclosure at or before the time of referral, as required by the Real Estate Settlement Procedures Act (RESPA).",
+            "You are NOT required to use any affiliated company as a condition of buying, selling, or settling on a property, or of receiving any Bear Team service. There are frequently other settlement service providers available with similar services — you are free to shop around to determine that you are receiving the best services and the best rate for those services.",
           ],
         },
         {
