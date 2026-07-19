@@ -19,7 +19,7 @@ const sections: Section[] = [
   {
     blocks: [
       { p: "Effective Date: July 2, 2015" },
-      { p: "Last Updated: July 16, 2026" },
+      { p: "Last Updated: July 19, 2026" },
       {
         p: "Bear Team Real Estate LLC, operated by Bethanne Baer (“Bear Team Real Estate,” “we,” “us,” or “our”), respects your privacy. This Privacy Policy explains how we collect, use, disclose, retain, and protect information when you visit our website, communicate with us, request real estate services, attend one of our events, or otherwise interact with Bear Team Real Estate.",
       },
@@ -47,6 +47,7 @@ const sections: Section[] = [
           "Information about your interest in buying, selling, leasing, or investing in real estate",
           "Property preferences, budget, desired location, and anticipated transaction timeline",
           "Information submitted through contact forms, property-inquiry forms, home-valuation requests, appointment requests, event registrations, or newsletter sign-ups",
+          "Questions, answers, and contact details you share with Scout\u2122, our conversational website assistant",
           "Communications you send to our agents, brokers, employees, contractors, or representatives",
           "Documents and information necessary to provide brokerage or transaction-related services",
           "Information submitted when applying to join or work with Bear Team Real Estate",
@@ -100,7 +101,24 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "2. How We Use Information",
+    heading: "2. Scout\u2122 and Assistant Conversations",
+    blocks: [
+      {
+        p: "Scout\u2122 is our conversational website assistant. It offers a guided, chat-style way to tell us what you are looking for and to ask questions about Bear Team Real Estate and Central Florida real estate.",
+      },
+      {
+        p: "When you interact with Scout\u2122, we collect the information you choose to share in the conversation, which may include your answers to intake questions (such as area, price range, property details, and timeframe), your name, telephone number, and email address, and the text of any questions you type.",
+      },
+      {
+        p: "Scout\u2122's conversational answers are generated with the assistance of a third-party artificial-intelligence service provider that processes the text of your questions in order to produce a response. Conversations may be stored so Scout\u2122 can maintain context and so we can review quality and follow up on your request. Completed Scout\u2122 intakes are handled like any other website inquiry and are routed to our team for follow-up as described in this Privacy Policy.",
+      },
+      {
+        p: "Scout\u2122 provides general information only. It does not provide legal, tax, lending, insurance, or appraisal advice, and no decision producing legal or similarly significant effects about you is made solely by automated means. Please do not share Social Security numbers, banking credentials, wire instructions, or similarly sensitive information with Scout\u2122; for anything sensitive, call our office directly.",
+      },
+    ],
+  },
+  {
+    heading: "3. How We Use Information",
     blocks: [
       { p: "We may use personal information to:" },
       {
@@ -130,7 +148,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "3. Real Estate Communications and Lead Follow-Up",
+    heading: "4. Real Estate Communications and Lead Follow-Up",
     blocks: [
       {
         p: "When you request information about a property, submit a home-valuation request, register for an event, request an appointment, or otherwise contact us, Bear Team Real Estate and its affiliated real estate professionals may respond by telephone, email, or text message.",
@@ -144,7 +162,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "4. Text Messages and Telephone Calls",
+    heading: "5. Text Messages and Telephone Calls",
     blocks: [
       {
         p: "When you provide your telephone number and expressly agree to receive communications, you authorize Bear Team Real Estate and its representatives to contact you regarding your inquiry, real estate services, appointments, property opportunities, events, and related matters.",
@@ -165,7 +183,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "5. Email Communications",
+    heading: "6. Email Communications",
     blocks: [
       {
         p: "You may unsubscribe from promotional emails by using the unsubscribe link included in the message or by contacting us directly.",
@@ -176,7 +194,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "6. How We Disclose Information",
+    heading: "7. How We Disclose Information",
     blocks: [
       {
         p: "We may disclose personal information to the following categories of recipients when reasonably necessary:",
@@ -252,7 +270,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "7. Sale and Sharing of Personal Information",
+    heading: "8. Sale and Sharing of Personal Information",
     blocks: [
       { p: "Bear Team Real Estate does not sell personal information in exchange for money." },
       {
@@ -267,7 +285,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "8. Cookies and Similar Technologies",
+    heading: "9. Cookies and Similar Technologies",
     blocks: [
       { p: "Our website may use cookies and similar technologies to:" },
       {
@@ -291,7 +309,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "9. Third-Party Websites and Services",
+    heading: "10. Third-Party Websites and Services",
     blocks: [
       {
         p: "Our website may contain links to third-party websites, including property-search platforms, multiple listing services, social-media sites, mortgage providers, title companies, scheduling services, mapping providers, and other real estate resources.",
@@ -302,7 +320,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "10. Data Retention",
+    heading: "11. Data Retention",
     blocks: [
       { p: "We retain personal information for as long as reasonably necessary to:" },
       {
@@ -324,7 +342,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "11. Data Security",
+    heading: "12. Data Security",
     blocks: [
       {
         p: "We use reasonable administrative, technical, and physical safeguards designed to protect personal information against unauthorized access, loss, misuse, alteration, or disclosure.",
@@ -338,7 +356,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "12. Your Privacy Choices and Rights",
+    heading: "13. Your Privacy Choices and Rights",
     blocks: [
       {
         p: "Depending on your state of residence and applicable law, you may have the right to:",
@@ -369,7 +387,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "13. Florida Residents",
+    heading: "14. Florida Residents",
     blocks: [
       {
         p: "Florida residents may have privacy rights under applicable Florida law when Bear Team Real Estate meets the law’s applicability requirements.",
@@ -380,7 +398,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "14. California Residents",
+    heading: "15. California Residents",
     blocks: [
       {
         p: "California residents may have additional rights under the California Consumer Privacy Act, as amended, when Bear Team Real Estate meets the law’s applicability thresholds.",
@@ -394,7 +412,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "15. Do Not Track and Opt-Out Preference Signals",
+    heading: "16. Do Not Track and Opt-Out Preference Signals",
     blocks: [
       {
         p: "Some browsers provide “Do Not Track” settings. Because there is not a universally accepted standard for responding to traditional Do Not Track signals, our website may not respond to every such signal.",
@@ -405,7 +423,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "16. Children’s Privacy",
+    heading: "17. Children’s Privacy",
     blocks: [
       {
         p: "Our website and services are intended for adults seeking real estate information or professional services. They are not directed to children under 13 years of age.",
@@ -416,7 +434,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "17. Fair Housing",
+    heading: "18. Fair Housing",
     blocks: [
       {
         p: "Bear Team Real Estate supports equal housing opportunity and conducts its real estate activities in accordance with applicable fair housing laws.",
@@ -427,7 +445,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "18. International Visitors",
+    heading: "19. International Visitors",
     blocks: [
       {
         p: "Bear Team Real Estate is based in Florida, United States. Information submitted through our website may be collected, processed, stored, and maintained in the United States.",
@@ -438,7 +456,7 @@ const sections: Section[] = [
     ],
   },
   {
-    heading: "19. Changes to This Privacy Policy",
+    heading: "20. Changes to This Privacy Policy",
     blocks: [
       {
         p: "We may update this Privacy Policy periodically to reflect changes in our services, technology, legal obligations, or information-handling practices.",
