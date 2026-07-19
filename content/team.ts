@@ -66,6 +66,22 @@ export const team: TeamMember[] = [
     reviewNote: "Bio drafted from confirmed role — Iris to approve wording and add specialties/languages before launch.",
   },
   {
+    slug: "alex-volchek",
+    name: "Alex Volchek",
+    title: "Agent",
+    bio: "Alex Volchek represents Bear Team buyers and sellers across the Orlando area. He came to Bear Team from Kardosh Realty, drawn to the team's boutique approach — real support, honest guidance, and a structure that puts the client relationship first. Alex brings energy and responsiveness to every transaction, from the first showing through closing day.",
+    areasServed: ["Orlando", "Greater Central Florida"],
+    specialties: ["Buyer representation", "Seller representation"],
+    languages: ["English"],
+    license: "FL SL3548627",
+    phone: "(407) 228-1112",
+    email: "alex@BearTeam.com",
+    headshot: "/images/team/alex-volchek.jpg",
+    verified: true,
+    reviewNote:
+      "Bio drafted from confirmed facts (July 2026) — Alex to approve wording and add years licensed/specialties/languages. Office phone used pending his preference; cell on file is (407) 925-1383.",
+  },
+  {
     slug: "kathleen-rutland",
     name: "Kathleen Rutland",
     title: "Agent — Land Advisory",
