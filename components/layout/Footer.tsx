@@ -80,14 +80,21 @@ export function Footer() {
           <p>{compliance.thirdPartyLinkDisclaimer}</p>
           <p>
             Accessibility: if you have difficulty using this website, contact{" "}
-            {siteConfig.accessibilityContact} or see our{" "}
+            <a href={`mailto:${siteConfig.accessibilityContact}`} className="underline hover:text-gold-light">
+              {siteConfig.accessibilityContact}
+            </a>{" "}
+            or see our{" "}
             <Link href="/accessibility" className="underline hover:text-gold-light">
               accessibility statement
             </Link>
             .
           </p>
           <p>
-            &copy; {new Date().getFullYear()} {siteConfig.legalName}. All rights reserved.
+            Made exclusively for · &copy; {new Date().getFullYear()} Bear Team Real Estate ·
+            Bethanne Baer, Broker
+            <br />
+            Design &amp; development · &copy; {new Date().getFullYear()} Atticus&trade; ·
+            WorldTeachPathways dba WorldTeachESL LLC · All IP rights reserved
           </p>
         </div>
       </div>

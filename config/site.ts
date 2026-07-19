@@ -32,7 +32,7 @@ export const siteConfig = {
   officeHours: "Monday–Friday, 9 AM–5 PM",
 
   /** Contacts required by the accessibility & compliance pages */
-  accessibilityContact: "[VERIFY ACCESSIBILITY CONTACT]",
+  accessibilityContact: "Tom@BearTeam.com",
   complaintContact: "[VERIFY CONSUMER COMPLAINT CONTACT]",
   privacyContact: "[VERIFY PRIVACY CONTACT]",
 
