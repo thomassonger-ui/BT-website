@@ -79,6 +79,8 @@ export default function SellPage() {
         eyebrow="For sellers"
         title="Sell With a Strategy, Not Just a Sign."
         intro="Understand your market position, prepare deliberately, market professionally, and negotiate from strength — with coordination through closing day."
+        image="/images/heroes/sell.jpg"
+        imageAlt="Grand two-story Florida home with manicured landscaping and palm trees"
       >
         <ButtonLink href="/home-value" variant="primary">
           Request a Home Value Consultation

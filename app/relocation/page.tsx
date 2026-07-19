@@ -23,6 +23,8 @@ export default function RelocationPage() {
         eyebrow="Relocation"
         title="A Guide on the Ground, Wherever You're Headed."
         intro="Employment, retirement, family, lifestyle, or investment — relocations run on logistics. We provide the local knowledge and coordination that make them manageable."
+        image="/images/heroes/relocation.jpg"
+        imageAlt="Open double doors welcoming into a bright Florida home entry hall"
       >
         <ButtonLink href="#relocation-inquiry" variant="primary">
           Start a Relocation Conversation

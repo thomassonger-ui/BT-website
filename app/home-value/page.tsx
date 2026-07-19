@@ -40,6 +40,8 @@ export default function HomeValuePage() {
         eyebrow="For homeowners"
         title="The Market Moved. Did Your Home's Value Move With It?"
         intro="Prices are up in all four Orlando-area counties — but inventory is the deepest since 2019 and 22% of listings are cutting price. A Zillow guess won't tell you where your home stands in that market. A consultation will."
+        image="/images/heroes/home-value.jpg"
+        imageAlt="Backyard of a Florida estate with a pool and covered lanai"
       >
         <ButtonLink href="#market-brief" variant="primary">
           See This Month&rsquo;s Market Brief
