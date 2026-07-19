@@ -27,11 +27,12 @@ function toPathway(l: Listing): Pathway {
   ]
     .filter(Boolean)
     .join(" · ");
+  const sold = l.status === "Sold";
   return {
     id: l.slug,
     img: l.photo || "/images/heroes/communities.jpg",
     alt: `Photo of ${l.address}`,
-    title: `${formatPrice(l.price)} — ${l.status}`,
+    title: sold ? `Sold — ${formatPrice(l.price)}` : `${formatPrice(l.price)} — ${l.status}`,
     text: "",
     ctaLabel: "",
     mode: "form",
@@ -41,39 +42,62 @@ function toPathway(l: Listing): Pathway {
     fields: [
       {
         key: "Interest",
-        label: "What would you like to do?",
+        label: sold ? "This one's gone — how can we help?" : "What would you like to do?",
         type: "select",
-        options: [
-          "Schedule a private showing",
-          "Ask a question about this property",
-          "Get comparable sales for this area",
-          "Make an offer",
-        ],
+        options: sold
+          ? [
+              "Alert me before homes like this hit the market",
+              "What would my home sell for?",
+              "Get sold comparables for this area",
+              "Talk to the team that sold it",
+            ]
+          : [
+              "Schedule a private showing",
+              "Ask a question about this property",
+              "Get comparable sales for this area",
+              "Make an offer",
+            ],
         required: true,
       },
     ],
-    leadPrefix: `Featured listing inquiry (${l.address})`,
+    leadPrefix: sold ? `Sold property interest (${l.address})` : `Featured listing inquiry (${l.address})`,
     submitLabel: "Send to the Listing Team",
   };
 }
 
+/** Scatter recent solds among the active/pending cards (one after every two). */
+function scatter(listings: Listing[]): Listing[] {
+  const active = listings.filter((l) => l.status !== "Sold");
+  const sold = listings.filter((l) => l.status === "Sold");
+  const out: Listing[] = [];
+  let s = 0;
+  active.forEach((l, i) => {
+    out.push(l);
+    if ((i + 1) % 2 === 0 && s < sold.length) out.push(sold[s++]);
+  });
+  while (s < sold.length) out.push(sold[s++]);
+  return out;
+}
+
 export function ListingCards({ listings }: { listings: Listing[] }) {
   const [open, setOpen] = useState<Pathway | null>(null);
-  const [filter, setFilter] = useState<"All" | "For Sale" | "Pending">("All");
+  const [filter, setFilter] = useState<"All" | "For Sale" | "Pending" | "Recently Sold">("All");
 
-  const shown = listings.filter((l) =>
+  const shown = scatter(listings).filter((l) =>
     filter === "All"
       ? true
       : filter === "Pending"
         ? l.status === "Pending" || l.status === "Active Under Contract"
-        : l.status === "For Sale",
+        : filter === "Recently Sold"
+          ? l.status === "Sold"
+          : l.status === "For Sale",
   );
 
   return (
     <>
       {/* Status filter */}
       <div className="mb-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filter listings by status">
-        {(["All", "For Sale", "Pending"] as const).map((f) => (
+        {(["All", "For Sale", "Pending", "Recently Sold"] as const).map((f) => (
           <button
             key={f}
             type="button"
@@ -109,19 +133,37 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
                   alt={`Photo of ${l.address}`}
                   fill
                   sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <span
                   className={cn(
-                    "absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider",
-                    STATUS_STYLES[l.status] ?? "bg-ink text-soft-white",
+                    "object-cover transition-transform duration-300 group-hover:scale-105",
+                    l.status === "Sold" && "saturate-[0.85]",
                   )}
-                >
-                  {l.status}
-                </span>
+                />
+                {l.status === "Sold" ? (
+                  /* Diagonal corner ribbon */
+                  <span className="absolute -right-14 top-7 w-56 rotate-45 bg-red-600 py-1.5 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-white shadow-lg">
+                    Recently Sold
+                  </span>
+                ) : (
+                  <span
+                    className={cn(
+                      "absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider",
+                      STATUS_STYLES[l.status] ?? "bg-ink text-soft-white",
+                    )}
+                  >
+                    {l.status}
+                  </span>
+                )}
               </div>
               <div className="flex flex-1 flex-col p-5">
-                <p className="font-display text-2xl font-medium text-ink">{formatPrice(l.price)}</p>
+                <p className="font-display text-2xl font-medium text-ink">
+                  {l.status === "Sold" ? (
+                    <>
+                      <span className="text-red-700">Sold</span> — {formatPrice(l.price)}
+                    </>
+                  ) : (
+                    formatPrice(l.price)
+                  )}
+                </p>
                 <p className="mt-1 text-sm font-medium text-charcoal">
                   {[
                     l.beds ? `${l.beds} bd` : null,
