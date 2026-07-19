@@ -52,7 +52,9 @@ export function TourHero() {
         className={`object-cover transition-opacity duration-700 ${tourReady ? "opacity-0" : "opacity-100"}`}
       />
 
-      {/* The 3D tour — mounted just after first paint, faded in when loaded */}
+      {/* The 3D tour — mounted just after first paint, faded in when loaded.
+          Offset upward so the embed's built-in top-left watermark sits above
+          the visible crop (attribution moves to our caption at the bottom). */}
       {mountTour ? (
         <iframe
           src={TOUR_URL}
@@ -60,18 +62,17 @@ export function TourHero() {
           allow="fullscreen; xr-spatial-tracking"
           allowFullScreen
           onLoad={() => setTimeout(() => setTourReady(true), 1200)}
-          className={`absolute inset-0 h-full w-full border-0 transition-opacity duration-700 ${tourReady ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-x-0 -top-16 h-[calc(100%+4rem)] w-full border-0 transition-opacity duration-700 ${tourReady ? "opacity-100" : "opacity-0"}`}
         />
       ) : null}
 
       {exploring ? (
         /* EXPLORE MODE — tour owns the mouse; exit restores the page */
         <div className="pointer-events-none absolute inset-x-0 bottom-6 z-30 flex flex-col items-center gap-2">
-          {IS_DEMO_TOUR ? (
-            <p className="text-[10px] uppercase tracking-widest text-cream/40">
-              Sample 3D tour — for demonstration only, not a Bear Team listing
-            </p>
-          ) : null}
+          <p className="text-[10px] uppercase tracking-widest text-cream/40">
+            {IS_DEMO_TOUR ? "Sample 3D tour — for demonstration only, not a Bear Team listing · " : ""}
+            3D tour powered by Matterport
+          </p>
           <button
             type="button"
             onClick={() => setExploring(false)}
@@ -109,11 +110,10 @@ export function TourHero() {
                 Sell Your Property
               </ButtonLink>
             </div>
-            {IS_DEMO_TOUR ? (
-              <p className="mt-8 text-[10px] uppercase tracking-widest text-cream/40">
-                Sample 3D tour — for demonstration only, not a Bear Team listing
-              </p>
-            ) : null}
+            <p className="mt-6 text-[10px] uppercase tracking-widest text-cream/40 md:mt-8">
+              {IS_DEMO_TOUR ? "Sample 3D tour — for demonstration only, not a Bear Team listing · " : ""}
+              3D tour powered by Matterport
+            </p>
           </div>
         </div>
       )}
