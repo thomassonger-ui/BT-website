@@ -41,7 +41,7 @@ export function TourHero() {
   }, []);
 
   return (
-    <section aria-labelledby="hero-heading" className="relative h-[100svh] overflow-hidden bg-ink">
+    <section aria-labelledby="hero-heading" className="relative min-h-[100svh] overflow-hidden bg-ink">
       {/* Instant poster — same kitchen view the tour starts at */}
       <Image
         src="/images/rooms/07-kitchen-1.jpg"
@@ -84,9 +84,10 @@ export function TourHero() {
           </button>
         </div>
       ) : (
-        /* OVERLAY MODE — headline + CTAs; page scroll works normally */
-        <div className="absolute inset-0 z-20 flex items-end bg-gradient-to-t from-ink/75 via-ink/20 to-transparent">
-          <div className="mx-auto w-full max-w-content px-6 pb-16 pt-32">
+        /* OVERLAY MODE — headline + CTAs; content taller than the screen grows
+           the section downward instead of overflowing up into the header */
+        <div className="relative z-20 flex min-h-[100svh] items-end bg-gradient-to-t from-ink/75 via-ink/20 to-transparent">
+          <div className="mx-auto w-full max-w-content px-6 pb-12 pt-28 md:pb-16 md:pt-32">
             <h1 id="hero-heading" className="max-w-3xl font-display text-[1.7rem] font-medium leading-[1.15] text-soft-white md:text-display-xl md:leading-[1.05]">
               <span className="block">{heroCopy.headlineTop}</span>
               <span className="block text-gold-light">{heroCopy.headlineBottom}</span>
