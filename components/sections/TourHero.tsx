@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
 import { heroCopy } from "@/content/home-scenes";
 
@@ -26,17 +27,39 @@ const IS_DEMO_TOUR = !process.env.NEXT_PUBLIC_MATTERPORT_URL;
 
 export function TourHero() {
   const [exploring, setExploring] = useState(false);
+  const [mountTour, setMountTour] = useState(false);
+  const [tourReady, setTourReady] = useState(false);
+
+  // Poster-first: paint an instant photo of the tour's starting view, then
+  // load the heavy Matterport engine in the background and crossfade it in.
+  useEffect(() => {
+    const t = setTimeout(() => setMountTour(true), 300);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <section aria-labelledby="hero-heading" className="relative h-[100svh] overflow-hidden bg-ink">
-      {/* The 3D tour */}
-      <iframe
-        src={TOUR_URL}
-        title="Interactive 3D home walkthrough"
-        allow="fullscreen; xr-spatial-tracking"
-        allowFullScreen
-        className="absolute inset-0 h-full w-full border-0"
+      {/* Instant poster — same kitchen view the tour starts at */}
+      <Image
+        src="/images/rooms/07-kitchen-1.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className={`object-cover transition-opacity duration-700 ${tourReady ? "opacity-0" : "opacity-100"}`}
       />
+
+      {/* The 3D tour — mounted just after first paint, faded in when loaded */}
+      {mountTour ? (
+        <iframe
+          src={TOUR_URL}
+          title="Interactive 3D home walkthrough"
+          allow="fullscreen; xr-spatial-tracking"
+          allowFullScreen
+          onLoad={() => setTimeout(() => setTourReady(true), 1200)}
+          className={`absolute inset-0 h-full w-full border-0 transition-opacity duration-700 ${tourReady ? "opacity-100" : "opacity-0"}`}
+        />
+      ) : null}
 
       {exploring ? (
         /* EXPLORE MODE — tour owns the mouse; exit restores the page */
