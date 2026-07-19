@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils/cn";
 type Variant = "primary" | "secondary" | "outline" | "outline-light" | "ghost";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold tracking-wide transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold min-h-[48px]";
+  "inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold tracking-wide transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold min-h-[48px] max-md:min-h-[44px] max-md:px-4 max-md:py-2.5 max-md:text-xs";
 
 const variants: Record<Variant, string> = {
   primary: "bg-teal-700 text-soft-white hover:bg-teal-800",

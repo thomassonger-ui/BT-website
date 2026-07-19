@@ -75,13 +75,13 @@ export function Header() {
         solid || mobileOpen ? "bg-ink/95 shadow-lg backdrop-blur" : "bg-gradient-to-b from-ink/70 to-transparent",
       )}
     >
-      <div className="mx-auto flex max-w-content items-center justify-between gap-4 px-6 py-4">
+      <div className="mx-auto flex max-w-content items-center justify-between gap-2 px-4 py-3 md:gap-4 md:px-6 md:py-4">
         <Link
           href="/"
-          className="flex items-center gap-3 font-display text-lg font-semibold tracking-tight text-soft-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+          className="flex min-w-0 items-center gap-2 font-display text-base font-semibold tracking-tight text-soft-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold md:gap-3 md:text-lg"
         >
-          <BTMark className="h-9 w-9 shrink-0 text-soft-white" />
-          <span className="whitespace-nowrap">
+          <BTMark className="h-8 w-8 shrink-0 text-soft-white md:h-9 md:w-9" />
+          <span className="truncate whitespace-nowrap">
             Bear Team <span className="text-gold-light">Real Estate</span>
           </span>
         </Link>
@@ -159,10 +159,10 @@ export function Header() {
         </nav>
 
         {/* Mobile: click-to-call + menu button */}
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex shrink-0 items-center gap-1.5 lg:hidden">
           <a
             href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "") || ""}`}
-            className="rounded-md border border-cream/30 p-2.5 text-cream hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
+            className="rounded-md border border-cream/30 p-2 text-cream hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
             aria-label={`Call Bear Team Real Estate at ${siteConfig.phone}`}
           >
             <svg aria-hidden="true" viewBox="0 0 20 20" className="h-5 w-5" fill="currentColor">
@@ -174,7 +174,7 @@ export function Header() {
             aria-expanded={mobileOpen}
             aria-controls={menuId}
             onClick={() => setMobileOpen((v) => !v)}
-            className="rounded-md border border-cream/30 p-2.5 text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
+            className="rounded-md border border-cream/30 p-2 text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
           >
             <span className="sr-only">{mobileOpen ? "Close menu" : "Open menu"}</span>
             {mobileOpen ? (

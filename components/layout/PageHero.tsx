@@ -21,7 +21,7 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative flex min-h-[480px] items-center overflow-hidden bg-ink pb-14 pt-32 md:min-h-[600px] md:pb-16 md:pt-40">
+    <section className="relative flex min-h-[420px] items-center overflow-hidden bg-ink pb-12 pt-28 md:min-h-[600px] md:pb-16 md:pt-40">
       {image ? (
         <>
           <Image src={image} alt={imageAlt} fill priority sizes="100vw" className="object-cover" />
@@ -32,11 +32,11 @@ export function PageHero({
         {eyebrow ? (
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-light">{eyebrow}</p>
         ) : null}
-        <h1 className="max-w-3xl font-display text-display-lg font-medium leading-tight text-soft-white text-balance">
+        <h1 className="max-w-3xl font-display text-[1.65rem] font-medium leading-[1.18] text-soft-white text-balance md:text-display-lg md:leading-tight">
           {title}
         </h1>
-        {intro ? <p className="mt-5 max-w-2xl text-base leading-relaxed text-cream/80">{intro}</p> : null}
-        {children ? <div className="mt-8 flex flex-wrap gap-4">{children}</div> : null}
+        {intro ? <p className="mt-4 max-w-2xl text-sm leading-relaxed text-cream/80 md:mt-5 md:text-base">{intro}</p> : null}
+        {children ? <div className="mt-6 flex flex-wrap gap-3 md:mt-8 md:gap-4">{children}</div> : null}
       </div>
     </section>
   );
