@@ -175,6 +175,9 @@ export function TourHero() {
                 </svg>
                 Walk Through in 3D
               </button>
+              <ButtonLink href="/listings" variant="primary" className="max-md:min-h-[40px] max-md:px-3.5 max-md:py-2 max-md:text-xs">
+                Featured Listings
+              </ButtonLink>
               <SearchHomesLink variant="primary" className="max-md:min-h-[40px] max-md:px-3.5 max-md:py-2 max-md:text-xs" />
               <ButtonLink href="/sell" variant="outline-light" className="max-md:min-h-[40px] max-md:px-3.5 max-md:py-2 max-md:text-xs">
                 Sell Your Property
