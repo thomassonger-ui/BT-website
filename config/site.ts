@@ -33,8 +33,8 @@ export const siteConfig = {
 
   /** Contacts required by the accessibility & compliance pages */
   accessibilityContact: "Tom@BearTeam.com",
-  complaintContact: "[VERIFY CONSUMER COMPLAINT CONTACT]",
-  privacyContact: "[VERIFY PRIVACY CONTACT]",
+  complaintContact: "Bethanne Baer, Broker — (407) 228-1112, Bethanne@BearTeam.com",
+  privacyContact: "Bethanne@BearTeam.com",
 
   serviceAreas: [
     "Orlando",

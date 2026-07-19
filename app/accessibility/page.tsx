@@ -31,7 +31,7 @@ export default function AccessibilityPage() {
         {
           heading: "Ongoing Work",
           paragraphs: [
-            "Accessibility is ongoing. Content, images, and features added over time are reviewed against the same standard. [REVIEW: consider an independent accessibility audit before launch.]",
+            "Accessibility is ongoing. Content, images, and features added over time are reviewed against the same standard.", // REVIEW (not user-visible): consider an independent accessibility audit before launch,
           ],
         },
         {

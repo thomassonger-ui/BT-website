@@ -10,7 +10,7 @@ export const compliance = {
     "Bear Team Real Estate LLC supports the principles of the Fair Housing Act and the Equal Opportunity Act. Equal Housing Opportunity.",
 
   brokerageRelationship:
-    "Contacting Bear Team Real Estate, submitting a form, or requesting a consultation does not create a brokerage relationship. Brokerage relationships in Florida are established as provided under Chapter 475, Florida Statutes. [REVIEW: confirm brokerage-relationship disclosure language with Florida counsel]",
+    "Contacting Bear Team Real Estate, submitting a form, or requesting a consultation does not create a brokerage relationship. Brokerage relationships in Florida are established as provided under Chapter 475, Florida Statutes.", // REVIEW (not user-visible): confirm brokerage-relationship language with Florida counsel
 
   valuationDisclaimer:
     "This consultation is not an appraisal and does not create a brokerage relationship. A property-value consultation is an opinion of probable market position prepared by a real estate licensee; an appraisal may only be performed by a licensed appraiser.",
@@ -25,7 +25,7 @@ export const compliance = {
     "Links to third-party websites are provided for convenience. Bear Team Real Estate does not control and is not responsible for third-party content, accuracy, or privacy practices.",
 
   communicationConsent:
-    "By submitting this form you consent to be contacted by Bear Team Real Estate by phone, email, or text message about your inquiry. Consent is not a condition of purchase. Message and data rates may apply. You may opt out at any time. [REVIEW: confirm TCPA / telephone-consent language with counsel]",
+    "By submitting this form you consent to be contacted by Bear Team Real Estate by phone, email, or text message about your inquiry. Consent is not a condition of purchase. Message and data rates may apply. You may opt out at any time.", // REVIEW (not user-visible): confirm TCPA / telephone-consent language with counsel
 
   resourceDisclaimer:
     "This material is for general education only and is not legal, tax, lending, insurance, inspection, or appraisal advice. Consult the appropriate licensed professional about your situation.",

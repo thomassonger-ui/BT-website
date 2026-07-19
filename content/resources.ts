@@ -15,7 +15,7 @@ export const resources: Resource[] = [
     category: "Buying",
     summary: "The full path from first conversation to keys in hand — what to expect at each stage of a Central Florida purchase.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     sections: [
       { heading: "Start with clarity, not listings", body: ["The strongest purchases start before the first showing: goals, timeline, budget comfort, and financing preparation. When those are set, the search itself gets faster and calmer.", "Your initial consultation covers how representation works, how compensation works, and how we'll communicate — in plain language, in writing."] },
       { heading: "The search", body: ["Property search happens through an approved external search platform, guided by a strategy we build together: target areas, property types, and the trade-offs you're willing to make.", "We preview considerations photographs can't show — road noise, lot orientation, renovation quality, resale factors."] },
@@ -29,7 +29,7 @@ export const resources: Resource[] = [
     category: "Selling",
     summary: "How pricing, preparation, marketing, and negotiation come together to sell a Central Florida property well.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     sections: [
       { heading: "Market position comes first", body: ["Every property competes with specific alternatives buyers are seeing the same week. Understanding that competition — honestly — is the foundation of pricing strategy.", "A property-value consultation looks at condition, location, improvements, competition, and buyer demand. It is not an appraisal."] },
       { heading: "Preparation and presentation", body: ["Not every improvement returns its cost. We help you separate the work buyers will pay for from the work they won't notice.", "Professional photography and thoughtful presentation are standard, not upgrades."] },
@@ -43,7 +43,7 @@ export const resources: Resource[] = [
     category: "Financing",
     summary: "How to get organized before you talk to lenders — documents, questions, and timing.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     professionalReview: "Licensed mortgage professional review required before launch.",
     sections: [
       { heading: "Why preparation matters", body: ["Sellers weigh financing strength alongside price. Being organized before you shop strengthens every offer you write.", "We are not lenders and do not provide mortgage advice. Financing decisions belong with licensed mortgage professionals — this overview only helps you prepare for those conversations."] },
@@ -57,7 +57,7 @@ export const resources: Resource[] = [
     category: "Relocation",
     summary: "A stage-by-stage checklist from six weeks out through move-in day.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     sections: [
       { heading: "Six weeks out", body: ["Collect quotes from movers or reserve equipment, begin sorting and donating, and start a folder for records that will move with you."] },
       { heading: "Two to four weeks out", body: ["Schedule utility transfers (power, water, internet), file mail forwarding, update addresses with banks and insurers, and confirm closing or lease dates."] },
@@ -71,7 +71,7 @@ export const resources: Resource[] = [
     category: "Inspections",
     summary: "What inspections cover in Florida, how findings are used, and what they can't tell you.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     professionalReview: "Licensed home inspector review required before launch.",
     sections: [
       { heading: "What an inspection is", body: ["A general home inspection is a visual assessment of a property's condition by a licensed inspector — systems, structure, roof, and more.", "In Florida, wind-mitigation and four-point inspections also commonly affect insurance conversations."] },
@@ -85,7 +85,7 @@ export const resources: Resource[] = [
     category: "Appraisals",
     summary: "What an appraisal is, who performs it, and how it interacts with financing.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     professionalReview: "Licensed appraiser review required before launch.",
     sections: [
       { heading: "The basics", body: ["An appraisal is an opinion of value prepared by a licensed appraiser, typically ordered by the lender in a financed purchase.", "It differs from a real estate licensee's price opinion or a property-value consultation — only a licensed appraiser performs an appraisal."] },
@@ -99,7 +99,7 @@ export const resources: Resource[] = [
     category: "Closing",
     summary: "The categories of costs buyers and sellers typically see at a Florida closing.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     professionalReview: "Title / closing professional review required before launch.",
     sections: [
       { heading: "Buyer-side categories", body: ["Lender fees, prepaid taxes and insurance, title-related charges, and recording costs are the usual categories. Exact amounts come from your lender's official estimates and the closing agent — not from a website."] },
@@ -113,7 +113,7 @@ export const resources: Resource[] = [
     category: "Relocation",
     summary: "A practical orientation for moves into, out of, or within the Orlando area.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     sections: [
       { heading: "Get oriented before you commit", body: ["Central Florida is a collection of distinct communities, not one market. Commutes, property types, and price points shift meaningfully within a few miles.", "Our Communities pages are built for exactly this comparison — architecture, amenities, transportation, and housing character, described factually."] },
       { heading: "Buying from a distance", body: ["Video tours, detailed condition reporting, and coordinated timelines make remote decisions manageable.", "If you're selling elsewhere while buying here, sequencing the two contracts is half the work — we coordinate both sides' timelines."] },
@@ -126,7 +126,7 @@ export const resources: Resource[] = [
     category: "Selling",
     summary: "Which preparation actually moves the needle — and which doesn't.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     sections: [
       { heading: "Start with a walkthrough, not a contractor", body: ["Before spending anything, walk the property with us. Buyers pay for condition they can see and systems they trust; they rarely pay extra for improvements they'd redo anyway."] },
       { heading: "The usual high-value work", body: ["Deep cleaning, decluttering, paint where it's tired, lighting, curb appeal, and addressing obvious deferred maintenance typically outperform larger renovations dollar-for-dollar.", "Pre-listing inspections can make sense for some properties — it's a strategy conversation."] },
@@ -139,7 +139,7 @@ export const resources: Resource[] = [
     category: "Selling",
     summary: "Price is one term among many — how buyers and sellers should read an offer.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     sections: [
       { heading: "The anatomy of an offer", body: ["Price, financing type, deposit, contingencies, timelines, and requested concessions all carry weight. A clean lower offer can outperform a fragile higher one.", "Contract forms and terms are specific legal documents — questions about legal effect belong with a Florida real estate attorney."] },
       { heading: "Multiple offers and negotiation", body: ["Multiple-offer situations reward preparation and clear priorities on both sides of the table. Strategy differs for buyers and sellers, and we represent each accordingly."] },
@@ -152,7 +152,7 @@ export const resources: Resource[] = [
     category: "Community",
     summary: "How to compare Orlando-area communities on the factors that actually differ.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     sections: [
       { heading: "Compare on structure, not slogans", body: ["Housing age and style, lot characteristics, association structures, commute corridors, and amenity access are the concrete differences between Central Florida communities.", "Our community pages describe those factors factually for Orlando, Winter Park, Lake Nona, Conway, College Park, Dr. Phillips, Windermere, MetroWest, and Pine Hills."] },
     ],
@@ -164,7 +164,7 @@ export const resources: Resource[] = [
     category: "New Construction",
     summary: "How buying new differs from buying resale — contracts, inspections, and representation.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     sections: [
       { heading: "The builder's contract is not the state resale contract", body: ["Builder purchase agreements are written by the builder. Deposits, timelines, changes, and remedies work differently — read carefully and ask questions before signing. Legal questions belong with an attorney.", "The on-site sales team works for the builder. Independent representation costs you nothing extra in most builder arrangements and gives you an advocate."] },
       { heading: "Inspections still matter", body: ["New homes benefit from independent inspections at key construction phases and before warranty expiration."] },
@@ -177,7 +177,7 @@ export const resources: Resource[] = [
     category: "Investment",
     summary: "A grounded starting framework for evaluating Central Florida rental property.",
     author: "Bear Team Real Estate",
-    reviewDate: "[REVIEW DATE PENDING]",
+    reviewDate: "July 2026",
     professionalReview: "Tax professional / attorney review recommended before launch.",
     sections: [
       { heading: "Run the numbers before the tour", body: ["Realistic rent, vacancy, insurance, taxes, maintenance, association fees, and management costs decide whether a property performs — not the listing photos.", "Tax treatment and entity questions belong with your tax professional and attorney; we focus on the real estate."] },

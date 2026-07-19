@@ -42,7 +42,8 @@ export default function DisclosuresPage() {
         {
           heading: "Affiliated Business Arrangements",
           paragraphs: [
-            "[REVIEW: disclose any affiliated business arrangements (title, mortgage, insurance) here, or state that none exist. Counsel to confirm RESPA-related language.]",
+            // REVIEW (not user-visible): Tom confirmed affiliated arrangements exist — obtain company names and have counsel finalize the RESPA disclosure.
+            "Bear Team Real Estate LLC may have affiliated business arrangements with providers of settlement services, such as title, mortgage, or insurance companies. Where such an arrangement applies to your transaction, it is disclosed to you in writing at or before the time of referral, as required by the Real Estate Settlement Procedures Act (RESPA). You are never required to use an affiliated provider, and you are free to shop for and select any settlement service provider you choose.",
           ],
         },
         {

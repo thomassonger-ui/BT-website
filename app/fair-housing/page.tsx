@@ -33,7 +33,7 @@ export default function FairHousingPage() {
         {
           heading: "Questions or Concerns",
           paragraphs: [
-            `Fair Housing questions or concerns may be directed to ${siteConfig.complaintContact}. Information about federal Fair Housing protections is available from the U.S. Department of Housing and Urban Development (HUD). [REVIEW: counsel to confirm complaint-pathway language and any required state notices.]`,
+            `Fair Housing questions or concerns may be directed to ${siteConfig.complaintContact}. Information about federal Fair Housing protections is available from the U.S. Department of Housing and Urban Development (HUD).`, // REVIEW (not user-visible): counsel to confirm complaint-pathway language and any required state notices,
           ],
         },
       ]}
