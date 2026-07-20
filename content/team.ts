@@ -59,7 +59,7 @@ export const team: TeamMember[] = [
     areasServed: ["Orlando", "Greater Central Florida"],
     specialties: ["Buyer representation", "Seller representation"],
     languages: ["English"],
-    phone: "(407) 228-1112",
+    phone: "(631) 245-8027",
     email: "iris@BearTeam.com",
     headshot: "/images/team/iris-reddick.jpg",
     verified: true,
