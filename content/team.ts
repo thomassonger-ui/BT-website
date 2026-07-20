@@ -74,12 +74,12 @@ export const team: TeamMember[] = [
     specialties: ["Buyer representation", "Seller representation"],
     languages: ["English"],
     license: "FL SL3548627",
-    phone: "(407) 228-1112",
+    phone: "(407) 925-1383",
     email: "alex@BearTeam.com",
     headshot: "/images/team/alex-volchek.jpg",
     verified: true,
     reviewNote:
-      "Bio drafted from confirmed facts (July 2026) — Alex to approve wording and add years licensed/specialties/languages. Office phone used pending his preference; cell on file is (407) 925-1383.",
+      "Bio drafted from confirmed facts (July 2026) — Alex to approve wording and add years licensed/specialties/languages. Direct line (407) 925-1383 set per Tom, 2026-07-20.",
   },
   {
     slug: "kathleen-rutland",
