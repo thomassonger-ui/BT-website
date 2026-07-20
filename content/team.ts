@@ -91,11 +91,11 @@ export const team: TeamMember[] = [
     specialties: ["Land advisory", "Acquisition strategies", "Land planning", "Economic development"],
     languages: ["English"],
     license: "FL SL3452210",
-    phone: "(407) 228-1112",
+    phone: "(407) 927-2618",
     email: "kathleen@BearTeam.com",
     headshot: "/images/team/kathleen-rutland.jpg",
     verified: true,
-    reviewNote: "Bio supplied verbatim by Tom Songer (July 2026). Office phone used pending Kathleen's preference for a direct line.",
+    reviewNote: "Bio supplied verbatim by Tom Songer (July 2026). Direct line set (407) 927-2618 per Tom, 2026-07-20.",
   },
   {
     slug: "allen-baer",
