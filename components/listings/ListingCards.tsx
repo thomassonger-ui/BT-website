@@ -37,7 +37,7 @@ function toPathway(l: Listing): Pathway {
     ctaLabel: "",
     mode: "form",
     inquiryType: "Buying",
-    description: `${l.address}${facts ? ` · ${facts}` : ""}${l.mls_number ? ` · MLS# ${l.mls_number}` : ""}. ${l.description ?? ""}`,
+    description: `${l.address}${facts ? ` · ${facts}` : ""}${l.mls_number ? ` · MLS# ${l.mls_number}` : ""}${l.listing_agent ? ` · Listed by ${l.listing_agent}` : ""}. ${l.description ?? ""}`,
     value: [],
     fields: [
       {
@@ -176,6 +176,9 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
                   {l.property_type ? ` · ${l.property_type}` : ""}
                 </p>
                 <p className="mt-1 text-sm text-muted">{l.address}</p>
+                {l.listing_agent ? (
+                  <p className="mt-1 text-xs text-charcoal/80">Listed by {l.listing_agent}</p>
+                ) : null}
                 <p className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-gold">
                   Click to Explore <span aria-hidden="true">→</span>
                 </p>

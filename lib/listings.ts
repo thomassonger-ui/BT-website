@@ -23,6 +23,8 @@ export type Listing = {
   mls_number: string | null;
   description: string | null;
   photo: string | null;
+  /** Optional public credit, e.g. "Kathleen Rutland & Bethanne Baer". */
+  listing_agent?: string | null;
 };
 
 export async function getListings(): Promise<Listing[]> {
