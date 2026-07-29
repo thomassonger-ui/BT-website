@@ -54,6 +54,9 @@ export type TeamMember = ReviewFlag & {
   email?: string;
   headshot: string;
   verified: boolean;
+  /** Personal scheduling link (e.g. Calendly) rendered on the profile page. */
+  bookingUrl?: string;
+  bookingLabel?: string;
 };
 
 export type ResourceSection = { heading: string; body: string[] };

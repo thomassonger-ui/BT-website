@@ -95,7 +95,9 @@ export const team: TeamMember[] = [
     email: "kathleen@BearTeam.com",
     headshot: "/images/team/kathleen-rutland.jpg",
     verified: true,
-    reviewNote: "Bio supplied verbatim by Tom Songer (July 2026). Direct line set (407) 927-2618 per Tom, 2026-07-20.",
+    bookingUrl: "https://calendly.com/kathleen-rutland/30min",
+    bookingLabel: "Schedule a Discovery Call",
+    reviewNote: "Bio supplied verbatim by Tom Songer (July 2026). Direct line set (407) 927-2618 per Tom, 2026-07-20. Calendly discovery-call link added per Tom, 2026-07-29.",
   },
   // Allen Baer removed from the roster 2026-07-29 (per Tom) — he's at Conway
   // Title, which is disclosed as an affiliated business on /disclosures.

@@ -12,6 +12,12 @@ import { cn } from "@/lib/utils/cn";
  * "Website — Buyer Lead" prefixed "Featured listing inquiry (<address>)".
  */
 
+// Agent scheduling links — a credited listing whose agent appears here gets a
+// "Schedule a Discovery Call" CTA in its inquiry pop-up (per Tom, 7/29).
+const AGENT_BOOKING: { match: string; url: string; label: string }[] = [
+  { match: "Kathleen Rutland", url: "https://calendly.com/kathleen-rutland/30min", label: "Schedule a Discovery Call" },
+];
+
 const STATUS_STYLES: Record<string, string> = {
   "For Sale": "bg-teal-700 text-soft-white",
   Pending: "bg-gold text-ink",
@@ -63,6 +69,12 @@ function toPathway(l: Listing): Pathway {
     leadPrefix: sold ? `Sold property interest (${l.address})` : `Featured listing inquiry (${l.address})`,
     submitLabel: "Send to the Listing Team",
     followUpBy: l.listing_agent || undefined,
+    ...(l.listing_agent
+      ? (() => {
+          const b = AGENT_BOOKING.find((a) => l.listing_agent!.includes(a.match));
+          return b ? { bookingUrl: b.url, bookingLabel: b.label } : {};
+        })()
+      : {}),
   };
 }
 

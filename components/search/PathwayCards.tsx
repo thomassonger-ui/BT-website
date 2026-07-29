@@ -48,6 +48,9 @@ export type Pathway = {
   moreLink?: { href: string; label: string };
   /** Who follows up — shown in the success message (e.g. a listing's agents). */
   followUpBy?: string;
+  /** Override the post-submit booking CTA (e.g. a listing agent's Calendly). */
+  bookingUrl?: string;
+  bookingLabel?: string;
 };
 
 const PATHWAYS: Pathway[] = [
@@ -385,6 +388,18 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
               </Link>
             </p>
           ) : null}
+          {pathway.bookingUrl ? (
+            <p className="mt-3">
+              <a
+                href={pathway.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-teal-800 underline underline-offset-4 hover:text-teal-600"
+              >
+                {pathway.bookingLabel || "Schedule a call"} →<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </p>
+          ) : null}
           <ul className="mt-4 space-y-2">
             {pathway.value.map((v) => (
               <li key={v} className="flex gap-3 text-sm leading-relaxed text-charcoal-soft">
@@ -422,12 +437,12 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
                   : "An agent will follow up fast. Want to lock in a time with the team now?"}
               </p>
               <a
-                href={externalLinks.bethanneBooking}
+                href={pathway.bookingUrl || externalLinks.bethanneBooking}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-md bg-gold px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-gold-light"
               >
-                Book 30 Minutes
+                {pathway.bookingLabel || "Book 30 Minutes"}
               </a>
             </div>
           ) : (
