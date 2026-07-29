@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils/cn";
 // Agent scheduling links — a credited listing whose agent appears here gets a
 // "Schedule a Discovery Call" CTA in its inquiry pop-up (per Tom, 7/29).
 const AGENT_BOOKING: { match: string; url: string; label: string }[] = [
-  { match: "Kathleen Rutland", url: "https://calendly.com/kathleen-rutland/30min", label: "Schedule a Discovery Call" },
+  { match: "Kathleen Rutland", url: "https://calendly.com/kathleen-rutland/30min", label: "Schedule a Discovery Call with Kathleen" },
 ];
 
 const STATUS_STYLES: Record<string, string> = {

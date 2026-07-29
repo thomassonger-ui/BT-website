@@ -432,9 +432,8 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
                 Sent to the team{name ? `, ${name.split(" ")[0]}` : ""}.
               </p>
               <p className="mt-2 text-sm text-charcoal-soft">
-                {pathway.followUpBy
-                  ? `${pathway.followUpBy} will follow up fast. Want to lock in a time with the team now?`
-                  : "An agent will follow up fast. Want to lock in a time with the team now?"}
+                {pathway.followUpBy ? `${pathway.followUpBy} will follow up fast.` : "An agent will follow up fast."}{" "}
+                {pathway.bookingUrl ? "Or grab time on the calendar right now:" : "Want to lock in a time with the team now?"}
               </p>
               <a
                 href={pathway.bookingUrl || externalLinks.bethanneBooking}
