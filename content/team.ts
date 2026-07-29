@@ -97,19 +97,8 @@ export const team: TeamMember[] = [
     verified: true,
     reviewNote: "Bio supplied verbatim by Tom Songer (July 2026). Direct line set (407) 927-2618 per Tom, 2026-07-20.",
   },
-  {
-    slug: "allen-baer",
-    name: "Allen Baer",
-    title: "Property Manager",
-    bio: "Allen Baer manages properties for Bear Team clients and investors — overseeing the day-to-day details that protect an owner's asset: tenant coordination, maintenance, and keeping every property performing the way it should.",
-    areasServed: ["Orlando", "Greater Central Florida"],
-    specialties: ["Property management", "Investor services"],
-    languages: ["English"],
-    phone: "(407) 228-1112",
-    headshot: "/images/team/allen-baer.jpg",
-    verified: true,
-    reviewNote: "Bio drafted from confirmed role — Allen to approve wording before launch.",
-  },
+  // Allen Baer removed from the roster 2026-07-29 (per Tom) — he's at Conway
+  // Title, which is disclosed as an affiliated business on /disclosures.
   {
     slug: "owen-willis",
     name: "Owen Willis",
