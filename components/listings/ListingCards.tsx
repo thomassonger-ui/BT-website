@@ -62,6 +62,7 @@ function toPathway(l: Listing): Pathway {
     ],
     leadPrefix: sold ? `Sold property interest (${l.address})` : `Featured listing inquiry (${l.address})`,
     submitLabel: "Send to the Listing Team",
+    followUpBy: l.listing_agent || undefined,
   };
 }
 

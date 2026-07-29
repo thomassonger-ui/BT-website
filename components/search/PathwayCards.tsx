@@ -46,6 +46,8 @@ export type Pathway = {
   description?: string;
   /** Optional internal link rendered in the modal (e.g. "View the full guide"). */
   moreLink?: { href: string; label: string };
+  /** Who follows up — shown in the success message (e.g. a listing's agents). */
+  followUpBy?: string;
 };
 
 const PATHWAYS: Pathway[] = [
@@ -415,7 +417,9 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
                 Sent to the team{name ? `, ${name.split(" ")[0]}` : ""}.
               </p>
               <p className="mt-2 text-sm text-charcoal-soft">
-                An agent will follow up fast. Want to lock in a time with Bethanne now?
+                {pathway.followUpBy
+                  ? `${pathway.followUpBy} will follow up fast. Want to lock in a time with the team now?`
+                  : "An agent will follow up fast. Want to lock in a time with the team now?"}
               </p>
               <a
                 href={externalLinks.bethanneBooking}
