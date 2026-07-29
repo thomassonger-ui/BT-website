@@ -113,13 +113,22 @@ function FooterColumn({
     <nav aria-label={`Footer ${title}`}>
       <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-light">{title}</h2>
       <ul className="mt-4 space-y-2 text-sm">
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link href={link.href} className="hover:text-gold-light">
-              {link.label}
-            </Link>
-          </li>
-        ))}
+        {links.map((link) =>
+          link.href.startsWith("http") ? (
+            <li key={link.href}>
+              <a href={link.href} target="_blank" rel="noopener noreferrer" className="hover:text-gold-light">
+                {link.label}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ) : (
+            <li key={link.href}>
+              <Link href={link.href} className="hover:text-gold-light">
+                {link.label}
+              </Link>
+            </li>
+          ),
+        )}
       </ul>
     </nav>
   );

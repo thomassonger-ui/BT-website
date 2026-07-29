@@ -6,7 +6,6 @@ import { useEffect, useId, useRef, useState } from "react";
 import { primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils/cn";
-import { SearchHomesLink } from "@/components/ui/Button";
 import { BTMark } from "@/components/ui/Logo";
 
 /**
@@ -93,11 +92,15 @@ export function Header() {
               if (item.external) {
                 return (
                   <li key={item.label}>
-                    <SearchHomesLink
-                      variant="ghost"
-                      className="!min-h-0 whitespace-nowrap !px-0 !py-1 !text-cream/90 no-underline hover:!text-gold-light"
-                      label={item.label}
-                    />
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border-b-2 border-transparent py-1 transition-colors hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                    >
+                      {item.label}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
                   </li>
                 );
               }
@@ -202,8 +205,16 @@ export function Header() {
         <ul className="space-y-1 text-base font-medium text-cream">
           {primaryNav.map((item) =>
             item.external ? (
-              <li key={item.label} className="py-2">
-                <SearchHomesLink variant="primary" className="w-full" />
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-md px-3 py-3 hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold"
+                >
+                  {item.label}
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
               </li>
             ) : (
               <li key={item.label}>

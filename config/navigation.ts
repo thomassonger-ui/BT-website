@@ -1,7 +1,8 @@
 /**
  * Centralized navigation configuration.
  * "Search Homes" is always an EXTERNAL link (config/external-links.ts).
- * No recruiting links may be added here.
+ * Recruiting lives OFF-SITE: the Career tab is a plain external link to
+ * joinbearteam.com — no recruiting routes or content on this site itself.
  */
 
 export type NavItem = {
@@ -45,6 +46,7 @@ export const primaryNav: NavItem[] = [
     ],
   },
   { label: "Contact", href: "/contact" },
+  { label: "Career", href: "https://joinbearteam.com", external: true },
 ];
 
 export const footerNav = {
@@ -62,6 +64,7 @@ export const footerNav = {
     { label: "Blog", href: "/blog" },
     { label: "Real Estate Resources", href: "/resources" },
     { label: "Contact", href: "/contact" },
+    { label: "Career — Join Bear Team", href: "https://joinbearteam.com" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
