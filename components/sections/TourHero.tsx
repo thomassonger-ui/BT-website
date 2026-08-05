@@ -197,7 +197,9 @@ export function TourHero() {
               id="hero-heading"
               className={`max-w-3xl font-display text-[1.7rem] font-medium leading-[1.15] text-soft-white transition-opacity duration-500 md:text-display-xl md:leading-[1.05] ${phraseVisible ? "opacity-100" : "opacity-0"}`}
             >
-              <span className="block">{PHRASES[phraseIdx][0]}</span>
+              {/* The {" "} matters: without it the accessible name computes as
+                  "Find Your Placein Central Florida." */}
+              <span className="block">{PHRASES[phraseIdx][0]}</span>{" "}
               <span className="block text-gold-light">{PHRASES[phraseIdx][1]}</span>
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-cream/90 md:mt-6 md:text-lg">{heroCopy.copy}</p>
