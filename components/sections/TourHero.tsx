@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
 import { heroCopy } from "@/content/home-scenes";
 
@@ -22,9 +22,19 @@ import { heroCopy } from "@/content/home-scenes";
 // mt=0 hides Mattertags (the demo model's owner embedded promo videos/posts
 // in the scan — the tags travel with the model, not our code); hr=0 hides the
 // highlight reel; brand=0/title=0 strip the owner's branding.
+// play=0 so the model does not auto-start a moving walkthrough on load — WCAG
+// 2.2.2 (Pause, Stop, Hide). The user starts motion via "Walk Through in 3D".
 const TOUR_URL =
   process.env.NEXT_PUBLIC_MATTERPORT_URL ||
-  "https://my.matterport.com/show/?m=JGPnGQ6hosj&play=1&qs=1&brand=0&title=0&mt=0&hr=0&ss=16";
+  "https://my.matterport.com/show/?m=JGPnGQ6hosj&play=0&qs=1&brand=0&title=0&mt=0&hr=0&ss=16";
+
+/** True when the visitor has asked the OS to minimise motion. */
+function prefersReducedMotion() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
 
 const IS_DEMO_TOUR = !process.env.NEXT_PUBLIC_MATTERPORT_URL;
 
@@ -74,10 +84,28 @@ export function TourHero() {
   const [tourReady, setTourReady] = useState(false);
   const [phraseIdx, setPhraseIdx] = useState(0);
   const [phraseVisible, setPhraseVisible] = useState(true);
+  const enterTourRef = useRef<HTMLButtonElement>(null);
+  const exitTourRef = useRef<HTMLButtonElement>(null);
+
+  // Entering/leaving the tour swaps the whole overlay, so move focus with it
+  // (WCAG 2.4.3) and let Escape leave the tour (2.1.2).
+  useEffect(() => {
+    if (exploring) {
+      exitTourRef.current?.focus();
+      const onKey = (e: KeyboardEvent) => e.key === "Escape" && setExploring(false);
+      document.addEventListener("keydown", onKey);
+      return () => document.removeEventListener("keydown", onKey);
+    }
+    // Only pull focus back if the user actually came out of the tour.
+    if (document.activeElement === document.body) enterTourRef.current?.focus();
+  }, [exploring]);
 
   // Poster-first: paint an instant photo of the tour's starting view, then
   // load the heavy Matterport engine in the background and crossfade it in.
   useEffect(() => {
+    // Reduced-motion visitors keep the still poster; the tour is still
+    // reachable on demand via the "Walk Through in 3D" button.
+    if (prefersReducedMotion()) return;
     const t = setTimeout(() => setMountTour(true), 300);
     return () => clearTimeout(t);
   }, []);
@@ -86,6 +114,9 @@ export function TourHero() {
   // different every visit, never the one shown last time on this device.
   useEffect(() => {
     if (!tourReady) return;
+    // Don't rewrite the page's primary heading under the reader's cursor
+    // when motion is reduced.
+    if (prefersReducedMotion()) return;
     let last = 0;
     try {
       last = Number(window.localStorage.getItem("bt-hero-phrase") || 0);
@@ -136,11 +167,17 @@ export function TourHero() {
       {exploring ? (
         /* EXPLORE MODE — tour owns the mouse; exit restores the page */
         <div className="pointer-events-none absolute inset-x-0 bottom-6 z-30 flex flex-col items-center gap-2">
-          <p className="text-[10px] uppercase tracking-widest text-cream/40">
+          {/* The page must keep exactly one h1 in every state, and
+              <section aria-labelledby="hero-heading"> must resolve. */}
+          <h1 id="hero-heading" className="sr-only">
+            {PHRASES[phraseIdx][0]} {PHRASES[phraseIdx][1]}
+          </h1>
+          <p className="text-[10px] uppercase tracking-widest text-cream/70">
             {IS_DEMO_TOUR ? "Sample 3D tour — for demonstration only, not a Bear Team listing · " : ""}
             3D tour powered by Matterport
           </p>
           <button
+            ref={exitTourRef}
             type="button"
             onClick={() => setExploring(false)}
             className="pointer-events-auto inline-flex min-h-[48px] items-center gap-2 rounded-full bg-ink/85 px-6 py-3 text-sm font-semibold text-soft-white backdrop-blur transition-colors hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
@@ -166,8 +203,12 @@ export function TourHero() {
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-cream/90 md:mt-6 md:text-lg">{heroCopy.copy}</p>
             <div className="mt-6 flex flex-wrap items-center gap-2.5 md:mt-9 md:gap-4">
               <button
+                ref={enterTourRef}
                 type="button"
-                onClick={() => setExploring(true)}
+                onClick={() => {
+                  setMountTour(true);
+                  setExploring(true);
+                }}
                 className="inline-flex min-h-[48px] items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold tracking-wide text-ink transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-soft-white max-md:min-h-[40px] max-md:px-3.5 max-md:py-2 max-md:text-xs"
               >
                 <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="currentColor">
@@ -183,7 +224,7 @@ export function TourHero() {
                 Sell Your Property
               </ButtonLink>
             </div>
-            <p className="mt-6 text-[10px] uppercase tracking-widest text-cream/40 md:mt-8">
+            <p className="mt-6 text-[10px] uppercase tracking-widest text-cream/70 md:mt-8">
               {IS_DEMO_TOUR ? "Sample 3D tour — for demonstration only, not a Bear Team listing · " : ""}
               3D tour powered by Matterport
             </p>

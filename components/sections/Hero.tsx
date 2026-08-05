@@ -25,8 +25,10 @@ export function Hero() {
 
         <div data-hero-content className="relative z-10 mx-auto w-full max-w-content px-6 pb-24 pt-36">
           <h1 id="hero-heading" className="max-w-3xl font-display text-display-xl font-medium leading-[1.05] text-soft-white">
+            {/* The trailing space matters: without it the accessible name
+                computes as "Find Your Placein Central Florida." */}
             <span data-hero-line className="block">
-              Find Your Place
+              Find Your Place{" "}
             </span>
             <span data-hero-line className="block text-gold-light">
               in Central Florida.
@@ -50,7 +52,7 @@ export function Hero() {
         </div>
 
         {/* Scroll cue */}
-        <div aria-hidden="true" className="absolute bottom-6 left-1/2 -translate-x-1/2 text-cream/50">
+        <div aria-hidden="true" className="absolute bottom-6 left-1/2 -translate-x-1/2 text-cream/70">
           <svg viewBox="0 0 24 24" className="h-6 w-6 motion-safe:animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M12 5v14m0 0-5-5m5 5 5-5" />
           </svg>

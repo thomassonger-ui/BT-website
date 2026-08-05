@@ -47,8 +47,12 @@ export default async function BlogArticlePage({ params }: Params) {
   const post = await getPost(slug);
   if (!post) notFound();
 
-  // The page renders the title itself — strip a duplicate leading H1 if the body has one.
-  const body = post.content_md.replace(/^\s*#\s+[^\n]+\n+/, "");
+  // The page renders the title itself. Strip a leading H1, then demote any
+  // remaining H1s in the remote markdown so the page keeps exactly one h1
+  // and the heading outline never skips a level (1.3.1 / 2.4.6).
+  const body = post.content_md
+    .replace(/^\s*#\s+[^\n]+\n+/, "")
+    .replace(/^#\s+/gm, "## ");
   const html = await marked.parse(body, { async: true });
   const related = (await getPosts()).filter((p) => p.slug !== post.slug).slice(0, 3);
 

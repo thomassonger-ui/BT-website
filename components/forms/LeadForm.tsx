@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { leadSchemas, type LeadKind } from "@/lib/forms/schemas";
 import { compliance } from "@/config/compliance";
 import { cn } from "@/lib/utils/cn";
@@ -37,8 +37,17 @@ export function LeadForm({
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "failed">("idle");
   const [serverError, setServerError] = useState<string>("");
   const summaryRef = useRef<HTMLDivElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
   const errorEntries = Object.entries(errors);
+  const fieldNames = new Set(fields.map((f) => f.name).concat("consent"));
+
+  // On success the whole form unmounts, taking the focused submit button with
+  // it. Move focus to the confirmation so keyboard users aren't dropped to the
+  // top of the document (WCAG 2.4.3).
+  useEffect(() => {
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -96,7 +105,12 @@ export function LeadForm({
 
   if (status === "success") {
     return (
-      <div role="status" className="rounded-lg border border-teal-700/30 bg-teal-50 p-8 text-center">
+      <div
+        ref={successRef}
+        tabIndex={-1}
+        role="status"
+        className="rounded-lg border border-teal-700/30 bg-teal-50 p-8 text-center focus:outline-none"
+      >
         <p className="font-display text-xl font-medium text-teal-900">{successTitle}</p>
         <p className="mt-2 text-sm text-charcoal-soft">{successBody}</p>
       </div>
@@ -116,9 +130,15 @@ export function LeadForm({
           <ul className="mt-2 list-disc space-y-1 pl-5">
             {errorEntries.map(([field, message]) => (
               <li key={field}>
-                <a href={`#${formId}-${field}`} className="underline underline-offset-2">
-                  {message}
-                </a>
+                {/* Only link when the key really maps to a control, otherwise
+                    the anchor dangles and lands the user nowhere. */}
+                {fieldNames.has(field) ? (
+                  <a href={`#${formId}-${field}`} className="underline underline-offset-2">
+                    {message}
+                  </a>
+                ) : (
+                  message
+                )}
               </li>
             ))}
           </ul>
@@ -149,8 +169,10 @@ export function LeadForm({
             id={`${formId}-consent`}
             name="consent"
             type="checkbox"
+            required
+            aria-invalid={errors.consent ? true : undefined}
             aria-describedby={errors.consent ? `${formId}-consent-error` : undefined}
-            className="mt-1 h-5 w-5 shrink-0 accent-teal-700"
+            className="mt-1 h-6 w-6 shrink-0 accent-teal-700"
           />
           <label htmlFor={`${formId}-consent`} className="text-xs leading-relaxed text-charcoal-soft">
             {compliance.communicationConsent} See our{" "}
@@ -200,7 +222,7 @@ function Field({
     autoComplete: field.autoComplete,
     className: cn(
       "mt-1.5 w-full rounded-md border bg-soft-white px-4 py-3 text-sm text-ink placeholder:text-muted focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700",
-      error ? "border-red-700/60" : "border-ink/15",
+      error ? "border-red-700/60" : "border-field",
     ),
   } as const;
 

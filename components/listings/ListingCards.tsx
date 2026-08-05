@@ -120,13 +120,21 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
               "min-h-[40px] rounded-full border px-5 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
               filter === f
                 ? "border-teal-700 bg-teal-700 text-soft-white"
-                : "border-ink/15 bg-soft-white text-charcoal hover:border-teal-700 hover:text-teal-800",
+                : "border-field bg-soft-white text-charcoal hover:border-teal-700 hover:text-teal-800",
             )}
           >
             {f === "Pending" ? "Pending / Under Contract" : f}
           </button>
         ))}
       </div>
+
+      {/* Filtering re-renders the grid with no visual focus change — announce
+          the new result count so screen-reader users get feedback (4.1.3). */}
+      <p role="status" aria-live="polite" className="sr-only">
+        {shown.length === 0
+          ? `No listings match ${filter}`
+          : `${shown.length} listing${shown.length === 1 ? "" : "s"} shown for ${filter}`}
+      </p>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((l) => (
@@ -192,7 +200,7 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
                 {l.listing_agent ? (
                   <p className="mt-1 text-xs text-charcoal/80">Listed by {l.listing_agent}</p>
                 ) : null}
-                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-gold">
+                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-gold-dark">
                   Click to Explore <span aria-hidden="true">→</span>
                 </p>
               </div>

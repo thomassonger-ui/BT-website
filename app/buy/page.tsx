@@ -212,7 +212,7 @@ export default function BuyPage() {
                 <h3 className="font-display text-lg font-medium text-ink">{card.title}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{card.text}</p>
                 <ButtonLink href={card.href} variant="ghost" className="mt-4 self-start !px-0">
-                  Learn more →
+                  Learn more<span className="sr-only"> about {card.title}</span> →
                 </ButtonLink>
               </article>
             </Reveal>
@@ -237,7 +237,7 @@ export default function BuyPage() {
 
               {/* Specialty corridor — home turf */}
               <div className="mb-6 rounded-lg border-l-4 border-gold bg-soft-white p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">
                   Our specialty for 40+ years
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-charcoal-soft">

@@ -1,4 +1,5 @@
 import { siteConfig, isPlaceholder } from "@/config/site";
+import { externalLinks } from "@/config/external-links";
 import type { Faq, Resource } from "@/types/content";
 
 /**
@@ -33,6 +34,13 @@ export function realEstateAgentSchema() {
     },
     areaServed: siteConfig.serviceAreas.map((name) => ({ "@type": "Place", name })),
     slogan: siteConfig.tagline,
+    sameAs: [
+      externalLinks.facebook,
+      externalLinks.linkedin,
+      externalLinks.x,
+      externalLinks.instagram,
+      externalLinks.googleBusinessProfile,
+    ].filter(Boolean),
   };
 }
 

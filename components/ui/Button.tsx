@@ -33,6 +33,7 @@ export function ButtonLink({
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
         {children}
+        <span className="sr-only"> (opens in a new tab)</span>
         <ExternalIcon />
       </a>
     );

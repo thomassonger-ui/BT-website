@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { compliance } from "@/config/compliance";
 import { externalLinks } from "@/config/external-links";
 import { cn } from "@/lib/utils/cn";
@@ -219,7 +219,14 @@ export function PathwayCards({
 
   function activate(p: Pathway) {
     if (p.mode === "scout") {
-      document.getElementById(scoutTargetId)?.scrollIntoView({ behavior: "smooth" });
+      const target = document.getElementById(scoutTargetId);
+      target?.scrollIntoView({ behavior: "smooth" });
+      // Scrolling alone strands keyboard and screen-reader users on the card
+      // they just pressed (2.4.3) — move focus to the destination too.
+      if (target) {
+        target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
       return;
     }
     setOpen(p);
@@ -268,7 +275,9 @@ export function PathwayCards({
 }
 
 export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: () => void }) {
+  const uid = useId();
   const panelRef = useRef<HTMLDivElement>(null);
+  const doneRef = useRef<HTMLDivElement>(null);
   const [values, setValues] = useState<Record<string, string>>({});
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -277,8 +286,41 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
   const [error, setError] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
 
+  // The form is replaced by the confirmation, so carry focus across (2.4.3).
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    if (status === "done") doneRef.current?.focus();
+  }, [status]);
+
+  useEffect(() => {
+    // Remember what opened the dialog so focus can go home on close (2.4.3).
+    const trigger = document.activeElement as HTMLElement | null;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      // Focus trap — aria-modal="true" tells AT the page behind is
+      // unavailable, so Tab must not be able to walk out of the panel (2.1.2).
+      if (e.key !== "Tab") return;
+      const panel = panelRef.current;
+      if (!panel) return;
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && (active === first || active === panel)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener("keydown", onKey);
     // iOS-safe scroll lock: fix the body in place (plain overflow:hidden is
     // ignored by iOS Safari and lets the page behind the modal scroll/jump).
@@ -296,6 +338,7 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
       document.body.style.width = width;
       document.body.style.overflow = overflow;
       window.scrollTo(0, scrollY);
+      trigger?.focus();
     };
   }, [onClose]);
 
@@ -355,7 +398,7 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
         aria-modal="true"
         aria-labelledby={`modal-${pathway.id}-title`}
         tabIndex={-1}
-        className="max-h-[92svh] w-full max-w-lg overflow-y-auto overscroll-contain rounded-t-2xl bg-soft-white shadow-2xl outline-none sm:rounded-2xl"
+        className="max-h-[92svh] w-full max-w-lg overflow-y-auto overscroll-contain rounded-t-2xl bg-soft-white shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-teal-700 sm:rounded-2xl"
       >
         <div className="relative aspect-[16/7]">
           <Image src={pathway.img} alt="" fill sizes="512px" className="object-cover sm:rounded-t-2xl" />
@@ -403,7 +446,7 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
           <ul className="mt-4 space-y-2">
             {pathway.value.map((v) => (
               <li key={v} className="flex gap-3 text-sm leading-relaxed text-charcoal-soft">
-                <span aria-hidden="true" className="mt-0.5 font-bold text-gold">✓</span>
+                <span aria-hidden="true" className="mt-0.5 font-bold text-gold-dark">✓</span>
                 {v}
               </li>
             ))}
@@ -427,7 +470,7 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
               </p>
             </div>
           ) : status === "done" ? (
-            <div role="status" className="mt-6 rounded-lg border border-teal-700/30 bg-teal-50 p-6 text-center">
+            <div ref={doneRef} tabIndex={-1} role="status" className="mt-6 rounded-lg border border-teal-700/30 bg-teal-50 p-6 text-center focus:outline-none">
               <p className="font-display text-lg font-medium text-teal-900">
                 Sent to the team{name ? `, ${name.split(" ")[0]}` : ""}.
               </p>
@@ -442,6 +485,7 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
                 className="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-md bg-gold px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-gold-light"
               >
                 {pathway.bookingLabel || "Book 30 Minutes"}
+                <span className="sr-only"> (opens in a new tab)</span>
               </a>
             </div>
           ) : (
@@ -456,7 +500,7 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
                       id={`pf-${pathway.id}-${f.key}`}
                       value={values[f.key] ?? ""}
                       onChange={(e) => setValues((v) => ({ ...v, [f.key]: e.target.value }))}
-                      className="mt-1.5 w-full rounded-md border border-ink/15 bg-soft-white px-4 py-3 text-sm text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
+                      className="mt-1.5 w-full rounded-md border border-field bg-soft-white px-4 py-3 text-sm text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
                     >
                       <option value="" disabled>
                         Select…
@@ -474,7 +518,7 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
                       value={values[f.key] ?? ""}
                       onChange={(e) => setValues((v) => ({ ...v, [f.key]: e.target.value }))}
                       placeholder={f.placeholder}
-                      className="mt-1.5 w-full rounded-md border border-ink/15 bg-soft-white px-4 py-3 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
+                      className="mt-1.5 w-full rounded-md border border-field bg-soft-white px-4 py-3 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
                     />
                   ) : (
                     <input
@@ -483,20 +527,37 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
                       value={values[f.key] ?? ""}
                       onChange={(e) => setValues((v) => ({ ...v, [f.key]: e.target.value }))}
                       placeholder={f.placeholder}
-                      className="mt-1.5 w-full rounded-md border border-ink/15 bg-soft-white px-4 py-3 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
+                      className="mt-1.5 w-full rounded-md border border-field bg-soft-white px-4 py-3 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
                     />
                   )}
                 </div>
               ))}
 
+              {/* Visible persistent labels — a placeholder disappears the moment
+                  the user types, which fails 3.3.2 Labels or Instructions. */}
               <div className="grid gap-3 sm:grid-cols-3">
-                <input aria-label="Your name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" autoComplete="name" className="min-h-[46px] rounded-md border border-ink/15 bg-soft-white px-4 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700" />
-                <input aria-label="Phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" autoComplete="tel" className="min-h-[46px] rounded-md border border-ink/15 bg-soft-white px-4 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700" />
-                <input aria-label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" autoComplete="email" className="min-h-[46px] rounded-md border border-ink/15 bg-soft-white px-4 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700" />
+                <div>
+                  <label htmlFor={`${uid}-name`} className="text-xs font-medium text-ink">
+                    Name
+                  </label>
+                  <input id={`${uid}-name`} type="text" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" className="mt-1 min-h-[46px] w-full rounded-md border border-field bg-soft-white px-4 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700" />
+                </div>
+                <div>
+                  <label htmlFor={`${uid}-phone`} className="text-xs font-medium text-ink">
+                    Phone
+                  </label>
+                  <input id={`${uid}-phone`} type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" className="mt-1 min-h-[46px] w-full rounded-md border border-field bg-soft-white px-4 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700" />
+                </div>
+                <div>
+                  <label htmlFor={`${uid}-email`} className="text-xs font-medium text-ink">
+                    Email
+                  </label>
+                  <input id={`${uid}-email`} type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" className="mt-1 min-h-[46px] w-full rounded-md border border-field bg-soft-white px-4 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700" />
+                </div>
               </div>
 
               <label className="flex items-start gap-3 rounded-md border border-ink/10 bg-cream/40 p-3 text-[11px] leading-relaxed text-charcoal-soft">
-                <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 accent-teal-700" />
+                <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-6 w-6 shrink-0 accent-teal-700" />
                 <span>
                   {compliance.communicationConsent}{" "}
                   <Link href="/privacy" className="underline underline-offset-2">

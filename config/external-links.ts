@@ -20,9 +20,10 @@ export const externalLinks = {
     process.env.NEXT_PUBLIC_BOOKING_URL || "https://calendar.app.google/8H2ytHozcNon3VzM8",
   googleMaps: process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || "https://maps.app.goo.gl/n6635xh7GQ7E1fbX7",
   googleBusinessProfile: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL || "",
-  facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "",
+  facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/TheBearTeam/",
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "",
-  linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
+  linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://www.linkedin.com/in/thebearteam",
+  x: process.env.NEXT_PUBLIC_X_URL || "https://x.com/thebearrealtor",
 } as const;
 
 export type ExternalLinks = typeof externalLinks;

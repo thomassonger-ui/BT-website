@@ -242,9 +242,12 @@ export function Scout({
         ) : null}
 
         {/* Ask Scout™ — free-text AI answers (Claude Sonnet via scout-chat) */}
-        {phase !== "done" && askLog.length > 0 ? (
-          <div className="mb-5 space-y-3" aria-live="polite">
-            {askLog.map((entry, i) => (
+        {/* Always mounted: a live region added at the same moment as its first
+            content is not announced by screen readers (WCAG 4.1.3). */}
+        <div className="mb-5 space-y-3" aria-live="polite" aria-busy={asking || undefined}>
+          {asking ? <p className="sr-only">Scout is thinking…</p> : null}
+          {phase !== "done" && askLog.length > 0
+            ? askLog.map((entry, i) => (
               <div key={i} className="space-y-2">
                 <p className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-sm bg-teal-700 px-4 py-2 text-sm text-soft-white">
                   {entry.q}
@@ -252,10 +255,10 @@ export function Scout({
                 <p className="w-fit max-w-[85%] rounded-2xl rounded-bl-sm bg-cream px-4 py-2 text-sm leading-relaxed text-charcoal">
                   {entry.a}
                 </p>
-              </div>
-            ))}
-          </div>
-        ) : null}
+                </div>
+              ))
+            : null}
+        </div>
 
         {phase === "done" ? (
           <div className="text-center" role="status">
@@ -305,7 +308,7 @@ export function Scout({
           </div>
         ) : phase === "questions" ? (
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">
               Question {qIndex + 1} of {questions.length}
             </p>
             <p className="mt-2 font-display text-xl font-medium text-ink">{questions[qIndex].prompt}</p>
@@ -340,10 +343,11 @@ export function Scout({
                 autoComplete={CONTACT_STEPS[cIndex].autoComplete}
                 aria-label={CONTACT_STEPS[cIndex].prompt}
                 aria-invalid={error ? true : undefined}
+                aria-describedby={error ? "scout-contact-error" : undefined}
                 autoFocus
                 className={cn(
                   "min-h-[48px] w-full flex-1 rounded-md border bg-soft-white px-4 py-3 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700",
-                  error ? "border-red-700/60" : "border-ink/15",
+                  error ? "border-red-700/60" : "border-field",
                 )}
               />
               <button
@@ -354,7 +358,7 @@ export function Scout({
               </button>
             </div>
             {error ? (
-              <p role="alert" className="mt-2 text-xs font-medium text-red-800">
+              <p id="scout-contact-error" role="alert" className="mt-2 text-xs font-medium text-red-800">
                 {error}
               </p>
             ) : null}
@@ -368,7 +372,9 @@ export function Scout({
                   type="checkbox"
                   checked={consent}
                   onChange={(e) => setConsent(e.target.checked)}
-                  className="mt-1 h-5 w-5 shrink-0 accent-teal-700"
+                  aria-invalid={error ? true : undefined}
+                  aria-describedby={error ? "scout-consent-error" : undefined}
+                  className="mt-1 h-6 w-6 shrink-0 accent-teal-700"
                 />
                 <span>
                   {compliance.communicationConsent} See our{" "}
@@ -380,7 +386,7 @@ export function Scout({
               </label>
             </div>
             {error ? (
-              <p role="alert" className="mt-2 text-xs font-medium text-red-800">
+              <p id="scout-consent-error" role="alert" className="mt-2 text-xs font-medium text-red-800">
                 {error}
               </p>
             ) : null}
@@ -407,7 +413,7 @@ export function Scout({
               Or ask Scout anything
             </label>
             {askSuggestions?.length && askLog.length === 0 ? (
-              <div className="mt-2.5 flex flex-wrap gap-2" aria-label="Example questions">
+              <div role="group" className="mt-2.5 flex flex-wrap gap-2" aria-label="Example questions">
                 {askSuggestions.map((s) => (
                   <button
                     key={s}
@@ -433,7 +439,7 @@ export function Scout({
                     : "e.g. What does a buyer consultation cost?"
                 }
                 maxLength={600}
-                className="min-h-[44px] w-full flex-1 rounded-full border border-ink/15 bg-soft-white px-5 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
+                className="min-h-[44px] w-full flex-1 rounded-full border border-field bg-soft-white px-5 py-2.5 text-sm text-ink placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-700"
               />
               <button
                 type="submit"

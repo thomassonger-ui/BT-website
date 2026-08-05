@@ -44,7 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-screen flex-col">
         <SkipLink />
         <Header />
-        <main id="main-content" className="flex-1">
+        {/* tabIndex={-1} so the skip link reliably moves keyboard focus (not just
+            the scroll position) in every browser; scroll-mt clears the fixed header. */}
+        <main id="main-content" tabIndex={-1} className="flex-1 scroll-mt-24 focus:outline-none">
           {children}
         </main>
         <Footer />

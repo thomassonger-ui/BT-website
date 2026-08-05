@@ -27,6 +27,7 @@ export function Pathways() {
     <section className="bg-soft-white py-20 md:py-28" aria-labelledby="pathways-heading">
       <div className="mx-auto max-w-content px-6">
         <SectionHeading
+          id="pathways-heading"
           eyebrow="Where would you like to start?"
           title="Buy, Sell, or Explore"
         />
@@ -36,7 +37,7 @@ export function Pathways() {
               key={path.title}
               className="flex flex-col rounded-lg border border-ink/10 bg-cream/50 p-8 transition-shadow hover:shadow-lg"
             >
-              <h3 id={path.title === "Buy a Home" ? "pathways-heading" : undefined} className="font-display text-2xl font-medium text-ink">
+              <h3 className="font-display text-2xl font-medium text-ink">
                 {path.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">{path.text}</p>

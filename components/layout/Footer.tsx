@@ -9,6 +9,7 @@ const socials = [
   { label: "Facebook", href: externalLinks.facebook },
   { label: "Instagram", href: externalLinks.instagram },
   { label: "LinkedIn", href: externalLinks.linkedin },
+  { label: "X", href: externalLinks.x },
   { label: "Google Business Profile", href: externalLinks.googleBusinessProfile },
 ].filter((s) => s.href);
 
@@ -28,13 +29,13 @@ export function Footer() {
               {siteConfig.address.zip}
             </p>
             <p>
-              <a href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`} className="hover:text-gold-light">
+              <a href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`} className="inline-flex min-h-[24px] items-center hover:text-gold-light">
                 {siteConfig.phone}
               </a>
             </p>
             {!isPlaceholder(siteConfig.email) ? (
               <p>
-                <a href={`mailto:${siteConfig.email}`} className="hover:text-gold-light">
+                <a href={`mailto:${siteConfig.email}`} className="inline-flex min-h-[24px] items-center hover:text-gold-light">
                   {siteConfig.email}
                 </a>
               </p>
@@ -55,7 +56,7 @@ export function Footer() {
             <ul className="mt-6 flex flex-wrap gap-4 text-sm">
               {socials.map((s) => (
                 <li key={s.label}>
-                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-gold-light">
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[24px] items-center hover:text-gold-light">
                     {s.label}
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
@@ -80,11 +81,11 @@ export function Footer() {
           <p>{compliance.thirdPartyLinkDisclaimer}</p>
           <p>
             Accessibility: if you have difficulty using this website, contact{" "}
-            <a href={`mailto:${siteConfig.accessibilityContact}`} className="underline hover:text-gold-light">
+            <a href={`mailto:${siteConfig.accessibilityContact}`} className="inline-flex min-h-[24px] items-center underline hover:text-gold-light">
               {siteConfig.accessibilityContact}
             </a>{" "}
             or see our{" "}
-            <Link href="/accessibility" className="underline hover:text-gold-light">
+            <Link href="/accessibility" className="inline-flex min-h-[24px] items-center underline hover:text-gold-light">
               accessibility statement
             </Link>
             .
@@ -116,14 +117,14 @@ function FooterColumn({
         {links.map((link) =>
           link.href.startsWith("http") ? (
             <li key={link.href}>
-              <a href={link.href} target="_blank" rel="noopener noreferrer" className="hover:text-gold-light">
+              <a href={link.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[24px] items-center hover:text-gold-light">
                 {link.label}
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
             </li>
           ) : (
             <li key={link.href}>
-              <Link href={link.href} className="hover:text-gold-light">
+              <Link href={link.href} className="inline-flex min-h-[24px] items-center hover:text-gold-light">
                 {link.label}
               </Link>
             </li>

@@ -38,7 +38,7 @@ export function PropertyTypesSection() {
                 <ul className="mt-3 space-y-1.5 text-xs text-charcoal-soft">
                   {type.buyerConsiderations.map((item) => (
                     <li key={item} className="flex gap-2">
-                      <span aria-hidden="true" className="mt-0.5 text-gold">
+                      <span aria-hidden="true" className="mt-0.5 text-gold-dark">
                         —
                       </span>
                       {item}

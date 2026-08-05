@@ -22,6 +22,10 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const navRef = useRef<HTMLUListElement>(null);
+  /** The disclosure button that opened the current dropdown, so Escape can
+   *  return focus to it instead of dumping the user at the top of the page. */
+  const openMenuTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
   const menuId = useId();
 
   useEffect(() => {
@@ -40,7 +44,12 @@ export function Header() {
   // Escape + click-outside close any open dropdown.
   useEffect(() => {
     if (!openMenu) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenMenu(null);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpenMenu(null);
+      // WCAG 2.4.3 — focus goes back to the trigger, not to <body>.
+      openMenuTriggerRef.current?.focus();
+    };
     const onClick = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenMenu(null);
     };
@@ -55,7 +64,11 @@ export function Header() {
   // Escape closes the mobile menu; lock body scroll while open.
   useEffect(() => {
     if (!mobileOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMobileOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMobileOpen(false);
+      mobileToggleRef.current?.focus();
+    };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
@@ -96,7 +109,7 @@ export function Header() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="border-b-2 border-transparent py-1 transition-colors hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                      className="inline-flex min-h-[24px] items-center border-b-2 border-transparent py-1.5 transition-colors hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
                     >
                       {item.label}
                       <span className="sr-only"> (opens in a new tab)</span>
@@ -111,9 +124,13 @@ export function Header() {
                     <button
                       type="button"
                       aria-expanded={open}
-                      onClick={() => setOpenMenu(open ? null : item.label)}
+                      aria-haspopup="true"
+                      onClick={(e) => {
+                        openMenuTriggerRef.current = e.currentTarget;
+                        setOpenMenu(open ? null : item.label);
+                      }}
                       className={cn(
-                        "flex items-center gap-1 py-1 transition-colors hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold",
+                        "flex min-h-[24px] items-center gap-1 py-1.5 transition-colors hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold",
                         item.children.some((c) => isActive(c.href)) && "text-gold-light",
                       )}
                     >
@@ -133,7 +150,7 @@ export function Header() {
                           <Link
                             href={child.href}
                             aria-current={pathname === child.href ? "page" : undefined}
-                            className="block px-4 py-2 hover:bg-charcoal hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold"
+                            className="flex min-h-[40px] items-center px-4 py-2 hover:bg-charcoal hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold"
                           >
                             {child.label}
                           </Link>
@@ -149,7 +166,7 @@ export function Header() {
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
                     className={cn(
-                      "border-b-2 border-transparent py-1 transition-colors hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold",
+                      "inline-flex min-h-[24px] items-center border-b-2 border-transparent py-1.5 transition-colors hover:text-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold",
                       isActive(item.href) && "border-gold text-gold-light",
                     )}
                   >
@@ -173,6 +190,7 @@ export function Header() {
             </svg>
           </a>
           <button
+            ref={mobileToggleRef}
             type="button"
             aria-expanded={mobileOpen}
             aria-controls={menuId}
@@ -210,7 +228,7 @@ export function Header() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block rounded-md px-3 py-3 hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold"
+                  className="flex min-h-[44px] items-center rounded-md px-3 py-3 hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold"
                 >
                   {item.label}
                   <span className="sr-only"> (opens in a new tab)</span>
@@ -222,7 +240,7 @@ export function Header() {
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={cn(
-                    "block rounded-md px-3 py-3 hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold",
+                    "flex min-h-[44px] items-center rounded-md px-3 py-3 hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold",
                     isActive(item.href) && "bg-charcoal text-gold-light",
                   )}
                 >
@@ -230,11 +248,16 @@ export function Header() {
                 </Link>
                 {item.children ? (
                   <ul className="ml-4 border-l border-cream/15 pl-2">
-                    {item.children.slice(1).map((child) => (
+                    {/* De-dupe against the parent link by HREF, not by position.
+                        slice(1) silently dropped Resources > Blog on mobile,
+                        breaking 3.2.3 Consistent Navigation. */}
+                    {item.children
+                      .filter((child) => child.href !== item.href)
+                      .map((child) => (
                       <li key={child.href}>
                         <Link
                           href={child.href}
-                          className="block rounded-md px-3 py-2.5 text-sm text-cream/80 hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold"
+                          className="flex min-h-[44px] items-center rounded-md px-3 py-2.5 text-sm text-cream/80 hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold"
                         >
                           {child.label}
                         </Link>

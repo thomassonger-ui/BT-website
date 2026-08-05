@@ -45,7 +45,7 @@ export default function TeamPage() {
                 </div>
                 <div className="p-6">
                   {!member.verified ? (
-                    <p className="mb-2 inline-block rounded bg-gold/15 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-gold">
+                    <p className="mb-2 inline-block rounded bg-gold/10 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-gold-dark">
                       Profile pending verification
                     </p>
                   ) : null}

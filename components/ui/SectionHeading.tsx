@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils/cn";
 
 export function SectionHeading({
+  id,
   eyebrow,
   title,
   intro,
@@ -8,6 +9,9 @@ export function SectionHeading({
   tone = "dark",
   className,
 }: {
+  /** Set this when a parent <section aria-labelledby> points at this heading,
+   *  so the section is named by its own h2 rather than an unrelated card title. */
+  id?: string;
   eyebrow?: string;
   title: string;
   intro?: string;
@@ -34,6 +38,7 @@ export function SectionHeading({
         </p>
       ) : null}
       <h2
+        id={id}
         className={cn(
           "font-display text-display-md font-medium leading-tight text-balance",
           tone === "dark" ? "text-ink" : "text-soft-white",

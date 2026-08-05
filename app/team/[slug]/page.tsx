@@ -101,7 +101,7 @@ export default async function TeamMemberPage({
           </div>
           <div>
             {!member.verified ? (
-              <p className="mb-4 inline-block rounded bg-gold/15 px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-gold">
+              <p className="mb-4 inline-block rounded bg-gold/10 px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-gold-dark">
                 Profile pending verification — do not publish
               </p>
             ) : null}

@@ -78,16 +78,26 @@ export async function MarketBrief() {
         {/* Stat tiles */}
         <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {brief.highlights.map((s) => (
-            <div key={s.label} className="rounded-lg border border-ink/10 bg-cream/40 p-6">
-              <dd className="font-display text-display-md font-medium text-teal-800">{s.value}</dd>
-              <dt className="mt-1 text-sm font-semibold text-ink">{s.label}</dt>
-              <p className="mt-2 text-xs leading-relaxed text-muted">{s.hint}</p>
+            <div key={s.label} className="flex flex-col rounded-lg border border-ink/10 bg-cream/40 p-6">
+              {/* dt before dd in the DOM (1.3.1); order-* keeps the visual layout.
+                  The hint is a second <dd> — a <p> is not permitted inside a
+                  dl > div grouping. */}
+              <dt className="order-2 mt-1 text-sm font-semibold text-ink">{s.label}</dt>
+              <dd className="order-1 font-display text-display-md font-medium text-teal-800">{s.value}</dd>
+              <dd className="order-3 mt-2 text-xs leading-relaxed text-muted">{s.hint}</dd>
             </div>
           ))}
         </dl>
 
         {/* County table */}
-        <div className="mt-10 overflow-x-auto rounded-lg border border-ink/10 bg-soft-white">
+        {/* A horizontally scrolling region must be keyboard-reachable, or the
+            table is unreadable without a mouse on narrow screens (2.1.1). */}
+        <div
+          tabIndex={0}
+          role="region"
+          aria-label="Central Florida county market data — scroll horizontally to see all columns"
+          className="mt-10 overflow-x-auto rounded-lg border border-ink/10 bg-soft-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+        >
           <table className="w-full min-w-[560px] text-left text-sm">
             <caption className="sr-only">
               Median sale price, days on market, active inventory, and year-over-year price change by county
@@ -117,7 +127,7 @@ export async function MarketBrief() {
 
         {/* The take */}
         <div className="mt-10 rounded-md border-l-4 border-gold bg-cream/60 p-6 md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">The take</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">The take</p>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-charcoal-soft">{brief.summary}</p>
         </div>
 

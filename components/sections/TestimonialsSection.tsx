@@ -20,7 +20,7 @@ export function TestimonialsSection() {
           {testimonials.map((t) => (
             <figure key={t.id} className="relative flex flex-col rounded-lg border border-ink/10 bg-soft-white p-6">
               {!t.verified ? (
-                <p className="mb-3 inline-block self-start rounded bg-gold/15 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-gold">
+                <p className="mb-3 inline-block self-start rounded bg-gold/10 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-gold-dark">
                   Placeholder — pending verified review
                 </p>
               ) : null}

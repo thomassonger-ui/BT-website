@@ -86,6 +86,11 @@ export function ShareLike({ slug, title, initialLikes }: { slug: string; title: 
 
   return (
     <div className="flex flex-wrap items-center gap-3 rounded-lg border border-ink/10 bg-cream/40 p-4">
+      {/* A label change on the already-focused button is not reliably
+          re-announced — mirror it into a live region (4.1.3). */}
+      <p role="status" aria-live="polite" className="sr-only">
+        {copied ? "Link copied to clipboard" : ""}
+      </p>
       <button
         type="button"
         onClick={like}
@@ -106,7 +111,7 @@ export function ShareLike({ slug, title, initialLikes }: { slug: string; title: 
       <button
         type="button"
         onClick={share}
-        className="inline-flex min-h-[42px] items-center gap-2 rounded-full border border-ink/15 bg-soft-white px-4 py-2 text-sm font-medium text-charcoal transition-colors hover:border-teal-700 hover:text-teal-800"
+        className="inline-flex min-h-[42px] items-center gap-2 rounded-full border border-field bg-soft-white px-4 py-2 text-sm font-medium text-charcoal transition-colors hover:border-teal-700 hover:text-teal-800"
       >
         <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
@@ -120,8 +125,8 @@ export function ShareLike({ slug, title, initialLikes }: { slug: string; title: 
           href={t.href}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Share on ${t.label}`}
-          className="inline-flex h-[42px] w-[42px] items-center justify-center rounded-full border border-ink/15 bg-soft-white text-charcoal transition-colors hover:border-teal-700 hover:text-teal-800"
+          aria-label={`Share on ${t.label} (opens in a new tab)`}
+          className="inline-flex h-[42px] w-[42px] items-center justify-center rounded-full border border-field bg-soft-white text-charcoal transition-colors hover:border-teal-700 hover:text-teal-800"
         >
           {t.icon}
         </a>
@@ -129,7 +134,7 @@ export function ShareLike({ slug, title, initialLikes }: { slug: string; title: 
       <button
         type="button"
         onClick={copyLink}
-        className="inline-flex min-h-[42px] items-center rounded-full border border-ink/15 bg-soft-white px-4 py-2 text-sm font-medium text-charcoal transition-colors hover:border-teal-700 hover:text-teal-800"
+        className="inline-flex min-h-[42px] items-center rounded-full border border-field bg-soft-white px-4 py-2 text-sm font-medium text-charcoal transition-colors hover:border-teal-700 hover:text-teal-800"
       >
         {copied ? "Link copied ✓" : "Copy link"}
       </button>

@@ -113,7 +113,7 @@ export default async function CommunityPage({
                 <ul className="mt-4 space-y-2 text-sm text-charcoal-soft">
                   {community.buyerConsiderations.map((item) => (
                     <li key={item} className="flex gap-3">
-                      <span aria-hidden="true" className="mt-0.5 text-gold">—</span>
+                      <span aria-hidden="true" className="mt-0.5 text-gold-dark">—</span>
                       {item}
                     </li>
                   ))}
@@ -126,7 +126,7 @@ export default async function CommunityPage({
                 <ul className="mt-4 space-y-2 text-sm text-charcoal-soft">
                   {community.sellerConsiderations.map((item) => (
                     <li key={item} className="flex gap-3">
-                      <span aria-hidden="true" className="mt-0.5 text-gold">—</span>
+                      <span aria-hidden="true" className="mt-0.5 text-gold-dark">—</span>
                       {item}
                     </li>
                   ))}
