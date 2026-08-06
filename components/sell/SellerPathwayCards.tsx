@@ -6,8 +6,8 @@ import { PathwayCards, type Pathway } from "@/components/search/PathwayCards";
  * handles that stage differently, then captures a tailored micro-lead.
  * Submissions flow through /api/contact → website-lead → premier_leads,
  * marked "Website — Seller Lead" (pricing card sends "Property value" so it
- * arrives as "Website — Home Value Lead"). The final card hands straight to
- * Bethanne's 30-minute booking calendar.
+ * arrives as "Website — Home Value Lead"). Public booking-calendar CTAs were
+ * retired 8/6/2026 — every card now captures a lead for the portal.
  */
 const SELLER_PATHWAYS: Pathway[] = [
   {
@@ -181,14 +181,36 @@ const SELLER_PATHWAYS: Pathway[] = [
     img: "/images/sell/closing.jpg",
     alt: "Couple signing closing paperwork at a title company conference table",
     title: "Contract-to-Close Coordination",
-    text: "Talk it through with the broker — from signed contract to closing table.",
-    ctaLabel: "Book 30 Minutes",
-    mode: "booking",
+    text: "Talk it through with the team — from signed contract to closing table.",
+    ctaLabel: "Talk With an Agent",
+    mode: "form",
     value: [
-      "Free 30 minutes with Bethanne Baer — Broker/Owner, 40+ years in Central Florida",
+      "A licensed Bear Team agent walks the timeline with you — no obligation",
       "Inspections, title, lender milestones, and deadlines tracked deliberately so nothing slips",
-      "One accountable local team from signed contract to closing day — no obligation, no pressure",
+      "One accountable local team from signed contract to closing day",
     ],
+    fields: [
+      {
+        key: "Where you are",
+        label: "Where are you in the process?",
+        type: "select",
+        options: [
+          "Under contract now",
+          "Offer accepted, not signed yet",
+          "About to list",
+          "Deal already fell apart once",
+          "Just planning ahead",
+        ],
+        required: true,
+      },
+      {
+        key: "What you need help with",
+        label: "What do you need help with? (optional)",
+        type: "textarea",
+      },
+    ],
+    leadPrefix: "Contract-to-close coordination request",
+    submitLabel: "Get Closing Help",
   },
 ];
 
