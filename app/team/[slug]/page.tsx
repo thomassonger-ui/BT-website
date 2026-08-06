@@ -7,6 +7,14 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/Button";
 import { team } from "@/content/team";
 
+/**
+ * Unknown slugs must return a real 404, not a 200-status not-found shell.
+ * Without this, Next generates unlisted slugs on demand and Vercel caches
+ * and serves the not-found body with HTTP 200 — a soft 404 that wastes
+ * crawl budget and silently absorbs mis-mapped redirects at domain cutover.
+ */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return team.map((m) => ({ slug: m.slug }));
 }

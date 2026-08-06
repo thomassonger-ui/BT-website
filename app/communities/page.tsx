@@ -44,6 +44,7 @@ const orangeTiles: CommunityTile[] = [
   { name: "Pine Hills", slug: "pine-hills", img: "/images/communities/pine-hills.jpg", blurb: intros["pine-hills"] },
   {
     name: "Baldwin Park",
+    slug: "baldwin-park",
     img: "/images/communities/baldwin-park.jpg",
     blurb: "A planned village on the former Orlando Naval Training Center site — neo-traditional homes, townhomes, and condominiums around Lake Baldwin and a walkable village center.",
   },

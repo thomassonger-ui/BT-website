@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { PathwayModal, type Pathway } from "@/components/search/PathwayCards";
 
@@ -57,14 +58,9 @@ export function CommunityTiles({ tiles }: { tiles: CommunityTile[] }) {
   return (
     <>
       <ul className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-        {tiles.map((t) => (
-          <li key={t.name}>
-            <button
-              type="button"
-              onClick={() => setOpen(toPathway(t))}
-              aria-haspopup="dialog"
-              className="group relative block aspect-[16/10] w-full overflow-hidden rounded-lg text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-            >
+        {tiles.map((t) => {
+          const inner = (
+            <>
               <Image
                 src={t.img}
                 alt={`Homes in ${t.name}, Florida`}
@@ -76,12 +72,39 @@ export function CommunityTiles({ tiles }: { tiles: CommunityTile[] }) {
               <div className="absolute bottom-2.5 left-3 right-3 drop-shadow">
                 <p className="text-sm font-semibold text-soft-white">{t.name}</p>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-gold-light">
-                  Click to Explore <span aria-hidden="true">→</span>
+                  {t.slug ? "Read the Guide" : "Click to Explore"} <span aria-hidden="true">→</span>
                 </p>
               </div>
-            </button>
-          </li>
-        ))}
+            </>
+          );
+          const tileClass =
+            "group relative block aspect-[16/10] w-full overflow-hidden rounded-lg text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
+
+          return (
+            <li key={t.name}>
+              {/*
+                Tiles that have a full community page render as real anchors so
+                the page is crawlable and inherits link equity from this hub.
+                Tiles without a page keep the pop-up. Adding a `slug` to a tile
+                converts it from modal to link automatically.
+              */}
+              {t.slug ? (
+                <Link href={`/communities/${t.slug}`} className={tileClass}>
+                  {inner}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setOpen(toPathway(t))}
+                  aria-haspopup="dialog"
+                  className={tileClass}
+                >
+                  {inner}
+                </button>
+              )}
+            </li>
+          );
+        })}
       </ul>
 
       {open ? <PathwayModal pathway={open} onClose={() => setOpen(null)} /> : null}

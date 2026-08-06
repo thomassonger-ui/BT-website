@@ -14,6 +14,14 @@ import { contactFields } from "@/components/forms/definitions";
 import { communities, getCommunity } from "@/content/communities";
 import { compliance } from "@/config/compliance";
 
+/**
+ * Unknown slugs must return a real 404, not a 200-status not-found shell.
+ * Without this, Next generates unlisted slugs on demand and Vercel caches
+ * and serves the not-found body with HTTP 200 — a soft 404 that wastes
+ * crawl budget and silently absorbs mis-mapped redirects at domain cutover.
+ */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return communities.map((c) => ({ slug: c.slug }));
 }

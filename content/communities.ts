@@ -319,6 +319,58 @@ export const communities: Community[] = [
     related: ["metrowest", "college-park", "orlando"],
     reviewNote: "Verify amenity and transportation facts before launch.",
   },
+  {
+    slug: "baldwin-park",
+    name: "Baldwin Park",
+    intro:
+      "A planned neighborhood in northeast Orlando built on the former Naval Training Center Orlando site, where architecture, street layout, and garage placement are governed by a City of Orlando ordinance rather than by an HOA design committee alone.",
+    lifestyle:
+      "A walkable Village Center along New Broad Street holds retail, restaurants, and services, with a connected network of public parks, greens, and lakefront open space woven through the residential blocks. Roughly 200 acres of parks and 250 acres of lakes were opened to public access as part of the redevelopment.",
+    locationContext:
+      "Northeast Orlando, inside City of Orlando limits, bordered by Winter Park to the north and Audubon Park to the west, with Colonial Drive (SR 50) as the nearest major east-west arterial and expressway access south to SR 408.",
+    housingOverview:
+      "Built out in the early-to-mid 2000s under a 1998 Planned Development Ordinance that divides the neighborhood into four character districts — Village Center Core, Village Center General, Neighborhood Center, and Neighborhood General. Housing includes single-family homes, townhomes, and multifamily buildings, most of them served by rear alleys rather than front driveways.",
+    propertyTypes: [
+      "Alley-served single-family homes",
+      "Townhomes",
+      "Condominiums and multifamily buildings",
+      "Lakefront and park-facing homes",
+      "Live-work and mixed-use units near the Village Center",
+    ],
+    buyerConsiderations: [
+      "Two separate assessments apply: Urban Orlando Community Development District charges, which appear on the tax bill and may include debt service on infrastructure bonds, plus Property Owners Association dues — request the CDD budget and an estoppel letter before closing",
+      "Architectural rules are written into the City's PD Ordinance, not only into HOA covenants: garage doors facing a street are limited to nine feet wide, front driveways are permitted only where there is no alley access, porches must be at least six feet deep and may not be glass-enclosed at the frontage, and frontage walls must be brick or stucco",
+      "Roof replacement is constrained by ordinance — sloped roofs must use clay tile, painted metal, concrete tile, wood shingle, fiberglass shingle, or dimensional asphalt, with principal slopes between 3:12 and 8:12",
+      "Several separate condominium and sub-associations exist alongside the master association; confirm which documents govern a specific address",
+      "Many ponds inside the neighborhood are CDD-owned stormwater retention facilities carrying maintenance and access easements rather than private amenity frontage",
+      "The site is a former federal installation with a documented BRAC environmental cleanup history; buyers doing full diligence can request the Navy's administrative record to confirm whether land use controls apply to a specific parcel",
+    ],
+    sellerConsiderations: [
+      "Alley-served design, park frontage, and Village Center proximity are the differentiators buyers compare within the neighborhood",
+      "Unpermitted changes to garages, driveways, porches, or frontage materials can surface late in a transaction because the standards are enforceable at the ordinance level — resolve them before listing",
+      "Buyers frequently misread CDD assessments as ordinary HOA dues; presenting both figures clearly up front prevents renegotiation after inspection",
+    ],
+    amenities: [
+      "Blue Jacket Park — 75 acres, with baseball, softball, and soccer fields, two playgrounds, pavilions, fitness stations, and paved walking and bike trails",
+      "Navy History Wall commemorating the former Naval Training Center",
+      "New Broad Street Village Center — retail, restaurants, and services",
+      "Lake Baldwin Park in adjacent Winter Park — 23 acres with an off-leash dog area, dock, and a boat ramp restricted to non-gas engines",
+      "Cady Way Trail — 7.2 miles of paved trail linking Orlando and Winter Park",
+      "Grace Hopper Hall community facility",
+    ],
+    transportation: [
+      "Colonial Drive (SR 50)",
+      "SR 408 East-West Expressway for downtown and eastbound access",
+      "SR 417 and SR 528 connections toward Orlando International Airport",
+      "LYNX bus service on the surrounding arterials",
+      "Nearest SunRail stations are Winter Park/Amtrak to the north and the downtown Orlando stations to the southwest",
+    ],
+    image: "/images/communities/baldwin-park.jpg",
+    imageAlt: "Homes in Baldwin Park, Orlando, Florida",
+    related: ["winter-park", "college-park", "orlando"],
+    reviewNote:
+      "Facts sourced from the City of Orlando Baldwin Park PD Ordinance and Appendix F architectural standards, orlando.gov park records, City of Winter Park park records, Orange County Parks (Cady Way Trail), and EPA BRAC records. Deliberately omits distance-to-downtown mileage, Lake Baldwin acreage, total unit count, and named architectural styles — all were single-source or conflicting. Verify current CDD assessment amounts and POA dues before quoting figures to clients.",
+  },
 ];
 
 export function getCommunity(slug: string): Community | undefined {
