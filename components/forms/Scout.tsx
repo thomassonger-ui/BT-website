@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { compliance } from "@/config/compliance";
-import { externalLinks } from "@/config/external-links";
 import { BTMark } from "@/components/ui/Logo";
 import { cn } from "@/lib/utils/cn";
 
@@ -11,10 +10,11 @@ import { cn } from "@/lib/utils/cn";
  * Scout™ — Bear Team's conversational intake.
  *
  * Replaces the long inquiry forms with a chat-style flow: a few tappable
- * questions (buyer or seller path), then name / phone / email, consent, and
- * a handoff to Bethanne's 30-minute booking calendar. The completed intake
- * submits through the existing /api/contact route (validated server-side,
- * mock delivery mode until a webhook is configured).
+ * questions (buyer or seller path), then name / phone / email, and consent.
+ * The completed intake routes to the team as a Premier Lead through the
+ * /api/contact route (validated server-side). Public "Book 30 Minutes with
+ * Bethanne" calendar hand-offs were retired 8/6/2026 — the lead card in the
+ * portal is the hand-off now.
  */
 
 type Intent = "Buying" | "Selling";
@@ -220,7 +220,7 @@ export function Scout({
           <p className="text-sm font-semibold text-soft-white">
             Scout<span className="align-super text-[9px]">™</span>
           </p>
-          <p className="text-xs text-cream/60">Bear Team&rsquo;s intake assistant — a few quick questions, then you pick a time with Bethanne.</p>
+          <p className="text-xs text-cream/60">Bear Team&rsquo;s intake assistant — a few quick questions and an agent reaches out.</p>
         </div>
       </div>
 
@@ -263,22 +263,9 @@ export function Scout({
               You&rsquo;re all set{answers.name ? `, ${answers.name.split(" ")[0]}` : ""}.
             </p>
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted">
-              Scout passed your answers to the team. Lock in your time with Bethanne now — 30
-              minutes, no obligation:
+              Scout passed your answers straight to the team. An agent will reach out shortly with
+              your next step — no obligation.
             </p>
-            <a
-              href={externalLinks.bethanneBooking}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex min-h-[52px] items-center gap-2 rounded-md bg-gold px-8 py-3.5 text-sm font-semibold tracking-wide text-ink transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
-            >
-              Book 30 Minutes with Bethanne
-              <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M6.5 3.5h-3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-3" />
-                <path d="M9.5 2.5h4v4" />
-                <path d="M13.5 2.5 7 9" />
-              </svg>
-            </a>
             <p className="mt-4 text-xs text-muted">
               Prefer to talk now? Call{" "}
               <a href="tel:4072281112" className="font-semibold text-teal-800 underline-offset-2 hover:underline">
