@@ -14,7 +14,6 @@ import { Scout } from "@/components/forms/Scout";
 import { buyerProcess } from "@/content/company";
 import { buyerFaqs } from "@/content/faqs";
 import { compliance } from "@/config/compliance";
-import { externalLinks } from "@/config/external-links";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -103,10 +102,10 @@ export default function BuyPage() {
                 img: "/images/buy/consult.jpg",
                 alt: "Agent discussing plans with a couple in an office",
                 title: "Talk It Through First",
-                text: "Book a free 30-minute buyer consultation — goals, budget comfort, and a search plan.",
+                text: "Tell us where you are — goals, budget comfort, and a search plan. An agent follows up fast, no obligation.",
                 cta: (
-                  <ButtonLink href={externalLinks.scheduling} external variant="outline" className="mt-5 w-full">
-                    Book 30 Minutes
+                  <ButtonLink href="#buyer-inquiry" variant="outline" className="mt-5 w-full">
+                    Talk With an Agent
                   </ButtonLink>
                 ),
               },
@@ -142,7 +141,7 @@ export default function BuyPage() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
             title="Ask Scout™ | Plan Your Home Purchase"
-            intro="Answer a few quick questions and pick a time with Bethanne — no long forms, no pressure."
+            intro="Answer a few quick questions and a Bear Team agent follows up — no long forms, no pressure."
           />
           <Scout initialIntent="Buying" />
           <p className="mt-6 text-xs italic leading-relaxed text-muted">{compliance.brokerageRelationship}</p>
