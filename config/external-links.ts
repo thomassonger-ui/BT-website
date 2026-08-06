@@ -13,11 +13,13 @@ export const PROPERTY_SEARCH_PLACEHOLDER = "[INSERT APPROVED PROPERTY SEARCH URL
 export const externalLinks = {
   propertySearch:
     process.env.NEXT_PUBLIC_PROPERTY_SEARCH_URL || PROPERTY_SEARCH_PLACEHOLDER,
-  scheduling:
-    process.env.NEXT_PUBLIC_SCHEDULING_URL || "https://calendar.app.google/Ppha9tukU9iqDgs88",
-  /** Scout™ hands completed intakes to this booking page — 30 minutes with Bethanne. */
-  bethanneBooking:
-    process.env.NEXT_PUBLIC_BOOKING_URL || "https://calendar.app.google/8H2ytHozcNon3VzM8",
+  /**
+   * RETIRED 8/6/2026 (Tom): the public "Book 30 Minutes with Bethanne" Google
+   * calendar links were removed site-wide. Every inquiry now routes through the
+   * lead forms → website-lead → premier_leads, where the agent on the clock
+   * claims it. Do NOT re-add a public booking URL here without Tom's sign-off;
+   * per-agent scheduling links live on their own profiles (content/team.ts).
+   */
   googleMaps: process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || "https://maps.app.goo.gl/n6635xh7GQ7E1fbX7",
   googleBusinessProfile: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL || "",
   facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "",
