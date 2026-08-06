@@ -60,7 +60,7 @@ export default function HomeValuePage() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
             title="Ask Scout™ | Your Market, Explained"
-            intro="Ask Scout what these numbers mean for your street, your timeline, and your price — it answers from this month's brief. Or take the 90-second intake and get your consultation with Bethanne on the calendar."
+            intro="Ask Scout what these numbers mean for your street, your timeline, and your price — it answers from this month's brief. Or take the 90-second intake and a Bear Team agent follows up with your consultation."
           />
           <h2 id="scout-brief-heading" className="sr-only">
             Ask Scout about the market brief
