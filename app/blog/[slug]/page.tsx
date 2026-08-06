@@ -151,8 +151,8 @@ export default async function BlogArticlePage({ params }: Params) {
               Have a question this article didn&rsquo;t answer?
             </p>
             <p className="mx-auto mt-2 max-w-md text-sm text-cream/70">
-              Ask Scout™ anything, or book 30 free minutes with Bethanne Baer — Broker/Owner, 40+
-              years in Central Florida.
+              Ask Scout™ anything, or send it to the team — a licensed Bear Team agent follows up
+              fast.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-4">
               <ButtonLink href="/search" variant="primary">
