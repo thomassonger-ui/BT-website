@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { Reveal } from "@/components/animation/Reveal";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
-import { externalLinks } from "@/config/external-links";
 import { siteConfig } from "@/config/site";
 
 /** Section 12 — final conversion. Visually strong, deliberately simple. */
@@ -32,19 +32,9 @@ export function FinalCta() {
             >
               Call {siteConfig.phone}
             </a>
-            {externalLinks.scheduling ? (
-              <a
-                href={externalLinks.scheduling}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline-offset-4 hover:underline"
-              >
-                Schedule a Consultation
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
-            ) : (
-              <span className="italic">Scheduling link: [VERIFY SCHEDULING URL]</span>
-            )}
+            <Link href="/contact" className="underline-offset-4 hover:underline">
+              Request a Consultation
+            </Link>
           </div>
         </Reveal>
       </div>
