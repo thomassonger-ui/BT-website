@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { compliance } from "@/config/compliance";
-import { externalLinks } from "@/config/external-links";
 import { cn } from "@/lib/utils/cn";
 
 /**
@@ -13,7 +12,8 @@ import { cn } from "@/lib/utils/cn";
  * /api/contact → website-lead → BearTeamOS premier_leads (status "offering")
  * with a pathway-specific prefix, so the claiming agent knows exactly what
  * the buyer needs. "Search Available Homes" routes to the Scout™ qualifier;
- * "Talk It Through First" hands straight to Bethanne's booking calendar.
+ * "Talk It Through First" captures a consultation request. Public booking-
+ * calendar CTAs were retired 8/6/2026 — the Premier Lead is the hand-off.
  */
 
 export type Field = {
@@ -35,8 +35,8 @@ export type Pathway = {
   value: string[];
   fields?: Field[];
   leadPrefix?: string;
-  /** "form" opens the micro-form modal; "booking" opens value + booking; "scout" scrolls to Scout. */
-  mode: "form" | "booking" | "scout";
+  /** "form" opens the micro-form modal; "scout" scrolls to Scout. */
+  mode: "form" | "scout";
   submitLabel?: string;
   /** inquiryType sent to /api/contact — controls how the lead is marked in Premier Leads. */
   inquiryType?: "Buying" | "Selling" | "Property value" | "Relocation" | "General question" | "Other";
@@ -164,14 +164,44 @@ const PATHWAYS: Pathway[] = [
     img: "/images/buy/consult.jpg",
     alt: "Agent discussing plans with a couple in an office",
     title: "Talk It Through First",
-    text: "Schedule a buyer strategy consultation.",
-    ctaLabel: "Book 30 Minutes",
-    mode: "booking",
+    text: "Tell us where you are and an agent will reach out.",
+    ctaLabel: "Talk With an Agent",
+    mode: "form",
     value: [
-      "Free 30 minutes with Bethanne Baer — Broker/Owner, 40+ years in Central Florida",
+      "A licensed Bear Team agent — not a call center, not a lead broker",
       "Goals, budget comfort, financing questions, and a search plan",
       "No obligation, no pressure — just a clear next step",
     ],
+    fields: [
+      {
+        key: "What you want to talk through",
+        label: "What would you like to talk through?",
+        type: "select",
+        options: [
+          "Where to start — I'm brand new to this",
+          "Budget and financing comfort",
+          "Which areas fit what I want",
+          "Timing — when should I move?",
+          "Something else",
+        ],
+        required: true,
+      },
+      {
+        key: "Timeframe",
+        label: "How soon are you hoping to move?",
+        type: "select",
+        options: ["As soon as possible", "1–3 months", "3–6 months", "6–12 months", "Just exploring"],
+        required: true,
+      },
+      {
+        key: "Best time to reach you",
+        label: "Best time to reach you (optional)",
+        type: "text",
+        placeholder: "Weekday mornings, after 5pm, etc.",
+      },
+    ],
+    leadPrefix: "Buyer consultation request",
+    submitLabel: "Request My Consultation",
   },
   {
     id: "communities",
@@ -409,40 +439,34 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
             ))}
           </ul>
 
-          {pathway.mode === "booking" ? (
-            <div className="mt-6">
-              <a
-                href={externalLinks.bethanneBooking}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-md bg-gold px-8 py-3.5 text-sm font-semibold tracking-wide text-ink transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
-              >
-                Book 30 Minutes with Bethanne
-              </a>
-              <p className="mt-3 text-center text-xs text-muted">
-                Prefer to talk now?{" "}
-                <a href="tel:4072281112" className="font-semibold text-teal-800 underline-offset-2 hover:underline">
-                  Call (407) 228-1112
-                </a>
-              </p>
-            </div>
-          ) : status === "done" ? (
+          {status === "done" ? (
             <div role="status" className="mt-6 rounded-lg border border-teal-700/30 bg-teal-50 p-6 text-center">
               <p className="font-display text-lg font-medium text-teal-900">
                 Sent to the team{name ? `, ${name.split(" ")[0]}` : ""}.
               </p>
               <p className="mt-2 text-sm text-charcoal-soft">
                 {pathway.followUpBy ? `${pathway.followUpBy} will follow up fast.` : "An agent will follow up fast."}{" "}
-                {pathway.bookingUrl ? "Or grab time on the calendar right now:" : "Want to lock in a time with the team now?"}
+                {pathway.bookingUrl
+                  ? "Or grab time on the calendar right now:"
+                  : "Prefer to talk now? Call (407) 228-1112."}
               </p>
-              <a
-                href={pathway.bookingUrl || externalLinks.bethanneBooking}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-md bg-gold px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-gold-light"
-              >
-                {pathway.bookingLabel || "Book 30 Minutes"}
-              </a>
+              {pathway.bookingUrl ? (
+                <a
+                  href={pathway.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-md bg-gold px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-gold-light"
+                >
+                  {pathway.bookingLabel || "Schedule a call"}
+                </a>
+              ) : (
+                <a
+                  href="tel:4072281112"
+                  className="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-md bg-gold px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-gold-light"
+                >
+                  Call (407) 228-1112
+                </a>
+              )}
             </div>
           ) : (
             <form onSubmit={submit} className="mt-6 space-y-4">
