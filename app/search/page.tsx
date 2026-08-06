@@ -157,7 +157,7 @@ export default function SearchPage() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
             title="Ask Scout™ | Build My Home Search"
-            intro="Ninety seconds, five questions. Your curated shortlist arrives within one business day, direct MLS alerts follow the moment matching homes hit the market — and you can book 30 minutes with Bethanne right now."
+            intro="Ninety seconds, five questions. Your curated shortlist arrives within one business day, and direct MLS alerts follow the moment matching homes hit the market."
           />
           <Scout initialIntent="Buying" questions={qualifyingQuestions} />
           <p className="mt-6 text-xs italic leading-relaxed text-muted">
