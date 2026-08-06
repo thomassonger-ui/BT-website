@@ -38,6 +38,9 @@ export async function generateMetadata({
     title: `${community.name} Real Estate & Community Guide`,
     description: `${community.intro} Housing character, amenities, and transportation in ${community.name}, Central Florida.`,
     path: `/communities/${community.slug}`,
+    // Share the community's own photo rather than the generic brand card.
+    image: community.image.includes("placeholder") ? undefined : community.image,
+    imageAlt: community.imageAlt,
   });
 }
 
