@@ -128,7 +128,7 @@ export default function SellPage() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionHeading
             title="Ask Scout™ | Request a Selling Consultation"
-            intro="Answer a few quick questions and pick a time with Bethanne — no long forms, no pressure."
+            intro="Answer a few quick questions and a Bear Team agent follows up — no long forms, no pressure."
           />
           <Scout initialIntent="Selling" questions={sellerQuestions} askSuggestions={sellerAskSuggestions} />
           <p className="mt-6 text-xs italic leading-relaxed text-muted">
