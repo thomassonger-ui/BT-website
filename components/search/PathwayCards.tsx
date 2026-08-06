@@ -446,9 +446,14 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
               </p>
               <p className="mt-2 text-sm text-charcoal-soft">
                 {pathway.followUpBy ? `${pathway.followUpBy} will follow up fast.` : "An agent will follow up fast."}{" "}
-                {pathway.bookingUrl
-                  ? "Or grab time on the calendar right now:"
-                  : "Prefer to talk now? Call (407) 228-1112."}
+                {pathway.bookingUrl ? (
+                  "Or grab time on the calendar right now:"
+                ) : (
+                  <>
+                    Prefer to talk now?{" "}
+                    <span className="whitespace-nowrap">Call (407) 228-1112.</span>
+                  </>
+                )}
               </p>
               {pathway.bookingUrl ? (
                 <a
