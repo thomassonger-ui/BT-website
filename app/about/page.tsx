@@ -87,7 +87,7 @@ export default function AboutPage() {
                   <p className="mt-3 text-sm leading-relaxed text-charcoal-soft">
                     Four decades of Central Florida real estate, thousands of families guided home,
                     and a brokerage built the way she believes real estate should work: personally.
-                    Every consultation with Bethanne is free, 30 minutes, and obligation-free.
+                    Every conversation with Bear Team is free and obligation-free.
                   </p>
                   <Link
                     href="/team/bethanne-baer"
