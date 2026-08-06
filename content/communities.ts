@@ -371,6 +371,331 @@ export const communities: Community[] = [
     reviewNote:
       "Facts sourced from the City of Orlando Baldwin Park PD Ordinance and Appendix F architectural standards, orlando.gov park records, City of Winter Park park records, Orange County Parks (Cady Way Trail), and EPA BRAC records. Deliberately omits distance-to-downtown mileage, Lake Baldwin acreage, total unit count, and named architectural styles — all were single-source or conflicting. Verify current CDD assessment amounts and POA dues before quoting figures to clients.",
   },
+  {
+    slug: "winter-garden",
+    name: "Winter Garden",
+    intro:
+      "An incorporated west Orange County city on the south shore of Lake Apopka, where a brick-paved historic downtown and two National Register districts sit alongside a housing stock that is roughly two-thirds newer than 2000.",
+    lifestyle:
+      "Downtown Plant Street anchors the city — the restored 1935 Garden Theatre, a year-round Saturday farmers market at the Downtown Pavilion drawing more than 100 vendors, the Winter Garden Heritage Museum in the 1923 brick depot, and the West Orange Trail running straight through the middle of it.",
+    locationContext:
+      "West Orange County on Lake Apopka's south shore, adjoining the Town of Oakland to the west and the City of Ocoee to the east, with Horizon West to the south. SR 429 runs along the east and south edges; SR 50, SR 438 (Plant Street), and Winter Garden Vineland Road serve the city directly.",
+    housingOverview:
+      "Census year-built data shows about 65% of the city's roughly 17,300 housing units were built in 2000 or later, with a small but genuine pre-1950 core of roughly 244 units concentrated in the historic districts. The city's own historic survey dates the oldest remaining buildings to about 1890, with most historic structures built between 1915 and 1940.",
+    propertyTypes: [
+      "Bungalow/Craftsman, Prairie School, and Colonial Revival homes in the historic residential district",
+      "Detached single-family homes (the large majority of the housing stock)",
+      "Townhomes",
+      "Apartments and condominiums",
+      "Homes inside Community Development Districts",
+    ],
+    buyerConsiderations: [
+      "A Winter Garden mailing address does not mean a City of Winter Garden property — Orange County's address database shows most 34787 addresses are in unincorporated Orange County. Jurisdiction determines millage, permitting authority, code enforcement, utility provider, and golf-cart-district eligibility, and must be confirmed parcel by parcel",
+      "Three Community Development Districts have the City as their local governing authority: Stoneybrook West (605 acres), Hickory Hammock (381 acres), and Winter Garden Village at Fowler Groves (175 acres, essentially commercial). CDD debt-service and operations assessments appear as separate non-ad-valorem line items on the tax bill, are charged per unit rather than by value, and are not reduced by homestead exemption",
+      "On a CDD property, confirm the remaining debt-service balance and amortization term, and whether the seller has prepaid the bond portion — it materially changes the annual carry",
+      "Inside the roughly 116-acre Historic Downtown Architectural Overlay (about 270 properties), alterations, demolitions, and new construction require a Certificate of Approval from the Architectural Review and Historic Preservation Board before work begins. Note the instrument is a Certificate of Approval, not the Certificate of Appropriateness used by the City of Orlando",
+      "The ARHPB meets monthly on the third Tuesday at 6:30 p.m. — build a review cycle measured in weeks, not days, into contract and inspection timelines",
+      "National Register listing alone imposes no restriction on a private owner; the local overlay is the layer that binds",
+      "Flood mapping in and around the city includes Special Flood Hazard Areas A, AE (including floodway) and AH, plus shaded Zone X, driven by Lake Apopka frontage and interior wetlands — pull the parcel-specific FEMA determination rather than inferring from the neighborhood",
+    ],
+    sellerConsiderations: [
+      "Historic-district provenance and downtown walkability are genuine differentiators, but only for the small share of stock that actually sits inside the overlay",
+      "A prepaid CDD bond is a real, quantifiable selling point — document it rather than leaving buyers to assume the worst",
+      "Buyers frequently confuse the mailing address with city limits; establishing jurisdiction up front prevents renegotiation late in the deal",
+    ],
+    amenities: [
+      "Historic downtown Plant Street with the Downtown Pavilion and interactive fountain",
+      "Garden Theatre — opened 1935, restored and reopened 2008, 295 seats",
+      "Winter Garden Farmers Market — Saturdays year-round, 100+ vendors",
+      "Winter Garden Heritage Museum in the 1923 brick depot, and the Central Florida Railroad Museum",
+      "Newton Park (8.5 acres) with the city fishing pier on Lake Apopka",
+      "Veteran's Memorial Park (11.5 acres), Sam Williams Little League/Walker Field (15.13 acres), Dr. Bradford Memorial Park (5 acres), Central Park (1.62 acres)",
+      "West Orange Park (47.49 acres) and the West Orange Recreation Center nearby",
+      "Lake Apopka — 30,909 acres, Florida's fourth-largest lake — with the Lake Apopka North Shore restoration area, the 11-mile Wildlife Drive, and 20+ miles of Loop Trail",
+    ],
+    transportation: [
+      "West Orange Trail — 22.32 miles, with Winter Garden Station at 455 E Plant Street and bike rental on site",
+      "SR 429 Daniel Webster Western Beltway, with SR 50 and CR 535 interchanges",
+      "SR 408 East-West Expressway for the downtown Orlando connection",
+      "Florida's Turnpike to the east; SR 528 Beachline toward Orlando International Airport",
+      "LYNX service on the West Colonial corridor, including a Winter Garden circulator",
+      "A City-administered Golf Cart District with registration and a published district map (Ordinance 09-53)",
+      "No SunRail station in west Orange County — the nearest stations are LYNX Central and Church Street in downtown Orlando",
+    ],
+    image: "/images/communities/winter-garden.jpg",
+    imageAlt: "Homes in Winter Garden, Florida",
+    related: ["horizon-west", "windermere", "orlando"],
+    reviewNote:
+      "Sourced from cityofwintergarden.com, Orange County GIS (address points, parks, CDD layers), Orange County Tax Collector, Census ACS B25034/B25024 (2020–2024 5-year), NRHP records (refs 96000850 and 96000849, both listed 8/1/1996), SJRWMD, and Orange County Water Atlas. LYNX route numbers deliberately omitted — verify against current schedules before publishing any. Verify current CDD assessment amounts directly with each district.",
+  },
+  {
+    slug: "horizon-west",
+    name: "Horizon West",
+    intro:
+      "A 20,704-acre planned village system in unincorporated southwest Orange County — five villages and a town center separated by greenbelts, adopted as a county planning framework in 1995 and built almost entirely since 2000.",
+    lifestyle:
+      "Village and neighborhood centers, the Hamlin town-center district, and an extensive network of greenbelts, trails, ponds and parks structure daily life here. Horizon West Regional Park covers 215 acres with hiking and equestrian trails.",
+    locationContext:
+      "Unincorporated southwest Orange County, bordered by the City of Winter Garden to the north, the Town of Windermere and the Butler Chain to the east, Walt Disney World property to the south and southwest, and Lake County to the west. SR 429 runs north–south through it; CR 535, Avalon Road, New Independence Parkway, Seidel Road, Reams Road and Ficquette Road serve the villages.",
+    housingOverview:
+      "Census year-built data shows 97.2% of roughly 23,800 housing units were built in 2000 or later and 73.7% since 2010 — effectively a single-generation build-out. Pre-1990 stock totals only about 490 units, scattered rural remnants consistent with the plan's Estate Rural and Vested Development categories.",
+    propertyTypes: [
+      "Estate and Estate Home district lots",
+      "Village Home and Garden Home district single-family",
+      "Townhomes",
+      "Apartment district multifamily and condominiums",
+      "Urban residential and mixed-use near village and town centers",
+    ],
+    buyerConsiderations: [
+      "Marketed community names are not the official villages, and the distinction matters when reading county records: Hamlin sits in Town Center; Independence, Summerport and Summerlake sit in the Village of Bridgewater; Waterleigh sits in Village H",
+      "Entirely unincorporated — Orange County handles permitting, code enforcement, and services. There is no city millage, no municipal utility, and no municipal architectural or historic review",
+      "Most Horizon West property carries a Winter Garden or Windermere mailing address while being outside both municipalities; roughly 93% of 34786 'Windermere' addresses are outside the Town of Windermere",
+      "Community Development District assessments are widespread here and appear as separate per-unit non-ad-valorem line items on the tax bill, unaffected by homestead exemption — confirm the district, the remaining debt-service term, and whether the bond portion has been prepaid",
+      "Development is governed by the Horizon West Village Planned Development Code, a separate Town Center code, and an Architectural Design Standards Guidebook — exterior changes and additions should be checked against the applicable village code and the relevant HOA",
+      "With 97% of stock built since 2000, resales compete directly against active new construction; builder incentives on comparable nearby product set the ceiling on a resale price",
+    ],
+    sellerConsiderations: [
+      "Lot position relative to greenbelt, pond, or trail frontage is one of the few durable differentiators in a market of similar-age product",
+      "Upgrades and elevation differences carry disproportionate weight where the alternative is a builder's base model down the road",
+      "A prepaid CDD bond should be documented and presented — it is a real reduction in the buyer's annual carry",
+    ],
+    amenities: [
+      "Horizon West Regional Park — 215 acres, with hiking and equestrian trails, picnic areas and a playground",
+      "Hamlin town-center district with retail and dining",
+      "Independence Park (6.24 acres) and Lakeside Village Park (8.86 acres)",
+      "Summerlake Park and Summerport neighborhood parks",
+      "Deputy Scott Pine Community Park",
+      "An extensive greenbelt, pond-buffer and trail network built into the village plan",
+    ],
+    transportation: [
+      "SR 429 Daniel Webster Western Beltway running through the area",
+      "CR 535 / Winter Garden Vineland Road and Avalon Road as principal arterials",
+      "New Independence Parkway, Seidel Road, Reams Road and Ficquette Road as village connectors",
+      "I-4 to the southeast and Florida's Turnpike to the east",
+      "The closest of Bear Team's service areas to the Walt Disney World corridor",
+      "No SunRail station — the nearest stations are in downtown Orlando",
+    ],
+    image: "/images/communities/horizon-west.jpg",
+    imageAlt: "Homes in Horizon West, Florida",
+    related: ["winter-garden", "windermere", "dr-phillips"],
+    reviewNote:
+      "Sourced from Orange County Planning, Orange County GIS (Horizon West Village Specific Area Plan layer, SAP district layer, address points, parks), and Census ACS B25034/B25024 (2020–2024 5-year). Village assignments for marketed community names were derived by point-in-polygon of county address points against the county village layer. Village acreages deliberately omitted as GIS-derived approximations. Straight-line distances omitted — they are not driving distances.",
+  },
+  {
+    slug: "hunters-creek",
+    name: "Hunter's Creek",
+    intro:
+      "A built-out master-planned community in unincorporated south Orange County, developed as a single project and platted as numbered tracts rather than named subdivisions — the closest of Bear Team's service areas to Orlando International Airport.",
+    lifestyle:
+      "Seven association-owned parks anchor the community, with tennis, racquetball, basketball, soccer and multi-purpose fields, two dog parks, fishing access, and walking paths connecting the neighborhoods.",
+    locationContext:
+      "Unincorporated south Orange County covering roughly 6.5 to 7 square miles, south of the Beachline and west of Orange Blossom Trail. John Young Parkway runs along the west with an SR 417 interchange; Florida's Turnpike lies east, Central Florida Parkway north, and Osceola Parkway and US 192 south.",
+    housingOverview:
+      "Census year-built data shows 53.1% of roughly 9,400 housing units date to 1990–1999 and 93.1% to 1980–2009, with post-2010 construction under 5%. The community is effectively built out — a buyer here is almost always buying resale.",
+    propertyTypes: [
+      "Detached single-family homes across 35 platted neighborhoods",
+      "Condominiums — Audubon Villas, Capri, Golfview, Villanova and Park Place are separately platted condominium properties",
+      "Garden-style apartment and condominium buildings (the 10-to-19-unit category is unusually large here)",
+      "One townhome neighborhood",
+      "Homes fronting Lake Calabay, Mallard Lake, and the golf course",
+    ],
+    buyerConsiderations: [
+      "Title and plat references read as numbered tracts — HUNTERS CREEK TR 135, TR 430-A and so on — rather than named subdivisions, which surprises buyers and agents unfamiliar with the community",
+      "Entirely unincorporated Orange County: no municipal government, no city millage, no city permitting, and no municipal architectural review. Governance is Orange County plus the master association",
+      "Hunter's Creek Community Association operates a Community Standards and Architectural Review function with published guidelines and application requirements for fences, enclosures, exterior paint colors and pools — approval is required before work begins",
+      "Master association assessments apply community-wide, and condominium properties carry their own separate association budgets, reserves and estoppel requirements on top",
+      "For the condominium inventory, Florida's milestone inspection and structural integrity reserve study requirements are live considerations given the 1990s construction era — request the association's current reserve and inspection status",
+      "With almost no new construction, comparable sales rather than builder pricing set value; conversely there is no builder inventory competing against a resale",
+      "Housing of this era commonly warrants attention to roof age, HVAC, polybutylene or galvanized supply lines, and wind-mitigation credits — confirm by inspection rather than by assumption",
+    ],
+    sellerConsiderations: [
+      "In a market of same-era homes, condition, systems age and documented updates are the primary differentiators",
+      "Wind mitigation and roof documentation directly affect a buyer's insurance quote and therefore their offer",
+      "Park, lake, and golf-course frontage are the durable location premiums within the community",
+    ],
+    amenities: [
+      "Osprey Park, 5100 Town Center Blvd — tennis, basketball, ball fields, dog park, fishing, social center, veterans monument",
+      "Eagle Park, 2950 Hunter's Creek Blvd — racquetball, tennis, community building, fishing dock",
+      "Vista Park I and Vista Park II on Hunter's Vista Blvd — dog park, soccer fields, playgrounds",
+      "Mallard Pointe Park, Calabay Park, and Braddock Oak Park",
+      "Deputy Brandon Coates Community Park — 27.01 acres, Orange County",
+      "Lester Mandell Park — 7.75 acres, Orange County",
+      "Hunter's Creek Golf Course, a separately platted tract within the community",
+    ],
+    transportation: [
+      "SR 417 Central Florida GreeneWay with a John Young Parkway interchange",
+      "John Young Parkway as the principal surface arterial",
+      "Florida's Turnpike to the east; US 17-92-441 Orange Blossom Trail parallel to the east",
+      "Central Florida Parkway northwest toward the International Drive area and SR 528",
+      "The shortest airport access of Bear Team's service areas — SR 417 or Central Florida Parkway to SR 528",
+      "No SunRail station; the nearest are Meadow Woods and Sand Lake Road, both requiring a drive",
+    ],
+    image: "/images/communities/hunters-creek.jpg",
+    imageAlt: "Homes in Hunter's Creek, Florida",
+    related: ["lake-nona", "orlando", "conway"],
+    reviewNote:
+      "Sourced from Orange County (Commission District 1) descriptions, Orange County GIS plat, address-point and parks layers, Census ACS B25034/B25024 (2020–2024 5-year), and hunterscreek.net for association park amenities. Golf course hole count, ownership and public/private access deliberately omitted — unverified. Park acreages for association-owned parks are not published and are omitted. Straight-line distances omitted; they are not driving distances.",
+  },
+  {
+    slug: "thornton-park",
+    name: "Thornton Park",
+    intro:
+      "A brick-street neighborhood immediately east of Lake Eola Park, most of which falls inside the Lake Lawsona Historic District — designated locally in 1994 and listed on the National Register in 2019.",
+    lifestyle:
+      "The Thornton Park District Main Street runs as a walkable commercial spine with more than 60 locally-owned shops, services and dining destinations, a short walk from the Lake Eola loop.",
+    locationContext:
+      "The eastern edge of downtown Orlando, east of Lake Eola Park and north of SR 408, served by Robinson Street, Summerlin Avenue, Mills Avenue (SR 15), Central Boulevard and Washington Street.",
+    housingOverview:
+      "Housing in the Lake Lawsona district dates from 1911 through the 1950s, with the period of significance concentrated in the 1920s through 1940s. About two-thirds of the district's roughly 500 buildings are contributing structures, set along brick-paved streets lined with live oaks.",
+    propertyTypes: [
+      "Craftsman and Bungalow homes",
+      "Colonial Revival and Dutch Colonial Revival",
+      "Mediterranean Revival and Mission Revival",
+      "Tudor Revival and Neoclassical Revival",
+      "Minimal Traditional and frame and masonry vernacular",
+    ],
+    buyerConsiderations: [
+      "Thornton Park is not itself a historic district — most of it lies inside the Lake Lawsona Historic District, but whether a specific parcel is subject to Certificate of Appropriateness review has to be checked parcel by parcel with City Planning. This is the single most important diligence item here",
+      "Inside the district, minor work — window replacement, siding, fences, doors, paint and roof color, solar, driveways — is reviewed by City staff at no fee, with the City contacting the applicant within five days",
+      "Major work — additions, garage apartments, demolition, new construction, major alterations — requires a mandatory pre-application meeting, a $250 fee, Historic Preservation Board review, and final City Council approval. The Board meets monthly on the first Wednesday at 4 p.m. with applications due two weeks prior, so a major review realistically spans multiple months",
+      "Orlando's 10-year historic preservation property tax exemption must be applied for BEFORE construction begins — it cannot be applied to work in progress or already completed, and at least $2,500 must go to the front façade. This is the most commonly missed incentive in the district",
+      "The federal 20% rehabilitation tax credit applies only to income-producing property. Owner-occupied homes do not qualify, despite how often this is stated otherwise",
+      "The three-year suspension of historic preservation review that takes effect August 10, 2026 applies only to the Downtown Historic District — it does not apply to Lake Lawsona",
+      "Homes of this era commonly warrant specialist inspection of electrical, plumbing, foundation and wind-mitigation items",
+    ],
+    sellerConsiderations: [
+      "Documented contributing-structure status and original architectural detail are meaningful marketing assets in this district",
+      "Unpermitted alterations inside the historic overlay can surface late in a transaction — resolve them before listing",
+      "Buyers routinely misunderstand what historic designation restricts; a clear explanation of minor-versus-major review prevents deals falling apart over renovation fears",
+    ],
+    amenities: [
+      "Lake Eola Park, 512 East Washington Street — a 0.9-mile paved loop, the Linton E. Allen Centennial Fountain, the Walt Disney Amphitheater, swan boat rentals and two playgrounds",
+      "Lake Eola — 28 acres",
+      "Lake Lawsona — 8 acres, monitored by the City, FDEP and LAKEWATCH volunteers",
+      "H.H. Dickson Azalea Park, 100 Rosearden Drive — a City park since 1924, containing the 1926 Washington Street Bridge; both carry state historic markers",
+      "Thornton Park District Main Street — 60+ locally-owned businesses",
+      "Brick-paved streets and the historic 1926 Orlando High School building within the district",
+    ],
+    transportation: [
+      "LYMMO fare-free bus rapid transit — the Grapefruit Line serves the Lake Eola and Thornton Park area",
+      "Robinson Street (SR 526), Mills Avenue (SR 15) and Summerlin Avenue",
+      "SR 408 East-West Expressway along the southern edge",
+      "Nearest SunRail stations are Church Street and LYNX Central in downtown Orlando",
+      "Airport access via SR 408 east to SR 417, or via SR 528",
+    ],
+    image: "/images/communities/thornton-park.jpg",
+    imageAlt: "Homes in Thornton Park, Orlando, Florida",
+    related: ["orlando", "delaney-park", "college-park"],
+    reviewNote:
+      "Sourced from orlando.gov historic preservation district and Certificate of Appropriateness pages, the 2010 Comprehensive Plan historic preservation support document, Florida Department of State's 2019 NRHP announcement, NPS tax incentive guidance, Orange County Water Atlas, and LYNX. Street-level neighborhood boundaries deliberately omitted — the neighborhood association's published boundary is internally contradictory and no authoritative legal boundary exists. Specific brick-paved street names omitted as unverified. Lake Eola Park acreage omitted; the City does not publish one and circulating figures conflict.",
+  },
+  {
+    slug: "delaney-park",
+    name: "Delaney Park",
+    intro:
+      "An established lake-dotted area south of downtown Orlando that overlaps two of the city's oldest local historic districts — Lake Cherokee, designated in 1981, and Lake Copeland, designated in 1984.",
+    lifestyle:
+      "Delaney Park itself is a 7.25-acre city park of oak-shaded open space, ball fields, tennis courts and playgrounds, with Lake Davis, Lake Cherokee, Lake Weldona and Lake Lancaster threaded through the surrounding streets.",
+    locationContext:
+      "South of downtown Orlando and south of SR 408, served by Orange Avenue (SR 527), Delaney Avenue, Summerlin Avenue, Mills Avenue (SR 15), Gore Street, Michigan Street, Kaley Street and Curry Ford Road.",
+    housingOverview:
+      "The Lake Cherokee district spans construction from the late 1870s through the 1940s across 189 buildings, 160 of them contributing. The Lake Copeland district holds roughly 110 structures, about two-thirds contributing, and includes homes designed by architect James Gamble Rogers II.",
+    propertyTypes: [
+      "Victorian and Queen Anne homes",
+      "Craftsman bungalows and American Four Square",
+      "Mediterranean Revival and Mission Revival",
+      "Tudor Revival, Colonial Revival and Neoclassical Revival",
+      "Art Deco and Minimal Traditional",
+    ],
+    buyerConsiderations: [
+      "Three different things share the Delaney Park name — the city park, the broader City of Orlando neighborhood, and the separately drawn Lake Cherokee and Lake Copeland historic districts. They do not share boundaries. Confirm with City Planning whether a specific parcel sits inside a historic overlay",
+      "Lake Copeland's published boundaries conflict between two City of Orlando sources, so a parcel near the edges genuinely requires confirmation rather than a map read",
+      "Inside either district, minor work — windows, siding, fences, doors, paint and roof color, solar, driveways — is staff-reviewed at no fee. Major work requires a pre-application meeting, a $250 fee, Historic Preservation Board review on the first Wednesday monthly, and final City Council approval, realistically spanning months",
+      "Orlando's 10-year historic preservation property tax exemption must be applied for before construction starts, with at least $2,500 allocated to the front façade",
+      "The federal 20% rehabilitation tax credit does not apply to owner-occupied homes — only to income-producing property",
+      "Lake Cherokee is a National Park Service certified local district, which is not the same as being listed on the National Register — neither district is NRHP-listed",
+      "The August 10, 2026 suspension of historic preservation review applies only to the Downtown Historic District, not to Lake Cherokee or Lake Copeland",
+      "Homes dating to the 1870s through 1940s warrant specialist inspection of electrical, plumbing, foundation and wind-mitigation items",
+    ],
+    sellerConsiderations: [
+      "Architect provenance and documented contributing status are real marketing assets, particularly for the Rogers-designed homes in Lake Copeland",
+      "Renovation work done without a Certificate of Appropriateness can stall a closing — clear it before listing",
+      "Lake frontage and proximity to Delaney Park drive the location premium within the area",
+    ],
+    amenities: [
+      "Delaney Park, 1055 Delaney Avenue — 7.25 acres with ball fields, hard-surface tennis courts, playgrounds, picnic facilities and restrooms",
+      "Lake Davis — 18 acres",
+      "Lake Cherokee — 12 acres",
+      "Wadeview Park, Lancaster Park, Lake Weldona Park and Lake Emerald Park nearby",
+      "Greenwood Cemetery",
+      "Brick streets and mature oak canopy through the historic districts",
+    ],
+    transportation: [
+      "Orange Avenue (SR 527) as the principal north–south arterial into downtown",
+      "SR 408 East-West Expressway along the northern edge",
+      "Mills Avenue (SR 15), Delaney Avenue and Summerlin Avenue",
+      "Nearest SunRail stations are Church Street and Orlando Health/Amtrak",
+      "Airport access via SR 408 east to SR 417, or via SR 528",
+    ],
+    image: "/images/communities/delaney-park.jpg",
+    imageAlt: "Homes in Delaney Park, Orlando, Florida",
+    related: ["orlando", "thornton-park", "conway"],
+    reviewNote:
+      "Sourced from orlando.gov historic preservation district and Certificate of Appropriateness pages, the 2010 Comprehensive Plan historic preservation support document, NPS tax incentive guidance, and Orange County Water Atlas. Lake Copeland boundaries and period of significance deliberately omitted — two City sources conflict and the discrepancy is unresolved. Neighborhood boundary streets omitted as low-confidence map extraction. Park acreages other than Delaney Park omitted as unverified.",
+  },
+  {
+    slug: "maitland",
+    name: "Maitland",
+    intro:
+      "An incorporated city of 5.36 square miles between Winter Park and Altamonte Springs, built around a chain of lakes and home to a National Historic Landmark — the 1937 Research Studio, now the Maitland Art Center.",
+    lifestyle:
+      "Lake Lily Park anchors the city's civic life with a half-mile walking trail and boardwalk, alongside the Art & History Museums campuses, the Audubon Center for Birds of Prey, and the Enzian Theater — a single-screen cinema café and home of the Florida Film Festival.",
+    locationContext:
+      "Orange County, immediately north of Winter Park and south of Altamonte Springs. US 17-92 (Orlando Avenue) is the principal north–south arterial and carries the SunRail corridor; Maitland Boulevard (SR 414) runs west from its eastern terminus at US 17-92, interchanging with Interstate 4 inside the city.",
+    housingOverview:
+      "An established city of 5.36 square miles of land built around roughly 21 lakes, with a documented architectural record running from the 1880s — the Waterhouse House dates to 1884 — through mid-century and later infill.",
+    propertyTypes: [
+      "Lakefront homes on Lake Maitland, Lake Sybelia, Lake Catherine and Lake Lily",
+      "Established single-family homes across a wide range of construction eras",
+      "Late Gothic Revival and early-period landmark structures",
+      "Condominiums and townhomes",
+      "Homes near the Maitland Center commercial district west of I-4",
+    ],
+    buyerConsiderations: [
+      "Maitland is a separate incorporated municipality — zoning, building permits and land development review run through the City of Maitland, not Orange County, though the Orange County Property Appraiser still handles assessment",
+      "Whether Maitland maintains a local historic preservation ordinance or locally designated district could not be confirmed from the City's own published sources — confirm directly with Maitland Community Development before assuming a property is or is not subject to local review",
+      "Federal National Register and National Historic Landmark designations, such as those on the Maitland Art Center and the Waterhouse House, impose no restriction on private owners absent federal funding or permitting — they are honorific for a private homeowner",
+      "For lakefront parcels, dock, seawall and shoreline work requires permitting; Orange County Environmental Protection Division handles this in unincorporated areas but its published guidance does not state whether it applies inside municipal limits, so confirm with both the City and the County before planning shoreline work",
+      "Orange County EPD dock permitting is sequential — an environmental permit first, then a building permit — with a one-year validity, and the County has proposed fee increases phasing in from October 1, 2026",
+      "The SunRail station is a genuine amenity for a specific buyer and irrelevant to another; its park-and-ride and pedestrian connections are worth verifying against a particular address",
+    ],
+    sellerConsiderations: [
+      "Lakefront and lake-view positioning is the dominant value driver in the city",
+      "Proximity to the SunRail station and to the Maitland Center employment district appeals to distinct buyer pools — position accordingly",
+      "Where shoreline structures exist, having dock and seawall permit history documented removes a common late-stage obstacle",
+    ],
+    amenities: [
+      "Lake Lily Park — 10 acres with a half-mile walking trail, boardwalk, playground, rentable gazebo and restrooms",
+      "Maitland Art Center — a National Historic Landmark as The Research Studio, founded 1937 by architect and artist J. Andre Smith, in Art Deco-Mayan Revival style",
+      "Waterhouse Residence Museum, 820 S. Lake Lily Drive — listed on the National Register in 1983",
+      "Audubon Center for Birds of Prey, 1101 Audubon Way — raptor rehabilitation and education, with a gazebo on Lake Sybelia",
+      "Enzian Theater, 1300 South Orlando Avenue — home of the Florida Film Festival",
+      "Church of the Good Shepherd, 331 Lake Avenue — National Register listed, Late Gothic Revival",
+      "Lake Maitland — 449 acres, the largest of the city's lakes",
+    ],
+    transportation: [
+      "Maitland SunRail station, 801 N. Orlando Avenue, with a park-and-ride lot and bus connections on US 17-92",
+      "US 17-92 (Orlando Avenue) as the principal north–south arterial",
+      "Maitland Boulevard (SR 414) running west from US 17-92, untolled through the city",
+      "Interstate 4, with an interchange inside the city",
+      "Airport access via I-4 to SR 408 east to SR 417, or via SR 528",
+    ],
+    image: "/images/communities/maitland.jpg",
+    imageAlt: "Homes in Maitland, Florida",
+    related: ["winter-park", "college-park", "orlando"],
+    reviewNote:
+      "Sourced from Census QuickFacts (land area), SunRail station records, U.S. Department of the Interior's 2014 National Historic Landmark announcement, NPS NPGallery NRHP records (Waterhouse House ref 83001434), Orange County Water Atlas, Orange County EPD permitting pages, and operator sites for the Audubon Center and Enzian. The City of Maitland's own site is robots-blocked to automated retrieval, so incorporation dates (reported as 1885 as the Town of Lake Maitland, renamed 1959) are deliberately omitted from the copy pending confirmation with the City. Whether Maitland has local historic-district review is an open question — confirm before advising any client. The '21 lakes' count is single-source and used qualitatively only.",
+  },
 ];
 
 export function getCommunity(slug: string): Community | undefined {

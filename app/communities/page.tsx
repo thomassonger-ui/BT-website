@@ -50,11 +50,13 @@ const orangeTiles: CommunityTile[] = [
   },
   {
     name: "Thornton Park",
+    slug: "thornton-park",
     img: "/images/communities/thornton-park.jpg",
     blurb: "A downtown-edge Orlando district of brick streets, historic bungalows, and condominiums a short walk from Lake Eola.",
   },
   {
     name: "Delaney Park",
+    slug: "delaney-park",
     img: "/images/communities/delaney-park.jpg",
     blurb: "An established near-downtown Orlando neighborhood of early-20th-century homes surrounding its namesake park.",
   },
@@ -65,11 +67,13 @@ const orangeTiles: CommunityTile[] = [
   },
   {
     name: "Winter Garden",
+    slug: "winter-garden",
     img: "/images/communities/winter-garden.jpg",
     blurb: "A west Orange County city with a restored historic downtown on the West Orange Trail near Lake Apopka's south shore.",
   },
   {
     name: "Horizon West",
+    slug: "horizon-west",
     img: "/images/communities/horizon-west.jpg",
     blurb: "One of Orange County's newest master-planned areas — village-based new construction in the county's southwest corner.",
   },
@@ -85,11 +89,13 @@ const orangeTiles: CommunityTile[] = [
   },
   {
     name: "Maitland",
+    slug: "maitland",
     img: "/images/communities/maitland.jpg",
     blurb: "A lake-dotted suburb just north of Winter Park with mid-century and custom homes and its own SunRail station.",
   },
   {
     name: "Hunter's Creek",
+    slug: "hunters-creek",
     img: "/images/communities/hunters-creek.jpg",
     blurb: "A master-planned community in south Orlando with village neighborhoods, parks, and access to SR 417.",
   },
