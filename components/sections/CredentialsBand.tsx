@@ -6,7 +6,21 @@
  * Deliberately static (no scroll-reveal) and no state seals (imply
  * endorsement). Do NOT add memberships, license numbers, or claims Tom has
  * not explicitly approved. Corporate (CQ) license number pending from Tom.
+ *
+ * Membership logo strip (files supplied by Tom, 2026-08-28) shows ONLY the
+ * five memberships listed below — never add BBB, HUD, D&B, USAA, or media
+ * logos here (held/rejected per Tom's compliance review).
  */
+import Image from "next/image";
+
+const MEMBERSHIP_LOGOS = [
+  { src: "/logos/nar.png", alt: "National Association of REALTORS®", width: 484, height: 120 },
+  { src: "/logos/florida-realtors.png", alt: "Florida Realtors®", width: 500, height: 120 },
+  { src: "/logos/orra.png", alt: "Orlando Regional REALTOR® Association", width: 281, height: 116 },
+  { src: "/logos/osceola-realtors.png", alt: "Osceola County Association of REALTORS®, Inc.", width: 394, height: 120 },
+  { src: "/logos/stellar-mls.png", alt: "Stellar MLS", width: 320, height: 81 },
+];
+
 const MEMBERSHIPS = [
   "REALTOR\u00AE \u2014 National Association of REALTORS\u00AE",
   "Orlando Regional REALTOR\u00AE Association",
@@ -99,6 +113,22 @@ export function CredentialsBand() {
             </ul>
           </div>
         </div>
+        <ul className="mx-auto mt-14 flex max-w-5xl flex-wrap items-center justify-center gap-4" aria-label="Membership organization logos">
+          {MEMBERSHIP_LOGOS.map((l) => (
+            <li
+              key={l.src}
+              className="flex h-16 items-center rounded-md bg-soft-white px-6"
+            >
+              <Image
+                src={l.src}
+                alt={l.alt}
+                width={l.width}
+                height={l.height}
+                className="h-9 w-auto"
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
