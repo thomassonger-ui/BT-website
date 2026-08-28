@@ -57,6 +57,10 @@ export type TeamMember = ReviewFlag & {
   /** Personal scheduling link (e.g. Calendly) rendered on the profile page. */
   bookingUrl?: string;
   bookingLabel?: string;
+  /** Professional designations shown on the profile (e.g. GRI, CRS, ABR). */
+  designations?: string[];
+  /** Extra profile sections rendered after the biography. */
+  profileSections?: { heading: string; body: string }[];
 };
 
 export type ResourceSection = { heading: string; body: string[] };
