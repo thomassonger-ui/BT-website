@@ -53,6 +53,9 @@ export const team: TeamMember[] = [
     specialties: ["Team operations", "Client experience", "Agent development"],
     languages: ["English"],
     phone: "(407) 228-1112",
+    // Calendly booking page (Tom, 2026-08-28; share_attribution param stripped).
+    bookingUrl: "https://calendly.com/thomas-songer/bear-team-office",
+    bookingLabel: "Discovery Call",
     headshot: "/images/team/tom-songer.jpg",
     verified: true,
     reviewNote: "Bio drafted from confirmed role — Tom to approve wording before launch.",
