@@ -112,7 +112,7 @@ export function TourHero() {
       {/* Instant poster — same kitchen view the tour starts at */}
       <Image
         src="/images/rooms/07-kitchen-1.jpg"
-        alt=""
+        alt="Bright modern kitchen in a Central Florida home"
         fill
         priority
         sizes="100vw"

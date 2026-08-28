@@ -6,8 +6,11 @@ import Image from "next/image";
  * section, never inside the dark band, no tile boxes). Pure-CSS marquee:
  * two identical halves, track slides -50% and loops seamlessly; pauses on
  * hover; prefers-reduced-motion gets a static centered row instead.
- * ONLY the five approved memberships — never add BBB, HUD, D&B, USAA, or
- * media logos here (held/rejected per Tom's compliance review).
+ * Contents approved by Tom (8/28): five memberships + D&B and the
+ * RealTrends "The Thousand"/WSJ badge (documented ranking). NEVER add the
+ * BBB "Accredited Business" seal unless the brokerage supplies its official
+ * seal from BBB (no accreditation claim without it — Tom's rule); never add
+ * HUD/VA/DBPR seals or media-network logos.
  */
 const MEMBERSHIP_LOGOS = [
   { src: "/logos/nar.png", alt: "National Association of REALTORS®", width: 484, height: 120 },
@@ -15,6 +18,8 @@ const MEMBERSHIP_LOGOS = [
   { src: "/logos/orra.png", alt: "Orlando Regional REALTOR® Association", width: 281, height: 116 },
   { src: "/logos/osceola-realtors.png", alt: "Osceola County Association of REALTORS®, Inc.", width: 394, height: 120 },
   { src: "/logos/stellar-mls.png", alt: "Stellar MLS", width: 320, height: 81 },
+  { src: "/logos/dnb.png", alt: "Dun & Bradstreet", width: 253, height: 160 },
+  { src: "/logos/realtrends-thousand.png", alt: 'RealTrends "The Thousand" — as advertised in The Wall Street Journal', width: 279, height: 160 },
 ];
 
 function LogoRow({ hidden }: { hidden?: boolean }) {
@@ -40,7 +45,7 @@ function LogoRow({ hidden }: { hidden?: boolean }) {
 
 export function MembershipLogoBar() {
   return (
-    <section aria-label="Professional membership organizations" className="overflow-hidden bg-white py-8 md:py-10">
+    <section aria-label="Memberships and recognitions" className="overflow-hidden bg-white py-8 md:py-10">
       <style>{`
         @keyframes bt-logobar-slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .bt-logobar-track { animation: bt-logobar-slide 35s linear infinite; }
