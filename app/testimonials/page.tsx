@@ -13,11 +13,26 @@ export const metadata: Metadata = buildMetadata({
   path: "/testimonials",
 });
 
+/** Rotating avatar fills for reviewer initials (Google-style fallback circles). */
+const AVATAR_BG = ["bg-ink", "bg-gold-dark", "bg-charcoal-soft"];
+
+/** Official Google "G" mark to attribute the review source. */
+function GoogleG() {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-label="Google" role="img" className="shrink-0">
+      <path fill="#4285F4" d="M23.5 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.45a5.51 5.51 0 0 1-2.39 3.62v3h3.87c2.26-2.09 3.57-5.17 3.57-8.81z" />
+      <path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.93-2.91l-3.87-3c-1.07.72-2.44 1.15-4.06 1.15-3.12 0-5.77-2.11-6.71-4.95H1.29v3.1A12 12 0 0 0 12 24z" />
+      <path fill="#FBBC05" d="M5.29 14.29A7.2 7.2 0 0 1 4.91 12c0-.8.14-1.57.38-2.29v-3.1H1.29a12 12 0 0 0 0 10.78l4-3.1z" />
+      <path fill="#EA4335" d="M12 4.77c1.76 0 3.34.6 4.58 1.79l3.44-3.44A11.98 11.98 0 0 0 12 0 12 12 0 0 0 1.29 6.61l4 3.1C6.23 6.88 8.88 4.77 12 4.77z" />
+    </svg>
+  );
+}
+
 /**
  * /testimonials — "Reviews by Real People".
  * Two sections of REAL reviews only (see content/testimonials.ts):
  *   1. Google reviews with the brokerage's public owner replies,
- *      republished verbatim (per Tom, no aggregate-rating banner).
+ *      republished verbatim (per Tom: no aggregate-rating banner).
  *   2. Client testimonials from the brokerage's previously published
  *      BearTeam.com testimonials page.
  * This page keeps the old site's /testimonials URL alive through the
@@ -38,29 +53,38 @@ export default function TestimonialsPage() {
       </PageHero>
       <Breadcrumbs items={[{ name: "Testimonials", path: "/testimonials" }]} />
 
-      <section className="bg-soft-white py-16 md:py-24" aria-label="Google reviews">
+      <section className="bg-cream py-16 md:py-24" aria-label="Google reviews">
         <div className="mx-auto max-w-content px-6">
-          <Reveal stagger className="grid gap-6 md:grid-cols-2">
-            {googleReviews.map((r) => (
+          <Reveal stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {googleReviews.map((r, i) => (
               <figure
                 key={r.id}
-                className="relative flex flex-col rounded-lg border border-ink/10 bg-cream p-6"
+                className="relative flex flex-col rounded-lg border border-ink/10 bg-soft-white p-6 shadow-sm"
               >
-                <figcaption className="mb-3">
-                  <span className="block font-semibold text-ink">{r.name}</span>
+                <figcaption className="mb-3 flex items-start gap-3">
                   <span
-                    className="text-sm tracking-widest text-gold-dark"
-                    role="img"
-                    aria-label={`Rated ${r.rating} out of 5 stars`}
+                    aria-hidden="true"
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-lg font-medium text-cream ${AVATAR_BG[i % AVATAR_BG.length]}`}
                   >
-                    {"★".repeat(r.rating)}
+                    {r.name.charAt(0)}
                   </span>
-                  <span className="ml-2 text-xs text-muted">Google review</span>
+                  <span className="flex-1">
+                    <span className="block font-semibold text-ink">{r.name}</span>
+                    <span className="block text-xs text-muted">{r.when}</span>
+                  </span>
+                  <GoogleG />
                 </figcaption>
+                <p
+                  className="mb-2 text-base tracking-widest text-gold"
+                  role="img"
+                  aria-label={`Rated ${r.rating} out of 5 stars`}
+                >
+                  {"★".repeat(r.rating)}
+                </p>
                 <blockquote className="flex-1 text-sm leading-relaxed text-charcoal-soft">
-                  &ldquo;{r.text}&rdquo;
+                  {r.text}
                 </blockquote>
-                <div className="mt-4 rounded-md border-l-2 border-gold-dark bg-soft-white p-4">
+                <div className="mt-4 rounded-md border-l-2 border-gold-dark bg-cream p-4">
                   <p className="text-xs font-semibold uppercase tracking-widest text-muted">
                     Response from Bear Team Real Estate
                   </p>
@@ -72,7 +96,7 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      <section className="bg-cream py-16 md:py-24" aria-label="Client testimonials">
+      <section className="bg-soft-white py-16 md:py-24" aria-label="Client testimonials">
         <div className="mx-auto max-w-content px-6">
           <h2 className="mb-8 font-display text-2xl font-medium text-ink">
             More Client Testimonials
@@ -81,7 +105,7 @@ export default function TestimonialsPage() {
             {verified.map((t) => (
               <figure
                 key={t.id}
-                className="relative flex flex-col rounded-lg border border-ink/10 bg-soft-white p-6"
+                className="relative flex flex-col rounded-lg border border-ink/10 bg-cream p-6"
               >
                 <blockquote className="flex-1 text-sm italic leading-relaxed text-charcoal-soft">
                   &ldquo;{t.text}&rdquo;
