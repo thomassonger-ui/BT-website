@@ -18,10 +18,11 @@ export const dynamicParams = false;
 /**
  * Official designation logos (member-portal files supplied by Tom Songer,
  * 2026-08-28). Only designations with an approved logo file appear as badges;
- * the rest render as text in the Designations row. GRI and ABR logos are
- * still pending from Tom — add them here when supplied.
+ * the rest render as text in the Designations row. ABR logo is still
+ * pending from Tom — add it here when supplied.
  */
 const DESIGNATION_LOGOS: Record<string, { src: string; width: number; height: number }> = {
+  GRI: { src: "/logos/gri.png", width: 300, height: 133 },
   CRS: { src: "/logos/crs.png", width: 141, height: 160 },
   "e-PRO": { src: "/logos/epro.png", width: 289, height: 160 },
   SFR: { src: "/logos/sfr.png", width: 575, height: 160 },
