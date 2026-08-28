@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { Reveal } from "@/components/animation/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
+import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
 import { testimonials, googleReviews } from "@/content/testimonials";
+import type { GoogleReview } from "@/content/testimonials";
+import type { Testimonial } from "@/types/content";
 
 export const metadata: Metadata = buildMetadata({
   title: "Reviews by Real People",
@@ -15,6 +17,9 @@ export const metadata: Metadata = buildMetadata({
 
 /** Rotating avatar fills for reviewer initials (Google-style fallback circles). */
 const AVATAR_BG = ["bg-ink", "bg-gold-dark", "bg-charcoal-soft"];
+
+const CARD =
+  "relative flex w-[85vw] max-w-[400px] shrink-0 snap-start flex-col rounded-lg border border-ink/10 p-6";
 
 /** Official Google "G" mark to attribute the review source. */
 function GoogleG() {
@@ -28,24 +33,90 @@ function GoogleG() {
   );
 }
 
+function GoogleCard({ r, i }: { r: GoogleReview; i: number }) {
+  return (
+    <figure data-card="true" className={`${CARD} bg-soft-white shadow-sm`}>
+      <figcaption className="mb-3 flex items-start gap-3">
+        <span
+          aria-hidden="true"
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-lg font-medium text-cream ${AVATAR_BG[i % AVATAR_BG.length]}`}
+        >
+          {r.name.charAt(0)}
+        </span>
+        <span className="flex-1">
+          <span className="block font-semibold text-ink">{r.name}</span>
+          <span className="block text-xs text-muted">{r.when}</span>
+        </span>
+        <GoogleG />
+      </figcaption>
+      <p
+        className="mb-2 text-base tracking-widest text-gold"
+        role="img"
+        aria-label={`Rated ${r.rating} out of 5 stars`}
+      >
+        {"★".repeat(r.rating)}
+      </p>
+      <blockquote className="flex-1 text-sm leading-relaxed text-charcoal-soft">{r.text}</blockquote>
+      <div className="mt-4 rounded-md border-l-2 border-gold-dark bg-cream p-4">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted">
+          Response from Bear Team Real Estate
+        </p>
+        <p className="mt-1 text-sm italic text-charcoal-soft">{r.ownerReply}</p>
+      </div>
+    </figure>
+  );
+}
+
+function SiteCard({ t, i }: { t: Testimonial; i: number }) {
+  return (
+    <figure data-card="true" className={`${CARD} bg-soft-white`}>
+      <figcaption className="mb-3 flex items-start gap-3">
+        <span
+          aria-hidden="true"
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-lg font-medium text-cream ${AVATAR_BG[(i + 1) % AVATAR_BG.length]}`}
+        >
+          {t.clientName.charAt(0).toUpperCase()}
+        </span>
+        <span className="flex-1">
+          <span className="block font-semibold text-ink">{t.clientName}</span>
+          <span className="block text-xs text-muted">
+            {t.clientType}
+            {t.propertyType ? ` · ${t.propertyType}` : ""}
+          </span>
+        </span>
+      </figcaption>
+      <blockquote className="flex-1 text-sm italic leading-relaxed text-charcoal-soft">
+        &ldquo;{t.text}&rdquo;
+      </blockquote>
+      <p className="mt-4 border-t border-ink/10 pt-3 text-xs text-muted">{t.source}</p>
+    </figure>
+  );
+}
+
 /**
  * /testimonials — "Reviews by Real People".
- * Two sections of REAL reviews only (see content/testimonials.ts):
- *   1. Google reviews with the brokerage's public owner replies,
- *      republished verbatim (per Tom: no aggregate-rating banner).
- *   2. Client testimonials from the brokerage's previously published
- *      BearTeam.com testimonials page.
- * This page keeps the old site's /testimonials URL alive through the
- * domain cutover. Never add fabricated entries.
+ * ONE auto-rotating carousel that alternates real Google reviews (with the
+ * brokerage's public owner replies) and verbatim client testimonials from the
+ * brokerage's previously published BearTeam.com page. No aggregate-rating
+ * banner (per Tom). Keeps the old site's /testimonials URL alive through the
+ * domain cutover. Never add fabricated entries. Data: content/testimonials.ts.
  */
 export default function TestimonialsPage() {
   const verified = testimonials.filter((t) => t.verified);
+  const cards: React.ReactNode[] = [];
+  const n = Math.max(googleReviews.length, verified.length);
+  for (let i = 0; i < n; i++) {
+    const g = googleReviews[i];
+    if (g) cards.push(<GoogleCard key={`g-${g.id}`} r={g} i={i} />);
+    const t = verified[i];
+    if (t) cards.push(<SiteCard key={`t-${t.id}`} t={t} i={i} />);
+  }
   return (
     <>
       <PageHero
         eyebrow="Client experiences"
         title="Reviews by Real People."
-        intro="Real reviews from Central Florida buyers and sellers who worked with Bethanne Baer and the Bear Team — in their own words, with our replies."
+        intro="40 years, 7,000+ transactions, and more than $4 billion in Central Florida real estate — and behind every closing, a client. Real reviews from real buyers and sellers, in their own words, with our replies."
       >
         <ButtonLink href="/contact" variant="primary">
           Work With the Bear Team
@@ -53,74 +124,9 @@ export default function TestimonialsPage() {
       </PageHero>
       <Breadcrumbs items={[{ name: "Testimonials", path: "/testimonials" }]} />
 
-      <section className="bg-cream py-16 md:py-24" aria-label="Google reviews">
+      <section className="bg-cream py-16 md:py-24" aria-label="Client reviews">
         <div className="mx-auto max-w-content px-6">
-          <Reveal stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {googleReviews.map((r, i) => (
-              <figure
-                key={r.id}
-                className="relative flex flex-col rounded-lg border border-ink/10 bg-soft-white p-6 shadow-sm"
-              >
-                <figcaption className="mb-3 flex items-start gap-3">
-                  <span
-                    aria-hidden="true"
-                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-lg font-medium text-cream ${AVATAR_BG[i % AVATAR_BG.length]}`}
-                  >
-                    {r.name.charAt(0)}
-                  </span>
-                  <span className="flex-1">
-                    <span className="block font-semibold text-ink">{r.name}</span>
-                    <span className="block text-xs text-muted">{r.when}</span>
-                  </span>
-                  <GoogleG />
-                </figcaption>
-                <p
-                  className="mb-2 text-base tracking-widest text-gold"
-                  role="img"
-                  aria-label={`Rated ${r.rating} out of 5 stars`}
-                >
-                  {"★".repeat(r.rating)}
-                </p>
-                <blockquote className="flex-1 text-sm leading-relaxed text-charcoal-soft">
-                  {r.text}
-                </blockquote>
-                <div className="mt-4 rounded-md border-l-2 border-gold-dark bg-cream p-4">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-muted">
-                    Response from Bear Team Real Estate
-                  </p>
-                  <p className="mt-1 text-sm italic text-charcoal-soft">{r.ownerReply}</p>
-                </div>
-              </figure>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-soft-white py-16 md:py-24" aria-label="Client testimonials">
-        <div className="mx-auto max-w-content px-6">
-          <h2 className="mb-8 font-display text-2xl font-medium text-ink">
-            More Client Testimonials
-          </h2>
-          <Reveal stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {verified.map((t) => (
-              <figure
-                key={t.id}
-                className="relative flex flex-col rounded-lg border border-ink/10 bg-cream p-6"
-              >
-                <blockquote className="flex-1 text-sm italic leading-relaxed text-charcoal-soft">
-                  &ldquo;{t.text}&rdquo;
-                </blockquote>
-                <figcaption className="mt-4 border-t border-ink/10 pt-4 text-xs text-muted">
-                  <span className="block font-semibold text-ink">{t.clientName}</span>
-                  <span>
-                    {t.clientType}
-                    {t.propertyType ? ` · ${t.propertyType}` : ""}
-                  </span>
-                  <span className="block">{t.source}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </Reveal>
+          <TestimonialsCarousel label="Client reviews carousel">{cards}</TestimonialsCarousel>
           <p className="mt-10 text-xs text-muted">
             Reviews on this page were submitted by past clients and are republished
             verbatim from Bear Team Real Estate&rsquo;s public Google Business Profile and
