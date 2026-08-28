@@ -43,6 +43,7 @@ export const primaryNav: NavItem[] = [
     children: [
       { label: "About Bear Team", href: "/about" },
       { label: "Meet the Team", href: "/team" },
+      { label: "Client Testimonials", href: "/testimonials" },
     ],
   },
   { label: "Contact", href: "/contact" },
@@ -61,6 +62,7 @@ export const footerNav = {
   company: [
     { label: "About Bear Team", href: "/about" },
     { label: "Meet the Team", href: "/team" },
+    { label: "Client Testimonials", href: "/testimonials" },
     { label: "Blog", href: "/blog" },
     { label: "Real Estate Resources", href: "/resources" },
     { label: "Contact", href: "/contact" },
