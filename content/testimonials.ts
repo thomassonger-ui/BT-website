@@ -167,11 +167,13 @@ export type GoogleReview = {
   rating: number;
   text: string;
   ownerReply: string;
+  when: string;
 };
 
 export const googleReviews: GoogleReview[] = [
   {
     id: "kyle-butler",
+    when: "5 years ago",
     name: "Kyle Butler",
     rating: 5,
     text: "Bethanne Baer at Bear Team Real Estate has helped me with two separate real estate transactions, and Bethanne and her team are fantastic! They are a wealth of knowledge, extremely hard working, responsive, professional, and a pleasure to work with! I highly recommend Bethanne for any and all of your real estate needs!",
@@ -179,6 +181,7 @@ export const googleReviews: GoogleReview[] = [
   },
   {
     id: "karen-tracy",
+    when: "6 years ago",
     name: "Karen Tracy",
     rating: 5,
     text: "Bethanne, Stacey, Tylor and the whole team made selling our home so easy. Their expertise and market knowledge made the process go quickly and as painlessly as possible. Lots of support and advice from staging and marketing to cleaning and closing and all the little bumps along the way. Bethanne and her team were enormously helpful. I highly recommend Bear Team Real Estate.",
@@ -186,6 +189,7 @@ export const googleReviews: GoogleReview[] = [
   },
   {
     id: "amanda-sampaio",
+    when: "7 years ago",
     name: "Amanda Sampaio",
     rating: 5,
     text: "Bethanne is a dream to work with. She is honest and extremely knowledgable. She tells it like it is and has excellent advice. The Bear Team staff is excellent as well. They really know what they are talking about and provide personalized service with great attention my specific needs. Their office is conveniently located in downtown Orlando and I love the staff. They are extremely helpful.",
@@ -193,6 +197,7 @@ export const googleReviews: GoogleReview[] = [
   },
   {
     id: "john-parrish-iii",
+    when: "8 years ago",
     name: "JohnParrishIII",
     rating: 5,
     text: "We used the Baer team to purchase a home and are very happy with our results and our home. I scoured all of the listing sites for a few months and normally if I can do it myself I do. However I was surprised that the house I ultimately purchased was actually found and recommended by Beth Anne. Allen Baer showed us the houses and was instrumental in the negotiation process and saved us some money. We are very pleased and I recommend this realty without reservation.",
@@ -200,6 +205,7 @@ export const googleReviews: GoogleReview[] = [
   },
   {
     id: "casey-wilson",
+    when: "4 years ago",
     name: "Casey Wilson",
     rating: 5,
     text: "We have worked with Bear Team Real Estate for years! Bethanne and her staff are amazing! Awesome service, awesome communication and awesome results. Hands down the best realtor in Orlando.",
@@ -207,6 +213,7 @@ export const googleReviews: GoogleReview[] = [
   },
   {
     id: "nancy-stewart",
+    when: "4 years ago",
     name: "Nancy Stewart",
     rating: 5,
     text: "Bear Team Real Estate helped us find the perfect home and made the entire process stress free. This team worked hard for us. They are professional, knowledgeable, and very community minded! Highly recommend!",
@@ -214,6 +221,7 @@ export const googleReviews: GoogleReview[] = [
   },
   {
     id: "brian-gibson",
+    when: "6 years ago",
     name: "Brian Gibson",
     rating: 5,
     text: "I want to thank the BT for being an all encompassing reality company. They exceeded all my expectations. Thank you so much for all your hard work. They will always be the 1ST realty company that comes to mind , when asked aniut a realty company...",
