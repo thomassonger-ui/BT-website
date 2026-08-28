@@ -3,6 +3,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { TourHero } from "@/components/sections/TourHero";
 import { ProofStrip } from "@/components/sections/ProofStrip";
 import { Pathways } from "@/components/sections/Pathways";
+import { CredentialsBand } from "@/components/sections/CredentialsBand";
 
 export const metadata: Metadata = buildMetadata({
   title: "Central Florida Real Estate | Bear Team Real Estate",
@@ -24,6 +25,7 @@ export default function HomePage() {
     <>
       <TourHero />
       <ProofStrip />
+      <CredentialsBand />
       <Pathways />
     </>
   );
