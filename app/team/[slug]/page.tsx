@@ -105,6 +105,12 @@ export default async function TeamMemberPage({
                   <dd className="text-muted">{member.license}</dd>
                 </div>
               ) : null}
+              {member.designations?.length ? (
+                <div>
+                  <dt className="font-semibold text-ink">Designations</dt>
+                  <dd className="text-muted">{member.designations.join(", ")}</dd>
+                </div>
+              ) : null}
             </dl>
           </div>
           <div>
@@ -118,6 +124,12 @@ export default async function TeamMemberPage({
             {member.experience ? (
               <p className="mt-3 text-sm leading-relaxed text-charcoal-soft">{member.experience}</p>
             ) : null}
+            {member.profileSections?.map((s) => (
+              <div key={s.heading} className="mt-10">
+                <h2 className="font-display text-2xl font-medium text-ink">{s.heading}</h2>
+                <p className="mt-4 text-sm leading-relaxed text-charcoal-soft">{s.body}</p>
+              </div>
+            ))}
             <div className="mt-8 flex flex-wrap gap-4">
               <ButtonLink href="/contact" variant="primary">
                 Work With {member.name.includes("[") ? "Bear Team" : member.name.split(" ")[0]}
