@@ -46,7 +46,14 @@ export default function TestimonialsPage() {
                 key={r.id}
                 className="relative flex flex-col rounded-lg border border-ink/10 bg-cream p-6"
               >
-                <figcaption className="mb-3">
+                <figcaption className="mb-3 flex items-center gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-dark font-display text-lg font-medium text-cream"
+                  >
+                    {r.name.charAt(0)}
+                  </span>
+                  <span>
                   <span className="block font-semibold text-ink">{r.name}</span>
                   <span
                     className="text-sm tracking-widest text-gold-dark"
@@ -56,6 +63,7 @@ export default function TestimonialsPage() {
                     {"★".repeat(r.rating)}
                   </span>
                   <span className="ml-2 text-xs text-muted">Google review</span>
+                  </span>
                 </figcaption>
                 <blockquote className="flex-1 text-sm leading-relaxed text-charcoal-soft">
                   &ldquo;{r.text}&rdquo;
