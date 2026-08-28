@@ -59,6 +59,10 @@ export type TeamMember = ReviewFlag & {
   bookingLabel?: string;
   /** Professional designations shown on the profile (e.g. GRI, CRS, ABR). */
   designations?: string[];
+  /** Award/program logos shown in the profile's Credentials & Recognition
+   *  row (e.g. RealTrends "The Thousand"). Only add logos whose underlying
+   *  claim is documented — approved per-logo by Tom Songer. */
+  recognitionLogos?: { src: string; alt: string; width: number; height: number }[];
   /** Extra profile sections rendered after the biography. */
   profileSections?: { heading: string; body: string }[];
 };
