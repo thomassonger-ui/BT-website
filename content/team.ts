@@ -35,8 +35,19 @@ export const team: TeamMember[] = [
     slug: "tom-songer",
     name: "Tom Songer",
     title: "Team Lead",
-    bio: "Tom Songer leads Bear Team's day-to-day operations and growth — the systems, standards, and people that keep every client's experience consistent from first conversation to closing table. He is the connector behind the scenes: making sure leads get answered fast, timelines stay coordinated, and the team's agents have everything they need to do their best work. A Wall Street Journal Top One Thousand agent formerly ranked in the top 1% of Coldwell Banker worldwide, Tom holds the SFR, GRI, CRS, ABR, and e-PRO designations and is an Instructor Candidate (Masters Education CI). A relocation specialist and USAA military specialist, he has been seen on Property Ladder, Home and Garden, CNN, HGTV, and The Wall Street Journal.",
-    designations: ["SFR", "GRI", "CRS", "ABR", "e-PRO"],
+    bio: "Tom Songer leads Bear Team's day-to-day operations and growth — the systems, standards, and people that keep every client's experience consistent from first conversation to closing table. He is the connector behind the scenes: making sure leads get answered fast, timelines stay coordinated, and the team's agents have everything they need to do their best work. A Wall Street Journal Top One Thousand agent formerly ranked in the top 1% of Coldwell Banker worldwide, Tom holds the SFR, GRI, CRS, ABR, e-PRO, and SRES designations and is an Instructor Candidate (Masters Education CI). A relocation specialist and USAA military specialist, he has been seen on Property Ladder, Home and Garden, CNN, HGTV, and The Wall Street Journal.",
+    designations: ["SFR", "GRI", "CRS", "ABR", "e-PRO", "SRES"],
+    // RealTrends "The Thousand" badge backs the WSJ Top One Thousand claim;
+    // USAA program participation documented (confirmed by Tom, 2026-08-28).
+    recognitionLogos: [
+      {
+        src: "/logos/realtrends-thousand.png",
+        alt: 'RealTrends "The Thousand" \u2014 as advertised in The Wall Street Journal',
+        width: 279,
+        height: 160,
+      },
+      { src: "/logos/usaa.png", alt: "USAA\u00AE", width: 360, height: 100 },
+    ],
     experience: "40+ years of real estate experience.",
     areasServed: ["Orlando", "Greater Central Florida"],
     specialties: ["Team operations", "Client experience", "Agent development"],
