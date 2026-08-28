@@ -1,5 +1,3 @@
-import { Reveal } from "@/components/animation/Reveal";
-
 /**
  * CREDENTIALS BAND - homepage trust section (approved by Tom Songer, 2026-08-28).
  * Continues the dark ProofStrip band: centered editorial header, three ruled
@@ -53,7 +51,7 @@ export function CredentialsBand() {
             Helping Central Florida families buy, sell and invest with confidence since 1987.
           </p>
         </div>
-        <Reveal stagger className="mx-auto mt-12 grid max-w-5xl gap-10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-cream/10">
+        <div className="mx-auto mt-12 grid max-w-5xl gap-10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-cream/10">
           {COLUMNS.map((col) => (
             <div key={col.heading} className="md:px-10 md:first:pl-0 md:last:pr-0">
               <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-light">
@@ -67,7 +65,7 @@ export function CredentialsBand() {
               </ul>
             </div>
           ))}
-        </Reveal>
+        </div>
       </div>
     </section>
   );
