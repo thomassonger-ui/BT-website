@@ -72,6 +72,7 @@ export default function SearchPage() {
         title="You do not need another property-search website."
         intro="You need the right homes, verified by an experienced local team. Tell us what you are looking for — we will search, screen, and organize the strongest available options for you. Ninety seconds to start, your shortlist within one business day, and direct MLS alerts the moment new homes hit the market."
         image="/images/buy/search.jpg"
+        imageAlt="Palm-lined street of single-story Florida homes on a sunny day"
       >
         <ButtonLink href="#scout-qualify" variant="primary">
           Build My Home Search
