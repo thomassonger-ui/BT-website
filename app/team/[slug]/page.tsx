@@ -177,20 +177,18 @@ export default async function TeamMemberPage({
               );
             })()}
             <div className="mt-8 flex flex-wrap gap-4">
-              <ButtonLink href="/contact" variant="primary">
-                Work With {member.name.includes("[") ? "Bear Team" : member.name.split(" ")[0]}
-              </ButtonLink>
               {member.bookingUrl ? (
-                <a
-                  href={member.bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-md bg-gold px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-                >
+                /* Booking link replaces the generic contact CTA (Tom, 8/28:
+                   his "Work With Tom" button → Calendly as "Discovery Call"). */
+                <ButtonLink href={member.bookingUrl} variant="primary" external>
                   {member.bookingLabel || "Schedule a Call"}
                   <span className="sr-only"> (opens in a new tab)</span>
-                </a>
-              ) : null}
+                </ButtonLink>
+              ) : (
+                <ButtonLink href="/contact" variant="primary">
+                  Work With {member.name.includes("[") ? "Bear Team" : member.name.split(" ")[0]}
+                </ButtonLink>
+              )}
             </div>
           </div>
         </div>
