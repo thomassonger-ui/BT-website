@@ -15,6 +15,19 @@ import { team } from "@/content/team";
  */
 export const dynamicParams = false;
 
+/**
+ * Official designation logos (member-portal files supplied by Tom Songer,
+ * 2026-08-28). Only designations with an approved logo file appear as badges;
+ * the rest render as text in the Designations row. GRI and ABR logos are
+ * still pending from Tom — add them here when supplied.
+ */
+const DESIGNATION_LOGOS: Record<string, { src: string; width: number; height: number }> = {
+  CRS: { src: "/logos/crs.png", width: 141, height: 160 },
+  "e-PRO": { src: "/logos/epro.png", width: 289, height: 160 },
+  SFR: { src: "/logos/sfr.png", width: 575, height: 160 },
+  SRES: { src: "/logos/sres.png", width: 241, height: 160 },
+};
+
 export function generateStaticParams() {
   return team.map((m) => ({ slug: m.slug }));
 }
@@ -130,6 +143,38 @@ export default async function TeamMemberPage({
                 <p className="mt-4 text-sm leading-relaxed text-charcoal-soft">{s.body}</p>
               </div>
             ))}
+            {(() => {
+              const badges = [
+                ...(member.designations ?? [])
+                  .filter((d) => DESIGNATION_LOGOS[d])
+                  .map((d) => ({ alt: `${d} designation`, ...DESIGNATION_LOGOS[d] })),
+                ...(member.recognitionLogos ?? []),
+              ];
+              if (!badges.length) return null;
+              return (
+                <div className="mt-10">
+                  <h2 className="font-display text-2xl font-medium text-ink">
+                    Credentials &amp; Recognition
+                  </h2>
+                  <ul className="mt-5 flex flex-wrap items-center gap-3">
+                    {badges.map((b) => (
+                      <li
+                        key={b.src}
+                        className="flex h-20 items-center rounded-md border border-ink/10 bg-soft-white px-5"
+                      >
+                        <Image
+                          src={b.src}
+                          alt={b.alt}
+                          width={b.width}
+                          height={b.height}
+                          className="h-12 w-auto"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })()}
             <div className="mt-8 flex flex-wrap gap-4">
               <ButtonLink href="/contact" variant="primary">
                 Work With {member.name.includes("[") ? "Bear Team" : member.name.split(" ")[0]}
