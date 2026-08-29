@@ -5,7 +5,9 @@
  * brokerage is state-licensed, NOT "accredited" (no BBB accreditation held).
  * Deliberately static (no scroll-reveal) and no state seals (imply
  * endorsement). Do NOT add memberships, license numbers, or claims Tom has
- * not explicitly approved. Corporate (CQ) license number pending from Tom.
+ * not explicitly approved. Corporate license CQ1054831 verified against the
+ * DBPR registry 8/28/2026 (BEARTEAM LLC, Real Estate Corporation, active,
+ * expires 03/31/2028).
  *
  * Membership LOGOS live in MembershipLogoBar (sliding bar at the bottom of
  * the homepage above the footer) — never inside this dark section (Tom, 8/28).
@@ -78,6 +80,7 @@ export function CredentialsBand() {
               <li>Independently Owned and Operated</li>
               <li>Bethanne Baer, Broker/Owner</li>
               <li>Florida Broker License BK553431</li>
+              <li>Corporate Brokerage License CQ1054831</li>
               <li>Regulated by the Florida DBPR and the Florida Real Estate Commission</li>
               <li className="flex items-center gap-2.5">
                 <EhoMark />
