@@ -1,9 +1,10 @@
 import Image from "next/image";
 
 /**
- * MEMBERSHIP LOGO BAR — white sliding strip mounted directly below the dark
- * CredentialsBand (Tom, 2026-08-28: logos on a white bar in their own
- * section, never inside the dark band, no tile boxes). Pure-CSS marquee:
+ * MEMBERSHIP LOGO BAR — sliding logo strip, LAST section of the homepage,
+ * just above the dark footer (Tom, 8/28: quiet closing trust signal; earlier
+ * spots — inside the dark band, then right below it — both rejected).
+ * Cream background so it flows out of the light sections; no tile boxes. Pure-CSS marquee:
  * two identical halves, track slides -50% and loops seamlessly; pauses on
  * hover; prefers-reduced-motion gets a static centered row instead.
  * Contents approved by Tom (8/28): five memberships + the RealTrends
@@ -47,7 +48,7 @@ function LogoRow({ hidden }: { hidden?: boolean }) {
 
 export function MembershipLogoBar() {
   return (
-    <section aria-label="Memberships and recognitions" className="overflow-hidden bg-white py-8 md:py-10">
+    <section aria-label="Memberships and recognitions" className="overflow-hidden border-t border-ink/10 bg-cream py-10 md:py-12">
       <style>{`
         @keyframes bt-logobar-slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .bt-logobar-track { animation: bt-logobar-slide 35s linear infinite; }
