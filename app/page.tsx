@@ -27,8 +27,8 @@ export default function HomePage() {
       <TourHero />
       <ProofStrip />
       <CredentialsBand />
-      <MembershipLogoBar />
       <Pathways />
+      <MembershipLogoBar />
     </>
   );
 }
