@@ -7,9 +7,11 @@
  * endorsement). Do NOT add memberships, license numbers, or claims Tom has
  * not explicitly approved. Corporate (CQ) license number pending from Tom.
  *
- * Membership LOGOS live in MembershipLogoBar (white sliding bar mounted
- * directly below this band) — NOT inside this dark section (Tom, 8/28).
+ * Membership LOGOS live in MembershipLogoBar (sliding bar at the bottom of
+ * the homepage above the footer) — never inside this dark section (Tom, 8/28).
  */
+import Image from "next/image";
+
 const MEMBERSHIPS = [
   "REALTOR\u00AE \u2014 National Association of REALTORS\u00AE",
   "Orlando Regional REALTOR\u00AE Association",
@@ -40,8 +42,20 @@ function EhoMark() {
 
 export function CredentialsBand() {
   return (
-    <section aria-labelledby="credentials-heading" className="border-t border-cream/10 bg-ink py-16 md:py-20">
-      <div className="mx-auto max-w-content px-6">
+    <section aria-labelledby="credentials-heading" className="relative overflow-hidden border-t border-cream/10 bg-ink py-16 md:py-20">
+      {/* Faint neighborhood-and-skyline backdrop under a heavy ink scrim —
+          fades to solid ink at the top and bottom so the band still melts
+          into the dark sections around it. Text sits on near-solid ink. */}
+      <Image
+        src="/images/buy/community.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover object-center opacity-40"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/50 to-ink" aria-hidden="true" />
+      <div className="relative mx-auto max-w-content px-6">
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-light">
             Credentials &amp; Memberships
