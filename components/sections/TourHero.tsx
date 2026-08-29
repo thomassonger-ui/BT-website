@@ -135,7 +135,7 @@ export function TourHero() {
 
       {exploring ? (
         /* EXPLORE MODE — tour owns the mouse; exit restores the page */
-        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-30 flex flex-col items-center gap-2">
+        <div className="pointer-events-none absolute inset-x-0 bottom-24 z-30 flex flex-col items-center gap-2 md:bottom-6">
           <p className="text-[10px] uppercase tracking-widest text-cream/40">
             {IS_DEMO_TOUR ? "Sample 3D tour — for demonstration only, not a Bear Team listing · " : ""}
             3D tour powered by Matterport
@@ -155,7 +155,9 @@ export function TourHero() {
         /* OVERLAY MODE — headline + CTAs; content taller than the screen grows
            the section downward instead of overflowing up into the header */
         <div className="relative z-20 flex min-h-[100svh] items-end bg-gradient-to-t from-ink/75 via-ink/20 to-transparent">
-          <div className="mx-auto w-full max-w-content px-6 pb-12 pt-28 md:pb-16 md:pt-32">
+          {/* Mobile pb-32 keeps the caption clear of Matterport's bottom control
+              buttons (~80px tall inside the iframe); md+ keeps the tighter pb-16 */}
+          <div className="mx-auto w-full max-w-content px-6 pb-32 pt-28 md:pb-16 md:pt-32">
             <h1
               id="hero-heading"
               className={`max-w-3xl font-display text-[1.7rem] font-medium leading-[1.15] text-soft-white transition-opacity duration-500 md:text-display-xl md:leading-[1.05] ${phraseVisible ? "opacity-100" : "opacity-0"}`}
