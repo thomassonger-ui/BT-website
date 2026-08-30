@@ -114,7 +114,7 @@ export const communities: Community[] = [
       "Occasional teardown and infill redevelopment",
     ],
     buyerConsiderations: [
-      "Which pool of the chain a property sits on matters. Hoffner Avenue separates North from Middle Lake Conway, and Nela Avenue separates Middle from Little Lake Conway. Waterfront value, boat access and navigability differ across those divisions — ask before assuming a dock reaches open water.",
+      "Which basin a property sits on matters. Orange County's code names them Little Lake Conway to the north, then the middle lobe of Lake Conway below the Hoffner Avenue bridge, then the south lobe below the Nela Avenue bridge, plus Lake Gatlin to the west. Waterfront value, boat access and navigability differ across those divisions — ask before assuming a dock reaches open water.",
       "Waterfront parcels fall under the Lake Conway Water and Navigation Control District, a dependent special district of Orange County created by special act of the Florida Legislature in the late 1950s. Its millage appears on the property tax bill and is not a city tax. Buyers relocating here regularly mistake it for one.",
       "Dock, seawall and shoreline work is permitted through the Orange County Environmental Protection Division under Chapter 15 of the county code, and applications inside the navigation district carry a minimum thirty-day review before a building permit can follow. Plan any dock project around that timeline rather than a closing date.",
       "With a median build year of 1975, roof age, electrical panels and plumbing materials drive insurability more than they do in newer Orlando suburbs. Get an insurance quote early in the inspection period, not at the end of it.",
@@ -142,8 +142,38 @@ export const communities: Community[] = [
       "Orlando International Airport — about 17 minutes",
       "Downtown Orlando — about 12 minutes",
     ],
+    extraSections: [
+      {
+        heading: "Docks, boats and the water itself",
+        body: [
+          "This is the part of a Conway purchase that costs people money, and it is almost never explained before a contract. The chain is four connected bodies of water and Orange County's code names them precisely: Little Lake Conway at the north end, the middle lobe of Lake Conway below the Hoffner Avenue bridge, the south lobe below the Nela Avenue bridge, and Lake Gatlin to the west. Canals and under-road channels connect them — the Hoffner bridge carries a fender system, which tells you real vessel traffic passes beneath it — but which basin a house fronts still decides what its dock reaches without a bridge transit.",
+          "A private dock in unincorporated Conway is permitted by the Orange County Environmental Protection Division under Chapter 15, Article IX of the county code, and that approval has to come before the building permit. Applications inside the Lake Conway Water and Navigation Control District carry a minimum thirty-day review. Jurisdiction changes at the city line: the City of Belle Isle has its own dock ordinance, and whether a Belle Isle dock also needs county approval is genuinely unsettled in the published code — confirm with both EPD at (407) 836-1400 and Belle Isle City Hall before planning any dock work on that side.",
+          "A seawall is a much heavier lift than a dock and sellers routinely underestimate it. Building, replacing or hardening a shoreline requires a Shoreline Alteration / Dredge and Fill permit, which needs engineer-sealed plans, a site inspection, and approval at a Board of County Commissioners public hearing — then a thirty-day appeal period before the permit issues, and it is only valid for a year. That is a months-long path, not a pre-closing repair.",
+          "Two things worth budgeting for. Orange County has proposed steep increases to environmental permit fees that have not changed since 2007, with a phase-in proposed to begin in October 2026 — anyone planning dock or shoreline work should confirm the adopted figures rather than the old ones. And the county is rewriting its boating ordinance, with a final Board hearing scheduled for December 2026 that would add idle-speed and slow-speed zones across the Conway chain. Those zones are not law yet, and any source telling you otherwise is ahead of the county.",
+          "One myth worth killing: there is no local boat sticker for Lake Conway. Florida state vessel registration is all that is required to operate here — neither the navigation district, nor Orange County, nor Belle Isle imposes a local vessel registration. What people are thinking of is Belle Isle's ramp decal, and that is a parking permit for the tow vehicle at the Perkins ramp, not a registration for the boat.",
+        ],
+      },
+      {
+        heading: "Launching, and keeping a boat at the house",
+        body: [
+          "Four public ramps reach the chain. Randolph Avenue is open twenty-four hours for launching; Ferncreek runs sunrise to sunset; both are Orange County. Perkins and Venetian belong to Belle Isle — Perkins requires a resident parking decal for the tow vehicle and Venetian has no public parking at all. County ramp rules cap docking at a ramp to fifteen minutes and prohibit commercial activity, including picking up or dropping off passengers.",
+          "Keeping the boat at home is governed by Orange County's zoning code, and the limits are specific. On a lot of a quarter-acre or less you may keep two boats or boat trailers total, with one in the front yard; up to a half-acre allows three; over a half-acre allows four. Boats and trailers of twenty-four feet or under can sit in a garage, carport, driveway, or on an approved surface immediately contiguous to the driveway — not elsewhere in the front or side yard. Anything stored in the rear half behind the house has to be screened from the right-of-way and set back from the lot lines. Canoes, jon boats and sailboats sixteen feet or under, and personal watercraft, are not counted as boats for these purposes, and length is measured bow to stern excluding the motor.",
+          "If a boat, RV or trailer is part of why you want the property, check the lot size and the code together before you write the offer. It is a common and expensive surprise.",
+        ],
+      },
+    ],
     image: "/images/communities/conway.jpg",
-    imageAlt: "Homes along the Conway Chain of Lakes in southeast Orlando, Florida",
+    imageAlt: "Sunset over Lake Conway from a covered private dock in southeast Orlando, Florida",
+    gallery: [
+      {
+        src: "/images/communities/conway-lakefront.jpg",
+        alt: "Aerial view of lakefront homes with a covered boat dock on the Conway Chain of Lakes",
+      },
+      {
+        src: "/images/communities/conway-oaks.webp",
+        alt: "Single-story Conway home under mature live oaks draped with Spanish moss",
+      },
+    ],
     related: ["belle-isle", "edgewood", "orlando"],
     reviewNote:
       "Facts sourced: 2020 Census and ACS 2020-2024 5-year estimates (population, housing units, build eras, unit types); Orange County Water Atlas (lake acreage and depth); Orange County government (navigation district, EPD dock permitting, Barber Park, boat ramps); Orange County BCC historical markers. Drive times are modeled free-flow estimates, not observed traffic. Re-verify the navigation district millage and any county fees before relying on them. Barber Park street number intentionally omitted - two county sources conflict.",

@@ -37,6 +37,11 @@ export type Community = ReviewFlag & {
   transportation: string[];
   image: string;
   imageAlt: string;
+  /** Extra photos rendered as a gallery under the intro. Optional. */
+  gallery?: { src: string; alt: string }[];
+  /** Long-form sections for communities with subject matter the standard
+   *  fields don't cover — e.g. docks and boating on the Conway chain. */
+  extraSections?: { heading: string; body: string[] }[];
   related: string[];
 };
 

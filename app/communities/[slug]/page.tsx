@@ -126,6 +126,40 @@ export default async function CommunityPage({
             <ChainMap />
           ) : null}
 
+          {/* Extra photos, when the community has them. */}
+          {community.gallery?.length ? (
+            <div className="mt-12 grid gap-4 sm:grid-cols-2">
+              {community.gallery.map((g) => (
+                <figure key={g.src} className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                  <Image
+                    src={g.src}
+                    alt={g.alt}
+                    fill
+                    sizes="(min-width:640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </figure>
+              ))}
+            </div>
+          ) : null}
+
+          {/* Long-form sections — currently the Conway chain's dock and boating
+              rules, which the standard community fields have no room for. */}
+          {community.extraSections?.length ? (
+            <div className="mt-14 space-y-12">
+              {community.extraSections.map((sec) => (
+                <div key={sec.heading} className="max-w-3xl">
+                  <h2 className="font-display text-2xl font-medium text-ink">{sec.heading}</h2>
+                  {sec.body.map((para) => (
+                    <p key={para.slice(0, 40)} className="mt-4 text-[15px] leading-relaxed text-charcoal-soft">
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ) : null}
+
           <div className="mt-16 grid gap-8 md:grid-cols-2">
             <Reveal>
               <article className="h-full rounded-lg border border-ink/10 bg-cream/40 p-6">
