@@ -182,29 +182,86 @@ export const communities: Community[] = [
     slug: "edgewood",
     name: "Edgewood",
     intro:
-      "A small incorporated city along the South Orange Avenue corridor, minutes south of downtown Orlando — one of Bear Team's specialty areas for more than 40 years.",
+      "Edgewood is the smallest of the three cities on the Conway chain — an incorporated city of about 2,758 people packed into roughly a square and a quarter of land on the chain's western side, with its own police department and city hall. Bear Team's office is a few minutes east of it.",
     lifestyle:
-      "A compact, established residential city with quick access to downtown Orlando, the SODO district, and the Conway chain of lakes area to the east.",
+      "Edgewood's water is the western end of the Conway chain rather than Lake Conway's main body. Lake Jessamine, at roughly 294 acres, and Lake Gatlin, at about 68 acres, both sit within the city, and canals connect them onward to Little Lake Conway and the rest of the chain. Nearly a fifth of the city's total area is water — 0.30 of its 1.54 square miles. The city runs its own building and permitting, code compliance, planning and development, business tax and residential waste services from City Hall, which for a place this size is unusual and is much of the reason people choose the address.",
     locationContext:
-      "South of downtown Orlando along South Orange Avenue, bordered by Orlando neighborhoods to the north and Belle Isle to the southeast.",
+      "Edgewood sits south of downtown Orlando along the South Orange Avenue corridor, west of Belle Isle and the main body of Lake Conway. The 2020 Census puts it at about 1.24 square miles of land plus 0.30 square miles of water. It is a genuinely separate municipality, not a neighborhood of Orlando: a five-member elected City Council serving staggered three-year terms, with the Council selecting its own President, and the Edgewood Police Department providing full-service law enforcement rather than the county sheriff.",
     housingOverview:
-      "Predominantly established single-family homes on generous lots, many without HOA restrictions, alongside selective infill construction.",
-    propertyTypes: ["Established single-family", "Larger-lot homes", "Infill new construction"],
+      "Edgewood holds about 1,239 housing units with a median build year of 1978, and its age profile is unlike either neighbour on the chain. Nearly 45 percent of everything here — 556 units — went up in the 1970s alone, the most concentrated single decade of any community Bear Team covers. It also kept building: about 16 percent dates from 2000 to 2009 and another 7 percent from 2010 on, so unlike Conway there is genuinely newer inventory inside the city limits. The other difference is form. Only about 61 percent of units are detached single-family homes, well below Conway's 91 percent and Belle Isle's 85 percent, which means Edgewood carries a substantially larger share of townhomes, condominiums and small multi-family buildings than either.",
+    propertyTypes: [
+      "Detached single-family homes (about 61% of units)",
+      "Townhomes, condominiums and small multi-family",
+      "1970s homes — nearly half the city's stock",
+      "2000s and newer infill construction",
+      "Lakefront on Lake Jessamine and Lake Gatlin",
+    ],
     buyerConsiderations: [
-      "Small-city governance with its own police department and services",
-      "Many properties without HOA restrictions",
-      "Older housing stock benefits from careful inspection",
+      "Edgewood is its own city. Permits, code enforcement, planning and police all run through Edgewood City Hall rather than Orange County — a meaningful difference from unincorporated Conway next door, where every one of those goes to the county.",
+      "The city's lakes are the western end of the Conway chain, not Lake Conway's main body. If open-water access to Lake Conway matters, confirm how a specific property's water connects: Lake Jessamine and Lake Gatlin reach the rest of the chain through canals, and what a given boat can pass through is a property-by-property question.",
+      "Dock, seawall and shoreline work on these lakes still runs through the Orange County Environmental Protection Division, and waterfront parcels on the chain fall under the Lake Conway Water and Navigation Control District — whose millage appears on the tax bill and is not a city tax.",
+      "With nearly half the housing stock built in the 1970s, roof age, electrical panels and plumbing materials drive insurability here more than square footage does. Get an insurance quote early in the inspection period.",
+      "Because Edgewood kept building through the 2000s, a buyer comparing two homes inside the same small city may be comparing a 1974 house to a 2006 one. The insurance and maintenance picture between those is not close.",
+      "Florida reassesses property at market value in the year after a sale, so a long-held Edgewood home's current tax bill is not what a buyer will pay.",
     ],
     sellerConsiderations: [
-      "Buyers value the corridor's proximity to downtown and the airport",
-      "Lot size and condition drive positioning against nearby alternatives",
+      "Edgewood's municipal status is under-marketed and it is a real differentiator — its own police department and city services, in a city of under three thousand people, is not something a Conway or unincorporated address can claim.",
+      "If the home dates from the 1970s — and odds are close to even that it does — a current four-point inspection and wind mitigation report in hand at listing answers the question that most often stalls a contract on this stock.",
+      "Sellers of older homes here compete against genuinely newer inventory a few streets away, which is not true in Conway. Pricing and presentation should account for that directly.",
+      "On the water, assemble dock permits, any navigation district correspondence and seawall history before listing, and be clear in the marketing about which lake the property fronts and how it connects to the wider chain.",
+      "Sellers buying again in Florida should ask about Save Our Homes portability early — it is capped, time-limited, and requires a separate filing alongside the new homestead application.",
     ],
-    amenities: ["South Orange Avenue corridor", "Proximity to SODO district shopping and dining", "Nearby Lake Conway chain access"],
-    transportation: ["South Orange Avenue", "SR 528 access", "Downtown Orlando via Orange Ave", "Orlando International Airport proximity"],
-    image: "/images/communities/edgewood.jpg",
-    imageAlt: "Homes in Edgewood, Florida",
+    amenities: [
+      "Lake Jessamine (about 294 acres)",
+      "Lake Gatlin (about 68 acres)",
+      "Canal access onward to the Conway chain",
+      "Edgewood City Hall and Police Department",
+      "South Orange Avenue corridor",
+    ],
+    transportation: [
+      "South Orange Avenue",
+      "Hoffner Avenue and Holden Avenue",
+      "State Road 528 (Beachline Expressway)",
+      "Interstate 4 via downtown Orlando",
+      "Orlando International Airport — about 20 minutes",
+    ],
+    extraSections: [
+      {
+        heading: "Edgewood\u2019s water: the western end of the chain",
+        body: [
+          "Edgewood\u2019s lakes are not Lake Conway\u2019s main body, and that distinction matters when a listing says \u201cchain of lakes.\u201d Lake Jessamine, at roughly 294 acres, and Lake Gatlin, at about 68 acres, sit within the city, and both reach the wider Conway chain through canals rather than open water. Nearly a fifth of the city\u2019s total area is water: 0.30 of its 1.54 square miles.",
+          "In practice that makes access a property-by-property question rather than a neighbourhood promise. A canal connection is genuine access, but clearance, depth, and the route to open water have to be confirmed for the individual parcel \u2014 and confirmed against the boat you actually intend to keep, not a boat in general. Ask before the inspection period closes.",
+          "Dock, seawall and shoreline work on these lakes runs through the Orange County Environmental Protection Division rather than the city, and waterfront parcels fall under the Lake Conway Water and Navigation Control District, whose millage appears on the tax bill and is not a city tax. A seawall in particular is a months-long path \u2014 engineer-sealed plans, a county site inspection, and approval at a Board of County Commissioners public hearing \u2014 not a repair that fits inside a contract.",
+        ],
+      },
+      {
+        heading: "What being your own city actually buys you",
+        body: [
+          "Edgewood runs more of its own affairs than its size suggests. Building and permitting, code compliance, planning and development, business tax and residential waste are city departments, and the Edgewood Police Department provides full-service law enforcement rather than the county sheriff. A five-member elected City Council serves staggered three-year terms and selects its own President. For a city of under three thousand people on roughly a square and a quarter of land, that is unusual, and much of what the address is.",
+          "The practical consequence for a buyer is that questions go somewhere different than they would a few streets away. Permits, code enforcement, zoning and planning are answered at Edgewood City Hall on Bagshaw Way, not at Orange County \u2014 the opposite of unincorporated Conway next door, where all of those run through the county. If you are buying a home with additions, a converted garage, a pool enclosure or a dock, the permit history lives with the city, and that is where to check before closing rather than after.",
+          "It cuts both ways. City review can be quicker and more personal than a county process. It also means a second set of rules on some projects, and on waterfront work the county still holds jurisdiction regardless. Confirm which government owns a given approval before scheduling anything.",
+        ],
+      },
+    ],
+    image: "/images/communities/edgewood.webp",
+    imageAlt: "Aerial view of an Edgewood, Florida lakefront home with the downtown Orlando skyline beyond",
+    gallery: [
+      {
+        src: "/images/communities/edgewood-stone.webp",
+        alt: "Stone and stucco single-story home on a wide lawn in Edgewood, Florida",
+      },
+      {
+        src: "/images/communities/edgewood-sunset.webp",
+        alt: "Edgewood, Florida ranch home at sunset with a mature palm in the front yard",
+      },
+      {
+        src: "/images/communities/edgewood-city-hall.jpg",
+        alt: "Edgewood City Hall entrance sign at 405 Bagshaw Way, Edgewood, Florida",
+      },
+    ],
     related: ["conway", "belle-isle", "orlando"],
-    reviewNote: "Verify amenity and transportation facts before launch.",
+    reviewNote:
+      "Facts sourced: US Census TIGER (land and water area, GEOID 1219900) and ACS 2020-2024 5-year estimates (population, housing units, build eras, unit types); City of Edgewood official site (council structure, police department, city departments); Orange County Water Atlas (Lake Jessamine and Lake Gatlin acreage and jurisdiction); Orange County (navigation district, EPD dock permitting). Drive time to MCO is an estimate — verify before relying on it.",
   },
   {
     slug: "belle-isle",
@@ -226,10 +283,11 @@ export const communities: Community[] = [
     ],
     buyerConsiderations: [
       "Belle Isle is a municipality, not a neighborhood. It has its own city council of seven district representatives plus a mayor, its own police department, its own code compliance and its own planning and zoning. Permitting and code questions go to the city, not to Orange County — except on the roads and lakes the city does not govern.",
-      "Utilities split across providers: water and sewer come from Orange County, electric from OUC, street lighting from Duke Energy, and waste and recycling collection from a contracted hauler. Budget for the combination rather than assuming a single municipal bill.",
+      "Utilities do not come from the city and they are not uniform across it. Belle Isle's own audited financial statements say Orange County Utilities and the Orlando Utilities Commission provide water and — the city's word — \"limited\" sanitary sewer service. Limited means exactly what it sounds like: not every property is on sewer, and septic systems exist here. Confirm which one serves a specific address before you write an offer, and if it is septic, budget for a septic inspection rather than only a sewer scope. Electric is likewise worth checking per address: the city's financial statements name Duke Energy, while its utilities page routes residents to OUC to start and stop service. Waste and recycling collection is contracted.",
       "The Lake Conway Water and Navigation Control District millage appears on Belle Isle tax bills and is a county district, not a city tax. The city says so on its own site because the question comes up constantly.",
-      "Boat ramp access is not automatic. The city's Perkins ramp requires a resident parking decal, sold annually with a fixed expiration date, and the Venetian ramp has no public parking at all. If lake access is the reason for the purchase, confirm how the specific property reaches the water.",
-      "Dock and seawall permitting runs through the Orange County Environmental Protection Division, not the city, with a minimum thirty-day review inside the navigation district.",
+      "Boat ramp access is not automatic, and living in Belle Isle does not by itself put you on the water. The city's Perkins ramp requires a resident parking decal for the tow vehicle — $50 a year, prorated quarterly, expiring 31 May — and the Venetian ramp has no public parking at all. Two more ramps, Randolph and Ferncreek, are Orange County's. There is no local boat registration for Lake Conway; Florida state vessel registration is all that is required, and the Belle Isle decal is a parking permit, not a boat sticker. If lake access is the reason for the purchase, confirm how that specific property reaches the water.",
+      "Docks are the one place where being a city cuts the other way. Belle Isle has its own dock ordinance — Chapter 48 of the city code — requiring a city permit for a new dock, an addition, or the repair of a non-conforming one. Whether a Belle Isle dock ALSO needs an Orange County EPD permit is genuinely unsettled in the published code: the county chapter reads as countywide, while the city ordinance refers to county authorization only \"when under county jurisdiction.\" No published source resolves it. Call both — EPD at (407) 836-1400 and Belle Isle City Hall — before you plan dock work, and do not rely on a contractor's assurance.",
+      "A seawall is a far heavier lift than a dock. Shoreline hardening or dredging requires a county Shoreline Alteration permit with engineer-sealed plans, a site inspection, and approval at a Board of County Commissioners public hearing, followed by a thirty-day appeal period — and the permit is good for one year. That is a months-long path, not a repair you slot in before closing.",
       "Older housing stock means insurability deserves early attention — roof age and system updates drive both premium and availability here more than square footage does.",
     ],
     sellerConsiderations: [
@@ -255,11 +313,31 @@ export const communities: Community[] = [
       "Orlando International Airport — about 15 minutes",
       "Downtown Orlando — about 15 minutes",
     ],
+    extraSections: [
+      {
+        heading: "What \u201clake access\u201d actually means here",
+        body: [
+          "This is the most misunderstood thing about buying in Belle Isle, and the listing portals are no help. A Belle Isle address does not by itself put you on the Conway chain. More than half the city\u2019s area is water \u2014 2.78 of its 5.19 square miles \u2014 but the houses are not all on it, and the phrase \u201clake access\u201d covers four genuinely different things worth very different money.",
+          "Direct lakefront means the parcel touches open water and can, subject to permitting, carry its own dock. Canal-front means it touches water that reaches the lake through a channel \u2014 real access, but what a given boat can pass through is a property-by-property question, not a neighbourhood one. Deeded or community access means the parcel itself is dry and the right to reach water comes from somewhere else: an association easement, a shared dock, a platted lake lot. Lake view means exactly that and nothing more. A listing may use \u201clake access\u201d for any of the last three. Ask which one, in writing, before the inspection period runs out.",
+          "Public access is different and every resident does have it. The city runs two ramps: Perkins, where trailer parking needs a resident decal for the tow vehicle at $50 a year, prorated quarterly and expiring 31 May; and Venetian, which has no public parking at all. Orange County runs two more on the chain, Randolph and Ferncreek. Warren Park, the largest park inside the city, has a canoe launch and is county-owned.",
+          "One myth worth killing: there is no local boat registration for Lake Conway. Florida state vessel registration is all that is required \u2014 the navigation district has no registration provision, and neither Orange County nor Belle Isle imposes one. The decal people are thinking of is a parking permit for the tow vehicle at a ramp, not a sticker for the boat.",
+        ],
+      },
+      {
+        heading: "Docks, seawalls, and which government you answer to",
+        body: [
+          "Belle Isle being its own city usually works in an owner\u2019s favour. On docks it cuts the other way, because it adds a layer rather than replacing one. The city has its own dock ordinance at Chapter 48 of its code, requiring a city permit for a new dock, an addition, or repair of a non-conforming one. Whether a Belle Isle dock also needs an Orange County EPD permit is unresolved in the published code \u2014 the county chapter reads as countywide, while the city ordinance refers to county authorisation only \u201cwhen under county jurisdiction.\u201d No published source settles it. Call both, EPD at (407) 836-1400 and Belle Isle City Hall, and do not take a contractor\u2019s word for which applies.",
+          "Waterfront parcels also sit inside the Lake Conway Water and Navigation Control District, an Orange County special district created by act of the Florida Legislature in the late 1950s. Its millage appears on the Belle Isle tax bill and is not a city tax \u2014 the city says so on its own website because residents ask constantly. Applications inside the district carry a minimum thirty-day review before a building permit can follow, so a dock project runs on that clock, not on a closing date.",
+          "A seawall is a different order of undertaking. Hardening or dredging a shoreline requires a county Shoreline Alteration permit: engineer-sealed plans, a site inspection, approval at a Board of County Commissioners public hearing, then a thirty-day appeal period before issue \u2014 valid one year. That is months. A seller who finds a failing seawall mid-contract is not fixing it before closing, and a buyer should price that in rather than assume a credit covers it.",
+          "Two changes are coming. Orange County has proposed steep increases to environmental permit fees unchanged since 2007, phasing in from October 2026. And the county is rewriting its boating ordinance, with a final Board hearing set for December 2026 that would add idle-speed and slow-speed zones across the chain. Neither is settled law yet.",
+        ],
+      },
+    ],
     image: "/images/communities/belle-isle.jpg",
     imageAlt: "Lakefront homes in Belle Isle, Florida on the Conway Chain of Lakes",
     related: ["conway", "edgewood", "orlando"],
     reviewNote:
-      "Facts sourced: 2020 Census and ACS 2020-2024 5-year estimates (population, land and water area, housing units, build eras); City of Belle Isle official site (government structure, history, parks, boat ramps, utilities, jurisdiction road list); Orange County (navigation district, EPD dock permitting, Warren Park). Drive times are modeled free-flow estimates. Park street addresses intentionally omitted - the city publishes none. Historical detail (1924 founding, 1954 reinstatement, 1972 charter) is from the city's own history page.",
+      "Facts sourced: 2020 Census and ACS 2020-2024 5-year estimates (population, land and water area, housing units, build eras); City of Belle Isle official site (government structure, history, parks, boat ramps, jurisdiction road list); City of Belle Isle FY2022 audited financial statements (utility providers - the 'limited sanitary sewer' wording is theirs); Belle Isle Code Ch. 48 Art. II (city dock permit) and Sec. 18-20 (ramp decal); Orange County (navigation district, EPD dock permitting, Shoreline Alteration permit, Warren Park). NOTE: the city's financial statements name Duke Energy for electric while its utilities page routes residents to OUC - the page reports the conflict rather than picking one. Whether a Belle Isle dock also needs a county EPD permit is unresolved in the published code; the page says so. Drive times are modeled free-flow estimates. Park street addresses intentionally omitted - the city publishes none.",
   },
   {
     slug: "college-park",

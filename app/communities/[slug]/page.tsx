@@ -7,6 +7,7 @@ import { Reveal } from "@/components/animation/Reveal";
 import Image from "next/image";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { ChainMap } from "@/components/sections/ChainMap";
+import { EdgewoodMap } from "@/components/sections/EdgewoodMap";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CommunityCard } from "@/components/ui/CommunityCard";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
@@ -122,9 +123,8 @@ export default async function CommunityPage({
 
           {/* The chain map runs full-width under the intro columns — it only
               applies to the communities that actually sit on the chain. */}
-          {["conway", "belle-isle", "edgewood"].includes(community.slug) ? (
-            <ChainMap />
-          ) : null}
+          {["conway", "belle-isle"].includes(community.slug) ? <ChainMap /> : null}
+          {community.slug === "edgewood" ? <EdgewoodMap /> : null}
 
           {/* Extra photos, when the community has them. */}
           {community.gallery?.length ? (

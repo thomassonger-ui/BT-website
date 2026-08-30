@@ -23,8 +23,10 @@ export function ChainMap({ highlight }: { highlight?: "conway" | "belle-isle" })
       <div className="border-b border-ink/10 px-6 py-4">
         <h3 className="font-display text-xl font-medium text-ink">The Conway Chain of Lakes</h3>
         <p className="mt-1 text-sm text-muted">
-          Two roads divide the chain into separate basins — which one a property fronts
-          decides where its dock can actually take you.
+          Two bridges divide the chain into separate basins. Orange County&rsquo;s code names them
+          Little Lake Conway to the north, then the middle lobe of Lake Conway below the Hoffner
+          Avenue bridge, then the south lobe below Nela Avenue. Which basin a property fronts
+          decides where its dock can take you without a bridge transit.
         </p>
       </div>
 
@@ -94,12 +96,13 @@ export function ChainMap({ highlight }: { highlight?: "conway" | "belle-isle" })
       <figcaption className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-ink/10 px-6 py-4 text-xs text-muted">
         <span className="flex items-center gap-2">
           <span className="inline-block h-1 w-6 rounded-full bg-gold" />
-          Hoffner Ave &amp; Nela Ave — the basin divisions
+          Hoffner Ave &amp; Nela Ave bridges — the basin divisions
         </span>
         <span className="flex items-center gap-2">
           <span className="inline-block h-3 w-3 rounded-full bg-teal-700" />
           Bear Team Real Estate, 2300 S Crystal Lake Dr
         </span>
+        <span>Little Lake Conway continues north of this frame</span>
         <span className="ml-auto">Lake and road data &copy; OpenStreetMap contributors</span>
       </figcaption>
     </figure>
