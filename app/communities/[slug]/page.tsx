@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/animation/Reveal";
 import Image from "next/image";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { ChainMap } from "@/components/sections/ChainMap";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CommunityCard } from "@/components/ui/CommunityCard";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
@@ -115,7 +116,15 @@ export default async function CommunityPage({
                 </ul>
               </div>
             </div>
+
           </div>
+
+
+          {/* The chain map runs full-width under the intro columns — it only
+              applies to the communities that actually sit on the chain. */}
+          {["conway", "belle-isle", "edgewood"].includes(community.slug) ? (
+            <ChainMap />
+          ) : null}
 
           <div className="mt-16 grid gap-8 md:grid-cols-2">
             <Reveal>
