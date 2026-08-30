@@ -4,6 +4,7 @@ import { TourHero } from "@/components/sections/TourHero";
 import { ProofStrip } from "@/components/sections/ProofStrip";
 import { Pathways } from "@/components/sections/Pathways";
 import { CredentialsBand } from "@/components/sections/CredentialsBand";
+import { NeighborhoodLinks } from "@/components/sections/NeighborhoodLinks";
 import { MembershipLogoBar } from "@/components/sections/MembershipLogoBar";
 
 export const metadata: Metadata = buildMetadata({
@@ -28,6 +29,7 @@ export default function HomePage() {
       <ProofStrip />
       <CredentialsBand />
       <Pathways />
+      <NeighborhoodLinks />
       <MembershipLogoBar />
     </>
   );
