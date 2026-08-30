@@ -15,7 +15,7 @@ import { siteConfig } from "@/config/site";
 export const metadata: Metadata = buildMetadata({
   title: "About Bear Team Real Estate",
   description:
-    "Bear Team Real Estate is a Central Florida real estate company combining decades of experience with modern service — buyer and seller representation across the Orlando area.",
+    "Bear Team Real Estate pairs decades of Central Florida experience with modern service — buyer and seller representation across the Orlando area.",
   path: "/about",
 });
 
