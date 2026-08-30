@@ -12,7 +12,7 @@ import { compliance } from "@/config/compliance";
 export const metadata: Metadata = buildMetadata({
   title: "Contact Bear Team Real Estate",
   description:
-    "Call, email, schedule, or send a message to Bear Team Real Estate in Orlando — buying, selling, property value, relocation, or general Central Florida real estate questions.",
+    "Call, email, or schedule with Bear Team Real Estate in Orlando — buying, selling, property value, relocation, or general Central Florida questions.",
   path: "/contact",
 });
 

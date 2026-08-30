@@ -12,7 +12,7 @@ import { compliance } from "@/config/compliance";
 export const metadata: Metadata = buildMetadata({
   title: "Relocating to Central Florida | Relocation Services",
   description:
-    "Moving into, out of, or within Central Florida? Bear Team provides dedicated relocation guidance — community comparison, remote touring, and coordinated timelines.",
+    "Moving into, out of, or within Central Florida? Bear Team offers dedicated relocation guidance — community comparison, remote touring, and timelines.",
   path: "/relocation",
 });
 

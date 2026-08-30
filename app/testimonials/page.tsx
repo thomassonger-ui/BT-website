@@ -11,7 +11,7 @@ import type { Testimonial } from "@/types/content";
 export const metadata: Metadata = buildMetadata({
   title: "Reviews by Real People",
   description:
-    "What buyers and sellers across Central Florida say about working with Bethanne Baer and Bear Team Real Estate — real Google reviews and client testimonials from real transactions.",
+    "What Central Florida buyers and sellers say about working with Bethanne Baer and Bear Team — real Google reviews and testimonials from real closings.",
   path: "/testimonials",
 });
 

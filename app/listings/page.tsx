@@ -13,7 +13,7 @@ export const revalidate = 1800;
 export const metadata: Metadata = buildMetadata({
   title: "Featured Listings | Active & Pending Sales",
   description:
-    "Bear Team Real Estate's featured listings across Central Florida — active homes for sale and pending sales, listed by Bethanne Baer, Broker. Schedule a private showing.",
+    "Bear Team's featured listings across Central Florida — active homes for sale and pending sales, listed by Bethanne Baer, Broker. Schedule a showing.",
   path: "/listings",
 });
 

@@ -11,7 +11,7 @@ import { compliance } from "@/config/compliance";
 export const metadata: Metadata = buildMetadata({
   title: "Real Estate Resources & Guides",
   description:
-    "Buyer guides, seller guides, financing preparation, inspection and appraisal overviews, moving checklists, and Central Florida relocation education from Bear Team.",
+    "Buyer and seller guides, financing prep, inspection and appraisal overviews, moving checklists, and Central Florida relocation education from Bear Team.",
   path: "/resources",
 });
 

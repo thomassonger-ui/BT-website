@@ -7,7 +7,7 @@ import { siteConfig } from "@/config/site";
 export const metadata: Metadata = buildMetadata({
   title: "Privacy Policy",
   description:
-    "How BearTeam LLC, doing business as Bear Team Real Estate, collects, uses, discloses, retains, and protects information when you visit our website or request real estate services.",
+    "How BearTeam LLC, dba Bear Team Real Estate, collects, uses, discloses, and protects information when you visit our site or request real estate services.",
   path: "/privacy",
 });
 

@@ -14,7 +14,7 @@ import { compliance } from "@/config/compliance";
 export const metadata: Metadata = buildMetadata({
   title: "Home Value & Orlando Market Brief | What Could Your Property Sell For?",
   description:
-    "Orlando's market moved — did your home's value move with it? See the current Orlando MSA market brief and request a property-value consultation from an experienced local team.",
+    "Orlando's market moved — did your home's value move with it? See the current market brief and request a property-value consultation from a local team.",
   path: "/home-value",
 });
 

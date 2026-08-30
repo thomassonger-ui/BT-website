@@ -11,7 +11,7 @@ import { compliance } from "@/config/compliance";
 export const metadata: Metadata = buildMetadata({
   title: "Search Homes in Central Florida",
   description:
-    "You don't need another property-search website — you need the right homes, verified by an experienced local team. Tell Bear Team what you're looking for and we'll search, screen, and organize the strongest options.",
+    "You don't need another property-search site — you need the right homes. Tell Bear Team what you're looking for and we'll search, screen, and organize.",
   path: "/search",
 });
 

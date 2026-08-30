@@ -17,7 +17,7 @@ import { compliance } from "@/config/compliance";
 export const metadata: Metadata = buildMetadata({
   title: "Sell Your Central Florida Property",
   description:
-    "Sell with a defined strategy — pricing, preparation, professional marketing, showing management, negotiation, and contract-to-close coordination in Orlando and Central Florida.",
+    "Sell with a defined strategy — pricing, preparation, professional marketing, showing management, and contract-to-close coordination in Central Florida.",
   path: "/sell",
 });
 
