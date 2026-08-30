@@ -3,11 +3,19 @@ import Link from "next/link";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import type { Community } from "@/types/content";
 
-/** Community card used on the homepage and /communities index. */
+/**
+ * Community card used on the homepage and /communities index.
+ *
+ * The <article> MUST keep `relative`. The title link uses the stretched-link
+ * pattern (`after:absolute after:inset-0`) so the whole card is clickable —
+ * and without a positioned ancestor that ::after resolves against the initial
+ * containing block and covers the ENTIRE PAGE, swallowing every other click on
+ * it. That shipped once and killed the hero buttons on all 18 community pages.
+ */
 export function CommunityCard({ community }: { community: Community }) {
   const hasPhoto = !community.image.includes("placeholder");
   return (
-    <article className="group flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-soft-white transition-shadow hover:shadow-lg">
+    <article className="group relative flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-soft-white transition-shadow hover:shadow-lg">
       {hasPhoto ? (
         <div className="relative aspect-[16/10] overflow-hidden">
           <Image
