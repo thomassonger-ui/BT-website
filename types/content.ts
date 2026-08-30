@@ -39,6 +39,9 @@ export type Community = ReviewFlag & {
   imageAlt: string;
   /** Extra photos rendered as a gallery under the intro. Optional. */
   gallery?: { src: string; alt: string }[];
+  /** Attribution for image/gallery when the source licence requires it
+   *  (e.g. Wikimedia Commons CC BY-SA). Rendered under the gallery. */
+  photoCredit?: { text: string; href: string };
   /** Long-form sections for communities with subject matter the standard
    *  fields don't cover — e.g. docks and boating on the Conway chain. */
   extraSections?: { heading: string; body: string[] }[];

@@ -336,7 +336,25 @@ export const communities: Community[] = [
       },
     ],
     image: "/images/communities/belle-isle.jpg",
-    imageAlt: "Lakefront homes in Belle Isle, Florida on the Conway Chain of Lakes",
+    imageAlt: "Belle Isle City Hall at 1600 Nela Avenue, Belle Isle, Florida",
+    gallery: [
+      {
+        src: "/images/communities/belle-isle-city-limit.webp",
+        alt: "Belle Isle city limit sign on Nela Avenue, marking the boundary with unincorporated Orange County",
+      },
+      {
+        src: "/images/communities/belle-isle-lesser-park.webp",
+        alt: "Lesser Park, a City of Belle Isle neighbourhood park shaded by live oaks",
+      },
+      {
+        src: "/images/communities/belle-isle-holloway-park.webp",
+        alt: "Holloway Park, a City of Belle Isle neighbourhood park with bench seating",
+      },
+    ],
+    photoCredit: {
+      text: "Michael Rivera, CC BY-SA 4.0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/Category:Belle_Isle,_Florida",
+    },
     related: ["conway", "edgewood", "orlando"],
     reviewNote:
       "Facts sourced: 2020 Census and ACS 2020-2024 5-year estimates (population, land and water area, housing units, build eras); City of Belle Isle official site (government structure, history, parks, boat ramps, jurisdiction road list); City of Belle Isle FY2022 audited financial statements (utility providers - the 'limited sanitary sewer' wording is theirs); Belle Isle Code Ch. 48 Art. II (city dock permit) and Sec. 18-20 (ramp decal); Orange County (navigation district, EPD dock permitting, Shoreline Alteration permit, Warren Park). NOTE: the city's financial statements name Duke Energy for electric while its utilities page routes residents to OUC - the page reports the conflict rather than picking one. Whether a Belle Isle dock also needs a county EPD permit is unresolved in the published code; the page says so. Drive times are modeled free-flow estimates. Park street addresses intentionally omitted - the city publishes none.",

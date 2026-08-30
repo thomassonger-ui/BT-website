@@ -146,6 +146,20 @@ export default async function CommunityPage({
             </div>
           ) : null}
 
+          {community.photoCredit ? (
+            <p className="mt-3 text-[11px] leading-relaxed text-charcoal-soft/70">
+              Photos:{" "}
+              <a
+                href={community.photoCredit.href}
+                rel="noopener noreferrer nofollow"
+                target="_blank"
+                className="underline underline-offset-2 hover:text-ink"
+              >
+                {community.photoCredit.text}
+              </a>
+            </p>
+          ) : null}
+
           {/* Long-form sections — currently the Conway chain's dock and boating
               rules, which the standard community fields have no room for. */}
           {community.extraSections?.length ? (
