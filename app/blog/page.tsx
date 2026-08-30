@@ -13,7 +13,7 @@ export const revalidate = 1800;
 export const metadata: Metadata = buildMetadata({
   title: "Orlando Real Estate Blog | Market News for Buyers & Sellers",
   description:
-    "Weekly answers to the questions Orlando buyers and sellers are asking right now — current mortgage rates, closing costs and title rules, market data, and practical strategy. Cited, current, and written for Central Florida.",
+    "Weekly answers for Orlando buyers and sellers — mortgage rates, closing costs, title rules, and market data. Cited, current, written for Central Florida.",
   path: "/blog",
 });
 
