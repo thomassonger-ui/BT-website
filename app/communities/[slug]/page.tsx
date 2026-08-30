@@ -7,7 +7,7 @@ import { Reveal } from "@/components/animation/Reveal";
 import Image from "next/image";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { ChainMap } from "@/components/sections/ChainMap";
-import { EdgewoodMap } from "@/components/sections/EdgewoodMap";
+import { CityMap } from "@/components/sections/CityMap";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CommunityCard } from "@/components/ui/CommunityCard";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
@@ -123,8 +123,11 @@ export default async function CommunityPage({
 
           {/* The chain map runs full-width under the intro columns — it only
               applies to the communities that actually sit on the chain. */}
-          {["conway", "belle-isle"].includes(community.slug) ? <ChainMap /> : null}
-          {community.slug === "edgewood" ? <EdgewoodMap /> : null}
+          {/* Conway is unincorporated — no boundary to draw, so it gets the chain map.
+              Edgewood and Belle Isle are real cities; their limits are the story. */}
+          {community.slug === "conway" ? <ChainMap /> : null}
+          {community.slug === "edgewood" ? <CityMap city="edgewood" /> : null}
+          {community.slug === "belle-isle" ? <CityMap city="belle-isle" /> : null}
 
           {/* Extra photos, when the community has them. */}
           {community.gallery?.length ? (

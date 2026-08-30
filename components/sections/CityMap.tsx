@@ -1,32 +1,50 @@
 import { edgewoodMap } from "@/content/edgewood-map";
+import { belleIsleMap } from "@/content/belle-isle-map";
 
 /**
- * EDGEWOOD CITY MAP.
+ * CITY MAP — Edgewood and Belle Isle.
  *
- * Shows what a text description cannot: that Edgewood is a real municipality
- * with drawn city limits, sitting among the lakes on the western side of the
- * Conway chain, distinct from Orlando around it. Geometry is OpenStreetMap
- * (ODbL) — city boundary, lakes and roads — with City Hall at its published
- * address. Attribution below is required by the licence.
+ * Both are incorporated cities that people mistake for Orlando neighbourhoods,
+ * and the drawn city limits are the fastest way to show otherwise. Geometry is
+ * OpenStreetMap (ODbL): city boundary, lakes and roads, with City Hall at each
+ * city's published address. Attribution below is required by the licence.
+ *
+ * Conway is NOT here — it is unincorporated and has no boundary to draw; it uses
+ * ChainMap instead.
  */
-export function EdgewoodMap() {
-  const { viewBox, boundary, lakes, roads, hall, labels } = edgewoodMap;
+const MAPS = {
+  edgewood: {
+    data: edgewoodMap,
+    title: "The City of Edgewood",
+    blurb:
+      "Edgewood is its own municipality, not a neighbourhood of Orlando — about 1.24 square miles of land wrapped around the lakes on the western side of the Conway chain.",
+    hallLabel: "City Hall, 405 Bagshaw Way",
+  },
+  "belle-isle": {
+    data: belleIsleMap,
+    title: "The City of Belle Isle",
+    blurb:
+      "Belle Isle is its own municipality with its own police department — and more of its area is water than land: 2.78 of its 5.19 square miles. The city limits wrap Lake Conway and Little Lake Conway.",
+    hallLabel: "City Hall, 1600 Nela Avenue",
+  },
+} as const;
+
+export function CityMap({ city }: { city: keyof typeof MAPS }) {
+  const cfg = MAPS[city];
+  const { viewBox, boundary, lakes, roads, hall, labels } = cfg.data;
   return (
     <figure className="my-12 overflow-hidden rounded-lg border border-ink/10 bg-cream">
       <div className="border-b border-ink/10 px-6 py-4">
-        <h3 className="font-display text-xl font-medium text-ink">The City of Edgewood</h3>
-        <p className="mt-1 text-sm text-muted">
-          Edgewood is its own municipality, not a neighbourhood of Orlando — about 1.24 square
-          miles of land wrapped around the lakes on the western side of the Conway chain.
-        </p>
+        <h3 className="font-display text-xl font-medium text-ink">{cfg.title}</h3>
+        <p className="mt-1 text-sm text-muted">{cfg.blurb}</p>
       </div>
 
       <div className="bg-[#EAF1F0] p-4 sm:p-6">
         <svg
           viewBox={viewBox}
-          className="mx-auto block h-auto w-full max-w-[680px]"
+          className="mx-auto block h-auto w-full max-w-[620px]"
           role="img"
-          aria-label="Map of the City of Edgewood, Florida, showing its city limits, the surrounding lakes including Lake Jessamine, Lake Gatlin and Little Lake Conway, and the location of Edgewood City Hall."
+          aria-label={`Map of ${cfg.title}, Florida, showing its city limits, the surrounding lakes, and the location of City Hall.`}
         >
           <g fill="none" strokeLinecap="round">
             <g stroke="#CBD8D5" strokeWidth={2}>
@@ -47,7 +65,6 @@ export function EdgewoodMap() {
             ))}
           </g>
 
-          {/* city limits — the point of the map */}
           <g stroke="#A8792E" strokeWidth={5} fill="none" strokeLinejoin="round">
             {boundary.map((d, i) => (
               <path key={`b${i}`} d={d} />
@@ -83,11 +100,11 @@ export function EdgewoodMap() {
       <figcaption className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-ink/10 px-6 py-4 text-xs text-muted">
         <span className="flex items-center gap-2">
           <span className="inline-block h-1 w-6 rounded-full bg-gold" />
-          Edgewood city limits
+          City limits
         </span>
         <span className="flex items-center gap-2">
           <span className="inline-block h-3 w-3 rounded-full bg-teal-700" />
-          City Hall, 405 Bagshaw Way
+          {cfg.hallLabel}
         </span>
         <span className="ml-auto">City limits, lake and road data &copy; OpenStreetMap contributors</span>
       </figcaption>

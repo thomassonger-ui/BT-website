@@ -33,7 +33,7 @@ const intros = Object.fromEntries(communities.map((c) => [c.slug, c.intro]));
 const orangeTiles: CommunityTile[] = [
   { name: "Orlando", slug: "orlando", img: "/images/communities/orlando.jpg", blurb: intros["orlando"] },
   { name: "Conway", slug: "conway", img: "/images/communities/conway.jpg", blurb: intros["conway"] },
-  { name: "Edgewood", slug: "edgewood", img: "/images/communities/edgewood.jpg", blurb: intros["edgewood"] },
+  { name: "Edgewood", slug: "edgewood", img: "/images/communities/edgewood.webp", blurb: intros["edgewood"] },
   { name: "Belle Isle", slug: "belle-isle", img: "/images/communities/belle-isle.jpg", blurb: intros["belle-isle"] },
   { name: "Winter Park", slug: "winter-park", img: "/images/communities/winter-park.jpg", blurb: intros["winter-park"] },
   { name: "College Park", slug: "college-park", img: "/images/communities/college-park.jpg", blurb: intros["college-park"] },
