@@ -8,6 +8,7 @@ import Image from "next/image";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { ChainMap } from "@/components/sections/ChainMap";
 import { CityMap } from "@/components/sections/CityMap";
+import { OrlandoLimitsMap } from "@/components/sections/OrlandoLimitsMap";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CommunityCard } from "@/components/ui/CommunityCard";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
@@ -128,6 +129,9 @@ export default async function CommunityPage({
           {community.slug === "conway" ? <ChainMap /> : null}
           {community.slug === "edgewood" ? <CityMap city="edgewood" /> : null}
           {community.slug === "belle-isle" ? <CityMap city="belle-isle" /> : null}
+          {/* Orlando gets the jurisdiction map, not a chain map: the page argues that
+              a mailing address does not tell you which government you are in. */}
+          {community.slug === "orlando" ? <OrlandoLimitsMap /> : null}
 
           {/* Extra photos, when the community has them. */}
           {community.gallery?.length ? (

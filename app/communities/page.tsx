@@ -31,7 +31,7 @@ const intros = Object.fromEntries(communities.map((c) => [c.slug, c.intro]));
  * "current options" micro-form. REVIEW: verify blurb facts before launch.
  */
 const orangeTiles: CommunityTile[] = [
-  { name: "Orlando", slug: "orlando", img: "/images/communities/orlando.jpg", blurb: intros["orlando"] },
+  { name: "City of Orlando", slug: "orlando", img: "/images/communities/orlando.jpg", blurb: intros["orlando"] },
   { name: "Conway", slug: "conway", img: "/images/communities/conway.jpg", blurb: intros["conway"] },
   { name: "Edgewood", slug: "edgewood", img: "/images/communities/edgewood.webp", blurb: intros["edgewood"] },
   { name: "Belle Isle", slug: "belle-isle", img: "/images/communities/belle-isle.jpg", blurb: intros["belle-isle"] },

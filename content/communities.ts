@@ -13,31 +13,91 @@ import type { Community } from "@/types/content";
 export const communities: Community[] = [
   {
     slug: "orlando",
-    name: "Orlando",
+    name: "City of Orlando",
     intro:
-      "Central Florida's urban core — a diverse housing market spanning historic districts, downtown condominiums, and established suburban neighborhoods.",
+      "The City of Orlando is a municipality of about 320,000 people inside an Orange County of roughly 1.47 million \u2014 which means most addresses that read \u201cOrlando, FL\u201d are not in the city at all.",
     lifestyle:
-      "Downtown Orlando offers dining, performing arts at the Dr. Phillips Center, Lake Eola Park, and a growing urban residential scene, with quieter established neighborhoods radiating outward.",
+      "Inside the city limits the pattern is unusually urban for Central Florida: Lake Eola Park and the Dr. Phillips Center anchor a downtown core, brick-street neighbourhoods like Thornton Park and College Park sit within a few minutes of it, and Baldwin Park and Lake Nona add newer walkable districts on the eastern side.",
     locationContext:
-      "The center of the Orlando metropolitan area, with direct access to Interstate 4, State Road 408, and Orlando International Airport to the southeast.",
+      "The city wraps the centre of the metropolitan area and reaches south-east in a separate arm to take in Orlando International Airport and Lake Nona. Interstate 4, SR 408 and SR 528 all cross it, and SunRail runs north\u2013south through downtown.",
     housingOverview:
-      "Housing spans early-1900s bungalows in historic districts, mid-century ranch homes, downtown high-rise condominiums, townhomes, and newer infill construction.",
-    propertyTypes: ["Historic bungalows", "High-rise condominiums", "Ranch homes", "Townhomes", "New infill construction"],
+      "The city\u2019s housing stock leans far more urban than the county around it. About 41% of city housing units are single-family, against 62% county-wide, while roughly 40% sit in buildings of ten or more units versus 23% across Orange County. Early-1900s bungalows in the historic districts, mid-century ranch homes, downtown high-rises and newer infill all trade in the same market.",
+    propertyTypes: [
+      "Historic bungalows and frame vernacular homes",
+      "Downtown high-rise condominiums",
+      "Mid-century ranch homes",
+      "Townhomes and new infill",
+      "Purpose-built rental apartments",
+    ],
     buyerConsiderations: [
-      "Historic-district renovation and preservation guidelines in some neighborhoods",
-      "Condominium association review for downtown buildings",
-      "Wide price and condition range between neighborhoods",
+      "Confirm the address is inside city limits before assuming anything about permits, utilities or millage \u2014 an Orlando mailing address does not establish it",
+      "Six local historic districts carry design review; exterior work there needs a Certificate of Appropriateness before a building permit",
+      "Condominium association and lender review matter more downtown than almost anywhere else in the metro",
+      "Median value inside the city and across the county are close \u2014 about $394,100 against $390,100 \u2014 so the city is not automatically the expensive option",
     ],
     sellerConsiderations: [
-      "Buyer pools differ sharply by neighborhood and property style",
-      "Presentation and pricing strategy matter in a market with many alternatives",
+      "Buyer pools differ sharply between a downtown condominium, a historic-district bungalow and a Lake Nona house \u2014 one pricing approach does not carry across them",
+      "In a historic district, unpermitted exterior changes made by a previous owner surface during diligence and are slow to cure",
+      "Roughly three in five occupied units in the city are rentals, so investor buyers are a real part of the pool for some property types",
     ],
-    amenities: ["Lake Eola Park", "Dr. Phillips Center for the Performing Arts", "Camping World Stadium", "Kia Center", "Orlando Urban Trail"],
-    transportation: ["Interstate 4", "SR 408 East-West Expressway", "SunRail commuter stations", "LYNX bus network", "Orlando International Airport"],
+    amenities: [
+      "Lake Eola Park",
+      "Dr. Phillips Center for the Performing Arts",
+      "Kia Center",
+      "Camping World Stadium",
+      "Orlando Urban Trail",
+    ],
+    transportation: [
+      "Interstate 4",
+      "SR 408 East\u2013West Expressway",
+      "SR 528 Beachline Expressway",
+      "SunRail commuter stations",
+      "LYNX bus network",
+      "Orlando International Airport",
+    ],
+    extraSections: [
+      {
+        heading: "Is the address actually in the City of Orlando?",
+        body: [
+          "This is the first question to settle, and most buyers never ask it. Orange County says plainly that 62% of its residents live in unincorporated areas, with the other 38% spread across thirteen municipalities. The postal service, meanwhile, hands out \u201cOrlando, FL\u201d addresses across most of the county. The mailing address and the city limits are two different things, and only one of them determines who governs the property.",
+          "The city\u2019s shape makes this harder than it sounds. In the Census Bureau\u2019s own boundary file the City of Orlando is not a single polygon: it is sixteen separate pieces covering about 129.6 square miles of land, and it contains forty-three pockets of unincorporated Orange County that sit entirely inside it. Orange County defines one of these as an enclave \u2014 \u201cany unincorporated area that may only be accessed through a municipality.\u201d You can be surrounded by Orlando on every side and not be in Orlando.",
+          "There are two reliable ways to check and one that is free and instant. The county\u2019s own guidance is the street sign: \u201cIf your street sign has an Orange on it, you live in unincorporated Orange County.\u201d Each municipality uses its own emblem \u2014 Orlando uses the Lake Eola fountain, Winter Park a peacock. The definitive check is the Orange County Property Appraiser\u2019s parcel record, which names the municipality for every property in the county. Do that before you write an offer, not after.",
+          "It matters because annexation, in the county\u2019s words, makes the municipality \u201cthe primary provider of local government services\u201d in place of the county. That is the permit office you file with, the agency that answers a call, the millage lines on the tax bill, and the code that governs what you may build. Utility service is a separate question again: the electric and water service boundaries do not follow the city line, so confirm the provider by address rather than inferring it from the jurisdiction.",
+          "Our own office is a working example. It carries an Orlando mailing address and sits in unincorporated Conway, outside the city limits entirely.",
+        ],
+      },
+      {
+        heading: "What changes when it is: buying, renting and selling",
+        body: [
+          "For buyers, the sharpest edge is historic designation. The city has six local historic districts \u2014 Downtown (1980), Lake Cherokee (1981), Lake Copeland (1984), Lake Eola Heights (1989), Lake Lawsona (1994) and Colonialtown South (2000). Thornton Park sits largely inside Lake Lawsona. In these districts exterior changes need a Certificate of Appropriateness before the building permit. Minor review \u2014 painting, re-roofing, repair with matching materials \u2014 runs through a Minor Review Committee in roughly two to ten days. Major review \u2014 alterations, additions, new construction, relocation or demolition \u2014 goes to a full Historic Preservation Board hearing and takes about seven weeks from the closing date. A buyer planning to replace windows or add a second storey should price that timeline into the contract, not discover it afterwards.",
+          "For renters, the city is the part of the county where renting is the norm rather than the exception: about 60.5% of occupied units inside the city are rentals, against 43.2% county-wide, and median gross rent is close between the two \u2014 roughly $1,747 in the city and $1,775 across the county. Florida\u2019s landlord-tenant statute, Chapter 83, applies statewide, but local programmes and protections are attached to a specific government. A renter who is not sure which one they live under should settle the jurisdiction question first, because it determines which office they can actually call.",
+          "For sellers, the practical consequences are permits and paperwork. Work done under an Orange County permit on a property later annexed into the city, or work done with no permit at all, tends to surface during a buyer\u2019s diligence, and the record lives with whichever government had jurisdiction on the day it was issued. Knowing which office holds the file \u2014 and pulling the permit history before listing rather than during a contract \u2014 is the difference between a disclosure and a renegotiation.",
+        ],
+      },
+    ],
     image: "/images/communities/orlando.jpg",
-    imageAlt: "Homes in Orlando, Florida",
-    related: ["college-park", "conway", "metrowest"],
-    reviewNote: "Verify amenity and transportation facts before launch.",
+    imageAlt: "The downtown Orlando skyline and the Linton E. Allen Memorial Fountain seen across Lake Eola",
+    gallery: [
+      {
+        src: "/images/communities/orlando-bungalow.webp",
+        alt: "Craftsman bungalow in the Lake Eola Heights historic district, Orlando",
+      },
+      {
+        src: "/images/communities/orlando-historic-house.webp",
+        alt: "Restored two-storey frame house with a wraparound porch in Lake Eola Heights, Orlando",
+      },
+      {
+        src: "/images/communities/orlando-central-blvd.webp",
+        alt: "Central Boulevard in downtown Orlando, looking along the street past mid-rise buildings",
+      },
+    ],
+    photoCredit: {
+      text: "Lake Eola skyline \u00a9 JER3L1337 (CC BY 4.0) \u00b7 bungalow \u00a9 Visitor7 (CC BY-SA 3.0) \u00b7 Lake Eola Heights house \u00a9 Ebyabe (CC BY 2.5) \u00b7 Central Boulevard by Beno\u00eet Prieur (CC0) \u2014 via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/Category:Orlando,_Florida",
+    },
+    related: ["thornton-park", "college-park", "conway"],
+    reviewNote:
+      "Facts sourced: ACS 2020-2024 5-year estimates via Census Reporter (population, housing units, tenure, unit types, median value and gross rent, for Orlando city GEOID 1253000 and Orange County GEOID 12095); US Census TIGERweb Incorporated Places (land and water area, and the boundary geometry from which the 16-piece / 43-enclave counts were computed and cross-checked against the published AREALAND+AREAWATER to within 0.6%); Orange County Planning and Development annexation page (62%/38% split, thirteen municipalities, enclave definition, street-sign guidance, municipality emblems, 'primary provider of local government services'); City of Orlando Historic Preservation Districts page (the six districts with designation years, and the Certificate of Appropriateness minor/major review scope and timelines). NOTE: the electric and water service boundaries were NOT verified against a primary source - the page therefore tells readers to confirm the provider by address rather than naming one. Whether Orange County tenant programmes reach addresses inside city limits was also not verified and is deliberately not asserted.",
   },
   {
     slug: "winter-park",
