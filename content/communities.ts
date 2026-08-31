@@ -103,29 +103,89 @@ export const communities: Community[] = [
     slug: "winter-park",
     name: "Winter Park",
     intro:
-      "A historic city north of downtown Orlando known for its brick-lined streets, chain of lakes, and the Park Avenue shopping and dining district.",
+      "A city of about 30,000 north of downtown Orlando, built around a chain of lakes and a brick-street commercial core \u2014 where more than half the housing predates 1970 and the median home is worth nearly twice the county figure.",
     lifestyle:
-      "Park Avenue's boutiques, museums including the Morse Museum of American Art, Rollins College, weekly farmers market, and a celebrated annual art festival anchor the city's walkable core.",
+      "Park Avenue runs as a walkable commercial spine beside Central Park, with the Morse Museum, Rollins College on Lake Virginia, and the Scenic Boat Tour working the canals between Osceola, Virginia and Maitland.",
     locationContext:
-      "Roughly five miles northeast of downtown Orlando, bordered by Maitland to the north and Orlando neighborhoods to the south and west.",
+      "Directly north-east of the City of Orlando, bounded roughly by Fairbanks Avenue to the south and Lake Maitland to the north, with SunRail and US 17-92 running through it and Interstate 4 just west.",
     housingOverview:
-      "Architecture ranges from historic Mediterranean and Colonial Revival estates near the lakes to mid-century homes, townhomes, and condominiums closer to commercial corridors.",
-    propertyTypes: ["Historic estates", "Lakefront homes", "Mid-century homes", "Townhomes", "Condominiums"],
+      "The defining fact is age. About 56% of Winter Park\u2019s housing was built before 1970, against 26% across Orange County, and the 1950s alone account for roughly 18% of the stock. Set that against a median home value near $731,400 \u2014 close to twice the county\u2019s $390,100 \u2014 and the arithmetic that drives most current planning fights becomes obvious: modest older houses sitting on land worth far more than the structure.",
+    propertyTypes: [
+      "Mid-century ranch and split-level homes",
+      "Pre-war frame and masonry houses",
+      "Lakefront estates",
+      "Low-rise condominiums near Park Avenue",
+      "New infill on redeveloped lots",
+    ],
     buyerConsiderations: [
-      "Lakefront ownership includes dock, seawall, and insurance considerations",
-      "Historic homes may involve renovation guidelines",
-      "Price points vary widely between lakefront, core, and west-side locations",
+      "More than 150 properties are individually listed on the Winter Park Register of Historic Places, and designation brings Historic Preservation Board review of exterior work",
+      "Certificate of Review approvals now expire one year after approval if work has not physically begun \u2014 one administrative extension is available, further ones need the Board",
+      "Minor exterior alterations consistent with the existing architectural style, including many window, door and roof replacements, were exempted from certificate review in 2025 and need only a building permit",
+      "The city runs its own electric utility, and the undergrounding programme means service at a given address may be overhead or already buried \u2014 confirm rather than assume",
     ],
     sellerConsiderations: [
-      "Architectural character and provenance can be meaningful marketing assets",
-      "Buyers in this market expect thorough presentation and documentation",
+      "On an older house the land often carries most of the value, so the realistic buyer pool may include people who intend to build \u2014 which makes designation status a material fact, not a footnote",
+      "Unpermitted exterior work on a designated property is expensive to cure: unauthorised work causing irreversible damage can draw a fine of up to three times the normal amount per violation, plus daily fines and a restoration order",
+      "Renting is a smaller share of this market than the county at large \u2014 about 34% of occupied units against 43% county-wide",
     ],
-    amenities: ["Park Avenue district", "Winter Park Chain of Lakes", "Morse Museum of American Art", "Rollins College", "Mead Botanical Garden", "Winter Park Farmers' Market"],
-    transportation: ["SunRail Winter Park station", "US 17-92", "SR 426 / Aloma Avenue", "Interstate 4 access via Fairbanks Avenue"],
+    amenities: [
+      "Central Park and Park Avenue",
+      "Charles Hosmer Morse Museum of American Art",
+      "Winter Park Scenic Boat Tour",
+      "Rollins College",
+      "Winter Park Library & Events Center at MLK Jr. Park",
+      "Mead Botanical Garden",
+    ],
+    transportation: [
+      "US 17-92 / Orlando Avenue",
+      "Fairbanks Avenue",
+      "SunRail Winter Park station",
+      "Interstate 4",
+      "LYNX bus network",
+    ],
+    extraSections: [
+      {
+        heading: "What is actually changing right now",
+        body: [
+          "Winter Park has been busy. Three things adopted since 2025 matter directly to a purchase or a sale, and a fourth is still moving.",
+          "The historic preservation ordinance was amended in May 2025 by Ordinance 3335-25, and the changes cut both ways. Applicants gained a non-binding preliminary review before formal submission, and minor exterior alterations consistent with the existing style \u2014 window and door replacements, roof work \u2014 were exempted from certificate review altogether. Against that, applications must now carry comprehensive detail on every exterior material and architectural element; staff must confirm the construction plans actually match what the Board approved, and send the matter back if they do not; any portion of a historic home proposed for demolition must be explicitly identified in the application and visually marked on the plans; and approvals lapse one year after approval if work has not physically started. Unauthorised work causing irreversible damage can now draw a fine of up to three times the amount per violation, alongside daily fines and a restoration requirement.",
+          "Lakefront subdivision was addressed by a citywide comprehensive plan text amendment adopted as Ordinance 3368-26, which added Policy 1-5.1.8 to the Future Land Use element. It is narrow by design. To be split, a property must be zoned R-1AAA with a Single Family Residential future land use, sit on at least 3.5 upland acres, and have existed in that form as of 1 October 2025. Each resulting lot must carry 150 feet of frontage on both the lake and the street and cover at least 1.5 acres, with combined floor area capped at 40,000 square feet and each lot limited to 35% floor area ratio. In practice that describes a very small number of estates \u2014 but for those owners it is the difference between one parcel and two.",
+          "State milestone inspection requirements were folded into the city\u2019s building regulations in September 2025 by Ordinance 3356-25, which implements the statutory milestone inspection, repair and enforcement rules locally. Anyone buying into an older condominium building should treat the inspection and reserve position as a primary diligence item rather than a formality.",
+          "Still moving: the Historic Preservation Board has been working through further revisions to the preservation ordinance, including education on what renovations are permitted and possible incentives \u2014 tax relief among them \u2014 for owners who keep historic structures standing. Reporting in July 2026 put a list of proposals before a City Commission workshop in September 2026. Because that one is live, confirm where it stands before relying on it.",
+        ],
+      },
+      {
+        heading: "The utility nobody expects, and what it means at an address",
+        body: [
+          "Winter Park is one of the few cities in Florida that owns its electric system. Residents voted on 9 September 2003 to buy the distribution network from Progress Energy Florida, and the city began operating it on 1 June 2005. That is unusual enough on its own; what makes it matter to a buyer is what the city has done since.",
+          "Winter Park is undergrounding its entire electrical system, with a target of 2030, funded from utility revenue rather than a separate tax or assessment. The city publishes a map of the programme and updates the timeline twice a year. The practical consequence is that two houses on neighbouring streets can have quite different exposure to wind and falling limbs, different streetscapes, and different expectations about outage duration \u2014 purely as a function of where they sit in the schedule.",
+          "None of that can be inferred from the address. It has to be looked up on the city\u2019s underground map, and it is worth doing before an offer rather than after a storm. The same caution applies to the boundary itself: like every city in this county, Winter Park\u2019s limits are not tidy. The Census boundary file shows the city in two pieces \u2014 8.77 square miles of land and 1.62 of water \u2014 with seven pockets of unincorporated Orange County sitting inside them. A Winter Park mailing address is not proof of a Winter Park jurisdiction, and the Property Appraiser\u2019s parcel record settles it in seconds.",
+        ],
+      },
+    ],
     image: "/images/communities/winter-park.jpg",
-    imageAlt: "Homes in Winter Park, Florida",
-    related: ["college-park", "orlando", "conway"],
-    reviewNote: "Verify amenity and transportation facts before launch.",
+    imageAlt: "Storefronts beneath a mature live oak on Park Avenue in Winter Park, Florida",
+    gallery: [
+      {
+        src: "/images/communities/winter-park-brewer-house.webp",
+        alt: "The Brewer House, a white neoclassical residence with columned portico in Winter Park, Florida",
+      },
+      {
+        src: "/images/communities/winter-park-warlow-house.webp",
+        alt: "The Warlow House, a Mediterranean Revival home with a green tile roof in Winter Park, Florida",
+      },
+      {
+        src: "/images/communities/winter-park-park-avenue.webp",
+        alt: "Sidewalk dining and shopfronts along Park Avenue in Winter Park, Florida",
+      },
+    ],
+    photoCredit: {
+      text: "Park Avenue \u00a9 Miosotis jade (CC BY-SA 4.0) \u00b7 Brewer House \u00a9 Ebyabe (CC BY 2.5) \u00b7 Warlow House \u00a9 Ebyabe (CC BY-SA 3.0) \u2014 via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/Category:Winter_Park,_Florida",
+    },
+    related: ["orlando", "baldwin-park", "maitland"],
+    reviewNote:
+      "Facts sourced: ACS 2020-2024 5-year estimates via Census Reporter (population, housing units, tenure, build eras, median value and gross rent, for Winter Park city GEOID 1278300 and Orange County GEOID 12095); US Census TIGERweb Incorporated Places (land and water area, and the 2-piece / 7-enclave boundary counts) and TIGERweb Areal Hydrography (lakes on the map); City of Winter Park Ordinance 3335-25 (historic preservation amendments, May 2025); City of Winter Park citywide notice for the 1020 Palmer Avenue comprehensive plan text amendment (the lakefront lot-split criteria, P&Z 2 Dec 2025 and Commission 10 Dec 2025) adopted as Ordinance 3368-26 per the city ordinance master index; Ordinance 3356-25 (milestone inspections, Sept 2025); City of Winter Park electric utility pages (2003 referendum, 1 June 2005 start, undergrounding by 2030 funded from utility revenue); City of Winter Park historic preservation page (Winter Park Register, 150+ designated properties, named districts). NOTE: the pending preservation-ordinance revisions and the September 2026 Commission workshop come from Spectrum News 13 reporting dated 23 July 2026, are explicitly attributed on the page as live and unsettled, and should be re-checked. The exact adoption date of Ordinance 3368-26 was not confirmed beyond its appearance in the 2026 master index. Whether the electric service territory matches the city limits was NOT verified and is not asserted.",
   },
   {
     slug: "lake-nona",

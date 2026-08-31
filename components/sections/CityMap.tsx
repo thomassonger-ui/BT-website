@@ -1,8 +1,9 @@
 import { edgewoodMap } from "@/content/edgewood-map";
 import { belleIsleMap } from "@/content/belle-isle-map";
+import { winterParkMap } from "@/content/winter-park-map";
 
 /**
- * CITY MAP — Edgewood and Belle Isle.
+ * CITY MAP — Edgewood, Belle Isle and Winter Park.
  *
  * Both are incorporated cities that people mistake for Orlando neighbourhoods,
  * and the drawn city limits are the fastest way to show otherwise. Geometry is
@@ -19,6 +20,13 @@ const MAPS = {
     blurb:
       "Edgewood is its own municipality, not a neighbourhood of Orlando — about 1.24 square miles of land wrapped around the lakes on the western side of the Conway chain.",
     hallLabel: "City Hall, 405 Bagshaw Way",
+  },
+  "winter-park": {
+    data: winterParkMap,
+    title: "The City of Winter Park",
+    blurb:
+      "Winter Park is its own city with its own electric utility \u2014 8.77 square miles of land and 1.62 of water, wrapped around the chain of lakes the Scenic Boat Tour runs on. Seven pockets of unincorporated Orange County sit inside the limits.",
+    hallLabel: "City Hall, 401 S. Park Avenue",
   },
   "belle-isle": {
     data: belleIsleMap,

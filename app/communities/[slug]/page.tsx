@@ -129,6 +129,7 @@ export default async function CommunityPage({
           {community.slug === "conway" ? <ChainMap /> : null}
           {community.slug === "edgewood" ? <CityMap city="edgewood" /> : null}
           {community.slug === "belle-isle" ? <CityMap city="belle-isle" /> : null}
+          {community.slug === "winter-park" ? <CityMap city="winter-park" /> : null}
           {/* Orlando gets the jurisdiction map, not a chain map: the page argues that
               a mailing address does not tell you which government you are in. */}
           {community.slug === "orlando" ? <OrlandoLimitsMap /> : null}
