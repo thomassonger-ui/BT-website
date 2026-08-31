@@ -40,6 +40,9 @@ const proseClasses = [
   "[&_ul]:mt-5 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mt-2",
   "[&_ol]:mt-5 [&_ol]:list-decimal [&_ol]:pl-6",
   "[&_blockquote]:mt-5 [&_blockquote]:border-l-4 [&_blockquote]:border-gold [&_blockquote]:pl-4 [&_blockquote]:italic",
+  // Charts and photos embedded in the markdown body — without this an image
+  // renders at its natural width and blows out the article column.
+  "[&_img]:mt-8 [&_img]:w-full [&_img]:rounded-lg [&_img]:border [&_img]:border-ink/10",
 ].join(" ");
 
 export default async function BlogArticlePage({ params }: Params) {

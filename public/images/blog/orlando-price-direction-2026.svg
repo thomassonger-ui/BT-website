@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" font-family="Georgia,'Times New Roman',serif">
+<rect width="1000" height="600" fill="#FBF9F4"/>
+<text x="70" y="52" font-size="27" font-weight="600" fill="#12303A">Same market, same summer, opposite direction</text>
+<text x="70" y="84" font-size="15.5" fill="#6B7B78" font-family="system-ui,-apple-system,sans-serif">Year-over-year change in median sale price, as each source reports it</text>
+<line x1="70" y1="450.0" x2="930" y2="450.0" stroke="#E2DED4" stroke-width="1"/>
+<text x="58" y="455.0" font-size="13" fill="#6B7B78" text-anchor="end" font-family="system-ui,sans-serif">-3%</text>
+<line x1="70" y1="400.0" x2="930" y2="400.0" stroke="#E2DED4" stroke-width="1"/>
+<text x="58" y="405.0" font-size="13" fill="#6B7B78" text-anchor="end" font-family="system-ui,sans-serif">-2%</text>
+<line x1="70" y1="350.0" x2="930" y2="350.0" stroke="#E2DED4" stroke-width="1"/>
+<text x="58" y="355.0" font-size="13" fill="#6B7B78" text-anchor="end" font-family="system-ui,sans-serif">-1%</text>
+<line x1="70" y1="300.0" x2="930" y2="300.0" stroke="#B9C4C1" stroke-width="1.6"/>
+<text x="58" y="305.0" font-size="13" fill="#6B7B78" text-anchor="end" font-family="system-ui,sans-serif">0%</text>
+<line x1="70" y1="250.0" x2="930" y2="250.0" stroke="#E2DED4" stroke-width="1"/>
+<text x="58" y="255.0" font-size="13" fill="#6B7B78" text-anchor="end" font-family="system-ui,sans-serif">+1%</text>
+<line x1="70" y1="200.0" x2="930" y2="200.0" stroke="#E2DED4" stroke-width="1"/>
+<text x="58" y="205.0" font-size="13" fill="#6B7B78" text-anchor="end" font-family="system-ui,sans-serif">+2%</text>
+<line x1="70" y1="150.0" x2="930" y2="150.0" stroke="#E2DED4" stroke-width="1"/>
+<text x="58" y="155.0" font-size="13" fill="#6B7B78" text-anchor="end" font-family="system-ui,sans-serif">+3%</text>
+<path d="M235.0,300.0 L235.0,416.0 Q235.0,420.0 239.0,420.0 L401.0,420.0 Q405.0,420.0 405.0,416.0 L405.0,300.0 Z" fill="#A8792E"/>
+<text x="320.0" y="454.0" font-size="30" font-weight="700" fill="#12303A" text-anchor="middle">-2.4%</text>
+<rect x="313.0" y="479" width="14" height="14" rx="3" fill="#A8792E"/>
+<text x="320.0" y="520" font-size="18" font-weight="600" fill="#12303A" text-anchor="middle">City of Orlando</text>
+<text x="320.0" y="542" font-size="14" fill="#6B7B78" text-anchor="middle" font-family="system-ui,sans-serif">Redfin · 3 months to June 2026</text>
+<text x="320.0" y="564" font-size="14.5" fill="#12303A" text-anchor="middle" font-family="system-ui,sans-serif">median $414,774</text>
+<path d="M595.0,300.0 L595.0,209.0 Q595.0,205.0 599.0,205.0 L761.0,205.0 Q765.0,205.0 765.0,209.0 L765.0,300.0 Z" fill="#0E9184"/>
+<text x="680.0" y="189.0" font-size="30" font-weight="700" fill="#12303A" text-anchor="middle">+1.9%</text>
+<rect x="673.0" y="479" width="14" height="14" rx="3" fill="#0E9184"/>
+<text x="680.0" y="520" font-size="18" font-weight="600" fill="#12303A" text-anchor="middle">Orlando region</text>
+<text x="680.0" y="542" font-size="14" fill="#6B7B78" text-anchor="middle" font-family="system-ui,sans-serif">ORRA · July 2026</text>
+<text x="680.0" y="564" font-size="14.5" fill="#12303A" text-anchor="middle" font-family="system-ui,sans-serif">median $410,494</text>
+<text x="70" y="584" font-size="12.5" fill="#6B7B78" font-family="system-ui,sans-serif">Sources: Redfin Orlando housing market (city, rolling three months to June 2026); Orlando Regional REALTOR® Association, July 2026.</text>
+</svg>
