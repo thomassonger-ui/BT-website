@@ -62,6 +62,7 @@ const orangeTiles: CommunityTile[] = [
   },
   {
     name: "Audubon Park",
+    slug: "audubon-park",
     img: "/images/communities/audubon-park.jpg",
     blurb: "A garden district between downtown Orlando and Winter Park with mid-century homes and the East End Market corridor.",
   },
