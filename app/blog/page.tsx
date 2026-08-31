@@ -8,7 +8,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { getPosts, formatPostDate } from "@/lib/blog";
 import { compliance } from "@/config/compliance";
 
-export const revalidate = 1800;
+export const revalidate = 60;
 
 export const metadata: Metadata = buildMetadata({
   title: "Orlando Real Estate Blog | Market News for Buyers & Sellers",

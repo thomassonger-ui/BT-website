@@ -12,7 +12,7 @@ import { getPost, getPosts, formatPostDate } from "@/lib/blog";
 import { siteConfig } from "@/config/site";
 import { compliance } from "@/config/compliance";
 
-export const revalidate = 1800;
+export const revalidate = 60;
 
 type Params = { params: Promise<{ slug: string }> };
 
