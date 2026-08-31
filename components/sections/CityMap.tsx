@@ -47,10 +47,10 @@ export function CityMap({ city }: { city: keyof typeof MAPS }) {
         <p className="mt-1 text-sm text-muted">{cfg.blurb}</p>
       </div>
 
-      <div className="bg-[#EAF1F0] p-4 sm:p-6">
+      <div className="bg-[#EAF1F0] p-3 sm:p-4">
         <svg
           viewBox={viewBox}
-          className="mx-auto block h-auto w-full max-w-[620px]"
+          className="mx-auto block h-auto w-full max-w-full"
           role="img"
           aria-label={`Map of ${cfg.title}, Florida, showing its city limits, the surrounding lakes, and the location of City Hall.`}
         >

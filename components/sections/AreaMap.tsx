@@ -60,7 +60,7 @@ const MAPS = {
     data: metrowestMap,
     title: "Where MetroWest sits",
     blurb:
-      "A master-planned community inside the City of Orlando, not a municipality — so there is no legal boundary to draw. Kirkman Road (SR 435) runs along the eastern edge, with SR 408 to the south and Turkey Lake to the west.",
+      "A master-planned community inside the City of Orlando, not a municipality — so there is no legal boundary to draw. Kirkman Road (SR 435) runs along the eastern edge and north toward Universal Orlando, with SR 408 to the south and Turkey Lake to the west.",
     legend: "Interstate & expressway",
     footer: "Lakes and roads: US Census Bureau TIGER. Marker positions are approximate.",
   },
@@ -94,10 +94,10 @@ export function AreaMap({ area }: { area: keyof typeof MAPS }) {
         <p className="mt-1 text-sm text-muted">{cfg.blurb}</p>
       </div>
 
-      <div className="bg-[#EAF1F0] p-4 sm:p-6">
+      <div className="bg-[#EAF1F0] p-3 sm:p-4">
         <svg
           viewBox={viewBox}
-          className="mx-auto block h-auto w-full max-w-[620px]"
+          className="mx-auto block h-auto w-full max-w-full"
           role="img"
           aria-label={`Map of ${cfg.title}, showing its lakes, main roads and points of reference.`}
         >
@@ -200,10 +200,6 @@ export function AreaMap({ area }: { area: keyof typeof MAPS }) {
         <span className="flex items-center gap-2">
           <span className="inline-block h-3 w-3 rounded-full bg-teal-700" />
           Lakes
-        </span>
-        <span className="flex items-center gap-2">
-          <span className="inline-block h-1 w-6 rounded-full bg-[#C9A063]" />
-          Interstate
         </span>
         <span className="ml-auto">{cfg.footer}</span>
       </figcaption>

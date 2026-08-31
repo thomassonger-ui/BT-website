@@ -29,10 +29,10 @@ export function OrlandoLimitsMap() {
         </p>
       </div>
 
-      <div className="bg-[#EAF1F0] p-4 sm:p-6">
+      <div className="bg-[#EAF1F0] p-3 sm:p-4">
         <svg
           viewBox={viewBox}
-          className="mx-auto block h-auto w-full max-w-[720px]"
+          className="mx-auto block h-auto w-full max-w-full"
           role="img"
           aria-label={`Map of Orange County, Florida with the City of Orlando shaded. The city occupies a small, irregular share of the county in ${counts.pieces} separate pieces, and contains ${counts.enclaves} enclaves of unincorporated county land.`}
         >

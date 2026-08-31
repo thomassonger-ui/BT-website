@@ -30,10 +30,10 @@ export function ChainMap({ highlight }: { highlight?: "conway" | "belle-isle" })
         </p>
       </div>
 
-      <div className="bg-[#EAF1F0] p-4 sm:p-6">
+      <div className="bg-[#EAF1F0] p-3 sm:p-4">
         <svg
           viewBox={viewBox}
-          className="mx-auto block h-auto w-full max-w-[560px]"
+          className="mx-auto block h-auto w-full max-w-full"
           role="img"
           aria-label="Map of the Conway Chain of Lakes in southeast Orlando, showing Lake Conway, Little Lake Conway, Lake Jessamine and neighbouring lakes, with Hoffner Avenue and Nela Avenue marked where they divide the chain."
         >
