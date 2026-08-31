@@ -11,6 +11,7 @@ import { CityMap } from "@/components/sections/CityMap";
 import { OrlandoLimitsMap } from "@/components/sections/OrlandoLimitsMap";
 import { CollegeParkMap } from "@/components/sections/CollegeParkMap";
 import { PineHillsTracker } from "@/components/sections/PineHillsTracker";
+import { AreaMap } from "@/components/sections/AreaMap";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CommunityCard } from "@/components/ui/CommunityCard";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
@@ -138,6 +139,13 @@ export default async function CommunityPage({
           {/* College Park is a neighbourhood with no legal boundary — locator, not limits. */}
           {community.slug === "college-park" ? <CollegeParkMap /> : null}
           {/* Pine Hills gets a status tracker, not a map: the question is what is real. */}
+          {/* Every community page gets a map. Windermere, Dr. Phillips and Pine Hills
+              have a legal boundary; MetroWest and Lake Nona do not, so those are locators. */}
+          {(["windermere", "dr-phillips", "pine-hills", "metrowest", "lake-nona"] as const).includes(
+            community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona",
+          )
+            ? <AreaMap area={community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona"} />
+            : null}
           {community.slug === "pine-hills" ? <PineHillsTracker /> : null}
 
           {/* Extra photos, when the community has them. */}

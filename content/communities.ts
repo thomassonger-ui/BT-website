@@ -251,13 +251,13 @@ export const communities: Community[] = [
       },
     ],
     image: "/images/communities/lake-nona.jpg",
-    imageAlt: "Lake Nona Town Center in south-east Orlando, Florida",
+    imageAlt: "Aerial view of lakefront homes and the golf course at Lake Nona, Orlando, Florida",
     gallery: [
+      { src: "/images/communities/lake-nona-golf.webp", alt: "Homes along the fairways at Lake Nona Golf & Country Club, Orlando" },
       { src: "/images/communities/lake-nona-town-center.webp", alt: "Lake Nona Town Center looking south-east, Orlando, Florida" },
-      { src: "/images/communities/lake-nona-golf.webp", alt: "Aerial view of the course at Lake Nona Golf & Country Club" },
     ],
     photoCredit: {
-      text: "Town Center \u00a9 PoultrySaga (CC BY-SA 4.0) \u00b7 golf course \u00a9 Angiesbc (CC BY-SA 4.0) \u2014 via Wikimedia Commons",
+      text: "Aerial and golf course \u00a9 Angiesbc (CC BY-SA 4.0) \u00b7 Town Center \u00a9 PoultrySaga (CC BY-SA 4.0) \u2014 via Wikimedia Commons",
       href: "https://commons.wikimedia.org/wiki/Category:Lake_Nona,_Orlando,_Florida",
     },
     related: ["orlando", "conway", "college-park"],
@@ -680,14 +680,14 @@ export const communities: Community[] = [
       },
     ],
     image: "/images/communities/dr-phillips.jpg",
-    imageAlt: "Dr. Phillips Boulevard in unincorporated Orange County, Florida",
+    imageAlt: "Homes overlooking the course at Arnold Palmer\u2019s Bay Hill Club & Lodge, Dr. Phillips, Florida",
     gallery: [
-      { src: "/images/communities/dr-phillips-bay-hill.webp", alt: "The sixteenth hole at Arnold Palmer\u2019s Bay Hill Club & Lodge" },
+      { src: "/images/communities/dr-phillips-bay-hill.webp", alt: "Homes across the water at the sixteenth hole, Bay Hill Club & Lodge" },
       { src: "/images/communities/dr-phillips-village.webp", alt: "Phillips Village retail centre in Dr. Phillips, Orange County, Florida" },
       { src: "/images/communities/dr-phillips-street.webp", alt: "Residential street scene in Dr. Phillips, Orange County, Florida" },
     ],
     photoCredit: {
-      text: "Dr. Phillips Boulevard, Phillips Village and street view \u00a9 Visitor7 (CC BY-SA 3.0) \u00b7 Bay Hill 16th hole \u00a9 Matthewjh44 (CC BY-SA 4.0) \u2014 via Wikimedia Commons",
+      text: "Bay Hill \u00a9 Matthewjh44 (CC BY-SA 4.0) \u00b7 Phillips Village and street views \u00a9 Visitor7 (CC BY-SA 3.0) \u2014 via Wikimedia Commons",
       href: "https://commons.wikimedia.org/wiki/Category:Dr._Phillips,_Florida",
     },
     related: ["windermere", "orlando", "metrowest"],
@@ -757,13 +757,13 @@ export const communities: Community[] = [
       },
     ],
     image: "/images/communities/windermere.jpg",
-    imageAlt: "Conroy-Windermere Road at the Town of Windermere town limits sign",
+    imageAlt: "A large white estate home on Lake Butler Sound in the Windermere area, Florida",
     gallery: [
       { src: "/images/communities/windermere-lake-down.webp", alt: "Lake Down Park on the Butler Chain of Lakes, Windermere, Florida" },
       { src: "/images/communities/windermere-town-hall.webp", alt: "The Town of Windermere town hall building" },
     ],
     photoCredit: {
-      text: "Town limits sign and town hall by SPUI (public domain) \u00b7 Lake Down Park, Town of Windermere (public domain) \u2014 via Wikimedia Commons",
+      text: "Lake Butler Sound estate \u00a9 350z33 (CC BY-SA 3.0) \u00b7 town hall by SPUI (public domain) \u00b7 Lake Down Park, Town of Windermere (public domain) \u2014 via Wikimedia Commons",
       href: "https://commons.wikimedia.org/wiki/Category:Windermere,_Florida",
     },
     related: ["dr-phillips", "orlando", "metrowest"],
@@ -778,9 +778,9 @@ export const communities: Community[] = [
     lifestyle:
       "The MetroWest Golf Club, a public Robert Trent Jones Sr. course, sits at the centre, with Bill Frederick Park at Turkey Lake \u2014 183 acres of City of Orlando parkland \u2014 on the western side and Shadow Bay Park within the neighbourhood.",
     locationContext:
-      "Southwest Orlando, bounded roughly by South Kirkman Road, Conroy Road, Florida\u2019s Turnpike and South Apopka-Vineland Road. Kirkman Road is State Road 435 and interchanges with SR 408, which runs east into downtown.",
+      "Southwest Orlando, bounded roughly by South Kirkman Road, Conroy Road, Florida\u2019s Turnpike and South Apopka-Vineland Road. Kirkman Road is State Road 435: it runs north along the neighbourhood\u2019s eastern edge toward the Universal Orlando area and the International Drive corridor, and interchanges with SR 408, which runs east into downtown.",
     housingOverview:
-      "MetroWest was built as a mixed community and stayed one. Its own master association describes apartments, condominiums and houses side by side, and reported the community had reached close to 10,000 residential units alongside roughly 1.4 million square feet of office space by around 2016. That mix is unusual for Orlando and it shapes who buys here.",
+      "MetroWest was built as a mixed community and stayed one \u2014 condominiums and apartment buildings on the lakes, gated single-family streets, townhomes and offices in the same square mile. Its own master association describes apartments, condominiums and houses side by side, and reported the community had reached close to 10,000 residential units alongside roughly 1.4 million square feet of office space by around 2016. That mix is unusual for Orlando and it shapes who buys here.",
     propertyTypes: [
       "Condominiums",
       "Purpose-built rental apartments",
@@ -832,13 +832,14 @@ export const communities: Community[] = [
       },
     ],
     image: "/images/communities/metrowest.jpg",
-    imageAlt: "The MetroWest entrance sign in southwest Orlando, Florida",
+    imageAlt: "Lakefront condominium buildings at La Palazza in MetroWest, Orlando, Florida",
     gallery: [
-      { src: "/images/communities/metrowest-turkey-lake.webp", alt: "Turkey Lake seen from the shoreline in southwest Orlando" },
-      { src: "/images/communities/metrowest-park.webp", alt: "Bill Frederick Park at Turkey Lake, a City of Orlando park beside MetroWest" },
+      { src: "/images/communities/metrowest-veranda.webp", alt: "The Residences at the Veranda, a lakefront condominium building in MetroWest, Orlando" },
+      { src: "/images/communities/metrowest-tradewinds.webp", alt: "Entrance and landscaping at the Tradewinds residential community in MetroWest, Orlando" },
+      { src: "/images/communities/metrowest-turkey-lake.webp", alt: "Sunset over Turkey Lake beside MetroWest, Orlando" },
     ],
     photoCredit: {
-      text: "MetroWest sign \u00a9 Rogerhamelin (CC BY-SA 3.0) \u00b7 Turkey Lake and Bill Frederick Park \u00a9 Miosotis jade (CC BY-SA 4.0 / 3.0) \u2014 via Wikimedia Commons",
+      text: "La Palazza, the Veranda and Tradewinds \u00a9 Rogerhamelin (CC BY-SA 3.0) \u00b7 Turkey Lake \u00a9 Miosotis jade (CC BY-SA 3.0) \u2014 via Wikimedia Commons",
       href: "https://commons.wikimedia.org/wiki/Category:MetroWest,_Orlando,_Florida",
     },
     related: ["orlando", "dr-phillips", "windermere"],
