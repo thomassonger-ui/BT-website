@@ -682,12 +682,12 @@ export const communities: Community[] = [
     image: "/images/communities/dr-phillips.jpg",
     imageAlt: "Homes overlooking the course at Arnold Palmer\u2019s Bay Hill Club & Lodge, Dr. Phillips, Florida",
     gallery: [
-      { src: "/images/communities/dr-phillips-bay-hill.webp", alt: "Homes across the water at the sixteenth hole, Bay Hill Club & Lodge" },
-      { src: "/images/communities/dr-phillips-village.webp", alt: "Phillips Village retail centre in Dr. Phillips, Orange County, Florida" },
-      { src: "/images/communities/dr-phillips-street.webp", alt: "Residential street scene in Dr. Phillips, Orange County, Florida" },
+      { src: "/images/communities/dr-phillips-homes-1.webp", alt: "Homes with palms backing onto the water and fairway at Bay Hill, Dr. Phillips, Florida" },
+      { src: "/images/communities/dr-phillips-homes-2.webp", alt: "Large homes overlooking a green and bunkers at Bay Hill, Dr. Phillips, Florida" },
+      { src: "/images/communities/dr-phillips-bay-hill.webp", alt: "The sixteenth hole at Bay Hill with homes across the water, Dr. Phillips, Florida" },
     ],
     photoCredit: {
-      text: "Bay Hill \u00a9 Matthewjh44 (CC BY-SA 4.0) \u00b7 Phillips Village and street views \u00a9 Visitor7 (CC BY-SA 3.0) \u2014 via Wikimedia Commons",
+      text: "Bay Hill photographs and details \u00a9 Matthewjh44 (CC BY-SA 4.0), via Wikimedia Commons",
       href: "https://commons.wikimedia.org/wiki/Category:Dr._Phillips,_Florida",
     },
     related: ["windermere", "orlando", "metrowest"],

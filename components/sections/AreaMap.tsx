@@ -3,6 +3,7 @@ import { drPhillipsMap } from "@/content/dr-phillips-map";
 import { pineHillsMap } from "@/content/pine-hills-map";
 import { metrowestMap } from "@/content/metrowest-map";
 import { lakeNonaMap } from "@/content/lake-nona-map";
+import { collegeParkMap } from "@/content/college-park-map";
 
 /**
  * AREA MAP — one component, five places, so these pages read as a set with the
@@ -16,15 +17,18 @@ import { lakeNonaMap } from "@/content/lake-nona-map";
  * invented line for either would be worse than drawing none.
  */
 
-type Kind = "hall" | "golf" | "transit" | "civic" | "park" | "area";
+type Kind = "hall" | "golf" | "transit" | "civic" | "park" | "area" | "star" | "sport" | "shop";
 
 const MARK: Record<Kind, { r: number; fill: string; bold?: boolean }> = {
   area: { r: 11, fill: "#A8792E", bold: true },
-  hall: { r: 10, fill: "#0E6B63" },
-  golf: { r: 9, fill: "#0E6B63" },
+  star: { r: 10, fill: "#12303A", bold: true },
+  hall: { r: 9, fill: "#0E6B63" },
+  golf: { r: 9, fill: "#2E7D5B" },
   transit: { r: 9, fill: "#0E6B63" },
   civic: { r: 9, fill: "#0E6B63" },
-  park: { r: 9, fill: "#12454A" },
+  sport: { r: 9, fill: "#2E7D5B" },
+  shop: { r: 9, fill: "#A8792E" },
+  park: { r: 9, fill: "#2E7D5B" },
 };
 
 const MAPS = {
@@ -60,6 +64,14 @@ const MAPS = {
     legend: "Interstate & expressway",
     footer: "Lakes and roads: US Census Bureau TIGER. Marker positions are approximate.",
   },
+  "college-park": {
+    data: collegeParkMap,
+    title: "Where College Park sits",
+    blurb:
+      "A neighbourhood of the City of Orlando, not a municipality, so there is no legal boundary to draw. It is built around Lakes Adair, Concord, Silver and Ivanhoe, with Interstate 4 along its eastern edge and downtown a short run south-east.",
+    legend: "Interstate & expressway",
+    footer: "Streets, lakes and roads: US Census Bureau TIGER. Marker positions are approximate.",
+  },
   "lake-nona": {
     data: lakeNonaMap,
     title: "Where Lake Nona sits",
@@ -72,8 +84,8 @@ const MAPS = {
 
 export function AreaMap({ area }: { area: keyof typeof MAPS }) {
   const cfg = MAPS[area];
-  const { viewBox, boundary, lakes, lakeLabels, highways, points } = cfg.data;
-  const roadSets = Object.values(highways as Record<string, readonly string[]>);
+  const { viewBox, boundary, lakes, lakeLabels, localRoads, arterials, highways, roadLabels, points } =
+    cfg.data;
 
   return (
     <figure className="my-12 overflow-hidden rounded-lg border border-ink/10 bg-cream">
@@ -89,16 +101,30 @@ export function AreaMap({ area }: { area: keyof typeof MAPS }) {
           role="img"
           aria-label={`Map of ${cfg.title}, showing its lakes, main roads and points of reference.`}
         >
-          <g fill="none" strokeLinecap="round" strokeLinejoin="round" stroke="#C9B189" strokeWidth={8}>
-            {roadSets.flat().map((d, i) => (
-              <path key={`r${i}`} d={d} />
+          {/* Street grid first — it is the texture that makes this read as a map. */}
+          <g fill="none" stroke="#D3DEDB" strokeWidth={1.6} strokeLinecap="round">
+            {localRoads.map((d, i) => (
+              <path key={`s${i}`} d={d} />
             ))}
           </g>
 
-          <g fill="#7FB2AE" fillOpacity={0.85} stroke="#4E8C88" strokeWidth={1.5}>
+          <g fill="#7FB2AE" fillOpacity={0.85} stroke="#4E8C88" strokeWidth={1.4}>
             {lakes.map((d, i) => (
               <path key={`l${i}`} d={d} />
             ))}
+          </g>
+
+          <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <g stroke="#BFCCC8" strokeWidth={4}>
+              {arterials.map((d, i) => (
+                <path key={`a${i}`} d={d} />
+              ))}
+            </g>
+            <g stroke="#C9A063" strokeWidth={8}>
+              {highways.map((d, i) => (
+                <path key={`h${i}`} d={d} />
+              ))}
+            </g>
           </g>
 
           {boundary.length ? (
@@ -122,6 +148,23 @@ export function AreaMap({ area }: { area: keyof typeof MAPS }) {
                 paintOrder="stroke"
               >
                 {l.name}
+              </text>
+            ))}
+          </g>
+
+          <g fill="#5A6B68" fontWeight={600} textAnchor="middle">
+            {roadLabels.map((r) => (
+              <text
+                key={r.name}
+                x={r.x}
+                y={r.y}
+                fontSize={r.size}
+                transform={`rotate(${r.rot} ${r.x} ${r.y})`}
+                stroke="#EAF1F0"
+                strokeWidth={5}
+                paintOrder="stroke"
+              >
+                {r.name}
               </text>
             ))}
           </g>
@@ -157,6 +200,10 @@ export function AreaMap({ area }: { area: keyof typeof MAPS }) {
         <span className="flex items-center gap-2">
           <span className="inline-block h-3 w-3 rounded-full bg-teal-700" />
           Lakes
+        </span>
+        <span className="flex items-center gap-2">
+          <span className="inline-block h-1 w-6 rounded-full bg-[#C9A063]" />
+          Interstate
         </span>
         <span className="ml-auto">{cfg.footer}</span>
       </figcaption>

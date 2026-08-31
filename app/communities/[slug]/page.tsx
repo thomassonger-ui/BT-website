@@ -9,7 +9,6 @@ import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { ChainMap } from "@/components/sections/ChainMap";
 import { CityMap } from "@/components/sections/CityMap";
 import { OrlandoLimitsMap } from "@/components/sections/OrlandoLimitsMap";
-import { CollegeParkMap } from "@/components/sections/CollegeParkMap";
 import { PineHillsTracker } from "@/components/sections/PineHillsTracker";
 import { AreaMap } from "@/components/sections/AreaMap";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -136,15 +135,13 @@ export default async function CommunityPage({
           {/* Orlando gets the jurisdiction map, not a chain map: the page argues that
               a mailing address does not tell you which government you are in. */}
           {community.slug === "orlando" ? <OrlandoLimitsMap /> : null}
-          {/* College Park is a neighbourhood with no legal boundary — locator, not limits. */}
-          {community.slug === "college-park" ? <CollegeParkMap /> : null}
           {/* Pine Hills gets a status tracker, not a map: the question is what is real. */}
           {/* Every community page gets a map. Windermere, Dr. Phillips and Pine Hills
               have a legal boundary; MetroWest and Lake Nona do not, so those are locators. */}
-          {(["windermere", "dr-phillips", "pine-hills", "metrowest", "lake-nona"] as const).includes(
-            community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona",
+          {(["windermere", "dr-phillips", "pine-hills", "metrowest", "lake-nona", "college-park"] as const).includes(
+            community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona" | "college-park",
           )
-            ? <AreaMap area={community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona"} />
+            ? <AreaMap area={community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona" | "college-park"} />
             : null}
           {community.slug === "pine-hills" ? <PineHillsTracker /> : null}
 
