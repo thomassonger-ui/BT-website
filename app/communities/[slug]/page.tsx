@@ -9,6 +9,7 @@ import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { ChainMap } from "@/components/sections/ChainMap";
 import { CityMap } from "@/components/sections/CityMap";
 import { OrlandoLimitsMap } from "@/components/sections/OrlandoLimitsMap";
+import { CollegeParkMap } from "@/components/sections/CollegeParkMap";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CommunityCard } from "@/components/ui/CommunityCard";
 import { ButtonLink, SearchHomesLink } from "@/components/ui/Button";
@@ -133,6 +134,8 @@ export default async function CommunityPage({
           {/* Orlando gets the jurisdiction map, not a chain map: the page argues that
               a mailing address does not tell you which government you are in. */}
           {community.slug === "orlando" ? <OrlandoLimitsMap /> : null}
+          {/* College Park is a neighbourhood with no legal boundary — locator, not limits. */}
+          {community.slug === "college-park" ? <CollegeParkMap /> : null}
 
           {/* Extra photos, when the community has them. */}
           {community.gallery?.length ? (

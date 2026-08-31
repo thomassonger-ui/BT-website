@@ -483,29 +483,90 @@ export const communities: Community[] = [
     slug: "college-park",
     name: "College Park",
     intro:
-      "A historic Orlando neighborhood northwest of downtown, with brick streets, 1920s–1950s architecture, and the Edgewater Drive main street.",
+      "A 1920s neighbourhood of the City of Orlando laid out on brick streets named for colleges \u2014 Princeton, Harvard, Yale, Dartmouth \u2014 wrapped around four lakes, with Interstate 4 on its eastern edge and downtown a few minutes south-east.",
     lifestyle:
-      "Locally owned restaurants and shops along Edgewater Drive, lakes and parks stitched between residential blocks, and quick access to downtown Orlando.",
+      "Edgewater Drive has served as the neighbourhood\u2019s main street since the 1920s and still does, with the Dubsdread golf course to the north, Lakes Adair, Concord, Silver and Ivanhoe threaded through the street grid, and the 202-acre Packing District redevelopment on the western side.",
     locationContext:
-      "Immediately northwest of downtown Orlando, bounded roughly by Lake Ivanhoe and the Dubsdread area.",
+      "Inside the City of Orlando, north-west of downtown. I-4 runs along the eastern edge with SR 408 just south, and downtown sits roughly three miles south-east \u2014 which is the practical reason the neighbourhood has held its value through several cycles.",
     housingOverview:
-      "Bungalows, cottages, and traditional homes from the 1920s onward, alongside renovated properties and selective new construction on infill lots.",
-    propertyTypes: ["Historic bungalows", "Cottages", "Renovated traditional homes", "Infill new construction"],
+      "The bones are 1925. Cooper-Atha-Barr broke ground on a 40-acre parcel near Lake Ivanhoe in February 1925 and recorded the first plat on 2 February, with eight more plats following through 1926. The result is a compact grid of 1920s and 1930s bungalows, Mediterranean Revival and Colonial Revival houses, later mid-century infill, and \u2014 increasingly \u2014 new construction on lots where the original house came down.",
+    propertyTypes: [
+      "1920s and 1930s bungalows",
+      "Mediterranean and Colonial Revival houses",
+      "Mid-century infill homes",
+      "Lakefront homes on Adair, Concord, Silver and Ivanhoe",
+      "New construction on redeveloped lots",
+    ],
     buyerConsiderations: [
-      "Older housing stock benefits from careful inspection and insurance review",
-      "Renovation quality varies widely between updated homes",
-      "Lot sizes and garages differ from newer suburban norms",
+      "National Register listing and City of Orlando local designation are different things with different consequences \u2014 confirm which, if either, applies to a specific address",
+      "Houses of this age commonly warrant attention to roof, electrical service, supply lines and window condition; confirm by inspection rather than assumption",
+      "Lots vary widely in width and depth across the 1925-26 plats, and setbacks on a narrow lot can constrain an addition more than the square footage suggests",
+      "Proximity to I-4 is a genuine convenience and, on the streets nearest the interstate, a genuine noise consideration \u2014 visit at more than one time of day",
     ],
     sellerConsiderations: [
-      "Character details are strong selling points when presented well",
-      "Pricing must account for renovation level relative to neighbors",
+      "On an older house the land can carry much of the value, so part of the buyer pool may be pricing the lot rather than the structure",
+      "Permit history matters here: work done decades ago on a 1920s house may not appear in the record, and buyers increasingly ask",
+      "Presentation of original detail \u2014 floors, windows, trim \u2014 tends to separate offers in this market more than it does in newer neighbourhoods",
     ],
-    amenities: ["Edgewater Drive district", "Dubsdread Golf Course", "Lake Ivanhoe", "Albert Park", "Orlando Urban Trail access"],
-    transportation: ["US 441 / Orange Blossom Trail access", "Interstate 4 via Princeton Street", "SunRail Florida Hospital station proximity"],
+    amenities: [
+      "Historic Dubsdread Golf Course",
+      "Edgewater Drive shops and dining",
+      "The Packing District regional park and trails",
+      "Orlando Tennis Centre",
+      "4Roots Farm Campus",
+      "Lakes Adair, Concord, Silver and Ivanhoe",
+    ],
+    transportation: [
+      "Interstate 4",
+      "SR 408 East\u2013West Expressway",
+      "Edgewater Drive",
+      "Princeton Street",
+      "Orange Blossom Trail",
+      "LYNX bus network",
+    ],
+    extraSections: [
+      {
+        heading: "Buying, selling or renting here: the questions worth asking first",
+        body: [
+          "Which government? College Park is a neighbourhood of the City of Orlando, not a municipality of its own. That means city permitting, city code and city services \u2014 but Orange County\u2019s boundary with the city is genuinely ragged in this part of the metro, so the Property Appraiser\u2019s parcel record is still the thing that settles it for a specific address rather than the neighbourhood name.",
+          "Is the house in a historic district, and does that bind you? This is where most buyers get it wrong. The Lake Adair\u2013Lake Concord Historic District was added to the National Register of Historic Places on 30 December 2011, roughly bounded by Golfview Street, Edgewater Court, Alameda Street and Peachtree Road. National Register listing is a federal designation \u2014 it is an honour and it can matter for certain tax credits on income-producing property, but it is not the thing that puts a design review board between you and a new window. The City of Orlando\u2019s own design review attaches to locally designated landmarks and to the city\u2019s six local historic districts, and Lake Adair\u2013Lake Concord is not on that local district list. College Park does contain a local landmark: the Jack Kerouac House is one of the 47 individually designated City of Orlando historic landmarks. The practical instruction is simple \u2014 ask the city which designation, if any, attaches to the parcel, and do it before you plan exterior work.",
+          "What about schools? Orange County Public Schools assigns attendance by address, and zones are periodically rezoned, so the only reliable answer for a specific house comes from the district itself. OCPS publishes attendance zone maps and a Find My School lookup, and College Park Middle School is located in the neighbourhood. We will point you to the district\u2019s tool rather than characterise any school \u2014 that is both the accurate answer and the lawful one.",
+          "For renters, the same jurisdiction question decides which local rules and which local offices apply, and Florida\u2019s landlord-tenant statute, Chapter 83, sits underneath all of it statewide. Settle the jurisdiction first; it determines who you can actually call.",
+          "For sellers, the two recurring friction points are permit history on a hundred-year-old house and the buyer who is valuing the lot rather than the building. Pulling the permit record before listing, rather than during a contract, is the single cheapest thing you can do.",
+        ],
+      },
+      {
+        heading: "The golf course, the vineyard and the 202 acres",
+        body: [
+          "The land north of the neighbourhood has been through several lives. In 1886 investors planted the Niagara Vineyard across 200 acres. It failed, and the Wright-Rundell Company platted the ground as Villa Farms in 1910. Carl Dann bought the property in 1924 and turned it into the Dubsdread Golf Course and the Golfview residential subdivision beside it. The course marked its hundredth anniversary in 2024 and remains open to the public, run under a city partnership by an outside operator, and it has kept investing \u2014 a new 40-bay driving range with teaching bays and technology-equipped stalls opened in late summer 2025.",
+          "On the western side, the Packing District is the largest thing to happen to this part of Orlando in a generation: a 202-acre redevelopment by Dr. Phillips Charities centred on Princeton Street and Orange Blossom Trail, on ground that was historically citrus packing. More than 100 acres were gifted to the City of Orlando for a regional park. The Orlando Tennis Centre relocated there with seventeen courts, eleven of them clay. The 4Roots Farm Campus occupies eighteen acres, with its first phase completed in January 2023. Residential arrived alongside it \u2014 a 307-unit apartment building opened in February 2022 and a 135-unit townhome project followed \u2014 and an $18.1 million streetscape rebuild, including a roundabout and bike paths, finished in April 2023.",
+          "For a buyer this cuts both ways and it is worth being honest about it. Hundreds of acres of new park, trail and recreation on the doorstep is a durable amenity of a kind that rarely gets added to an established neighbourhood. It also means construction traffic, changing street patterns and a still-unfinished build-out on the western approach. Which of those matters more depends entirely on which street you are looking at, and it is a reason to walk the specific block rather than trust the neighbourhood\u2019s reputation in either direction.",
+        ],
+      },
+    ],
     image: "/images/communities/college-park.jpg",
-    imageAlt: "Homes in College Park, Orlando, Florida",
-    related: ["winter-park", "orlando", "metrowest"],
-    reviewNote: "Verify amenity and transportation facts before launch.",
+    imageAlt: "A large white Colonial Revival home on a brick street in the Lake Adair\u2013Lake Concord Historic District, College Park, Orlando",
+    gallery: [
+      {
+        src: "/images/communities/college-park-house-1.webp",
+        alt: "Two-storey Colonial Revival house on a brick street in College Park, Orlando",
+      },
+      {
+        src: "/images/communities/college-park-house-2.webp",
+        alt: "White two-storey house behind mature oaks in the Lake Adair\u2013Lake Concord Historic District, College Park",
+      },
+      {
+        src: "/images/communities/college-park-edgewater.webp",
+        alt: "Storefront with sidewalk seating along Edgewater Drive, College Park, Orlando",
+      },
+    ],
+    photoCredit: {
+      text: "Historic district houses \u00a9 Ebyabe (CC BY-SA 4.0) \u00b7 Edgewater Drive \u00a9 Eric Friedebach (CC BY 3.0) \u2014 via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/Category:College_Park,_Orlando,_Florida",
+    },
+    related: ["orlando", "thornton-park", "winter-park"],
+    reviewNote:
+      "Facts sourced: Orange County Regional History Center, 'A College Park Century' (CABCO groundbreaking February 1925 on a 40-acre parcel near Lake Ivanhoe, first plat recorded 2 February 1925 with eight further plats through 1926, the college street names introduced by Walter Rose from 1921, Edgewater Drive as de facto main street, and the Dubsdread chain of title: 1886 Niagara Vineyard on 200 acres, Wright-Rundell platting Villa Farms in 1910, Carl Dann purchasing in 1924 and creating the course and Golfview); Wikipedia/NRHP for the Lake Adair-Lake Concord Historic District National Register listing date of 30 December 2011 and its rough boundaries; City of Orlando Local Historic Landmarks map (Jack Kerouac House among 47 designated local landmarks) and the city's Historic Preservation Districts page (the six LOCAL districts, which do not include Lake Adair-Lake Concord - this local-versus-national distinction is the point of that paragraph); City of Orlando 2025 press release (Dubsdread 100th anniversary in 2024, public-private operation, new 40-bay driving range opening late summer 2025); Packing District official timeline (202 acres, Dr. Phillips Charities, 100+ acres gifted to the city, Orlando Tennis Centre with 17 courts including 11 clay, 4Roots 18-acre campus phase one January 2023, 307-unit apartments February 2022, 135 townhomes, $18.1M streetscape April 2023); Census TIGER hydrography and primary roads for the map. SCHOOLS: the page names only that College Park Middle School is in the neighbourhood and routes all attendance questions to the OCPS Find My School tool and zone maps. It makes NO quality, rating or desirability claim about any school, by design - Fair Housing. Bethanne should confirm she is comfortable with even this factual level before launch. NO neighbourhood-level Census statistics are published on this page: College Park has no Census place or CDP geography, and the 18 tracts intersecting it extend well beyond the neighbourhood, so any 'College Park median' figure would have been fabricated. Drive distance to downtown is stated as roughly three miles and is approximate.",
   },
   {
     slug: "dr-phillips",
