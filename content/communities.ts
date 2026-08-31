@@ -836,7 +836,6 @@ export const communities: Community[] = [
     gallery: [
       { src: "/images/communities/metrowest-veranda.webp", alt: "The Residences at the Veranda, a lakefront condominium building in MetroWest, Orlando" },
       { src: "/images/communities/metrowest-tradewinds.webp", alt: "Entrance and landscaping at the Tradewinds residential community in MetroWest, Orlando" },
-      { src: "/images/communities/metrowest-homes.webp", alt: "Gabled residential buildings with balconies and palms in MetroWest, Orlando" },
     ],
     photoCredit: {
       text: "La Palazza, the Veranda and Tradewinds \u00a9 Rogerhamelin (CC BY-SA 3.0), via Wikimedia Commons",
