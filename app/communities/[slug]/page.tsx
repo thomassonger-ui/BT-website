@@ -138,10 +138,10 @@ export default async function CommunityPage({
           {/* Pine Hills gets a status tracker, not a map: the question is what is real. */}
           {/* Every community page gets a map. Windermere, Dr. Phillips and Pine Hills
               have a legal boundary; MetroWest and Lake Nona do not, so those are locators. */}
-          {(["windermere", "dr-phillips", "pine-hills", "metrowest", "lake-nona", "college-park"] as const).includes(
-            community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona" | "college-park",
+          {(["windermere", "dr-phillips", "pine-hills", "metrowest", "lake-nona", "college-park", "baldwin-park", "thornton-park", "delaney-park", "audubon-park"] as const).includes(
+            community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona" | "college-park" | "baldwin-park" | "thornton-park" | "delaney-park" | "audubon-park",
           )
-            ? <AreaMap area={community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona" | "college-park"} />
+            ? <AreaMap area={community.slug as "windermere" | "dr-phillips" | "pine-hills" | "metrowest" | "lake-nona" | "college-park" | "baldwin-park" | "thornton-park" | "delaney-park" | "audubon-park"} />
             : null}
           {community.slug === "pine-hills" ? <PineHillsTracker /> : null}
 

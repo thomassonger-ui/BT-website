@@ -4,6 +4,10 @@ import { pineHillsMap } from "@/content/pine-hills-map";
 import { metrowestMap } from "@/content/metrowest-map";
 import { lakeNonaMap } from "@/content/lake-nona-map";
 import { collegeParkMap } from "@/content/college-park-map";
+import { baldwinParkMap } from "@/content/baldwin-park-map";
+import { thorntonParkMap } from "@/content/thornton-park-map";
+import { delaneyParkMap } from "@/content/delaney-park-map";
+import { audubonParkMap } from "@/content/audubon-park-map";
 
 /**
  * AREA MAP — one component, five places, so these pages read as a set with the
@@ -69,6 +73,38 @@ const MAPS = {
     title: "Where College Park sits",
     blurb:
       "A neighbourhood of the City of Orlando, not a municipality, so there is no legal boundary to draw. It is built around Lakes Adair, Concord, Silver and Ivanhoe, with Interstate 4 along its eastern edge and downtown a short run south-east.",
+    legend: "Interstate & expressway",
+    footer: "Streets, lakes and roads: US Census Bureau TIGER. Marker positions are approximate.",
+  },
+  "baldwin-park": {
+    data: baldwinParkMap,
+    title: "Where Baldwin Park sits",
+    blurb:
+      "Built on the former Naval Training Center Orlando, between Winter Park and Audubon Park. There is no municipal boundary to draw \u2014 it is a City of Orlando planned development, and its street grid reconnects to the surrounding city at around twenty-seven points.",
+    legend: "Interstate & expressway",
+    footer: "Streets, lakes and roads: US Census Bureau TIGER. Marker positions are approximate.",
+  },
+  "thornton-park": {
+    data: thorntonParkMap,
+    title: "Where Thornton Park sits",
+    blurb:
+      "Immediately east of Lake Eola, inside the City of Orlando. The Lake Lawsona Historic District covering it runs from Robinson Street south to SR 408, between Summerlin and Hampton Avenues.",
+    legend: "Interstate & expressway",
+    footer: "Streets, lakes and roads: US Census Bureau TIGER. Marker positions are approximate.",
+  },
+  "delaney-park": {
+    data: delaneyParkMap,
+    title: "Where Delaney Park sits",
+    blurb:
+      "South of downtown Orlando, wrapped around Lake Lancaster. Lake Cherokee Historic District borders it to the north and Lake Copeland Historic District lies west of Delaney Avenue \u2014 neither overlaps the neighbourhood itself.",
+    legend: "Interstate & expressway",
+    footer: "Streets, lakes and roads: US Census Bureau TIGER. Marker positions are approximate.",
+  },
+  "audubon-park": {
+    data: audubonParkMap,
+    title: "Where Audubon Park sits",
+    blurb:
+      "North-east Orlando, around Lake Druid, with Harry P. Leu Gardens on its western side and Baldwin Park east along the Corrine Drive corridor.",
     legend: "Interstate & expressway",
     footer: "Streets, lakes and roads: US Census Bureau TIGER. Marker positions are approximate.",
   },
