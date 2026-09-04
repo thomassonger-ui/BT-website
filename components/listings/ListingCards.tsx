@@ -3,6 +3,12 @@
 import Image from "next/image";
 import { useState } from "react";
 import { PathwayModal, type Pathway } from "@/components/search/PathwayCards";
+import {
+  RegistrationModal,
+  SaveButton,
+  postListingLead,
+  useListingVisitor,
+} from "@/components/listings/ListingRegistration";
 import { formatPrice, type Listing } from "@/lib/listings";
 import { cn } from "@/lib/utils/cn";
 
@@ -10,6 +16,11 @@ import { cn } from "@/lib/utils/cn";
  * Featured-listing cards. Every card opens the site's standard pop-up with
  * a tailored micro-form — inquiries land in Premier Leads as
  * "Website — Buyer Lead" prefixed "Featured listing inquiry (<address>)".
+ *
+ * Registration gate + saves (Tom, 9/4/2026): after FREE_OPENS pop-ups an
+ * unregistered visitor is asked for name/phone/email before the next one;
+ * a heart on each card saves it (first save registers). Each registration
+ * and each save posts its own lead. See ListingRegistration.tsx.
  */
 
 // Agent scheduling links — a credited listing whose agent appears here gets a
@@ -95,6 +106,35 @@ function scatter(listings: Listing[]): Listing[] {
 export function ListingCards({ listings }: { listings: Listing[] }) {
   const [open, setOpen] = useState<Pathway | null>(null);
   const [filter, setFilter] = useState<"All" | "For Sale" | "Pending" | "Recently Sold">("All");
+  const { visitor, saved, recordOpen, register, markSaved, unmarkSaved } = useListingVisitor();
+  // What the visitor was trying to do when the gate appeared, so we can finish it after they register.
+  const [gate, setGate] = useState<{ reason: "gate" | "save"; listing: Listing } | null>(null);
+  const [opened, setOpened] = useState<string[]>([]);
+
+  function openCard(l: Listing) {
+    setOpened((prev) => (prev.includes(l.address) ? prev : [...prev, l.address]));
+    if (recordOpen()) {
+      setGate({ reason: "gate", listing: l });
+      return;
+    }
+    setOpen(toPathway(l));
+  }
+
+  async function saveCard(l: Listing) {
+    if (saved.includes(l.slug)) {
+      unmarkSaved(l.slug); // local only — un-saving never creates a lead
+      return;
+    }
+    if (!visitor) {
+      setGate({ reason: "save", listing: l });
+      return;
+    }
+    markSaved(l.slug);
+    const facts = [l.beds ? `${l.beds} bd` : null, l.baths ? `${l.baths} ba` : null, formatPrice(l.price), l.status]
+      .filter(Boolean)
+      .join(" · ");
+    await postListingLead(visitor, `Saved listing (${l.address}): ${facts}`);
+  }
 
   const shown = scatter(listings).filter((l) =>
     filter === "All"
@@ -132,11 +172,14 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
         {shown.map((l) => (
           <article
             key={l.slug}
-            className="group flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-soft-white transition-shadow hover:shadow-lg"
+            className="group relative flex flex-col overflow-hidden rounded-lg border border-ink/10 bg-soft-white transition-shadow hover:shadow-lg"
           >
+            {l.status !== "Sold" ? (
+              <SaveButton saved={saved.includes(l.slug)} onClick={() => saveCard(l)} />
+            ) : null}
             <button
               type="button"
-              onClick={() => setOpen(toPathway(l))}
+              onClick={() => openCard(l)}
               aria-haspopup="dialog"
               className="text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
             >
@@ -208,6 +251,21 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
       ) : null}
 
       {open ? <PathwayModal pathway={open} onClose={() => setOpen(null)} /> : null}
+
+      {gate ? (
+        <RegistrationModal
+          reason={gate.reason}
+          context={gate.reason === "save" ? gate.listing.address : opened.join("; ")}
+          onClose={() => setGate(null)}
+          onRegistered={(v) => {
+            register(v);
+            const l = gate.listing;
+            setGate(null);
+            if (gate.reason === "save") markSaved(l.slug);
+            else setOpen(toPathway(l));
+          }}
+        />
+      ) : null}
     </>
   );
 }
