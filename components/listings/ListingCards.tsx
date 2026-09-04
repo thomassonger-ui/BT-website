@@ -192,8 +192,17 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
                   className={cn(
                     "object-cover transition-transform duration-300 group-hover:scale-105",
                     l.status === "Sold" && "saturate-[0.85]",
+                    !l.photo && "blur-[2px] brightness-75",
                   )}
                 />
+                {!l.photo && l.status !== "Sold" ? (
+                  /* No public MLS photo yet — the listing is coming soon */
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <span className="rounded-md bg-ink/80 px-4 py-2 font-display text-lg font-medium uppercase tracking-[0.25em] text-gold-light shadow-lg">
+                      Coming Soon
+                    </span>
+                  </span>
+                ) : null}
                 {l.status === "Sold" ? (
                   /* Diagonal corner ribbon */
                   <span className="absolute -right-14 top-7 w-56 rotate-45 bg-red-600 py-1.5 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-white shadow-lg">
