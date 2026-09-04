@@ -31,9 +31,15 @@ const AGENT_BOOKING: { match: string; url: string; label: string }[] = [
 
 const STATUS_STYLES: Record<string, string> = {
   "For Sale": "bg-teal-700 text-soft-white",
+  "For Rent": "bg-charcoal text-soft-white",
   Pending: "bg-gold text-ink",
   "Active Under Contract": "bg-gold text-ink",
 };
+
+/** Rentals come from the MLS feed with is_rental=true; price is monthly. */
+const isRental = (l: Listing) => Boolean(l.is_rental);
+const priceLabel = (l: Listing) => (isRental(l) ? `${formatPrice(l.price)}/mo` : formatPrice(l.price));
+const statusLabel = (l: Listing) => (isRental(l) && l.status === "For Sale" ? "For Rent" : l.status);
 
 function toPathway(l: Listing): Pathway {
   const facts = [
@@ -49,7 +55,7 @@ function toPathway(l: Listing): Pathway {
     id: l.slug,
     img: l.photo || "/images/heroes/communities.jpg",
     alt: `Photo of ${l.address}`,
-    title: sold ? `Sold — ${formatPrice(l.price)}` : `${formatPrice(l.price)} — ${l.status}`,
+    title: sold ? `Sold — ${formatPrice(l.price)}` : `${priceLabel(l)} — ${statusLabel(l)}`,
     text: "",
     ctaLabel: "",
     mode: "form",
@@ -105,7 +111,7 @@ function scatter(listings: Listing[]): Listing[] {
 
 export function ListingCards({ listings }: { listings: Listing[] }) {
   const [open, setOpen] = useState<Pathway | null>(null);
-  const [filter, setFilter] = useState<"All" | "For Sale" | "Pending" | "Recently Sold">("All");
+  const [filter, setFilter] = useState<"All" | "For Sale" | "For Rent" | "Pending" | "Recently Sold">("All");
   const { visitor, saved, recordOpen, register, markSaved, unmarkSaved } = useListingVisitor();
   // What the visitor was trying to do when the gate appeared, so we can finish it after they register.
   const [gate, setGate] = useState<{ reason: "gate" | "save"; listing: Listing } | null>(null);
@@ -136,6 +142,7 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
     await postListingLead(visitor, `Saved listing (${l.address}): ${facts}`);
   }
 
+  const hasRentals = listings.some(isRental);
   const shown = scatter(listings).filter((l) =>
     filter === "All"
       ? true
@@ -143,14 +150,18 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
         ? l.status === "Pending" || l.status === "Active Under Contract"
         : filter === "Recently Sold"
           ? l.status === "Sold"
-          : l.status === "For Sale",
+          : filter === "For Rent"
+            ? isRental(l) && l.status !== "Sold"
+            : l.status === "For Sale" && !isRental(l),
   );
 
   return (
     <>
       {/* Status filter */}
       <div className="mb-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filter listings by status">
-        {(["All", "For Sale", "Pending", "Recently Sold"] as const).map((f) => (
+        {(["All", "For Sale", "For Rent", "Pending", "Recently Sold"] as const)
+          .filter((f) => f !== "For Rent" || hasRentals)
+          .map((f) => (
           <button
             key={f}
             type="button"
@@ -212,10 +223,10 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
                   <span
                     className={cn(
                       "absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider",
-                      STATUS_STYLES[l.status] ?? "bg-ink text-soft-white",
+                      STATUS_STYLES[statusLabel(l)] ?? "bg-ink text-soft-white",
                     )}
                   >
-                    {l.status}
+                    {statusLabel(l)}
                   </span>
                 )}
               </div>
@@ -226,7 +237,7 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
                       <span className="text-red-700">Sold</span> — {formatPrice(l.price)}
                     </>
                   ) : (
-                    formatPrice(l.price)
+                    priceLabel(l)
                   )}
                 </p>
                 <p className="mt-1 text-sm font-medium text-charcoal">

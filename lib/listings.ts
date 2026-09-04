@@ -25,6 +25,8 @@ export type Listing = {
   photo: string | null;
   /** Optional public credit, e.g. "Kathleen Rutland & Bethanne Baer". */
   listing_agent?: string | null;
+  /** MLS feed only: true for lease listings (price is monthly rent). */
+  is_rental?: boolean | null;
 };
 
 export async function getListings(): Promise<Listing[]> {

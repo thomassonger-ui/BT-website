@@ -19,8 +19,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function ListingsPage() {
   const listings = await getListings();
-  const active = listings.filter((l) => l.status === "For Sale").length;
-  const pending = listings.length - active;
+  const active = listings.filter((l) => l.status === "For Sale" && !l.is_rental).length;
+  const pending = listings.filter((l) => l.status === "Pending" || l.status === "Active Under Contract").length;
 
   return (
     <>
