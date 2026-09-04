@@ -163,6 +163,10 @@ const legacyRedirects = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  images: {
+    // Stellar MLS listing photos via MLS Grid (listings_source = 'mls').
+    remotePatterns: [{ protocol: "https", hostname: "s3.amazonaws.com", pathname: "/mlsgrid/**" }],
+  },
   async redirects() {
     return legacyRedirects;
   },
