@@ -44,7 +44,7 @@ export function Pathways() {
                   primary button bottom-aligns across the row. */}
               <div className="mt-6 flex flex-1 flex-col justify-end gap-3">
                 {path.secondary === "search" ? (
-                  <SearchHomesLink variant="ghost" label="Search Available Homes" className="w-full" />
+                  <SearchHomesLink variant="ghost" label="Search Orlando, Florida Homes" className="w-full" />
                 ) : null}
                 <ButtonLink href={path.cta.href} variant="primary" className="w-full">
                   {path.cta.label}
