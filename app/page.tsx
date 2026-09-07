@@ -8,7 +8,7 @@ import { NeighborhoodLinks } from "@/components/sections/NeighborhoodLinks";
 import { MembershipLogoBar } from "@/components/sections/MembershipLogoBar";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Central Florida Real Estate | Bear Team Real Estate",
+  title: "Orlando, Florida Real Estate Brokerage | Bear Team Real Estate",
   description:
     "Buy, sell, or explore Central Florida real estate with Bear Team — experienced local guidance for Orlando-area buyers, sellers, and relocation clients.",
   path: "/",
