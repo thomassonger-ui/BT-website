@@ -63,7 +63,7 @@ export function CredentialsBand() {
             Credentials &amp; Memberships
           </p>
           <h2 id="credentials-heading" className="mt-3 font-display text-3xl font-medium text-cream md:text-4xl">
-            Conway&rsquo;s Hometown Real Estate Broker
+            Orlando, Florida&rsquo;s Hometown Real Estate Broker
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-cream/80 md:text-base">
             Helping Central Florida families buy, sell and invest with confidence since 1987.
