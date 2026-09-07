@@ -14,12 +14,18 @@ export function Reveal({
   className,
   stagger = false,
   y = 32,
+  converge = false,
 }: {
   children: ReactNode;
   className?: string;
   /** Animate direct children in sequence instead of the wrapper as one unit. */
   stagger?: boolean;
   y?: number;
+  /**
+   * With stagger: the first half of the children slide in from the left and
+   * the second half from the right, meeting at the center (no vertical offset).
+   */
+  converge?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -31,13 +37,22 @@ export function Reveal({
       mm.add([DESKTOP_MQ, MOBILE_MQ], (context) => {
         const isMobile = context.conditions?.[1];
         const targets = stagger ? Array.from(el.children) : [el];
+        const useConverge = converge && stagger && targets.length > 1;
+        const distance = isMobile ? 24 : 48;
         gsap.fromTo(
           targets,
-          { autoAlpha: 0, y: isMobile ? Math.min(y, 20) : y },
+          useConverge
+            ? {
+                autoAlpha: 0,
+                y: 0,
+                x: (i: number) => (i < targets.length / 2 ? -distance : distance),
+              }
+            : { autoAlpha: 0, y: isMobile ? Math.min(y, 20) : y },
           {
             autoAlpha: 1,
+            x: 0,
             y: 0,
-            duration: 0.7,
+            duration: useConverge ? 0.9 : 0.7,
             ease: "power2.out",
             stagger: stagger ? 0.12 : 0,
             scrollTrigger: {
@@ -51,7 +66,7 @@ export function Reveal({
       // Reduced-motion: no tweens are created; content stays visible.
     }, el);
     return () => ctx.revert();
-  }, [stagger, y]);
+  }, [stagger, y, converge]);
 
   return (
     <div ref={ref} className={className}>
