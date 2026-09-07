@@ -10,7 +10,7 @@ import { MembershipLogoBar } from "@/components/sections/MembershipLogoBar";
 export const metadata: Metadata = buildMetadata({
   title: "Orlando, Florida Real Estate Brokerage | Bear Team Real Estate",
   description:
-    "Buy, sell, or explore Central Florida real estate with Bear Team — experienced local guidance for Orlando-area buyers, sellers, and relocation clients.",
+    "Orlando, Florida homes, houses, and real estate. Bear Team is an Orlando, Florida real estate broker with 40 years in Conway, serving buyers, sellers, and relocation clients across Central Florida communities.",
   path: "/",
 });
 
