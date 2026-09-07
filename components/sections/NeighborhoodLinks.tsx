@@ -24,7 +24,7 @@ export function NeighborhoodLinks() {
         <SectionHeading
           eyebrow="Where we work"
           title="Neighborhoods We Serve"
-          intro="Bear Team works across Central Florida. Explore the housing stock, location context, and buyer and seller considerations for each community."
+          intro="Bear Team serves Orlando, Florida and the surrounding Central Florida communities. Explore the housing stock, location context, and buyer and seller considerations for each community."
           align="left"
         />
         <Reveal>
