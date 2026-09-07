@@ -66,7 +66,7 @@ export function CredentialsBand() {
             Conway&rsquo;s Hometown Real Estate Broker
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-cream/80 md:text-base">
-            Helping Central Florida families buy, sell and invest with confidence since 1987.
+            Orlando, Florida real estate broker &mdash; helping families buy, sell and invest across Central Florida communities since 1987.
           </p>
         </div>
         <div className="mx-auto mt-12 grid max-w-5xl gap-10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-cream/10">
