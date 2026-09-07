@@ -21,7 +21,7 @@ export const externalLinks = {
    * per-agent scheduling links live on their own profiles (content/team.ts).
    */
   googleMaps: process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || "https://maps.app.goo.gl/n6635xh7GQ7E1fbX7",
-  googleBusinessProfile: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL || "",
+  googleBusinessProfile: process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL || "https://share.google/6drTi25twbAnwHrca",
   facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL || "",
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "",
   linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
