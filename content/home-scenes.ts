@@ -38,5 +38,5 @@ export const rooms: Room[] = [
 export const heroCopy = {
   headlineTop: "Find Your Place",
   headlineBottom: "in Central Florida.",
-  copy: "Whether you are buying, selling, relocating, or exploring your options, Bear Team provides the experience and local guidance to help you move forward.",
+  copy: "Whether you are buying or selling a home in Orlando, Florida, relocating, or exploring your options, Bear Team provides the experience and local guidance to help you move forward.",
 };
