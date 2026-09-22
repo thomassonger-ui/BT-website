@@ -53,7 +53,7 @@ function toPathway(l: Listing): Pathway {
   const sold = l.status === "Sold";
   return {
     id: l.slug,
-    img: l.photo || "/images/heroes/communities.jpg",
+    img: l.photo || "",
     alt: `Photo of ${l.address}`,
     title: sold ? `Sold — ${formatPrice(l.price)}` : `${priceLabel(l)} — ${statusLabel(l)}`,
     text: "",
@@ -116,7 +116,7 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
   // What the visitor was trying to do when the gate appeared, so we can finish it after they register.
   const [gate, setGate] = useState<{ reason: "gate" | "save"; listing: Listing } | null>(null);
   const [opened, setOpened] = useState<string[]>([]);
-  // MLS photo URLs that failed to load — fall back to the placeholder instead of a broken image.
+  // MLS photos that failed to load — show the plain "Photo coming soon" panel.
   const [broken, setBroken] = useState<string[]>([]);
 
   function openCard(l: Listing) {
@@ -197,27 +197,28 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
               className="text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={(!broken.includes(l.slug) && l.photo) || "/images/heroes/communities.jpg"}
-                  alt={`Photo of ${l.address}`}
-                  fill
-                  unoptimized={!!l.photo && !broken.includes(l.slug)}
-                  onError={() => setBroken((b) => (b.includes(l.slug) ? b : [...b, l.slug]))}
-                  sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                  className={cn(
-                    "object-cover transition-transform duration-300 group-hover:scale-105",
-                    l.status === "Sold" && "saturate-[0.85]",
-                    !l.photo && "blur-[2px] brightness-75",
-                  )}
-                />
-                {!l.photo && l.status !== "Sold" ? (
-                  /* No public MLS photo yet — the listing is coming soon */
-                  <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="rounded-md bg-ink/80 px-4 py-2 font-display text-lg font-medium uppercase tracking-[0.25em] text-gold-light shadow-lg">
-                      Coming Soon
+                {l.photo && !broken.includes(l.slug) ? (
+                  /* The listing's own MLS photo — never a stand-in image */
+                  <Image
+                    src={l.photo}
+                    alt={`Photo of ${l.address}`}
+                    fill
+                    unoptimized
+                    onError={() => setBroken((b) => (b.includes(l.slug) ? b : [...b, l.slug]))}
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                    className={cn(
+                      "object-cover transition-transform duration-300 group-hover:scale-105",
+                      l.status === "Sold" && "saturate-[0.85]",
+                    )}
+                  />
+                ) : (
+                  /* No MLS photo available — plain panel, no substitute house */
+                  <span className="absolute inset-0 flex items-center justify-center bg-ink/10">
+                    <span className="font-display text-sm font-medium uppercase tracking-[0.25em] text-charcoal/70">
+                      Photo coming soon
                     </span>
                   </span>
-                ) : null}
+                )}
                 {l.status === "Sold" ? (
                   /* Diagonal corner ribbon */
                   <span className="absolute -right-14 top-7 w-56 rotate-45 bg-red-600 py-1.5 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-white shadow-lg">

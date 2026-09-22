@@ -388,7 +388,11 @@ export function PathwayModal({ pathway, onClose }: { pathway: Pathway; onClose: 
         className="max-h-[92svh] w-full max-w-lg overflow-y-auto overscroll-contain rounded-t-2xl bg-soft-white shadow-2xl outline-none sm:rounded-2xl"
       >
         <div className="relative aspect-[16/7]">
-          <Image src={pathway.img} alt={pathway.title} fill sizes="512px" unoptimized={pathway.img.startsWith("http")} className="object-cover sm:rounded-t-2xl" />
+          {pathway.img ? (
+            <Image src={pathway.img} alt={pathway.title} fill sizes="512px" unoptimized={pathway.img.startsWith("http")} className="object-cover sm:rounded-t-2xl" />
+          ) : (
+            <div className="absolute inset-0 bg-ink/10 sm:rounded-t-2xl" />
+          )}
           <button
             type="button"
             onClick={onClose}
