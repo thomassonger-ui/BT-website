@@ -116,6 +116,8 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
   // What the visitor was trying to do when the gate appeared, so we can finish it after they register.
   const [gate, setGate] = useState<{ reason: "gate" | "save"; listing: Listing } | null>(null);
   const [opened, setOpened] = useState<string[]>([]);
+  // MLS photo URLs that failed to load — fall back to the placeholder instead of a broken image.
+  const [broken, setBroken] = useState<string[]>([]);
 
   function openCard(l: Listing) {
     setOpened((prev) => (prev.includes(l.address) ? prev : [...prev, l.address]));
@@ -196,9 +198,11 @@ export function ListingCards({ listings }: { listings: Listing[] }) {
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
-                  src={l.photo || "/images/heroes/communities.jpg"}
+                  src={(!broken.includes(l.slug) && l.photo) || "/images/heroes/communities.jpg"}
                   alt={`Photo of ${l.address}`}
                   fill
+                  unoptimized={!!l.photo && !broken.includes(l.slug)}
+                  onError={() => setBroken((b) => (b.includes(l.slug) ? b : [...b, l.slug]))}
                   sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
                   className={cn(
                     "object-cover transition-transform duration-300 group-hover:scale-105",

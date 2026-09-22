@@ -165,7 +165,13 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     // Stellar MLS listing photos via MLS Grid (listings_source = 'mls').
-    remotePatterns: [{ protocol: "https", hostname: "s3.amazonaws.com", pathname: "/mlsgrid/**" }],
+    // Listing cards render MLS photos with `unoptimized` so a host change can't break them;
+    // these patterns cover any remaining optimized paths.
+    remotePatterns: [
+      { protocol: "https", hostname: "s3.amazonaws.com", pathname: "/mlsgrid/**" },
+      { protocol: "https", hostname: "media.mlsgrid.com" },
+      { protocol: "https", hostname: "**.mlsgrid.com" },
+    ],
   },
   async redirects() {
     return legacyRedirects;
